@@ -25,6 +25,17 @@ namespace LihatKosV1.UserControl.CariLokasi
                 ddlTipeKos.DataValueField = "ID";
                 ddlTipeKos.DataBind();
                 ddlTipeKos.SelectedValue = "1";
+
+                ddlSatuanHarga.DataSource = new SatuanHargaSystem().GetAllSatuanHarga();
+                ddlSatuanHarga.DataTextField = "Nama";
+                ddlSatuanHarga.DataValueField = "ID";
+                ddlSatuanHarga.DataBind();
+                ddlSatuanHarga.SelectedValue = "3";
+
+                chkFasilitas.DataSource = new FasilitasSystem().GetAllFasilitas();
+                chkFasilitas.DataTextField = "NamaFasilitas";
+                chkFasilitas.DataValueField = "ID";
+                chkFasilitas.DataBind();
             }
         }
 

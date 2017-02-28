@@ -56,6 +56,7 @@
     <Compile Include="FormKosDA.cs" />
     <Compile Include="LingkunganDA.cs" />
     <Compile Include="PaymentDA.cs" />
+    <Compile Include="SatuanHargaDA.cs" />
     <Compile Include="TipeKosDA.cs" />
     <Compile Include="UserDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

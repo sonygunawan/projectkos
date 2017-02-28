@@ -40,6 +40,15 @@ namespace LihatKosV1.UserControl.CariLokasi {
         protected global::System.Web.UI.WebControls.DropDownList ddlSatuanHarga;
         
         /// <summary>
+        /// chkFasilitas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList chkFasilitas;
+        
+        /// <summary>
         /// txtSearch control.
         /// </summary>
         /// <remarks>

@@ -54,6 +54,7 @@
     <Compile Include="FormKosSystem.cs" />
     <Compile Include="LingkunganSystem.cs" />
     <Compile Include="PaymentSystem.cs" />
+    <Compile Include="SatuanHargaSystem.cs" />
     <Compile Include="TipeKosSystem.cs" />
     <Compile Include="UserSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
