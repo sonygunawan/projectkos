@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{934A5E00-E47F-4EDA-90C7-4955AC317DFD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LihatKosV1</RootNamespace>
+    <AssemblyName>LihatKosV1</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControls">
+      <HintPath>Dll\AjaxControls.dll</HintPath>
+    </Reference>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>Dll\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\gallery\blueimp-gallery.min.css" />
+    <Content Include="assets\gallery\jquery.blueimp-gallery.min.js" />
+    <Content Include="assets\jquery.js" />
+    <Content Include="assets\login.css" />
+    <Content Include="assets\mobile\touchSwipe.min.js" />
+    <Content Include="assets\owlcarousel\ajax-loader.gif" />
+    <Content Include="assets\owlcarousel\owl.carousel.min.css" />
+    <Content Include="assets\owlcarousel\owl.carousel.min.js" />
+    <Content Include="assets\owlcarousel\owl.theme.default.min.css" />
+    <Content Include="assets\owlcarousel\owl.video.play.png" />
+    <Content Include="assets\respond\respond.js" />
+    <Content Include="assets\script.js" />
+    <Content Include="assets\style.css" />
+    <Content Include="assets\uniform\css\uniform.default.min.css" />
+    <Content Include="assets\uniform\images\bg-input-focus.png" />
+    <Content Include="assets\uniform\images\bg-input.png" />
+    <Content Include="assets\uniform\images\sprite.png" />
+    <Content Include="assets\uniform\js\jquery.uniform.js" />
+    <Content Include="assets\wow\animate.css" />
+    <Content Include="assets\wow\wow.min.js" />
+    <Content Include="CariLokasi.aspx" />
+    <Content Include="DaftarKos.aspx" />
+    <Content Include="DetailKos.aspx" />
+    <Content Include="FormApproval.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="images\128x128.png" />
+    <Content Include="images\300x150.png" />
+    <Content Include="images\64x64.png" />
+    <Content Include="images\drop.png" />
+    <Content Include="images\favicon.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\photos\1.jpg" />
+    <Content Include="images\photos\10.jpg" />
+    <Content Include="images\photos\11.jpg" />
+    <Content Include="images\photos\1900x849.png" />
+    <Content Include="images\photos\2.jpg" />
+    <Content Include="images\photos\3.jpg" />
+    <Content Include="images\photos\4.jpg" />
+    <Content Include="images\photos\5.jpg" />
+    <Content Include="images\photos\6.jpg" />
+    <Content Include="images\photos\7.jpg" />
+    <Content Include="images\photos\8.jpg" />
+    <Content Include="images\photos\9.jpg" />
+    <Content Include="images\photos\banner.jpg" />
+    <Content Include="Default2.aspx" />
+    <Content Include="LoginForm.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="RegisterForm.aspx" />
+    <Content Include="TestJquery.aspx" />
+    <Content Include="UserControl\CariLokasi\ListByLocation.ascx" />
+    <Content Include="UserControl\CariLokasi\SearchControlDetail.ascx" />
+    <Content Include="UserControl\Home\BannerLeft.ascx" />
+    <Content Include="UserControl\Home\HighestControl.ascx" />
+    <Content Include="UserControl\Home\MyFavoritesControl.ascx" />
+    <Content Include="UserControl\Home\SearchControl.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Default.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CariLokasi.aspx.cs">
+      <DependentUpon>CariLokasi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CariLokasi.aspx.designer.cs">
+      <DependentUpon>CariLokasi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DaftarKos.aspx.cs">
+      <DependentUpon>DaftarKos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DaftarKos.aspx.designer.cs">
+      <DependentUpon>DaftarKos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default2.aspx.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default2.aspx.designer.cs">
+      <DependentUpon>Default2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetailKos.aspx.cs">
+      <DependentUpon>DetailKos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetailKos.aspx.designer.cs">
+      <DependentUpon>DetailKos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormApproval.aspx.cs">
+      <DependentUpon>FormApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormApproval.aspx.designer.cs">
+      <DependentUpon>FormApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginForm.aspx.designer.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterForm.aspx.cs">
+      <DependentUpon>RegisterForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegisterForm.aspx.designer.cs">
+      <DependentUpon>RegisterForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestJquery.aspx.cs">
+      <DependentUpon>TestJquery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestJquery.aspx.designer.cs">
+      <DependentUpon>TestJquery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\CariLokasi\ListByLocation.ascx.cs">
+      <DependentUpon>ListByLocation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CariLokasi\ListByLocation.ascx.designer.cs">
+      <DependentUpon>ListByLocation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\CariLokasi\SearchControlDetail.ascx.cs">
+      <DependentUpon>SearchControlDetail.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CariLokasi\SearchControlDetail.ascx.designer.cs">
+      <DependentUpon>SearchControlDetail.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Home\BannerLeft.ascx.cs">
+      <DependentUpon>BannerLeft.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Home\BannerLeft.ascx.designer.cs">
+      <DependentUpon>BannerLeft.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Home\HighestControl.ascx.cs">
+      <DependentUpon>HighestControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Home\HighestControl.ascx.designer.cs">
+      <DependentUpon>HighestControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Home\MyFavoritesControl.ascx.cs">
+      <DependentUpon>MyFavoritesControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Home\MyFavoritesControl.ascx.designer.cs">
+      <DependentUpon>MyFavoritesControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Home\SearchControl.ascx.cs">
+      <DependentUpon>SearchControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Home\SearchControl.ascx.designer.cs">
+      <DependentUpon>SearchControl.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="MasterPage\Main.Master" />
+    <None Include="Properties\PublishProfiles\publish1.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessFacade\BusinessFacade.csproj">
+      <Project>{c3ede749-a527-4082-85c0-cb4d0226b961}</Project>
+      <Name>BusinessFacade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{335382fa-b1cc-4564-93c0-bbabcc618c2b}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Controls\Web.Controls.csproj">
+      <Project>{33f2219e-2267-4f22-9aa3-0c6a2c8e666c}</Project>
+      <Name>Web.Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10981</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10981/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
