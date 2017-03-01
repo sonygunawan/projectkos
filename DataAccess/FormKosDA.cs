@@ -350,7 +350,7 @@ namespace LihatKos.DataAccess
             }
         }
 
-        public List<FormKosData> GetAllFormKosByLocation(string DataLatitude, string DataLongitude)
+        public List<FormKosData> GetAllFormKosByLocation(string DataLatitude, string DataLongitude, int TipeKosID)
         {
             try
             {
@@ -358,7 +358,8 @@ namespace LihatKos.DataAccess
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetAllFormKosByLocation");
                 db.AddInParameter(dbCommand, "Latitude", DbType.Decimal, Convert.ToDecimal(DataLatitude.Replace('.', ',')));
                 db.AddInParameter(dbCommand, "Longitude", DbType.Decimal, Convert.ToDecimal(DataLongitude.Replace('.', ',')));
-
+                db.AddInParameter(dbCommand, "TipeKosId", DbType.Int32, TipeKosID);
+                //TipeKosId
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 {
                     while (dataReader.Read())

@@ -13,8 +13,14 @@ namespace LihatKosV1.UserControl.CariLokasi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!String.IsNullOrEmpty(Request.QueryString["lokasi"]))
+            {
+                txtSearch.Text = Server.HtmlDecode(Request.QueryString["lokasi"]);
+            }
+            
             if (!Page.IsPostBack)
             {
+                
                 //ToolkitScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "testSearch",
                 //    "$(function () {$(\"#slider-3\").slider({" +
                 //        "range: true, min: 0, max: 500, values: [75, 300], slide: function (event, ui) { $(\"#price\").val(\"$\" + ui.values[0] + \" - $\" + ui.values[1]); } " +
@@ -24,6 +30,7 @@ namespace LihatKosV1.UserControl.CariLokasi
                 ddlTipeKos.DataTextField = "Nama";
                 ddlTipeKos.DataValueField = "ID";
                 ddlTipeKos.DataBind();
+                ddlTipeKos.Items.Insert(0, new ListItem { Value = "0", Text = "Semua" });
                 ddlTipeKos.SelectedValue = "1";
 
                 ddlSatuanHarga.DataSource = new SatuanHargaSystem().GetAllSatuanHarga();
@@ -37,11 +44,38 @@ namespace LihatKosV1.UserControl.CariLokasi
                 chkFasilitas.DataValueField = "ID";
                 chkFasilitas.DataBind();
             }
+            if (!String.IsNullOrEmpty(Request.QueryString["tipeKos"]))
+            {
+                ddlTipeKos.SelectedValue = Request.QueryString["tipeKos"];
+            }
+            if (!String.IsNullOrEmpty(Request.QueryString["fasilitas"]))
+            {
+                string[] FasilitasItems = Request.QueryString["fasilitas"].ToString().Split(',');
+                foreach (ListItem item in chkFasilitas.Items)
+                {
+
+                    if (FasilitasItems.Where(i => i == item.Value).ToString() != "")
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             //Response.Redirect("/CariLokasi?latLng=" + hidLatitude.Value + "," + hidLongitude.Value);
+        }
+
+        protected void chkFasilitas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (chkFasilitas.Items[0].Selected == true)
+            //{
+            //    foreach (ListItem item in chkFasilitas.Items)
+            //    {
+            //        item.Selected = true;
+            //    }
+            //}
         }
     }
 }

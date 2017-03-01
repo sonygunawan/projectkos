@@ -14,17 +14,19 @@ namespace LihatKosV1.UserControl
         {
             if (!Page.IsPostBack)
             {
-                rdlTipeKos2.DataSource = new TipeKosSystem().GetAllTipeKos();
-                rdlTipeKos2.DataTextField = "Nama";
-                rdlTipeKos2.DataValueField = "ID";
-                rdlTipeKos2.DataBind();
-                rdlTipeKos2.SelectedValue = "1";
+                rdlTipeKos.DataSource = new TipeKosSystem().GetAllTipeKos();
+                rdlTipeKos.DataTextField = "Nama";
+                rdlTipeKos.DataValueField = "ID";
+                rdlTipeKos.DataBind();
+                rdlTipeKos.Items.Insert(0, new ListItem { Value = "0", Text = "Semua" });
+                rdlTipeKos.SelectedValue = "1";
             }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/CariLokasi?latLng=" + hidLatitude.Value + "," +  hidLongitude.Value);
+            Response.Redirect("/CariLokasi?tipeKos=" + rdlTipeKos.SelectedValue + "&lokasi="+ Server.HtmlEncode(txtSearch.Text) 
+                +"&latLng=" + hidLatitude.Value + "," +  hidLongitude.Value);
         }
     }
 }

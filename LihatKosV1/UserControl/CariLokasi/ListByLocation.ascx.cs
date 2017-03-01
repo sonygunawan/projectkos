@@ -13,20 +13,26 @@ namespace LihatKosV1.UserControl.CariLokasi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            int tipeKos = 0;
+            if (!String.IsNullOrEmpty(Request.QueryString["tipeKos"]))
+            {
+                tipeKos = Convert.ToInt32(Request.QueryString["tipeKos"]);
+            }
+            if (String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
+            {
+                rptListByLoc.DataSource = new FormKosSystem().GetAllFormKos(0);
+                rptListByLoc.DataBind();
+            }
+            else
+            {
+                string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
+                rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByLocation(splitLatLng[0], splitLatLng[1], tipeKos);
+                rptListByLoc.DataBind();
+            }
+            
             if (!Page.IsPostBack)
             {
-
-                if (String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
-                {
-                    rptListByLoc.DataSource = new FormKosSystem().GetAllFormKos(0);
-                    rptListByLoc.DataBind();
-                }
-                else
-                {
-                    string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
-                    rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByLocation(splitLatLng[0], splitLatLng[1]);
-                    rptListByLoc.DataBind();
-                }
+                
             }
         }
 

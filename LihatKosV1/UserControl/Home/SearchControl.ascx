@@ -36,7 +36,7 @@
 <div class="form-horizontal" style="margin:2px 0px;">
     <div class="form-group">
         <label>Tipe Kos</label>
-        <asp:DropDownList ID="rdlTipeKos2" runat="server" RepeatLayout="Flow" RepeatDirection="Horizontal"></asp:DropDownList>
+        <asp:DropDownList ID="rdlTipeKos" runat="server" RepeatLayout="Flow" RepeatDirection="Horizontal"></asp:DropDownList>
     </div>
 </div>
 <%--    <div class="form-group">

@@ -43,9 +43,9 @@ namespace LihatKos.BusinessFacade
             return new FormKosDA().GetAllFormKos(Id);
         }
 
-        public List<FormKosData> GetAllFormKosByLocation(string Latitude, string Longitude)
+        public List<FormKosData> GetAllFormKosByLocation(string Latitude, string Longitude, int TipeKosID)
         {
-            return new FormKosDA().GetAllFormKosByLocation(Latitude, Longitude);
+            return new FormKosDA().GetAllFormKosByLocation(Latitude, Longitude, TipeKosID);
         }
     }
 }

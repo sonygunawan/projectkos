@@ -46,8 +46,9 @@
     </div>
     <div class="form-group">
         <label>Fasilitas</label>
-        <div class="ui-controlgroup-item ui-tabs">
-            <asp:CheckBoxList ID="chkFasilitas" runat="server" RepeatDirection="Vertical" RepeatLayout="Flow" ></asp:CheckBoxList>
+        <div class="ui-controlgroup-item">
+            <asp:CheckBoxList ID="chkFasilitas" runat="server" RepeatDirection="Vertical" RepeatLayout="Flow" 
+                OnSelectedIndexChanged="chkFasilitas_SelectedIndexChanged" ></asp:CheckBoxList>
         </div>
     </div>
 
