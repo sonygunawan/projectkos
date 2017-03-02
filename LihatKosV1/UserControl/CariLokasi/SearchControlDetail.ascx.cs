@@ -80,6 +80,7 @@ namespace LihatKosV1.UserControl.CariLokasi
                 if (item.Selected == true)
                     fasilitas += item.Value + ",";
             }
+            fasilitas = (fasilitas != "") ? fasilitas.Substring(0,fasilitas.Length - 1) : "";
             Response.Redirect("/CariLokasi?tipeKos="+ ddlTipeKos.SelectedValue +"&lokasi="+ Server.HtmlEncode(txtSearch.Text) +"&fasilitas=" + fasilitas 
                 + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value);
         }
