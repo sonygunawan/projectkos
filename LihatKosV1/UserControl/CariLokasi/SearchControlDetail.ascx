@@ -7,23 +7,23 @@
   <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <!-- boostrap -->
 <%--<script src="../../assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>--%>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&libraries=places"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
     <script type="text/javascript">
-        //google.maps.event.addDomListener(window, 'load', function () {
-        //    var places = new google.maps.places.Autocomplete(document.getElementById('txtSearch'));
-        //    google.maps.event.addListener(places, 'place_changed', function () {
-        //        var place = places.getPlace();
-        //        var address = place.formatted_address;
-        //        var latitude = place.geometry.location.lat();
-        //        var longitude = place.geometry.location.lng();
-        //        var mesg = "Address: " + address;
-        //        mesg += "\nLatitude: " + latitude;
-        //        mesg += "\nLongitude: " + longitude;
-        //        document.getElementById('hidLatitude').value = latitude;
-        //        document.getElementById('hidLongitude').value = longitude;
-        //        //alert(mesg);
-        //    });
-        //});
+        google.maps.event.addDomListener(window, 'load', function () {
+            var places = new google.maps.places.Autocomplete(document.getElementById('txtSearch'));
+            google.maps.event.addListener(places, 'place_changed', function () {
+                var place = places.getPlace();
+                var address = place.formatted_address;
+                var latitude = place.geometry.location.lat();
+                var longitude = place.geometry.location.lng();
+                var mesg = "Address: " + address;
+                mesg += "\nLatitude: " + latitude;
+                mesg += "\nLongitude: " + longitude;
+                document.getElementById('hidLatitude').value = latitude;
+                document.getElementById('hidLongitude').value = longitude;
+                //alert(mesg);
+            });
+        });
     </script>
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
@@ -35,7 +35,7 @@
          margin-left: 0px; 
     }
 </style>
-<div class="form-horizontal" style="margin:2px 0px;">
+<div class="form-horizontal">
     <div class="form-group">
         <label>Tipe Kos</label>
         <asp:DropDownList ID="ddlTipeKos" runat="server"></asp:DropDownList>

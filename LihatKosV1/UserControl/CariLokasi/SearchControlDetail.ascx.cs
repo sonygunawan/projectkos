@@ -11,16 +11,15 @@ namespace LihatKosV1.UserControl.CariLokasi
 {
     public partial class SearchControlDetail : System.Web.UI.UserControl
     {
+        String fasilitas;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(Request.QueryString["lokasi"]))
-            {
-                txtSearch.Text = Server.HtmlDecode(Request.QueryString["lokasi"]);
-            }
-            
             if (!Page.IsPostBack)
             {
-                
+                if (!String.IsNullOrEmpty(Request.QueryString["lokasi"]))
+                {
+                    txtSearch.Text = Server.HtmlDecode(Request.QueryString["lokasi"]);
+                }
                 //ToolkitScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "testSearch",
                 //    "$(function () {$(\"#slider-3\").slider({" +
                 //        "range: true, min: 0, max: 500, values: [75, 300], slide: function (event, ui) { $(\"#price\").val(\"$\" + ui.values[0] + \" - $\" + ui.values[1]); } " +
@@ -43,28 +42,46 @@ namespace LihatKosV1.UserControl.CariLokasi
                 chkFasilitas.DataTextField = "NamaFasilitas";
                 chkFasilitas.DataValueField = "ID";
                 chkFasilitas.DataBind();
-            }
-            if (!String.IsNullOrEmpty(Request.QueryString["tipeKos"]))
-            {
-                ddlTipeKos.SelectedValue = Request.QueryString["tipeKos"];
-            }
-            if (!String.IsNullOrEmpty(Request.QueryString["fasilitas"]))
-            {
-                string[] FasilitasItems = Request.QueryString["fasilitas"].ToString().Split(',');
-                foreach (ListItem item in chkFasilitas.Items)
-                {
 
-                    if (FasilitasItems.Where(i => i == item.Value).ToString() != "")
+                if (!String.IsNullOrEmpty(Request.QueryString["tipeKos"]))
+                {
+                    ddlTipeKos.SelectedValue = Request.QueryString["tipeKos"];
+                }
+                if (!String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
+                {
+                    string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
+                    hidLatitude.Value = splitLatLng[0];
+                    hidLongitude.Value = splitLatLng[1];
+                }
+                if (!String.IsNullOrEmpty(Request.QueryString["fasilitas"]))
+                {
+                    string[] FasilitasItems = Request.QueryString["fasilitas"].ToString().Split(',');
+                    foreach (ListItem item in chkFasilitas.Items)
                     {
-                        item.Selected = true;
+                        var value = FasilitasItems.Where(i => i == item.Value).ToList();
+                        if (value.Count > 0)
+                        {
+                            if (value.ToString() != "")
+                            {
+                                item.Selected = true;
+                            }
+                        }
                     }
                 }
             }
+            
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("/CariLokasi?latLng=" + hidLatitude.Value + "," + hidLongitude.Value);
+            fasilitas = "";
+            foreach (ListItem item in chkFasilitas.Items)
+            {
+                if (item.Selected == true)
+                    fasilitas += item.Value + ",";
+            }
+            Response.Redirect("/CariLokasi?tipeKos="+ ddlTipeKos.SelectedValue +"&lokasi="+ Server.HtmlEncode(txtSearch.Text) +"&fasilitas=" + fasilitas 
+                + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value);
         }
 
         protected void chkFasilitas_SelectedIndexChanged(object sender, EventArgs e)
