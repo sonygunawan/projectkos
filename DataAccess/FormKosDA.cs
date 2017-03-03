@@ -411,24 +411,25 @@ namespace LihatKos.DataAccess
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetHighestFormKosByArea");
                 db.AddInParameter(dbCommand, "AreaID", DbType.Int64, AreaID);
 
-                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
-                {
+                DataSet HighestFormKos = db.ExecuteDataSet(dbCommand);
+                //using (IDataReader dataReader = db.ExecuteDataSet(dbCommand))
+                //{
                     
-                    while (dataReader.Read())
-                    {
-                        FormKosData Data = new FormKosData();
+                //    while (dataReader.Read())
+                //    {
+                //        FormKosData Data = new FormKosData();
 
-                        Data.ID = Convert.ToInt64(dataReader["ID"].ToString());
-                        Data.Nama = dataReader["Nama"].ToString();
-                        Data.Alamat = dataReader["Alamat"].ToString();
-                        Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
-                        Data.SatuanHarga = dataReader["SatuanHarga"].ToString();
-                        Data.Keterangan = dataReader["ScoreH"].ToString();
+                //        Data.ID = Convert.ToInt64(dataReader["ID"].ToString());
+                //        Data.Nama = dataReader["Nama"].ToString();
+                //        Data.Alamat = dataReader["Alamat"].ToString();
+                //        Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
+                //        Data.SatuanHarga = dataReader["SatuanHarga"].ToString();
+                //        Data.Keterangan = dataReader["ScoreH"].ToString();
                         
-                        formKos.Add(Data);
-                    }
-                    dataReader.Close();
-                }
+                //        formKos.Add(Data);
+                //    }
+                //    dataReader.Close();
+                //}
                 return formKos;
             }
             catch (Exception ex)
