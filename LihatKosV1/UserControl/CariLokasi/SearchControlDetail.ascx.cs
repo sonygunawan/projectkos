@@ -47,6 +47,10 @@ namespace LihatKosV1.UserControl.CariLokasi
                 {
                     ddlTipeKos.SelectedValue = Request.QueryString["tipeKos"];
                 }
+                if (!String.IsNullOrEmpty(Request.QueryString["jkWkt"]))
+                {
+                    ddlSatuanHarga.SelectedValue = Request.QueryString["jkWkt"];
+                }
                 if (!String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
                 {
                     string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
@@ -82,7 +86,7 @@ namespace LihatKosV1.UserControl.CariLokasi
             }
             fasilitas = (fasilitas != "") ? fasilitas.Substring(0,fasilitas.Length - 1) : "";
             Response.Redirect("/CariLokasi?tipeKos="+ ddlTipeKos.SelectedValue +"&lokasi="+ Server.HtmlEncode(txtSearch.Text) +"&fasilitas=" + fasilitas 
-                + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value);
+                + "&jkWkt=" + ddlSatuanHarga.SelectedValue + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value);
         }
 
         protected void chkFasilitas_SelectedIndexChanged(object sender, EventArgs e)

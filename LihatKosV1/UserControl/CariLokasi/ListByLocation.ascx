@@ -21,7 +21,6 @@
                     <img src="images/64x64.png" class="img-responsive center-block" alt=""></asp:HyperLink></td>
                 <td><asp:Label ID="lblHargaBulanan" runat="server"></asp:Label> /bln</td>
                 <td><asp:Label ID="lblLocation" runat="server"></asp:Label></td>
-                
             </tr>
         </ItemTemplate>
         <FooterTemplate>

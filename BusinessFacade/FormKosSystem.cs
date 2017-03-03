@@ -43,9 +43,18 @@ namespace LihatKos.BusinessFacade
             return new FormKosDA().GetAllFormKos(Id);
         }
 
-        public List<FormKosData> GetAllFormKosByLocation(string Latitude, string Longitude, int TipeKosID)
+        public List<FormKosData> GetAllFormKosByLocation(string Latitude, string Longitude, int TipeKosID, int SatuanHargaID, string Fasilitas)
         {
-            return new FormKosDA().GetAllFormKosByLocation(Latitude, Longitude, TipeKosID);
+            return new FormKosDA().GetAllFormKosByLocation(Latitude, Longitude, TipeKosID, SatuanHargaID, Fasilitas);
+        }
+        public bool UpdateFormKosView(Int64 Id)
+        {
+            return new FormKosDA().UpdateFormKosView(Id);
+        }
+
+        public List<FormKosData> GetHighestFormKosByArea(int AreaID)
+        {
+            return new FormKosDA().GetHighestFormKosByArea(AreaID);
         }
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="DataAccessConnection.cs" />
     <Compile Include="DataAccessException.cs" />
     <Compile Include="FasilitasDA.cs" />
+    <Compile Include="FavoriteDA.cs" />
     <Compile Include="FormKosDA.cs" />
     <Compile Include="LingkunganDA.cs" />
     <Compile Include="PaymentDA.cs" />

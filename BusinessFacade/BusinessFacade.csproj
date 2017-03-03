@@ -51,6 +51,7 @@
     <Compile Include="AreaSystem.cs" />
     <Compile Include="BannerSystem.cs" />
     <Compile Include="FasilitasSystem.cs" />
+    <Compile Include="FavoriteSystem.cs" />
     <Compile Include="FormKosSystem.cs" />
     <Compile Include="LingkunganSystem.cs" />
     <Compile Include="PaymentSystem.cs" />

@@ -29,7 +29,17 @@
     <div class="table-responsive">
         <table class="table table-room-highlight">
             <tbody>
-                <tr>
+                <asp:Repeater ID="rptFormKosByArea" runat="server" OnItemDataBound="rptFormKosByArea_ItemDataBound">
+                    <ItemTemplate>
+                        <td class="clearfix">
+                            <asp:HyperLink ID="hlDetailLink" runat="server" NavigateUrl="~/DetailKos.aspx">
+                                <img src="images/300x150.png" class="pull-left img-responsive" alt="">
+                            </asp:HyperLink>
+                            <h4><asp:Label ID="lblKeterangan" runat="server"></asp:Label></h4>
+                        </td>
+                    </ItemTemplate>
+                </asp:Repeater>
+                <%--<tr>
                     <td class="clearfix">
                         <img src="images/300x150.png" class="pull-left img-responsive" alt="">
                         <h4>Latest</h4>
@@ -46,7 +56,8 @@
                         <img src="images/300x150.png" class="pull-left img-responsive" alt="">
                         <h4>Banyak dilihat</h4>
                     </td>
-                </tr>
+                </tr>--%>
+                
             </tbody>
         </table>
     </div>

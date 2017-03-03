@@ -129,10 +129,13 @@ namespace LihatKosV1
 
                 if (Session["UserID"] != null)
                 {
-                    lblNamaPengelola.Text = Data.NamaPengelola;
-                    lblNmrTlpnPengelola.Text = Data.KontakPengelola;
-                    btnHubungi.Visible = false;
+                    //lblNamaPengelola.Text = Data.NamaPengelola;
+                    //lblNmrTlpnPengelola.Text = Data.KontakPengelola;
+                    //btnBook.Visible = false;
+                    bool favVal = new FavoriteSystem().GetFormKosFavorit(ID, Convert.ToInt64(Session["UserID"]));
+                    btnFavorit.Enabled = (favVal == true) ? false : true;
                 }
+                new FormKosSystem().UpdateFormKosView(ID);
             }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -141,14 +144,30 @@ namespace LihatKosV1
             
         }
 
-        protected void btnHubungi_Click(object sender, EventArgs e)
+        protected void btnBook_Click(object sender, EventArgs e)
+        {
+            if (Session["UserID"] == null)
+            {
+                Uri halaman = Request.UrlReferrer;
+                //Response.Redirect("/Login?Link=" + Server.HtmlEncode(halaman.PathAndQuery));
+            }
+        }
+
+        protected void btnFavorit_Click(object sender, EventArgs e)
         {
             if (Session["UserID"] == null)
             {
                 Uri halaman = Request.UrlReferrer;
                 Response.Redirect("/Login?Link=" + Server.HtmlEncode(halaman.PathAndQuery));
-                //Server.HtmlEncode(halaman.PathAndQuery);
-                //halaman.PathAndQuery
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(Request.QueryString["ID"]))
+                {
+                    ID = Convert.ToInt64(Request.QueryString["ID"]);
+                }
+                bool retVal = new FavoriteSystem().InsertFormKosFavorit(ID, Convert.ToInt64(Session["UserID"]));
+                btnFavorit.Enabled = (retVal == true) ? false : true;
             }
         }
     }

@@ -89,8 +89,10 @@
             values: [25000, 2000000],
             slide: function (event, ui) {
                 $("#price").val("Rp." + ui.values[0] + " - Rp." + ui.values[1]);
+                $("#hidLowRate").val(ui.values[0]);
+                $("#hidHighRate").val(ui.values[1]);
             }
-        });
+        }); 
         $("#price").val("Rp." + $("#slider-3").slider("values", 0) +
            " - Rp." + $("#slider-3").slider("values", 1));
     });
@@ -114,5 +116,7 @@
 
 <asp:HiddenField ID="hidLatitude" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidLongitude" runat="server" ClientIDMode="Static" />
+<asp:HiddenField ID="hidLowRate" runat="server" ClientIDMode="Static" />
+<asp:HiddenField ID="hidHighRate" runat="server" ClientIDMode="Static" />
 </ContentTemplate>
 </asp:UpdatePanel>

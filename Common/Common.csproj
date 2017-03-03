@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AreaData.cs" />
     <Compile Include="FasilitasData.cs" />
+    <Compile Include="FavoriteData.cs" />
     <Compile Include="FormKosData.cs" />
     <Compile Include="KosFasilitasData.cs" />
     <Compile Include="KosHargaData.cs" />

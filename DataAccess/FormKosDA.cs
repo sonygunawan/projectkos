@@ -350,7 +350,7 @@ namespace LihatKos.DataAccess
             }
         }
 
-        public List<FormKosData> GetAllFormKosByLocation(string DataLatitude, string DataLongitude, int TipeKosID)
+        public List<FormKosData> GetAllFormKosByLocation(string DataLatitude, string DataLongitude, int TipeKosID, int SatuanHargaID, string Fasilitas)
         {
             try
             {
@@ -359,7 +359,9 @@ namespace LihatKos.DataAccess
                 db.AddInParameter(dbCommand, "Latitude", DbType.Decimal, Convert.ToDecimal(DataLatitude.Replace('.', ',')));
                 db.AddInParameter(dbCommand, "Longitude", DbType.Decimal, Convert.ToDecimal(DataLongitude.Replace('.', ',')));
                 db.AddInParameter(dbCommand, "TipeKosId", DbType.Int32, TipeKosID);
-                //TipeKosId
+                db.AddInParameter(dbCommand, "SatuanHargaId", DbType.Int32, SatuanHargaID);
+                db.AddInParameter(dbCommand, "Fasilitas", DbType.String, Fasilitas);
+
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 {
                     while (dataReader.Read())
@@ -371,7 +373,58 @@ namespace LihatKos.DataAccess
                         Data.Alamat = dataReader["Alamat"].ToString();
                         Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
                         Data.SatuanHarga = dataReader["SatuanHarga"].ToString();
-                        //MaxCode = Convert.ToString(dataReader["Kode"]);
+                        
+                        formKos.Add(Data);
+                    }
+                    dataReader.Close();
+                }
+                return formKos;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+        public bool UpdateFormKosView(Int64 Id)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdateFormKosView");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, Id);
+
+                db.ExecuteNonQuery(dbCommand);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+        public List<FormKosData> GetHighestFormKosByArea(int AreaID)
+        {
+            try
+            {
+                List<FormKosData> formKos = new List<FormKosData>();
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetHighestFormKosByArea");
+                db.AddInParameter(dbCommand, "AreaID", DbType.Int64, AreaID);
+
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    
+                    while (dataReader.Read())
+                    {
+                        FormKosData Data = new FormKosData();
+
+                        Data.ID = Convert.ToInt64(dataReader["ID"].ToString());
+                        Data.Nama = dataReader["Nama"].ToString();
+                        Data.Alamat = dataReader["Alamat"].ToString();
+                        Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
+                        Data.SatuanHarga = dataReader["SatuanHarga"].ToString();
+                        Data.Keterangan = dataReader["ScoreH"].ToString();
+                        
                         formKos.Add(Data);
                     }
                     dataReader.Close();

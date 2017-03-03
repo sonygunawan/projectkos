@@ -14,9 +14,19 @@ namespace LihatKosV1.UserControl.CariLokasi
         protected void Page_Load(object sender, EventArgs e)
         {
             int tipeKos = 0;
+            int jkWkt = 0;
+            string Fasilitas = "";
             if (!String.IsNullOrEmpty(Request.QueryString["tipeKos"]))
             {
                 tipeKos = Convert.ToInt32(Request.QueryString["tipeKos"]);
+            }
+            if (!String.IsNullOrEmpty(Request.QueryString["jkWkt"]))
+            {
+                jkWkt = Convert.ToInt32(Request.QueryString["jkWkt"]);
+            }
+            if (!String.IsNullOrEmpty(Request.QueryString["fasilitas"]))
+            {
+                Fasilitas = Request.QueryString["fasilitas"].ToString();
             }
             if (String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
             {
@@ -26,10 +36,10 @@ namespace LihatKosV1.UserControl.CariLokasi
             else
             {
                 string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
-                rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByLocation(splitLatLng[0], splitLatLng[1], tipeKos);
+                rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByLocation(splitLatLng[0], splitLatLng[1], tipeKos, jkWkt, Fasilitas);
                 rptListByLoc.DataBind();
             }
-            
+
             if (!Page.IsPostBack)
             {
                 

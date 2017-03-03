@@ -94,13 +94,22 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.Label lblTahunan;
         
         /// <summary>
-        /// btnHubungi control.
+        /// btnFavorit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnHubungi;
+        protected global::System.Web.UI.WebControls.Button btnFavorit;
+        
+        /// <summary>
+        /// btnBook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBook;
         
         /// <summary>
         /// lblNamaPengelola control.

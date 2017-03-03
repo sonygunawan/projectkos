@@ -148,8 +148,12 @@
                                             </div>
                                     </div>
                                     <div style="text-align:center;">
-                                    <asp:Button ID="btnHubungi" runat="server" CssClass="btn btn-primary text-center text-capitalize" Text="Hubungi" OnClick="btnHubungi_Click" />
+                                    <asp:Button ID="btnFavorit" runat="server" BackColor="DarkGoldenrod" CssClass="btn btn-primary text-center text-capitalize" Text="Favorit" OnClick="btnFavorit_Click" />
                                     <br />
+                                    <asp:Button ID="btnBook" runat="server" CssClass="btn btn-primary text-center text-capitalize" Text="Book" OnClick="btnBook_Click" />
+                                    <br />
+                                    
+
                                     <asp:Label ID="lblNamaPengelola" runat="server" Font-Bold="true"></asp:Label>
                                         <br />
                                     <asp:Label ID="lblNmrTlpnPengelola" runat="server"></asp:Label>

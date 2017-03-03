@@ -1,4 +1,5 @@
 ﻿using LihatKos.BusinessFacade;
+using LihatKos.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,16 @@ namespace LihatKosV1.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ddlArea.DataSource = new AreaSystem().GetAllArea();
-            ddlArea.DataTextField = "Nama";
-            ddlArea.DataValueField = "ID";
-            ddlArea.DataBind();
+            if (!Page.IsPostBack)
+            {
+                ddlArea.DataSource = new AreaSystem().GetAllArea();
+                ddlArea.DataTextField = "Nama";
+                ddlArea.DataValueField = "ID";
+                ddlArea.DataBind();
+            }
 
+            rptFormKosByArea.DataSource = new FormKosSystem().GetHighestFormKosByArea(Convert.ToInt32(ddlArea.SelectedValue));
+            rptFormKosByArea.DataBind();
             //using (var webClient = new System.Net.WebClient())
             //{
 
@@ -27,6 +33,21 @@ namespace LihatKosV1.UserControl
 
             //    ddlArea.SelectedItem.Text = d["city"];
             //}
+        }
+
+        protected void rptFormKosByArea_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                FormKosData Data = (FormKosData)e.Item.DataItem;
+
+                Label lblKeterangan = (Label)e.Item.FindControl("lblKeterangan");
+                HyperLink hlDetailLink = (HyperLink)e.Item.FindControl("hlDetailLink");
+
+                //lblHargaBulanan.Text = Data.Harga.ToString("N2");
+                lblKeterangan.Text = Data.Keterangan;
+                hlDetailLink.NavigateUrl = "../../DetailKos?id=" + Data.ID.ToString();
+            }
         }
     }
 }
