@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-    <AjaxToolKit:ToolkitScriptManager runat="Server" ID="ScriptManager1" />
+    <%--<AjaxToolKit:ToolkitScriptManager runat="Server" ID="ScriptManager1" />--%>
     <asp:HiddenField ID="hidLatitude" runat="server" ClientIDMode="Static" />
     <asp:HiddenField ID="hidLongitude" runat="server" ClientIDMode="Static" />
     <!-- Room -->

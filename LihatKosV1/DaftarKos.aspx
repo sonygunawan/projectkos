@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>LihatKos.com | Website Pencari Tempat Kos Terbaik dan Terkini</title>
@@ -465,6 +465,7 @@
                                     <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
                                 </div>
                             </div>
+                            
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Landmark</label>
                                 <div class="col-md-9 ui-controlgroup-item">
@@ -477,6 +478,19 @@
                                 <label class="col-md-3 control-label" for="image">Keterangan Lain-lain</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtKeteranganLain" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Foto Depan</label>
+                                <div class="col-md-9"> 
+                                    
+                                    <cc1:AjaxFileUpload ID="fuFotoDepan" ThrobberID="myThrobber"
+                                        Mode="Auto"
+                                        AllowedFileTypes="jpg,jpeg,png"
+                                        MaximumNumberOfFiles="1" UseAbsoluteHandlerPath="true"
+                                        runat="server" AutoStartUpload="true" OnUploadStart="fuFotoDepan_UploadStart"  OnUploadComplete="fuFotoDepan_UploadComplete"
+                                        OnUploadCompleteAll="fuFotoDepan_UploadCompleteAll"></cc1:AjaxFileUpload>
+                                    <asp:Image ID="myThrobber" runat="server" Width="100" Height="100" />
                                 </div>
                             </div>
                             <div class="form-group">

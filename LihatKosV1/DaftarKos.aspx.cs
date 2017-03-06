@@ -2,6 +2,7 @@
 using LihatKos.Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -137,6 +138,31 @@ namespace LihatKosV1
             Data.KosLingkungan = DetailsLink;
 
             new FormKosSystem().InsertFormKosLengkap(Data);
+        }
+
+        protected void fuFotoDepan_UploadStart(object sender, AjaxControlToolkit.AjaxFileUploadStartEventArgs e)
+        {
+            //string temppath = Path.GetTempPath();
+        }
+
+        protected void fuFotoDepan_UploadCompleteAll(object sender, AjaxControlToolkit.AjaxFileUploadCompleteAllEventArgs e)
+        {
+            bool test = fuFotoDepan.ClearFileListAfterUpload;
+        }
+
+        protected void fuFotoDepan_UploadComplete(object sender, AjaxControlToolkit.AjaxFileUploadEventArgs e)
+        {
+            try
+            {
+                string filePath = Server.MapPath("~/Temp/") + e.FileName;
+                fuFotoDepan.SaveAs(filePath);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            
         }
     }
 }
