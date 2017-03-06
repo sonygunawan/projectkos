@@ -407,11 +407,29 @@ namespace LihatKos.DataAccess
         {
             try
             {
-                List<FormKosData> formKos = new List<FormKosData>();
+                List<FormKosData> retVal = new List<FormKosData>();
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetHighestFormKosByArea");
                 db.AddInParameter(dbCommand, "AreaID", DbType.Int64, AreaID);
 
-                DataSet HighestFormKos = db.ExecuteDataSet(dbCommand);
+                DataSet ds = db.ExecuteDataSet(dbCommand);
+                DataTable dtLatest = ds.Tables[0];
+                DataTable dtFav = ds.Tables[1];
+                DataTable dtSeen = ds.Tables[2];
+                int countx = ds.Tables.Count;
+                for (int x = 0; x < countx; x++)
+                {
+                    foreach (DataRow dr in ds.Tables[x].Rows)
+                    {
+                        var DataKos = new FormKosData();
+                        DataKos.Keterangan = dr["ScoreH"].ToString();
+                        DataKos.ID = Convert.ToInt64(dr["ID"].ToString());
+                        DataKos.Nama = dr["Nama"].ToString();
+                        DataKos.Alamat = dr["Alamat"].ToString();
+                        DataKos.Harga = Convert.ToDecimal(dr["Harga"].ToString());
+                        DataKos.SatuanHarga = dr["SatuanHarga"].ToString();
+                        retVal.Add(DataKos);
+                    }
+                }
                 //using (IDataReader dataReader = db.ExecuteDataSet(dbCommand))
                 //{
                     
@@ -430,7 +448,7 @@ namespace LihatKos.DataAccess
                 //    }
                 //    dataReader.Close();
                 //}
-                return formKos;
+                return retVal;
             }
             catch (Exception ex)
             {

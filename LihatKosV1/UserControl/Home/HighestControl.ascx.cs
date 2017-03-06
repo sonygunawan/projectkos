@@ -41,11 +41,11 @@ namespace LihatKosV1.UserControl
             {
                 FormKosData Data = (FormKosData)e.Item.DataItem;
 
-                Label lblKeterangan = (Label)e.Item.FindControl("lblKeterangan");
+                Literal litKeterangan = (Literal)e.Item.FindControl("litKeterangan");
                 HyperLink hlDetailLink = (HyperLink)e.Item.FindControl("hlDetailLink");
 
                 //lblHargaBulanan.Text = Data.Harga.ToString("N2");
-                lblKeterangan.Text = Data.Keterangan;
+                litKeterangan.Text = Data.Keterangan;
                 hlDetailLink.NavigateUrl = "../../DetailKos?id=" + Data.ID.ToString();
             }
         }
