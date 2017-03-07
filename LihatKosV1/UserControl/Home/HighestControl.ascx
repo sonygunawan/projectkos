@@ -31,12 +31,14 @@
             <tbody>
                 <asp:Repeater ID="rptFormKosByArea" runat="server" OnItemDataBound="rptFormKosByArea_ItemDataBound">
                     <ItemTemplate>
-                        <td class="clearfix">
-                            <asp:HyperLink ID="hlDetailLink" runat="server" NavigateUrl="~/DetailKos.aspx">
-                                <img src="images/300x150.png" class="pull-left img-responsive" alt="">
-                            </asp:HyperLink>
-                            <h4><asp:Label ID="lblKeterangan" runat="server"></asp:Label></h4>
-                        </td>
+                        <tr>
+                            <td class="clearfix">
+                                <asp:HyperLink ID="hlDetailLink" runat="server" NavigateUrl="~/DetailKos.aspx">
+                                    <img src="images/300x150.png" class="pull-left img-responsive" alt="">
+                                </asp:HyperLink>
+                                <h4><asp:Label ID="lblKeterangan" runat="server"></asp:Label></h4>
+                            </td>
+                        </tr>
                     </ItemTemplate>
                 </asp:Repeater>
                 <%--<tr>

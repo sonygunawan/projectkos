@@ -2,11 +2,12 @@
 <%@ Register Src="~/UserControl/CariLokasi/ListByLocation.ascx" TagName="ListByLocation" TagPrefix="uc2" %>
 <%@ Register src="~/UserControl/CariLokasi/SearchControlDetail.ascx" tagname="SearchControlDetail" tagprefix="uc4" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolKit" %>
-<%@ Register Assembly="AjaxControls" Namespace="AjaxControls" TagPrefix="CustomAjaxControls" %>
+<%--<%@ Register Assembly="AjaxControls" Namespace="AjaxControls" TagPrefix="CustomAjaxControls" %>--%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-    <AjaxToolKit:ToolkitScriptManager runat="Server" ID="ScriptManager1" />
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<%--    <AjaxToolKit:ToolkitScriptManager runat="Server" ID="ScriptManager1" />--%>
     <asp:HiddenField ID="hidLatitude" runat="server" ClientIDMode="Static" />
     <asp:HiddenField ID="hidLongitude" runat="server" ClientIDMode="Static" />
     <!-- Room -->
