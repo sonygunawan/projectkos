@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchControlDetail.ascx.cs" Inherits="LihatKosV1.UserControl.CariLokasi.SearchControlDetail" %>
-<%@ Register Assembly="AjaxControls" Namespace="AjaxControls" TagPrefix="CustomAjaxControls" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="AjaxControlToolkit" %>
 
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />

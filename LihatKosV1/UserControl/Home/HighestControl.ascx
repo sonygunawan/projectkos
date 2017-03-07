@@ -36,7 +36,7 @@
                                 <asp:HyperLink ID="hlDetailLink" runat="server" NavigateUrl="~/DetailKos.aspx">
                                     <img src="images/300x150.png" class="pull-left img-responsive" alt="">
                                 </asp:HyperLink>
-                                <h4><asp:Literal ID="litKeterangan" runat="server"></asp:Literal></h4>
+                                <h4><asp:Label ID="lblKeterangan" runat="server"></asp:Label></h4>
                             </td>
                         </tr>
                     </ItemTemplate>
