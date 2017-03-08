@@ -57,23 +57,7 @@ namespace LihatKosV1
                 //}
 
             }
-            if (Request.QueryString["preview"] != "1" || string.IsNullOrEmpty(Request.QueryString["fileId"]))
-                return;
-
-            var fileId = Request.QueryString["fileId"];
-            string fileContentType = null;
-            byte[] fileContents = null;
-
-            fileContents = (byte[])Session["fileContents_" + fileId];
-            fileContentType = (string)Session["fileContentType_" + fileId];
-
-            if (fileContents == null)
-                return;
-
-            Response.Clear();
-            Response.ContentType = fileContentType;
-            Response.BinaryWrite(fileContents);
-            Response.End();
+            
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)

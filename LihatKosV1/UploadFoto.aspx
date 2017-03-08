@@ -104,10 +104,10 @@
 
                                         function onClientDepanUploadComplete(sender, e) {
 
-                                            onImageValidated("TRUE", e);
+                                            onImageValidated1("TRUE", e);
                                         }
 
-                                        function onImageValidated(arg, context) {
+                                        function onImageValidated1(arg, context) {
                                             var test = document.getElementById("testuploaded");
                                             test.style.display = 'block';
 
@@ -118,29 +118,29 @@
                                             if (arg == "TRUE") {
                                                 var url = context.get_postedUrl();
                                                 url = url.replace('&amp;', '&');
-                                                item.appendChild(createThumbnail(context, url));
+                                                item.appendChild(createThumbnail1(context, url));
                                             } else {
-                                                item.appendChild(createFileInfo(context));
+                                                item.appendChild(createFileInfo1(context));
                                             }
 
                                             fileList.appendChild(item);
                                         }
 
-                                        function createFileInfo(e) {
+                                        function createFileInfo1(e) {
                                             var holder = document.createElement('div');
                                             holder.appendChild(document.createTextNode(e.get_fileName() + ' with size ' + e.get_fileSize() + ' bytes'));
 
                                             return holder;
                                         }
 
-                                        function createThumbnail(e, url) {
+                                        function createThumbnail1(e, url) {
                                             var holder = document.createElement('div');
                                             var img = document.createElement("img");
                                             img.style.width = '80px';
                                             img.style.height = '80px';
                                             img.setAttribute("src", url);
 
-                                            holder.appendChild(createFileInfo(e));
+                                            holder.appendChild(createFileInfo1(e));
                                             holder.appendChild(img);
 
                                             return holder;
@@ -172,10 +172,10 @@
                                     <asp:Label runat="server" ID="throbberDepan" Style="display: none;"><img align="absmiddle" alt="" src="images/uploading.gif" /></asp:Label>
                                         <ajaxToolkit:AjaxFileUpload ID="fuFotoDepan" runat="server" Padding-Bottom="4"
                                         Padding-Left="2" Padding-Right="1" Padding-Top="4" ThrobberID="throbberDepan"
-                                        MaxFileSize="1024" MaximumNumberOfFiles="3" AllowedFileTypes="jpg,jpeg,png" />
-                                    <%--OnClientUploadComplete="onClientDepanUploadComplete" OnUploadComplete="fuFotoDepan_UploadComplete"
+                                        MaxFileSize="1024" MaximumNumberOfFiles="3" AllowedFileTypes="jpg,jpeg,png" 
+                                        OnClientUploadComplete="onClientDepanUploadComplete" OnUploadComplete="fuFotoDepan_UploadComplete"
                                         OnClientUploadCompleteAll="onClientDepanUploadCompleteAll" OnUploadCompleteAll="fuFotoDepan_UploadCompleteAll" 
-                                        OnUploadStart="fuFotoDepan_UploadStart" OnClientUploadStart="onClientDepanUploadStart" OnClientUploadError="onClientDepanUploadError"--%>
+                                        OnUploadStart="fuFotoDepan_UploadStart" OnClientUploadStart="onClientDepanUploadStart" OnClientUploadError="onClientDepanUploadError" />
                                     <div id="uploadCompleteInfo"></div>
                                     <br />
                                     <div id="testuploaded" style="display: none; padding: 4px; border: gray 1px solid;">
@@ -193,43 +193,43 @@
 
                                         function onClientDalamUploadComplete(sender, e) {
 
-                                            onImageValidated("TRUE", e);
+                                            onImageValidated2("TRUE", e);
                                         }
 
-                                        function onImageValidated(arg, context) {
+                                        function onImageValidated2(arg, context) {
                                             var test = document.getElementById("testuploaded2");
                                             test.style.display = 'block';
 
-                                            var fileList = document.getElementById("fileList2");
+                                            var fileList2 = document.getElementById("fileList2");
                                             var item = document.createElement('div');
                                             item.style.padding = '4px';
 
                                             if (arg == "TRUE") {
                                                 var url = context.get_postedUrl();
                                                 url = url.replace('&amp;', '&');
-                                                item.appendChild(createThumbnail(context, url));
+                                                item.appendChild(createThumbnail2(context, url));
                                             } else {
-                                                item.appendChild(createFileInfo(context));
+                                                item.appendChild(createFileInfo2(context));
                                             }
 
-                                            fileList.appendChild(item);
+                                            fileList2.appendChild(item);
                                         }
 
-                                        function createFileInfo(e) {
+                                        function createFileInfo2(e) {
                                             var holder = document.createElement('div');
                                             holder.appendChild(document.createTextNode(e.get_fileName() + ' with size ' + e.get_fileSize() + ' bytes'));
 
                                             return holder;
                                         }
 
-                                        function createThumbnail(e, url) {
+                                        function createThumbnail2(e, url) {
                                             var holder = document.createElement('div');
                                             var img = document.createElement("img");
                                             img.style.width = '80px';
                                             img.style.height = '80px';
                                             img.setAttribute("src", url);
 
-                                            holder.appendChild(createFileInfo(e));
+                                            holder.appendChild(createFileInfo2(e));
                                             holder.appendChild(img);
 
                                             return holder;
@@ -261,10 +261,10 @@
                                     <asp:Label runat="server" ID="throbberDalam" Style="display: none;"><img align="absmiddle" alt="" src="images/uploading.gif" /></asp:Label>
                                         <ajaxToolkit:AjaxFileUpload ID="fuFotoDalam" runat="server" Padding-Bottom="4"
                                         Padding-Left="2" Padding-Right="1" Padding-Top="4" ThrobberID="throbberDalam"
-                                        MaxFileSize="1024" MaximumNumberOfFiles="3" AllowedFileTypes="jpg,jpeg,png" />
-                                    <%--OnClientUploadComplete="onClientDepanUploadComplete" OnUploadComplete="fuFotoDepan_UploadComplete"
-                                        OnClientUploadCompleteAll="onClientDepanUploadCompleteAll" OnUploadCompleteAll="fuFotoDepan_UploadCompleteAll" 
-                                        OnUploadStart="fuFotoDepan_UploadStart" OnClientUploadStart="onClientDepanUploadStart" OnClientUploadError="onClientDepanUploadError"--%>
+                                        MaxFileSize="1024" MaximumNumberOfFiles="3" AllowedFileTypes="jpg,jpeg,png" 
+                                        OnClientUploadComplete="onClientDalamUploadComplete" OnUploadComplete="fuFotoDalam_UploadComplete"
+                                        OnClientUploadCompleteAll="onClientDalamUploadCompleteAll" OnUploadCompleteAll="fuFotoDalam_UploadCompleteAll" 
+                                        OnUploadStart="fuFotoDalam_UploadStart" OnClientUploadStart="onClientDalamUploadStart" OnClientUploadError="onClientDalamUploadError" />
                                     <div id="uploadCompleteInfo2"></div>
                                     <br />
                                     <div id="testuploaded2" style="display: none; padding: 4px; border: gray 1px solid;">
