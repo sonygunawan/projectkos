@@ -115,6 +115,7 @@
     <Content Include="Logout.aspx" />
     <Content Include="RegisterForm.aspx" />
     <Content Include="TestJquery.aspx" />
+    <Content Include="UploadFoto.aspx" />
     <Content Include="UserControl\CariLokasi\ListByLocation.ascx" />
     <Content Include="UserControl\CariLokasi\SearchControlDetail.ascx" />
     <Content Include="UserControl\Home\BannerLeft.ascx" />
@@ -207,6 +208,13 @@
     </Compile>
     <Compile Include="TestJquery.aspx.designer.cs">
       <DependentUpon>TestJquery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadFoto.aspx.cs">
+      <DependentUpon>UploadFoto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadFoto.aspx.designer.cs">
+      <DependentUpon>UploadFoto.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\CariLokasi\ListByLocation.ascx.cs">
       <DependentUpon>ListByLocation.ascx</DependentUpon>

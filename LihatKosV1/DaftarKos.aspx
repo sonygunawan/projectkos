@@ -19,7 +19,7 @@
     <!-- bootstrap -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/login.css" />
-    
+     
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -491,11 +491,11 @@
                                     <script type="text/javascript">
 
                                         function onClientDepanUploadComplete(sender, e) {
+                                            
                                             onImageValidated("TRUE", e);
                                         }
 
                                         function onImageValidated(arg, context) {
-
                                             var test = document.getElementById("testuploaded");
                                             test.style.display = 'block';
 
@@ -536,6 +536,7 @@
 
                                         function onClientDepanUploadStart(sender, e) {
                                             document.getElementById('uploadCompleteInfo').innerHTML = 'Please wait while uploading ' + e.get_filesInQueue() + ' files...';
+                                            
                                         }
 
                                         function onClientDepanUploadError(sender, e) {
@@ -543,7 +544,7 @@
                                         }
 
                                         function onClientDepanUploadCompleteAll(sender, e) {
-
+                                            //alert('upload complete all');
                                             var args = JSON.parse(e.get_serverArguments()),
                                                 unit = args.duration > 60 ? 'minutes' : 'seconds',
                                                 duration = (args.duration / (args.duration > 60 ? 60 : 1)).toFixed(2);
@@ -577,7 +578,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="submit"></label>
                                 <div class="col-md-9">
-                                    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Submit" OnClick="btnSubmit_Click" />
+                                    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Lanjut" OnClick="btnSubmit_Click" />
                                     <%--<button id="submit" name="submit" class="btn btn-primary">Insert</button>--%>
                                 </div>
                             </div>

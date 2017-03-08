@@ -44,9 +44,11 @@ namespace LihatKosV1
                 "FormApproval",
                 "~/FormApproval.aspx");
             routes.MapPageRoute("",
+                "UploadFoto",
+                "~/UploadFoto.aspx");
+            routes.MapPageRoute("",
                 "Logout",
                 "~/Logout.aspx");
-
         }
         protected void Session_Start(object sender, EventArgs e)
         {

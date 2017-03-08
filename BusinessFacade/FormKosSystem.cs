@@ -33,7 +33,7 @@ namespace LihatKos.BusinessFacade
         {
             return new FormKosDA().GetKosLingkunganByFormID(Id);
         }
-        public bool InsertFormKosLengkap(FormKosData Data)
+        public Int64 InsertFormKosLengkap(FormKosData Data)
         {
             return new FormKosDA().InsertFormKosLengkap(Data);
         }

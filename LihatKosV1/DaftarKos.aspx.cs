@@ -3,6 +3,7 @@ using LihatKos.BusinessFacade;
 using LihatKos.Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -15,24 +16,8 @@ namespace LihatKosV1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["preview"] != "1" || string.IsNullOrEmpty(Request.QueryString["fileId"]))
-                return;
-
-            var fileId = Request.QueryString["fileId"];
-            string fileContentType = null;
-            byte[] fileContents = null;
-
-            fileContents = (byte[])Session["fileContents_" + fileId];
-            fileContentType = (string)Session["fileContentType_" + fileId];
-
-            if (fileContents == null)
-                return;
-
-            Response.Clear();
-            Response.ContentType = fileContentType;
-            Response.BinaryWrite(fileContents);
-            Response.End();
-
+            
+             
             if (!Page.IsPostBack)
             {
                 chkFasilitas.DataSource = new FasilitasSystem().GetAllFasilitas();
@@ -48,7 +33,7 @@ namespace LihatKosV1
                 ddlArea.DataSource = new AreaSystem().GetAllArea();
                 ddlArea.DataTextField = "Nama";
                 ddlArea.DataValueField = "ID";
-                ddlArea.DataBind();
+                ddlArea.DataBind(); 
 
                 rdlTipeKos.DataSource = new TipeKosSystem().GetAllTipeKos();
                 rdlTipeKos.DataTextField = "NamaRdl";
@@ -72,6 +57,23 @@ namespace LihatKosV1
                 //}
 
             }
+            if (Request.QueryString["preview"] != "1" || string.IsNullOrEmpty(Request.QueryString["fileId"]))
+                return;
+
+            var fileId = Request.QueryString["fileId"];
+            string fileContentType = null;
+            byte[] fileContents = null;
+
+            fileContents = (byte[])Session["fileContents_" + fileId];
+            fileContentType = (string)Session["fileContentType_" + fileId];
+
+            if (fileContents == null)
+                return;
+
+            Response.Clear();
+            Response.ContentType = fileContentType;
+            Response.BinaryWrite(fileContents);
+            Response.End();
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -155,7 +157,8 @@ namespace LihatKosV1
             Data.KosFasilitas = DetailsFasi;
             Data.KosLingkungan = DetailsLink;
 
-            new FormKosSystem().InsertFormKosLengkap(Data);
+            var retFormID = new FormKosSystem().InsertFormKosLengkap(Data);
+            Response.Redirect("/UploadFoto?ID=" + retFormID.ToString());
         }
 
         protected void fuFotoDepan_UploadStart(object sender, AjaxControlToolkit.AjaxFileUploadStartEventArgs e)
@@ -180,32 +183,46 @@ namespace LihatKosV1
 
         protected void fuFotoDepan_UploadComplete(object sender, AjaxFileUploadEventArgs file)
         {
-            // User can save file to File System, database or in session state
-            if (file.ContentType.Contains("jpg") || file.ContentType.Contains("gif")
-                || file.ContentType.Contains("png") || file.ContentType.Contains("jpeg"))
+            try
             {
-
-                // Limit preview file for file equal or under 4MB only, otherwise when GetContents invoked
-                // System.OutOfMemoryException will thrown if file is too big to be read.
-                if (file.FileSize <= 1024 * 1024 * 4)
+                
+                //Directory.CreateDirectory()
+                // User can save file to File System, database or in session state
+                if (file.ContentType.Contains("jpg") || file.ContentType.Contains("gif")
+                    || file.ContentType.Contains("png") || file.ContentType.Contains("jpeg"))
                 {
-                    Session["fileContentType_" + file.FileId] = file.ContentType;
-                    Session["fileContents_" + file.FileId] = file.GetContents();
 
-                    // Set PostedUrl to preview the uploaded file.
-                    file.PostedUrl = string.Format("?preview=1&fileId={0}", file.FileId);
+                    // Limit preview file for file equal or under 4MB only, otherwise when GetContents invoked
+                    // System.OutOfMemoryException will thrown if file is too big to be read.
+                    if (file.FileSize <= 1024 * 1024 * 4)
+                    {
+                        Session["fileContentType_" + file.FileId] = file.ContentType;
+                        Session["fileContents_" + file.FileId] = file.GetContents();
+
+                        // Set PostedUrl to preview the uploaded file.
+                        file.PostedUrl = string.Format("?preview=1&fileId={0}", file.FileId);
+                    }
+                    else
+                    {
+                        file.PostedUrl = "fileTooBig.gif";
+                    }
+
+                    // Since we never call the SaveAs method(), we need to delete the temporary fileß
+                    //file.DeleteTemporaryData();
                 }
-                else
+                if (Directory.Exists(MapPath("~/UploadedImage/")))
                 {
-                    file.PostedUrl = "fileTooBig.gif";
+                    Directory.CreateDirectory(MapPath("~/UploadedImage/User-" + Session["UserID"])); // +"/Kos-1/"));
                 }
-
-                // Since we never call the SaveAs method(), we need to delete the temporary fileß
-                file.DeleteTemporaryData();
+                // In a real app, you would call SaveAs() to save the uploaded file somewhere
+                fuFotoDepan.SaveAs(MapPath("~/UploadedImage/User-"+ Session["UserID"] + "/" + file.FileName));
             }
-
-            // In a real app, you would call SaveAs() to save the uploaded file somewhere
-            // AjaxFileUpload1.SaveAs(MapPath("~/App_Data/" + file.FileName), true);
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            
         }
     }
 }

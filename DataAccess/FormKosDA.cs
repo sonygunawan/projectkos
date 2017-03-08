@@ -244,9 +244,10 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
-        public bool InsertFormKosLengkap(FormKosData Data)
+        public Int64 InsertFormKosLengkap(FormKosData Data)
         {
             bool retVal = true;
+            Int64 retFormID = 0;
             using (DbConnection connection = db.CreateConnection())
             {
                 connection.Open();
@@ -255,6 +256,8 @@ namespace LihatKos.DataAccess
                 try
                 {
                     Int64 FormID = InsertFormKos(Data);
+                    //set return
+                    retFormID = FormID;
                     foreach (KosHargaData detail in Data.KosHarga)
                     {
                         detail.FormKosID = FormID;
@@ -296,7 +299,7 @@ namespace LihatKos.DataAccess
                     transaction.Rollback();
                 connection.Close();
             }
-            return true;
+            return retFormID;
             
             
         }
