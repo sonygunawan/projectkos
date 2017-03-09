@@ -13,6 +13,15 @@ namespace LihatKosV1 {
     public partial class Default {
         
         /// <summary>
+        /// sm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager sm;
+        
+        /// <summary>
         /// BannerLeft control.
         /// </summary>
         /// <remarks>
@@ -56,5 +65,14 @@ namespace LihatKosV1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::LihatKosV1.UserControl.MyFavoritesControl MyFavoritesControl;
+        
+        /// <summary>
+        /// Head1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
     }
 }

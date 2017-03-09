@@ -32,8 +32,8 @@ namespace LihatKos.DataAccess
                 db.AddInParameter(dbCommand, "Deskripsi", DbType.String, Data.Deskripsi);
                 db.AddInParameter(dbCommand, "Alamat", DbType.String, Data.Alamat);
                 db.AddInParameter(dbCommand, "AreaID", DbType.Int32, Data.AreaID);
-                db.AddInParameter(dbCommand, "Altitude", DbType.Double, Data.Latitude);
-                db.AddInParameter(dbCommand, "Longitude", DbType.Double, Data.Longitude);
+                db.AddInParameter(dbCommand, "Altitude", DbType.Decimal, Data.Latitude);
+                db.AddInParameter(dbCommand, "Longitude", DbType.Decimal, Data.Longitude);
                 db.AddInParameter(dbCommand, "ImageID", DbType.Int64, Data.ImageID);
                 db.AddInParameter(dbCommand, "NamaPemilik", DbType.String, Data.NamaPemilik);
                 db.AddInParameter(dbCommand, "AlamatPemilik", DbType.String, Data.AlamatPemilik);
@@ -323,8 +323,8 @@ namespace LihatKos.DataAccess
                         Data.Alamat = dataReader["Alamat"].ToString();
                         Data.AreaID = Convert.ToInt32(dataReader["AreaID"].ToString());
                         Data.NamaArea = dataReader["NamaArea"].ToString();
-                        Data.Latitude = (float) Convert.ToDouble(dataReader["Altitude"].ToString());
-                        Data.Longitude = (float)Convert.ToDouble(dataReader["Longitude"].ToString());
+                        Data.Latitude = (decimal) Convert.ToDecimal(dataReader["Altitude"].ToString());
+                        Data.Longitude = (decimal)Convert.ToDecimal(dataReader["Longitude"].ToString());
                         Data.NamaPemilik = dataReader["NamaPemilik"].ToString();
                         Data.AlamatPemilik = dataReader["AlamatPemilik"].ToString();
                         Data.KontakPemilik = dataReader["KontakPemilik"].ToString();

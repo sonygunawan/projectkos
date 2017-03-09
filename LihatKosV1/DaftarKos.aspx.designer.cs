@@ -346,24 +346,6 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.TextBox txtKeteranganLain;
         
         /// <summary>
-        /// throbberDepan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label throbberDepan;
-        
-        /// <summary>
-        /// fuFotoDepan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AjaxFileUpload fuFotoDepan;
-        
-        /// <summary>
         /// btnSubmit control.
         /// </summary>
         /// <remarks>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.Data;
+﻿using LihatKos.Common;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -59,6 +60,37 @@ namespace LihatKos.DataAccess
                     while (dataReader.Read())
                     {
                         retVal = Convert.ToInt64(dataReader["ID"]);
+                    }
+                    dataReader.Close();
+                }
+
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+        public List<UserData> GetUsers(Int64 UserID)
+        {
+            try
+            {
+                var retVal = new List<UserData>();
+
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetUser");
+                db.AddInParameter(dbCommand, "UserID", DbType.Int64, UserID);
+
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        var data = new UserData();
+                        data.ID = Convert.ToInt64(dataReader["ID"].ToString());
+                        data.Email = dataReader["Email"].ToString();
+                        data.UserName = dataReader["UserName"].ToString();
+                        data.LastActivityDate = Convert.ToDateTime(dataReader["LastActivityDate"].ToString());
+                        retVal.Add(data);
                     }
                     dataReader.Close();
                 }

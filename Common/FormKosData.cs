@@ -13,8 +13,8 @@ namespace LihatKos.Common
         public string Deskripsi { get; set; }
         public string Alamat { get; set; }
         public int AreaID { get; set; }
-        public float Latitude { get; set; }
-        public float Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
         public int ImageID { get; set; }
         public string NamaPemilik { get; set; }
         public string AlamatPemilik { get; set; }

@@ -479,7 +479,7 @@
                                     <asp:TextBox ID="txtKeteranganLain" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Foto Depan</label>
                                 <div class="col-md-9">
                                     <style>
@@ -574,7 +574,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="submit"></label>
                                 <div class="col-md-9">

@@ -104,9 +104,16 @@
                                 </div>
                             </div>
                              <div class="form-group">
-                                <div class="col-sm-8">
+                                <div class="col-sm-8 slide no-gutter">
                                     <div class="owl-carousel owl-theme">
-                                        <div class="item">
+                                        <asp:Repeater ID="rptGambarKos" runat="server" OnItemDataBound="rptGambarKos_ItemDataBound">
+                                            <ItemTemplate>
+                                                <div class="item">
+                                                    <asp:Image ID="imgKos" runat="server" CssClass="img-responsive" AlternateText="slide" />
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        <%--<div class="item">
                                             <img src="images/photos/banner.jpg" class="img-responsive" alt="slide">
                                         </div>
                                         <div class="item">
@@ -120,7 +127,7 @@
                                         </div>
                                         <div class="item">
                                             <img src="images/photos/1900x849.png" class="img-responsive" alt="slide">
-                                        </div>
+                                        </div>--%>
                                     </div>
                                 </div>
 
@@ -194,7 +201,7 @@
                                     function init_map() {
                                         var latitude = document.getElementById('hidLatitude').value;
                                         var longitude = document.getElementById('hidLongitude').value;
-                                        var myOptions = { zoom: 13, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(latitude, longitude), animation: google.maps.Animation.DROP }); marker.addListener('click', toggleBounce);
+                                        var myOptions = { zoom: 16, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(latitude, longitude), animation: google.maps.Animation.DROP }); marker.addListener('click', toggleBounce);
                                     }
 
                                     function toggleBounce() {

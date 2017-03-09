@@ -4,8 +4,11 @@
 <%@ Register Src="~/UserControl/Home/HighestControl.ascx" TagName="HighestControl" TagPrefix="uc3" %>
 <%@ Register Src="~/UserControl/Home/MyFavoritesControl.ascx" TagName="MyFavoritesControl" TagPrefix="uc4" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        
+
+    <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>
+    
         <!-- Front -->
         <div id="front">
             <div class="container-fluid">
@@ -42,4 +45,10 @@
             <!-- #container-fluid -->
         </asp:Panel>
         <!-- End of Room -->
+    <script  type="text/javascript">
+        function show() {
+            document.write("<head id='Head1' runat='server'></head>");
+        }
+    </script>
+    
 </asp:Content>

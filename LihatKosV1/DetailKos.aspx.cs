@@ -2,6 +2,7 @@
 using LihatKos.Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -135,9 +136,26 @@ namespace LihatKosV1
                     bool favVal = new FavoriteSystem().GetFormKosFavorit(ID, Convert.ToInt64(Session["UserID"]));
                     btnFavorit.Enabled = (favVal == true) ? false : true;
                 }
+                rptGambarKos.DataSource = AmbilListGambar(Data.UserID,ID);
+                rptGambarKos.DataBind();
                 new FormKosSystem().UpdateFormKosView(ID);
             }
         }
+
+        private List<string> AmbilListGambar(Int64 UserID, Int64 ID)
+        {
+            List<string> listStr = new List<string>();
+            var remPath = System.Web.Hosting.HostingEnvironment.MapPath("~/"); //Path.GetFullPath("/");
+            
+            string[] arrFiles = Directory.GetFiles(MapPath("~/UploadedImage/User-" + UserID + "/Kos-" + ID.ToString() + "/"));
+            foreach(string arrItem in arrFiles)
+            {
+                var arr = arrItem.Replace(remPath, "");
+                listStr.Add(arr);
+            }
+            return listStr;
+        }
+        
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             
@@ -168,6 +186,22 @@ namespace LihatKosV1
                 }
                 bool retVal = new FavoriteSystem().InsertFormKosFavorit(ID, Convert.ToInt64(Session["UserID"]));
                 btnFavorit.Enabled = (retVal == true) ? false : true;
+            }
+        }
+
+        protected void rptGambarKos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                string DataStr = (string)e.Item.DataItem;
+                
+                Image imgKos = (Image)e.Item.FindControl("imgKos");
+                imgKos.ImageUrl = DataStr;
+                //HyperLink hlDetailLink = (HyperLink)e.Item.FindControl("hlDetailLink");
+
+                ////lblHargaBulanan.Text = Data.Harga.ToString("N2");
+                //lblKeterangan.Text = Data.Keterangan;
+                //hlDetailLink.NavigateUrl = "../../DetailKos?id=" + Data.ID.ToString();
             }
         }
     }

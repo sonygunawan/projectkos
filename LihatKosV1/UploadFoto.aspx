@@ -186,7 +186,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Foto Bagian Dalam</label>
                                 <div class="col-md-9">
                                     <script type="text/javascript">
@@ -274,7 +274,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="submit"></label>
                                 <div class="col-md-9">

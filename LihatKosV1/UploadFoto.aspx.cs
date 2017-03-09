@@ -1,4 +1,6 @@
 ﻿using AjaxControlToolkit;
+using LihatKos.BusinessFacade;
+using LihatKos.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,10 +14,21 @@ namespace LihatKosV1
 {
     public partial class UploadFoto : System.Web.UI.Page
     {
+        private Int64 ID = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["preview"] != "1" || Request.QueryString["preview"] != "2" || string.IsNullOrEmpty(Request.QueryString["fileId"])
-                || string.IsNullOrEmpty(Request.QueryString["fileId2"]))
+            if (!Page.IsPostBack)
+            {
+                if (!String.IsNullOrEmpty(Request.QueryString["ID"]))
+                {
+                    ID = Convert.ToInt64(Request.QueryString["ID"]);
+                }
+                FormKosData Data = new FormKosSystem().GetAllFormKos(ID)[0];
+                lblNama.Text = Data.Nama;
+                lblAlamat.Text = Data.Alamat;
+            }
+            //|| Request.QueryString["preview"] != "2"|| string.IsNullOrEmpty(Request.QueryString["fileId2"])
+            if (Request.QueryString["preview"] != "1"  || string.IsNullOrEmpty(Request.QueryString["fileId"]))
                 return;
 
             var fileId = Request.QueryString["fileId"];
@@ -58,7 +71,10 @@ namespace LihatKosV1
         {
             try
             {
-
+                if (!String.IsNullOrEmpty(Request.QueryString["ID"]))
+                {
+                    ID = Convert.ToInt64(Request.QueryString["ID"]);
+                }
                 //Directory.CreateDirectory()
                 // User can save file to File System, database or in session state
                 if (file.ContentType.Contains("jpg") || file.ContentType.Contains("gif")
@@ -85,10 +101,10 @@ namespace LihatKosV1
                 }
                 if (Directory.Exists(MapPath("~/UploadedImage/")))
                 {
-                    Directory.CreateDirectory(MapPath("~/UploadedImage/User-" + Session["UserID"])); // +"/Kos-1/"));
+                    Directory.CreateDirectory(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/Kos-" + ID.ToString())); // +"/Kos-1/"));
                 }
                 // In a real app, you would call SaveAs() to save the uploaded file somewhere
-                fuFotoDepan.SaveAs(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/" + file.FileName));
+                fuFotoDepan.SaveAs(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/Kos-" + ID.ToString() + "/" + file.FileName));
             }
             catch (Exception ex)
             {
@@ -123,7 +139,7 @@ namespace LihatKosV1
         {
             try
             {
-
+                
                 //Directory.CreateDirectory()
                 // User can save file to File System, database or in session state
                 if (file.ContentType.Contains("jpg") || file.ContentType.Contains("gif")
@@ -164,6 +180,7 @@ namespace LihatKosV1
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            Response.Redirect("/");
         }
     }
 }

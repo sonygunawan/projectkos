@@ -1,4 +1,5 @@
-﻿using LihatKos.DataAccess;
+﻿using LihatKos.Common;
+using LihatKos.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,11 @@ namespace LihatKos.BusinessFacade
         {
             return new UserDA().DoSignIn(Email, Password);
         }
+
+        public List<UserData> GetUsers(Int64 UserID)
+        {
+            return new UserDA().GetUsers(UserID);
+        }
+
     }
 }

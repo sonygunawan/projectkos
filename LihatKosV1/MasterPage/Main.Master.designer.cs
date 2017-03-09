@@ -31,13 +31,40 @@ namespace LihatKosV1.MasterPage {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liTambahKos;
         
         /// <summary>
-        /// liLogout control.
+        /// liRegister control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liLogout;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRegister;
+        
+        /// <summary>
+        /// liLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liLogin;
+        
+        /// <summary>
+        /// pWelcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pWelcome;
+        
+        /// <summary>
+        /// litUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litUsername;
         
         /// <summary>
         /// ContentPlaceHolder1 control.
