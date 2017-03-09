@@ -33,7 +33,6 @@ namespace LihatKos.Common
         public int FormKosLingkunganID { get; set; }
         public string Keterangan { get; set; }
         public Int64 UserID { get; set; }
-        public string MyProperty { get; set; }
 
         public decimal Harga { get; set; }
         public string SatuanHarga { get; set; }

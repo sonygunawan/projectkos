@@ -96,7 +96,18 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nama</th>
+                                                <th>TipeKos</th>
+                                                <th>Hewan</th>
                                                 <th>Area</th>
+                                                <th>Nama Pemilik</th>
+                                                <th>Kontak Pemilik</th>
+                                                <th>Harga</th>
+                                                <th>Satuan Hrg</th>
+                                                <th>Minimum Bayar Bulan</th>
+                                                <th>Luas Kamar</th>
+                                                <th>Jml Kamar</th>
+                                                <th>Jml Kmr Kosong</th>
+                                                <th>User</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
                                         </thead>
