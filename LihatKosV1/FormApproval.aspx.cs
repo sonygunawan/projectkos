@@ -14,38 +14,54 @@ namespace LihatKosV1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            rptApprovalKos.DataSource= new FormKosSystem().GetAllFormKos(0);
-            rptApprovalKos.DataBind();
-        }
-
-        protected void rptApprovalKos_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                FormKosData Data = (FormKosData)e.Item.DataItem;
-
-                Label lblID = (Label)e.Item.FindControl("lblID");
-                Label lblNama = (Label)e.Item.FindControl("lblNama");
-                Label lblArea = (Label)e.Item.FindControl("lblArea");
-                HyperLink hlApprovalButton = (HyperLink)e.Item.FindControl("hlApprovalButton");
-
-                lblID.Text = Data.ID.ToString();
-                lblNama.Text = Data.Nama;
-                lblArea.Text = Data.NamaArea;
-                hlApprovalButton.NavigateUrl = "FormApproval?id=" + Data.ID.ToString();
-            }
-        }
-
-        protected void rptApprovalKos_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-
+            gvApprovalKos.DataSource= new FormKosSystem().GetAllFormKos(0);
+            gvApprovalKos.DataBind();
         }
 
         protected void gvApprovalKos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            gvApprovalKos.PageIndex = e.NewPageIndex;
 
         }
 
+        protected void gvApprovalKos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                FormKosData data = (FormKosData)e.Row.DataItem;
+                LinkButton lbtnApprove = (LinkButton)e.Row.Cells[13].FindControl("lbtnApprove");
+                LinkButton lbtnAbort = (LinkButton)e.Row.Cells[13].FindControl("lbtnAbort");
+                lbtnApprove.CommandArgument = data.ID.ToString();
+                lbtnAbort.CommandArgument = data.ID.ToString();
+            }
+        }
+        protected void lbApprove_Command(object sender, CommandEventArgs e)
+        {
+        }
+        protected void lbAbort_Command(object sender, CommandEventArgs e)
+        {
+        }
+        //protected void rptApprovalKos_ItemCommand(object source, RepeaterCommandEventArgs e)
+        //{
+
+        //}
+        //protected void rptApprovalKos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        //{
+        //    if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        //    {
+        //        FormKosData Data = (FormKosData)e.Item.DataItem;
+
+        //        Label lblID = (Label)e.Item.FindControl("lblID");
+        //        Label lblNama = (Label)e.Item.FindControl("lblNama");
+        //        Label lblArea = (Label)e.Item.FindControl("lblArea");
+        //        HyperLink hlApprovalButton = (HyperLink)e.Item.FindControl("hlApprovalButton");
+
+        //        lblID.Text = Data.ID.ToString();
+        //        lblNama.Text = Data.Nama;
+        //        lblArea.Text = Data.NamaArea;
+        //        hlApprovalButton.NavigateUrl = "FormApproval?id=" + Data.ID.ToString();
+        //    }
+        //}
 
         //#region fungsi paging
         //private void FillPaging()

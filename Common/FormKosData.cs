@@ -27,12 +27,14 @@ namespace LihatKos.Common
         public  int JmlKamar { get; set; }
         public float LuasKamar { get; set; }
         public int TipeKosID { get; set; }
+        public string NamaTipeKos { get; set; }
         public int JmlKamarKosong { get; set; }
         public bool PetID { get; set; }
         public int FormKosFasilitasID { get; set; }
         public int FormKosLingkunganID { get; set; }
         public string Keterangan { get; set; }
         public Int64 UserID { get; set; }
+        public string UserName { get; set; }
 
         public decimal Harga { get; set; }
         public string SatuanHarga { get; set; }

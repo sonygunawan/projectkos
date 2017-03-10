@@ -336,11 +336,13 @@ namespace LihatKos.DataAccess
                         Data.JmlKamarKosong = Convert.ToInt32(dataReader["JmlKamarKosong"].ToString());
                         Data.LuasKamar = (float)Convert.ToDouble(dataReader["Luaskamar"].ToString());
                         Data.TipeKosID = Convert.ToInt32(dataReader["TipeKosID"].ToString());
+                        Data.NamaTipeKos = dataReader["NamaTipeKos"].ToString();
                         Data.PetID = Convert.ToBoolean(dataReader["PetID"].ToString());
                         Data.Keterangan = dataReader["Keterangan"].ToString();
                         Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
                         Data.SatuanHarga = dataReader["SatuanHarga"].ToString();
                         Data.UserID = Convert.ToInt64(dataReader["UserID"].ToString());
+                        Data.UserName = dataReader["UserName"].ToString();
                         formKos.Add(Data);
                     }
                     dataReader.Close();

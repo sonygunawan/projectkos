@@ -84,16 +84,18 @@
         </nav>
         <div style="margin-top:20px;"></div>
         <div class="container">
-            <div class="row col-md-6 col-md-offset-2 custyle">
-                <div class="card mb-5">
+            <div class="row col-md-6 custyle">
+                <div class="card mb-12">
                 <h2>Form Approval</h2>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="gvApprovalKos" runat="server" AutoGenerateColumns="false"
+                        <div class="card-block p-0">
+                        <asp:GridView ID="gvApprovalKos" runat="server" CssClass="table table-striped custab"
+                             AutoGenerateColumns="false" OnRowDataBound="gvApprovalKos_RowDataBound"
                              AllowPaging="true" PageSize="20" OnPageIndexChanging="gvApprovalKos_PageIndexChanging">
                             <Columns>
                                 <asp:BoundField DataField="ID" HeaderText="ID" />
-                                <asp:BoundField DataField="Nama" HeaderText="Nama" />
+                                <asp:BoundField DataField="Nama" HeaderText="Nama" wid ItemStyle-Width="100" />
                                 <asp:BoundField DataField="NamaTipeKos" HeaderText="TipeKos" />
                                 <asp:BoundField DataField="PetID" HeaderText="Hewan" />
                                 <asp:BoundField DataField="NamaArea" HeaderText="Area" />
@@ -116,6 +118,7 @@
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView> 
+                        </div>
                         <%--<asp:Repeater ID="rptApprovalKos" runat="server" OnItemDataBound="rptApprovalKos_ItemDataBound" OnItemCommand="rptApprovalKos_ItemCommand">
                             <HeaderTemplate>
                                 <div class="card-block p-0">
