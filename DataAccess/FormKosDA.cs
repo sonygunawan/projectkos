@@ -353,6 +353,58 @@ namespace LihatKos.DataAccess
             }
         }
 
+        public List<FormKosData> GetAllFormKosPaging(Int64 Id, int pageNumber, int pageSize)
+        {
+            try
+            {
+                List<FormKosData> formKos = new List<FormKosData>();
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetAllFormKos");
+                db.AddInParameter(dbCommand, "ID", DbType.Int64, Id);
+                db.AddInParameter(dbCommand, "PageNumber", DbType.Int32, pageNumber);
+                db.AddInParameter(dbCommand, "PageSize", DbType.Int32, pageSize);
+                db.AddOutParameter(dbCommand, "TotalPage", DbType.Int32, 10);
+
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        FormKosData Data = new FormKosData();
+                        Data.ID = Convert.ToInt64(dataReader["ID"].ToString());
+                        Data.Nama = dataReader["Nama"].ToString();
+                        Data.Deskripsi = dataReader["Deskripsi"].ToString();
+                        Data.Alamat = dataReader["Alamat"].ToString();
+                        Data.AreaID = Convert.ToInt32(dataReader["AreaID"].ToString());
+                        Data.NamaArea = dataReader["NamaArea"].ToString();
+                        Data.Latitude = (decimal)Convert.ToDecimal(dataReader["Altitude"].ToString());
+                        Data.Longitude = (decimal)Convert.ToDecimal(dataReader["Longitude"].ToString());
+                        Data.NamaPemilik = dataReader["NamaPemilik"].ToString();
+                        Data.AlamatPemilik = dataReader["AlamatPemilik"].ToString();
+                        Data.KontakPemilik = dataReader["KontakPemilik"].ToString();
+                        Data.NamaPengelola = dataReader["NamaPengelola"].ToString();
+                        Data.KontakPengelola = dataReader["KontakPengelola"].ToString();
+                        Data.MinimumBayarMonth = Convert.ToInt32(dataReader["MinimumBayarMonth"].ToString());
+                        Data.MinimumBayarDesc = dataReader["MinimumBayarDesc"].ToString();
+                        Data.JmlKamar = Convert.ToInt32(dataReader["JmlKamar"].ToString());
+                        Data.JmlKamarKosong = Convert.ToInt32(dataReader["JmlKamarKosong"].ToString());
+                        Data.LuasKamar = (float)Convert.ToDouble(dataReader["Luaskamar"].ToString());
+                        Data.TipeKosID = Convert.ToInt32(dataReader["TipeKosID"].ToString());
+                        Data.PetID = Convert.ToBoolean(dataReader["PetID"].ToString());
+                        Data.Keterangan = dataReader["Keterangan"].ToString();
+                        Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
+                        Data.SatuanHarga = dataReader["SatuanHarga"].ToString();
+                        Data.UserID = Convert.ToInt64(dataReader["UserID"].ToString());
+                        formKos.Add(Data);
+                    }
+                    dataReader.Close();
+                }
+                return formKos;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
         public List<FormKosData> GetAllFormKosByLocation(string DataLatitude, string DataLongitude, int TipeKosID, int SatuanHargaID, string Fasilitas)
         {
             try

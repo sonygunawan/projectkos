@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FormApproval.aspx.cs" Inherits="LihatKosV1.FormApproval" %>
 
+<%@ Register src="~/UserControl/PagingControl.ascx" tagname="PagingControl" tagprefix="uc1" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +89,34 @@
                 <h2>Form Approval</h2>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:Repeater ID="rptApprovalKos" runat="server" OnItemDataBound="rptApprovalKos_ItemDataBound" OnItemCommand="rptApprovalKos_ItemCommand">
+                        <asp:GridView ID="gvApprovalKos" runat="server" AutoGenerateColumns="false"
+                             AllowPaging="true" PageSize="20" OnPageIndexChanging="gvApprovalKos_PageIndexChanging">
+                            <Columns>
+                                <asp:BoundField DataField="ID" HeaderText="ID" />
+                                <asp:BoundField DataField="Nama" HeaderText="Nama" />
+                                <asp:BoundField DataField="NamaTipeKos" HeaderText="TipeKos" />
+                                <asp:BoundField DataField="PetID" HeaderText="Hewan" />
+                                <asp:BoundField DataField="NamaArea" HeaderText="Area" />
+                                <asp:BoundField DataField="NamaPemilik" HeaderText="Pemilik" />
+                                <asp:BoundField DataField="Harga" HeaderText="Harga" DataFormatString="N0" />
+                                <asp:BoundField DataField="SatuanHarga" HeaderText="Satuan Hrg" />
+                                <asp:BoundField DataField="MinimumBayarMonth" HeaderText="Minimum Bayar" />
+                                <asp:BoundField DataField="LuasKamar" HeaderText="Luas Kmr" />
+                                <asp:BoundField DataField="JmlKamar" HeaderText="Jml Kmr" />
+                                <asp:BoundField DataField="JmlKamarKosong" HeaderText="Jml Kmr Kosong" />
+                                <asp:BoundField DataField="UserName" HeaderText="User" />
+                                <asp:TemplateField HeaderText="Action" HeaderStyle-Width="350px">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="lbtnApprove" OnCommand="lbApprove_Command" runat="server">Approve</asp:LinkButton>
+                                        |
+                                        <asp:LinkButton ID="lbtnAbort" OnCommand="lbAbort_Command" runat="server">Abort</asp:LinkButton>
+                                    </ItemTemplate>
+                                    <HeaderStyle Width="140px"></HeaderStyle>
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView> 
+                        <%--<asp:Repeater ID="rptApprovalKos" runat="server" OnItemDataBound="rptApprovalKos_ItemDataBound" OnItemCommand="rptApprovalKos_ItemCommand">
                             <HeaderTemplate>
                                 <div class="card-block p-0">
                                     <table class="table table-striped custab">
@@ -100,7 +128,6 @@
                                                 <th>Hewan</th>
                                                 <th>Area</th>
                                                 <th>Nama Pemilik</th>
-                                                <th>Kontak Pemilik</th>
                                                 <th>Harga</th>
                                                 <th>Satuan Hrg</th>
                                                 <th>Minimum Bayar Bulan</th>
@@ -116,34 +143,37 @@
                                 <tr>
                                     <td><asp:Label ID="lblID" runat="server"></asp:Label></td>
                                     <td><asp:Label ID="lblNama" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblTipeKos" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblPet" runat="server"></asp:Label></td>
                                     <td><asp:Label ID="lblArea" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblNamaPemilik" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblHarga" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblSatuanHarga" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblMinimumPamentMonth" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblLuasKamar" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblJmlKamar" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblJmlKmrKosong" runat="server"></asp:Label></td>
+                                    <td><asp:Label ID="lblUser" runat="server"></asp:Label></td>
                                     <td class="text-center"><asp:HyperLink ID="hlApprovalButton" runat="server" CssClass="btn btn-info btn-xs" 
-                                        ClientIDMode="Static" Enabled="true" Visible="true"><span class="glyphicon glyphicon-edit"></span>Approve</asp:HyperLink><%-- <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span>Del</a>--%></td>
+                                        ClientIDMode="Static" Enabled="true" Visible="true"><span class="glyphicon glyphicon-edit"></span>Approve</asp:HyperLink></td>
                                 </tr>
                             </ItemTemplate>
                             <FooterTemplate>
                                 </table>
                                     </div>
-                                    <div class="card-footer p-0">
-                                        <nav aria-label="...">
-                                            <ul class="pagination justify-content-end mt-3 mr-3">
-                                                <li class="page-item disabled">
-                                                    <span class="page-link">Previous</span>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item active">
-                                                    <span class="page-link">2<span class="sr-only">(current)</span>
-                                                    </span>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">Next</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                
+                                    
                             </FooterTemplate>
                         </asp:Repeater>
+                        <uc1:PagingControl ID="PagingControl1" runat="server" OnClick="LinkPaging_Click" />
+                        <script type="text/javascript">
+                            function btnDelete_Click(ID) {
+                                if (confirm("Are you sure want to delete?")) {
+                                    location.href = 'Delete.aspx?id=' + ID;
+                                }
+                            }
+
+                        </script>--%>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>

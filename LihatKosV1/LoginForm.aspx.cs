@@ -22,7 +22,8 @@ namespace LihatKosV1
                 else
                 {
                     txtEmail.Text = Request.Cookies["email"].Value.ToString().Trim();
-                    txtPassword.Text = Request.Cookies["passwrd"].Value.ToString().Trim();
+                    txtPassword.Attributes["value"] = Request.Cookies["passwrd"].Value.ToString().Trim();
+                    //txtPassword.Text = Request.Cookies["passwrd"].Value.ToString().Trim();
                 }
             }
         }

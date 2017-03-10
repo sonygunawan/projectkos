@@ -1,5 +1,6 @@
 ﻿using LihatKos.BusinessFacade;
 using LihatKos.Common;
+using LihatKos.Common.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,5 +40,88 @@ namespace LihatKosV1
         {
 
         }
+
+        protected void gvApprovalKos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
+
+
+        //#region fungsi paging
+        //private void FillPaging()
+        //{
+        //    /*int countPage = CountData;
+        //    int sumPage = 1;
+
+        //    if (countPage % SystemConfiguration.DefaultPagingSize == 0)
+        //    {
+        //        sumPage = countPage / SystemConfiguration.DefaultPagingSize;
+        //    }
+        //    else
+        //    {
+        //        sumPage = countPage / SystemConfiguration.DefaultPagingSize + 1;
+        //    }
+
+        //    PagingControl1.SumPage = sumPage;*/
+        //    PagingControl1.SumPage = CountData;
+        //    PagingControl1.Clear();
+        //    PagingControl1.DataBind();
+        //}
+
+        //protected int CurrPage
+        //{
+        //    get
+        //    {
+        //        return Convert.ToInt32(ViewState["CurrPage"]);
+        //    }
+        //    set
+        //    {
+        //        ViewState["CurrPage"] = value;
+        //    }
+        //}
+
+        //public void LinkPaging_Click(object sender, EventArgs e)
+        //{
+        //    List<FormKosData> dataSource = null;
+        //    LinkButton linkButton = sender as LinkButton;
+
+        //    if (linkButton.ID == Convert.ToInt32(NavigationName.First).ToString())
+        //    {
+        //        PagingControl1.CurrentPage = 1;
+        //    }
+        //    else if (linkButton.ID == Convert.ToInt32(NavigationName.Last).ToString())
+        //    {
+        //        PagingControl1.CurrentPage = PagingControl1.SumPage;
+        //    }
+        //    else if (linkButton.ID == Convert.ToInt32(NavigationName.Next).ToString())
+        //    {
+        //        PagingControl1.CurrentPage = PagingControl1.CurrentPage + 1;
+        //    }
+        //    else if (linkButton.ID == Convert.ToInt32(NavigationName.Prev).ToString())
+        //    {
+        //        PagingControl1.CurrentPage = PagingControl1.CurrentPage - 1;
+        //    }
+        //    else
+        //    {
+        //        PagingControl1.CurrentPage = Convert.ToInt32(linkButton.ID);
+        //    }
+
+        //    CurrPage = PagingControl1.CurrentPage;
+        //    dataSource = new AnnouncementSystem().SearchAnnouncementBackend("", CurrPage, SystemConfiguration.DefaultPagingSize); ;
+
+        //    if (dataSource != null)
+        //    {
+        //        PagingControl1.Visible = true;
+        //        dataSource.RemoveAt(dataSource.Count - 1);
+        //    }
+        //    else
+        //    {
+        //        PagingControl1.Visible = false;
+        //    }
+        //    rptApprovalKos.DataSource = dataSource;
+        //    rptApprovalKos.DataBind();
+        //    FillPaging();
+        //}
+        //#endregion
     }
 }
