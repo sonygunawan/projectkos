@@ -85,7 +85,7 @@
                     <ul class="nav navbar-nav">
                         
                         <li id="liTambahKos" runat="server"><a href="/DaftarKos">Promosikan Kos Anda</a></li>
-                        <li class="dropdown">
+                        <li id="liAdmin" runat="server" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                               <li><a href="/FormApproval">Form Approval</a></li>

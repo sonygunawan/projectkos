@@ -10,6 +10,8 @@ namespace LihatKos.Common
         public Int64 ID { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
+        public int TipeUserID { get; set; }
+        public string TipeUser { get; set; }
         public DateTime LastActivityDate { get; set; }
     }
 }

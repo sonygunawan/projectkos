@@ -316,34 +316,36 @@ namespace LihatKos.DataAccess
                 {
                     while (dataReader.Read())
                     {
-                        FormKosData Data = new FormKosData();
-                        Data.ID = Convert.ToInt64(dataReader["ID"].ToString());
-                        Data.Nama = dataReader["Nama"].ToString();
-                        Data.Deskripsi = dataReader["Deskripsi"].ToString();
-                        Data.Alamat = dataReader["Alamat"].ToString();
-                        Data.AreaID = Convert.ToInt32(dataReader["AreaID"].ToString());
-                        Data.NamaArea = dataReader["NamaArea"].ToString();
-                        Data.Latitude = (decimal) Convert.ToDecimal(dataReader["Altitude"].ToString());
-                        Data.Longitude = (decimal)Convert.ToDecimal(dataReader["Longitude"].ToString());
-                        Data.NamaPemilik = dataReader["NamaPemilik"].ToString();
-                        Data.AlamatPemilik = dataReader["AlamatPemilik"].ToString();
-                        Data.KontakPemilik = dataReader["KontakPemilik"].ToString();
-                        Data.NamaPengelola = dataReader["NamaPengelola"].ToString();
-                        Data.KontakPengelola = dataReader["KontakPengelola"].ToString();
-                        Data.MinimumBayarMonth = Convert.ToInt32(dataReader["MinimumBayarMonth"].ToString());
-                        Data.MinimumBayarDesc = dataReader["MinimumBayarDesc"].ToString();
-                        Data.JmlKamar = Convert.ToInt32(dataReader["JmlKamar"].ToString());
-                        Data.JmlKamarKosong = Convert.ToInt32(dataReader["JmlKamarKosong"].ToString());
-                        Data.LuasKamar = (float)Convert.ToDouble(dataReader["Luaskamar"].ToString());
-                        Data.TipeKosID = Convert.ToInt32(dataReader["TipeKosID"].ToString());
-                        Data.NamaTipeKos = dataReader["NamaTipeKos"].ToString();
-                        Data.PetID = Convert.ToBoolean(dataReader["PetID"].ToString());
-                        Data.Keterangan = dataReader["Keterangan"].ToString();
-                        Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
-                        Data.SatuanHarga = dataReader["SatuanHarga"].ToString();
-                        Data.UserID = Convert.ToInt64(dataReader["UserID"].ToString());
-                        Data.UserName = dataReader["UserName"].ToString();
-                        formKos.Add(Data);
+                        FormKosData data = new FormKosData();
+                        data.ID = Convert.ToInt64(dataReader["ID"].ToString());
+                        data.Nama = dataReader["Nama"].ToString();
+                        data.Deskripsi = dataReader["Deskripsi"].ToString();
+                        data.Alamat = dataReader["Alamat"].ToString();
+                        data.AreaID = Convert.ToInt32(dataReader["AreaID"].ToString());
+                        data.NamaArea = dataReader["NamaArea"].ToString();
+                        data.Latitude = (decimal) Convert.ToDecimal(dataReader["Altitude"].ToString());
+                        data.Longitude = (decimal)Convert.ToDecimal(dataReader["Longitude"].ToString());
+                        data.NamaPemilik = dataReader["NamaPemilik"].ToString();
+                        data.AlamatPemilik = dataReader["AlamatPemilik"].ToString();
+                        data.KontakPemilik = dataReader["KontakPemilik"].ToString();
+                        data.NamaPengelola = dataReader["NamaPengelola"].ToString();
+                        data.KontakPengelola = dataReader["KontakPengelola"].ToString();
+                        data.MinimumBayarMonth = Convert.ToInt32(dataReader["MinimumBayarMonth"].ToString());
+                        data.MinimumBayarDesc = dataReader["MinimumBayarDesc"].ToString();
+                        data.JmlKamar = Convert.ToInt32(dataReader["JmlKamar"].ToString());
+                        data.JmlKamarKosong = Convert.ToInt32(dataReader["JmlKamarKosong"].ToString());
+                        data.LuasKamar = (float)Convert.ToDouble(dataReader["Luaskamar"].ToString());
+                        data.TipeKosID = Convert.ToInt32(dataReader["TipeKosID"].ToString());
+                        data.NamaTipeKos = dataReader["NamaTipeKos"].ToString();
+                        data.PetID = Convert.ToBoolean(dataReader["PetID"].ToString());
+                        data.Keterangan = dataReader["Keterangan"].ToString();
+                        data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
+                        data.SatuanHarga = dataReader["SatuanHarga"].ToString();
+                        data.UserID = Convert.ToInt64(dataReader["UserID"].ToString());
+                        data.UserName = dataReader["UserName"].ToString();
+                        data.StatusApproval = Convert.ToInt32(dataReader["StatusApproval"].ToString());
+                        data.AuditTime = Convert.ToDateTime(dataReader["AuditTime"].ToString());
+                        formKos.Add(data);
                     }
                     dataReader.Close();
                 }
@@ -459,7 +461,24 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+        
+        public bool UpdateFormKosApproval(Int64 Id, int StatusApproval)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdateFormKosApproval");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, Id);
+                db.AddInParameter(dbCommand, "StatusApproval", DbType.Int32, StatusApproval);
 
+                db.ExecuteNonQuery(dbCommand);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
         public List<FormKosData> GetHighestFormKosByArea(int AreaID)
         {
             try

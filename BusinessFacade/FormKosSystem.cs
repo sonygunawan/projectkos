@@ -51,7 +51,10 @@ namespace LihatKos.BusinessFacade
         {
             return new FormKosDA().UpdateFormKosView(Id);
         }
-
+        public bool UpdateFormKosApproval(Int64 Id, int StatusApproval)
+        {
+            return new FormKosDA().UpdateFormKosApproval(Id, StatusApproval);
+        }
         public List<FormKosData> GetHighestFormKosByArea(int AreaID)
         {
             return new FormKosDA().GetHighestFormKosByArea(AreaID);

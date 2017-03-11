@@ -14,10 +14,14 @@ namespace LihatKosV1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            gvApprovalKos.DataSource= new FormKosSystem().GetAllFormKos(0);
-            gvApprovalKos.DataBind();
+            LoadApproval();
         }
 
+        private void LoadApproval()
+        {
+            gvApprovalKos.DataSource = new FormKosSystem().GetAllFormKos(0);
+            gvApprovalKos.DataBind();
+        }
         protected void gvApprovalKos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvApprovalKos.PageIndex = e.NewPageIndex;
@@ -29,17 +33,33 @@ namespace LihatKosV1
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 FormKosData data = (FormKosData)e.Row.DataItem;
-                LinkButton lbtnApprove = (LinkButton)e.Row.Cells[13].FindControl("lbtnApprove");
-                LinkButton lbtnAbort = (LinkButton)e.Row.Cells[13].FindControl("lbtnAbort");
+                LinkButton lbtnApprove = (LinkButton)e.Row.Cells[12].FindControl("lbtnApprove");
+                LinkButton lbtnAbort = (LinkButton)e.Row.Cells[12].FindControl("lbtnAbort");
+                if (data.StatusApproval == 1)
+                {
+                    lbtnApprove.Visible = false;
+                    lbtnAbort.Visible = true;
+                }
+                else
+                {
+                    lbtnApprove.Visible = true;
+                    lbtnAbort.Visible = false;
+                }
                 lbtnApprove.CommandArgument = data.ID.ToString();
                 lbtnAbort.CommandArgument = data.ID.ToString();
             }
         }
         protected void lbApprove_Command(object sender, CommandEventArgs e)
         {
+            Int64 idx = Convert.ToInt64(e.CommandArgument);
+            new FormKosSystem().UpdateFormKosApproval(idx, 1);
+            LoadApproval();
         }
         protected void lbAbort_Command(object sender, CommandEventArgs e)
         {
+            Int64 idx = Convert.ToInt64(e.CommandArgument);
+            new FormKosSystem().UpdateFormKosApproval(idx, 0);
+            LoadApproval();
         }
         //protected void rptApprovalKos_ItemCommand(object source, RepeaterCommandEventArgs e)
         //{

@@ -30,6 +30,8 @@ namespace LihatKos.Common
         public string NamaTipeKos { get; set; }
         public int JmlKamarKosong { get; set; }
         public bool PetID { get; set; }
+        public string Hewan { get { return (PetID == true) ? "Ya" : "Tidak"  ; } }
+
         public int FormKosFasilitasID { get; set; }
         public int FormKosLingkunganID { get; set; }
         public string Keterangan { get; set; }
@@ -39,7 +41,8 @@ namespace LihatKos.Common
         public decimal Harga { get; set; }
         public string SatuanHarga { get; set; }
         public string NamaArea { get; set; }
-
+        public int StatusApproval { get; set; }
+        public DateTime AuditTime { get; set; }
         public List<KosHargaData> KosHarga{get; set;}
         public List<KosFasilitasData> KosFasilitas { get; set; }
         public List<KosLingkunganData> KosLingkungan { get; set; }

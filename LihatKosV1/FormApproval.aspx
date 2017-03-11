@@ -92,26 +92,25 @@
                         <div class="card-block p-0">
                         <asp:GridView ID="gvApprovalKos" runat="server" CssClass="table table-striped custab"
                              AutoGenerateColumns="false" OnRowDataBound="gvApprovalKos_RowDataBound"
-                             AllowPaging="true" PageSize="20" OnPageIndexChanging="gvApprovalKos_PageIndexChanging">
+                             AllowPaging="true" PageSize="10" OnPageIndexChanging="gvApprovalKos_PageIndexChanging" PagerStyle-Wrap="false">
                             <Columns>
                                 <asp:BoundField DataField="ID" HeaderText="ID" />
-                                <asp:BoundField DataField="Nama" HeaderText="Nama" wid ItemStyle-Width="100" />
+                                <asp:BoundField DataField="Nama" HeaderText="Nama" ItemStyle-Width="30%" />
                                 <asp:BoundField DataField="NamaTipeKos" HeaderText="TipeKos" />
-                                <asp:BoundField DataField="PetID" HeaderText="Hewan" />
+                                <asp:BoundField DataField="Hewan" HeaderText="Hewan" />
                                 <asp:BoundField DataField="NamaArea" HeaderText="Area" />
                                 <asp:BoundField DataField="NamaPemilik" HeaderText="Pemilik" />
-                                <asp:BoundField DataField="Harga" HeaderText="Harga" DataFormatString="N0" />
-                                <asp:BoundField DataField="SatuanHarga" HeaderText="Satuan Hrg" />
+                                <asp:BoundField DataField="Harga" HeaderText="Harga" DataFormatString="{0:0}" />
+                                <%--<asp:BoundField DataField="SatuanHarga" HeaderText="Satuan Hrg" />--%>
                                 <asp:BoundField DataField="MinimumBayarMonth" HeaderText="Minimum Bayar" />
                                 <asp:BoundField DataField="LuasKamar" HeaderText="Luas Kmr" />
                                 <asp:BoundField DataField="JmlKamar" HeaderText="Jml Kmr" />
                                 <asp:BoundField DataField="JmlKamarKosong" HeaderText="Jml Kmr Kosong" />
                                 <asp:BoundField DataField="UserName" HeaderText="User" />
-                                <asp:TemplateField HeaderText="Action" HeaderStyle-Width="350px">
+                                <asp:TemplateField HeaderText="Action" HeaderStyle-Width="150px">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lbtnApprove" OnCommand="lbApprove_Command" runat="server">Approve</asp:LinkButton>
-                                        |
-                                        <asp:LinkButton ID="lbtnAbort" OnCommand="lbAbort_Command" runat="server">Abort</asp:LinkButton>
+                                        <asp:LinkButton ID="lbtnApprove" OnCommand="lbApprove_Command" runat="server" CssClass="btn btn-info btn-xs" OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Approve</asp:LinkButton>
+                                        <asp:LinkButton ID="lbtnAbort" OnCommand="lbAbort_Command" runat="server" CssClass="btn btn-danger btn-xs"  OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Abort</asp:LinkButton>
                                     </ItemTemplate>
                                     <HeaderStyle Width="140px"></HeaderStyle>
                                     <ItemStyle HorizontalAlign="Center" />

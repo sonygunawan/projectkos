@@ -89,6 +89,8 @@ namespace LihatKos.DataAccess
                         data.ID = Convert.ToInt64(dataReader["ID"].ToString());
                         data.Email = dataReader["Email"].ToString();
                         data.UserName = dataReader["UserName"].ToString();
+                        data.TipeUser = dataReader["TipeUser"].ToString();
+                        data.TipeUserID = Convert.ToInt32(dataReader["TipeUserID"].ToString());
                         data.LastActivityDate = Convert.ToDateTime(dataReader["LastActivityDate"].ToString());
                         retVal.Add(data);
                     }
