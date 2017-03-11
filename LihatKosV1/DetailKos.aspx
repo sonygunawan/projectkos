@@ -106,14 +106,14 @@
                              <div class="form-group">
                                 <div class="col-sm-8 slide no-gutter">
                                     <div class="owl-carousel owl-theme">
-                                        <asp:Repeater ID="rptGambarKos" runat="server" OnItemDataBound="rptGambarKos_ItemDataBound">
+                                        <%--<asp:Repeater ID="rptGambarKos" runat="server" OnItemDataBound="rptGambarKos_ItemDataBound">
                                             <ItemTemplate>
                                                 <div class="item">
                                                     <asp:Image ID="imgKos" runat="server" CssClass="img-responsive" AlternateText="slide" />
                                                 </div>
                                             </ItemTemplate>
-                                        </asp:Repeater>
-                                        <%--<div class="item">
+                                        </asp:Repeater>--%>
+                                        <div class="item">
                                             <img src="images/photos/banner.jpg" class="img-responsive" alt="slide">
                                         </div>
                                         <div class="item">
@@ -127,8 +127,8 @@
                                         </div>
                                         <div class="item">
                                             <img src="images/photos/1900x849.png" class="img-responsive" alt="slide">
-                                        </div>--%>
-                                    </div>
+                                        </div>
+                                    </div>  
                                 </div>
 
                                 <div class="col-sm-4 search">

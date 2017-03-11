@@ -321,14 +321,14 @@
 
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="price">Nama Pemilik</label>
+                                <label class="col-md-3 control-label" for="price">Contact Person</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtPemilik" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                     <%--<input id="price" name="price" type="text" placeholder="Product price" class="form-control input-md" required="">--%>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="image">Alamat Pemilik</label>
+                                <label class="col-md-3 control-label" for="image">Alamat Pemilik sesuai KTP</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtAlamatPemilik" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     <%--<input id="image" name="image" type="text" placeholder="Image URL" class="form-control input-md">--%>
@@ -466,7 +466,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Landmark</label>
+                                <label class="col-md-3 control-label" for="title">Lingkungan Sekitar</label>
                                 <div class="col-md-9 ui-controlgroup-item">
                                     <asp:CheckBoxList ID="chkLingkungan" runat="server" ClientIDMode="Static" 
                                         RepeatDirection="Horizontal" RepeatLayout="Flow" CellSpacing="10" CellPadding="10" CssClass="chkMargin" ></asp:CheckBoxList>

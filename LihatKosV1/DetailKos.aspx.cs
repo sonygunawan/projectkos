@@ -136,8 +136,8 @@ namespace LihatKosV1
                     bool favVal = new FavoriteSystem().GetFormKosFavorit(ID, Convert.ToInt64(Session["UserID"]));
                     btnFavorit.Enabled = (favVal == true) ? false : true;
                 }
-                rptGambarKos.DataSource = AmbilListGambar(Data.UserID,ID);
-                rptGambarKos.DataBind();
+                //rptGambarKos.DataSource = AmbilListGambar(Data.UserID,ID);
+                //rptGambarKos.DataBind();
                 new FormKosSystem().UpdateFormKosView(ID);
             }
         }
