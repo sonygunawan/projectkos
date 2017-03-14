@@ -1,93 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DetailKos.aspx.cs" Inherits="LihatKosV1.DetailKos" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/Admin.Master" AutoEventWireup="true" CodeBehind="DetailKos.aspx.cs" Inherits="LihatKosV1.DetailKos" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>LihatKos.com | Website Pencari Tempat Kos Terbaik dan Terkini</title>
-
-    <!-- Google fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800|Old+Standard+TT' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800' rel='stylesheet' type='text/css'>
-
-    <!-- font awesome -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/login.css" />
-    
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    
-    <!-- font awesome -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- uniform -->
-    <link type="text/css" rel="stylesheet" href="assets/uniform/css/uniform.default.min.css" />
-
-    <!-- animate.css -->
-    <link rel="stylesheet" href="assets/wow/animate.css" />
-
-
-    <!-- gallery -->
-    <link rel="stylesheet" href="assets/gallery/blueimp-gallery.min.css">
-
-
-<%--    <!-- favicon -->
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-    <link rel="icon" href="images/favicon.png" type="image/x-icon">--%>
-
-
-    <!-- Owl Carousel 2 -->
-    <link rel="stylesheet" href="assets/owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/owlcarousel/owl.theme.default.min.css">
-
-</head>
-
-<body id="home">
-    <form class="form-horizontal" id="form1" runat="server">
-        <asp:ScriptManager ID="sm" AsyncPostBackTimeout="36000" runat="server" ></asp:ScriptManager>
-        <!-- header -->
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.php">
-                        <img src="" alt="LihatKos"></a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-
-                    <ul class="nav navbar-nav">
-                        <!--
-        <li><a href="index.php">Home </a></li>
-        <li><a href="rooms-tariff.php">Rooms & Tariff</a></li>
-        <li><a href="introduction.php">Introduction</a></li>
-        <li><a href="gallery.php">Gallery</a></li>
-        <li><a href="contact.php">Contact</a></li>
-      -->
-
-                        <li><a href="/Register">Register</a></li>
-                        <li><a href="/Login">Login</a></li>
-                    </ul>
-                </div>
-                <!-- navbar-collapse -->
-            </div>
-            <!-- container-fluid -->
-        </nav>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <div style="margin-top: 20px;"></div>
         <div class="container">
             <div class="row">
@@ -606,7 +520,4 @@
                 $("#<%= chkLingkungan.ClientID %>").buttonset();
             });
         </script>
-    </form>
-</body>
-</html>
-
+</asp:Content>
