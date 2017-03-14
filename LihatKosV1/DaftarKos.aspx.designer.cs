@@ -31,6 +31,15 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.TextBox txtNama;
         
         /// <summary>
+        /// link1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink link1;
+        
+        /// <summary>
         /// txtDeskripsi control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,24 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.TextBox txtDeskripsi;
         
         /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+        
+        /// <summary>
+        /// BalloonPopupExtender1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.BalloonPopupExtender BalloonPopupExtender1;
+        
+        /// <summary>
         /// ddlArea control.
         /// </summary>
         /// <remarks>
@@ -47,15 +74,6 @@ namespace LihatKosV1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlArea;
-        
-        /// <summary>
-        /// txtAlamat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAlamat;
         
         /// <summary>
         /// txtLokasi control.
@@ -110,15 +128,6 @@ namespace LihatKosV1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPemilik;
-        
-        /// <summary>
-        /// txtAlamatPemilik control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAlamatPemilik;
         
         /// <summary>
         /// txtTlpPemilik control.

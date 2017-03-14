@@ -67,11 +67,10 @@ namespace LihatKosV1
             Data.Nama = txtNama.Text;
             Data.Deskripsi = txtDeskripsi.Text;
             Data.AreaID = Convert.ToInt32(ddlArea.SelectedValue);
-            Data.Alamat = txtAlamat.Text;
+            Data.Alamat = txtLokasi.Text;
             Data.Latitude = Convert.ToDecimal(Convert.ToDecimal(hidLatitude.Value.Replace('.',',')).ToString("N6"));
             Data.Longitude = Convert.ToDecimal(Convert.ToDecimal(hidLongitude.Value.Replace('.', ',')).ToString("N6"));
             Data.NamaPemilik = txtPemilik.Text;
-            Data.AlamatPemilik = txtAlamatPemilik.Text;
             Data.KontakPemilik = txtTlpPemilik.Text;
             Data.NamaPengelola = txtNamaPengelola.Text;
             Data.KontakPengelola = txtTlpPengelola.Text;

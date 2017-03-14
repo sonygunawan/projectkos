@@ -19,34 +19,42 @@
                             </div>
                             <!-- Text input-->
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Nama Kost</label>
+                                <label class="col-md-3 control-label" for="title">Nama Kost<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtNama" runat="server" MaxLength="250" CssClass="form-control input-md"></asp:TextBox>
                                     <%--<input id="title" name="title" type="text" placeholder="Product name" class="form-control input-md" required="">--%>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="textarea">Deskripsikan Kos-mu</label>
+                                <label class="col-md-3 control-label" for="textarea">Deskripsikan Kos-mu<asp:HyperLink ID="link1" runat="server" CssClass="fa fa-info-circle"></asp:HyperLink></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtDeskripsi" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     <%--<textarea class="form-control" id="textarea" name="description" placeholder="Description"></textarea>--%>
                                 </div>
+                                <asp:Panel ID="Panel1" runat="server">
+                                    This Balloon Popup appears when you click the link. It uses a Rectangle style and it is set to 
+                                    appear at the top-right of the link.
+                                </asp:Panel>
+                                <cc1:BalloonPopupExtender ID="BalloonPopupExtender1" runat="server" TargetControlID="link1"
+                                    BalloonPopupControlID="Panel1" Position="BottomRight" BalloonStyle="Cloud" BalloonSize="Small"
+                                    UseShadow="true" />
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="textarea">Area</label>
+                                <label class="col-md-3 control-label" for="textarea">Area<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:DropDownList ID="ddlArea" runat="server" CssClass="form-control ui-controlgroup-item"></asp:DropDownList>
                                     <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>--%>
                                     
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="textarea">Alamat</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtAlamat" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
-                                    <%--<textarea class="form-control" id="textarea" name="description" placeholder="Description"></textarea>--%>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <script type="text/javascript">
                                     function initAutocomplete() {
@@ -209,7 +217,8 @@
 
                                     //});
                                 </script>
-                                <label class="col-md-3 control-label" for="textarea">Lokasi</label>
+                                <label class="col-md-3 control-label" for="textarea">Lokasi<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtLokasi" runat="server" CssClass="form-control" ClientIDMode="Static"
                                          MaxLength="1000" ></asp:TextBox>
@@ -260,39 +269,37 @@
 
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="price">Contact Person</label>
+                                <label class="col-md-3 control-label" for="price">Contact Person<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtPemilik" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                     <%--<input id="price" name="price" type="text" placeholder="Product price" class="form-control input-md" required="">--%>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="image">Alamat Pemilik sesuai KTP</label>
-                                <div class="col-md-9">
-                                    <asp:TextBox ID="txtAlamatPemilik" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
-                                    <%--<input id="image" name="image" type="text" placeholder="Image URL" class="form-control input-md">--%>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label" for="file">Telepon/HP Pemilik</label>
+                                <label class="col-md-3 control-label" for="file">Telepon/HP Pemilik<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtTlpPemilik" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Nama Pengelola</label>
+                                <label class="col-md-3 control-label" for="title">Nama Pengelola<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtNamaPengelola" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Telepon/HP Pengelola</label>
+                                <label class="col-md-3 control-label" for="title">Telepon/HP Pengelola<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtTlpPengelola" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Harga Sewa</label>
+                                <label class="col-md-3 control-label">Harga Sewa<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtHarian" runat="server" 
                                         CssClass="col-md-8"></asp:TextBox>
@@ -337,19 +344,22 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Minimum Bayar</label>
+                                <label class="col-md-3 control-label" for="title">Minimum Bayar<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:DropDownList ID="ddlMinimumBayarMonth" runat="server" CssClass="form-control ui-controlgroup-item"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="image">Keterangan Minimum Bayar</label>
+                                <label class="col-md-3 control-label" for="image">Keterangan Minimum Bayar<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtMinimumBayarDesc" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Jumlah Kamar</label>
+                                <label class="col-md-3 control-label" for="title">Jumlah Kamar<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtJmlKamar" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server" Enabled="True" TargetControlID="txtJmlKamar" FilterType="Numbers" FilterMode="ValidChars">
@@ -357,13 +367,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Luas Kamar</label>
+                                <label class="col-md-3 control-label" for="title">Luas Kamar<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtLuasKamar" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Tipe Kos</label>
+                                <label class="col-md-3 control-label" for="title">Tipe Kos<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:RadioButtonList ID="rdlTipeKos" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow"
                                         CellSpacing="50" CellPadding="50" />
@@ -371,7 +383,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Jumlah Kamar Kosong</label>
+                                <label class="col-md-3 control-label" for="title">Jumlah Kamar Kosong<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtJmlKamarKosong" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender6" runat="server" Enabled="True" TargetControlID="txtJmlKamarKosong" FilterType="Numbers" FilterMode="ValidChars">
@@ -379,7 +392,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Binatang Peliharaan</label>
+                                <label class="col-md-3 control-label" for="title">Binatang Peliharaan<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <%--<asp:RadioButton ID="rdlPet1" runat="server" GroupName="Pet" CssClass="form-control radio-inline" Text="Boleh" />
                                     <asp:RadioButton ID="rdlPet2" runat="server" GroupName="Pet" CssClass="form-control radio-inline" Text="Tidak Boleh" />--%>
@@ -396,7 +410,8 @@
                              }); </script> 
                             <style>.chkMargin{ margin-left:4px; margin-right:4px; padding-left:4px;padding-right:4px;}</style>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Fasilitas Kamar</label>
+                                <label class="col-md-3 control-label" for="title">Fasilitas Kamar<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9 ui-controlgroup-item">
                                     <asp:CheckBoxList ID="chkFasilitas" runat="server" ClientIDMode="Static" 
                                         RepeatDirection="Horizontal" RepeatLayout="Table" CellSpacing="10" CellPadding="10" CssClass="chkMargin" >
@@ -405,7 +420,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="title">Lingkungan Sekitar</label>
+                                <label class="col-md-3 control-label" for="title">Lingkungan Sekitar<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9 ui-controlgroup-item">
                                     <asp:CheckBoxList ID="chkLingkungan" runat="server" ClientIDMode="Static" 
                                         RepeatDirection="Horizontal" RepeatLayout="Flow" CellSpacing="10" CellPadding="10" CssClass="chkMargin" ></asp:CheckBoxList>
@@ -413,7 +429,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="image">Keterangan Lain-lain</label>
+                                <label class="col-md-3 control-label" for="image">Keterangan Lain-lain<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtKeteranganLain" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                 </div>
