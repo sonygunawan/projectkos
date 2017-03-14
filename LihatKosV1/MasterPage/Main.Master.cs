@@ -12,6 +12,22 @@ namespace LihatKosV1.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //if (!Page.IsPostBack)
+            //{
+            //    if (Request.Cookies["email"] == null || Request.Cookies["email"].Value.ToString().Trim() == "")
+            //    {
+            //        //txtEmail.Text = txtPassword.Text = "";
+            //    }
+            //    else
+            //    {
+            //        Int64 retVal = new UserSystem().DoSignIn(Request.Cookies["email"].Value.ToString().Trim()
+            //            , Request.Cookies["passwrd"].Value.ToString().Trim());
+            //        if (retVal != 0)
+            //        {
+            //            Session["UserID"] = retVal;
+            //        }
+            //    }
+            //}
             if (Session["UserID"] == null)
             {
                 liTambahKos.Visible = false;
