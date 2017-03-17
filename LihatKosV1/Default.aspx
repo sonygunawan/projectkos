@@ -8,7 +8,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>
-    
+        <style>
+            .favList {
+                margin: 0px 25px;
+            }
+            .favPadding {
+                padding: 4px;
+            }
+            .text 
+            {
+                z-index:100;
+                background-color:lightgray;
+                position:absolute;
+                left:0px;
+                bottom:-30px;
+                padding:2px;
+                font-size:12px;
+                font-family:sans-serif;
+
+            }
+        </style>
         <!-- Front -->
         <div id="front">
             <div class="container-fluid">
@@ -16,15 +35,138 @@
                     <div class="col-sm-8 slide no-gutter">
                         <uc1:BannerLeft ID="BannerLeft" runat="server" />
                     </div>
-
-                    <div class="col-sm-4 search" style="overflow-y:auto;">
-                        <uc2:SearchControl ID="SearchControl" runat="server" /> 
+                    
+                    <div class="col-sm-4 topservices" style="position:relative;">
+                        <%--<uc2:SearchControl ID="SearchControl" runat="server" /> --%>
+                        <%--<h5 class="text-center">Top Listing</h5>--%>
+                        <div class="row favList">
+                            <div class="col-sm-6 col-xs-6 favPadding">
+                                <a href="#"><img src="images/150x110.png" ></a>
+                                <p class="text">Setiabudi, Jakarta</p>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 favPadding">
+                                <a href="#"><img src="images/150x110.png" ></a>
+                                <p class="text">Casablanca, Jakarta</p>
+                            </div>
+                        
+                            <div class="col-sm-6 col-xs-6 favPadding">
+                                <a href="#"><img src="images/150x110.png" ></a>
+                                <p class="text">Pluit, Jakarta</p>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 favPadding">
+                                <a href="#"><img src="images/150x110.png" ></a>
+                                <p class="text">Muara Karang, Jakarta</p>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 favPadding">
+                                <a href="#"><img src="images/150x110.png" ></a>
+                                <p class="text">Pagedangan, Tangerang</p>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 favPadding">
+                                <a href="#"><img src="images/150x110.png" ></a>
+                                <p class="text">Kuningan, Jakarta</p>
+                            </div>
+                        </div>
+                        <%--<div class="row favList ">
+                            <div class="col-sm-6 favPadding">
+                                <a href="#"><img src="images/150x110.png"</a>
+                            </div>
+                            <div class="col-sm-6 favPadding">
+                                <a href="#"><img src="images/150x110.png"</a>
+                            </div>
+                            <div class="col-sm-6 favPadding">
+                                <a href="#"><img src="images/150x110.png"</a>
+                            </div>
+                            <div class="col-sm-6 favPadding">
+                                <a href="#"><img src="images/150x110.png"</a>
+                            </div>
+                            <div class="col-sm-6 favPadding">
+                                <a href="#"><img src="images/150x110.png"</a>
+                            </div>
+                            <div class="col-sm-6 favPadding">
+                                <a href="#"><img src="images/150x110.png"</a>
+                            </div>
+                        </div>--%>
                     </div>
                 </div>
+                <%--<div class="row">
+                    <div class="col-sm-12 newsearch">
+
+                    </div>
+                </div>--%>
+               
             </div>
         </div>
         <!-- End of Front -->
+    <div class="spacersmall services">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Propinsi</label>
+                    <asp:DropDownList ID="ddlPropinsi" runat="server"></asp:DropDownList>
+                </div>
+                <div class="col-sm-4">
+                    <label>Kabupaten</label>
+                    <asp:DropDownList ID="ddlKabupaten" runat="server"></asp:DropDownList>
+                </div>
+                <div class="col-sm-4">
+                    <label>Kecamatan</label>
+                    <asp:DropDownList ID="ddlKecamatan" runat="server"></asp:DropDownList>
+                </div>
+            </div>
+            </div>
+        </div>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <div class="spacersmaller services">
+        <div class="container">
+            <div class="row">
+                <style>
+                    
+                    .ui-widget-header {
+                        border: 1px solid #dddddd;
+                        background: #bfa145;
+                        color: #333333;
+                        font-weight: bold;
+                    }
+                </style>
+                <script type="text/javascript">
+                    $(function () {
+                        $("#slider-3").slider({
+                            range: true,
+                            min: 0,
+                            max: 5000000,
+                            step: 5000,
+                            values: [25000, 2000000],
+                            slide: function (event, ui) {
+                                $("#price").val("Rp." + ui.values[0] + " - Rp." + ui.values[1]);
+                                $("#hidLowRate").val(ui.values[0]);
+                                $("#hidHighRate").val(ui.values[1]);
+                            }
+                        });
+                        $("#price").val("Rp." + $("#slider-3").slider("values", 0) +
+                           " - Rp." + $("#slider-3").slider("values", 1));
+                    });
+                </script>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label></label>
+                        <input type="text" id="price" 
+                            style="width:100%;border:0; background-color:#dedbd3; color:#756534; font-weight:bold;">
+                       <div id="slider-3"></div>
+                    </div>
+    
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label></label>
+                        <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default btn-fullwidth text-uppercase" Text="Cari Kos" />
+                    </div>
+                </div>
+            </div>
 
+        </div>
+    </div>
 
         <!-- Room -->
         <asp:Panel ID="room" runat="server"  ClientIDMode="Static">
