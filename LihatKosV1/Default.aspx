@@ -6,7 +6,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
     <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>
         <style>
             .favList {
@@ -38,11 +38,10 @@
                     
                     <div class="col-sm-4 topservices" style="position:relative;">
                         <%--<uc2:SearchControl ID="SearchControl" runat="server" /> --%>
-                        <%--<h5 class="text-center">Top Listing</h5>--%>
                         <div class="row favList">
                             <div class="col-sm-6 col-xs-6 favPadding">
                                 <a href="#"><img src="images/150x110.png" ></a>
-                                <p class="text">Setiabudi, Jakarta</p>
+                                <label class="text">Setiabudi, Jakarta</label>
                             </div>
                             <div class="col-sm-6 col-xs-6 favPadding">
                                 <a href="#"><img src="images/150x110.png" ></a>
@@ -97,24 +96,69 @@
             </div>
         </div>
         <!-- End of Front -->
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <script type="text/javascript">
+                function showLatLng() {
+                    var geocoder = new google.maps.Geocoder();
+                    var ddlKecamatan = document.getElementById('ddlKecamatan');
+                    var kecamatanText = ddlKecamatan.options[ddlKecamatan.selectedIndex].innerHTML != "- Semua -" ? ddlKecamatan.options[ddlKecamatan.selectedIndex].innerHTML : "" ;
+                    
+                    var ddlKabupaten = document.getElementById('ddlKabupaten');
+                    var kabupatenText = ddlKabupaten.options[ddlKabupaten.selectedIndex].innerHTML != "- Semua -" ? ddlKabupaten.options[ddlKabupaten.selectedIndex].innerHTML : "";
+
+                    var ddlPropinsi = document.getElementById('ddlPropinsi');
+                    var propinsiText = ddlPropinsi.options[ddlPropinsi.selectedIndex].innerHTML != "- Semua -" ? ddlPropinsi.options[ddlPropinsi.selectedIndex].innerHTML : "";
+
+                    var address = "";
+                    if (kecamatanText == '')
+                    {
+                        address = kabupatenText;
+                    }
+                    else
+                    {
+                        address = kabupatenText + "," + kecamatanText;
+                    }
+                    
+                    if (kabupatenText == "" && kecamatanText == "")
+                    {
+                        address = propinsiText;
+                        //alert(address);
+                    }
+                    
+                    geocoder.geocode({ 'address': address }, function (results, status) {
+
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            var latitude = results[0].geometry.location.lat();
+                            var longitude = results[0].geometry.location.lng();
+                            //alert(latitude+ ',' + longitude);
+                            alert(JSON.stringify(results));
+                        }
+                    });
+                }
+            </script>
     <div class="spacersmall services">
         <div class="container">
             <div class="row">
+                
                 <div class="col-sm-4">
                     <label>Propinsi</label>
-                    <asp:DropDownList ID="ddlPropinsi" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlPropinsi" runat="server" AutoPostBack="true" ClientIDMode="Static" OnSelectedIndexChanged="ddlPropinsi_SelectedIndexChanged"></asp:DropDownList>
                 </div>
                 <div class="col-sm-4">
                     <label>Kabupaten</label>
-                    <asp:DropDownList ID="ddlKabupaten" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlKabupaten" runat="server" AutoPostBack="true" ClientIDMode="Static" OnSelectedIndexChanged="ddlKabupaten_SelectedIndexChanged"></asp:DropDownList>
                 </div>
                 <div class="col-sm-4">
                     <label>Kecamatan</label>
-                    <asp:DropDownList ID="ddlKecamatan" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlKecamatan" runat="server" ClientIDMode="Static"></asp:DropDownList>
                 </div>
+                    
             </div>
             </div>
         </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -160,7 +204,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label></label>
-                        <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default btn-fullwidth text-uppercase" Text="Cari Kos" />
+                        <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default btn-fullwidth text-uppercase" Text="Cari Kos" OnClientClick="showLatLng();return false;" />
                     </div>
                 </div>
             </div>

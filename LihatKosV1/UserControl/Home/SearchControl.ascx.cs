@@ -19,7 +19,7 @@ namespace LihatKosV1.UserControl
                 rdlTipeKos.DataValueField = "ID";
                 rdlTipeKos.DataBind();
                 rdlTipeKos.Items.Insert(0, new ListItem { Value = "0", Text = "Semua" });
-                rdlTipeKos.SelectedValue = "1";
+                rdlTipeKos.SelectedValue = "0";
             }
         }
 
