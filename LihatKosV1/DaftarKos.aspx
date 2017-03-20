@@ -123,6 +123,26 @@
                                                 document.getElementById('<%= txtLatitude.ClientID %>').value = latitude;
                                                 document.getElementById('<%= txtLongitude.ClientID %>').value = longitude;
                                                 
+                                                for (i = 0 ; i < place.address_components.length ; ++i) {
+                                                    var super_var1 = place.address_components[i];
+                                                    //find kelurahan
+                                                    if (super_var1.types[0] == "administrative_area_level_4") {
+                                                        document.getElementById('<%= txtKelurahan.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                    //find kecamatan
+                                                    if (super_var1.types[0] == "administrative_area_level_3") {
+                                                        document.getElementById('<%= txtKecamatan.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                    //find kabupaten
+                                                    if (super_var1.types[0] == "administrative_area_level_2") {
+                                                        document.getElementById('<%= txtKabupaten.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                    //find propinsi
+                                                    if (super_var1.types[0] == "administrative_area_level_1") {
+                                                        document.getElementById('<%= txtCity.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                }
+
                                                 //alert(true);
                                                 if (place.geometry.viewport) {
                                                     // Only geocodes have viewport.
@@ -240,7 +260,7 @@
                                     </style>
 
                                 </div>
-                                <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places&callback=initAutocomplete"></script>
+                                <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?language=id&key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places&callback=initAutocomplete"></script>
                                 
                                 <script type='text/javascript'>
                                     //function init_map() {
@@ -265,6 +285,23 @@
                                         <div class="col-md-4">
                                             <asp:TextBox ID="txtLongitude" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
                                         </div>
+                                        <label class="col-md-2 control-label" for="textarea">Kota</label>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtCity" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
+                                        </div>
+                                        <label class="col-md-2 control-label" for="textarea">Kabupaten</label>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtKabupaten" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
+                                        </div>
+                                        <label class="col-md-2 control-label" for="textarea">Kecamatan</label>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtKecamatan" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
+                                        </div>
+                                        <label class="col-md-2 control-label" for="textarea">Kelurahan</label>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtKelurahan" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
+                                        </div>
+                                        
                                     </div>
 
                             </div>
