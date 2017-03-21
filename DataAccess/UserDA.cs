@@ -1,4 +1,5 @@
 ﻿using LihatKos.Common;
+using LihatKos.DataAccess.Helper;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
 using System.Collections.Generic;
@@ -18,27 +19,45 @@ namespace LihatKos.DataAccess
         {
             db = dbConnection.CreateDatabase();
         }
-        public bool DoRegister(string UserName, string Email, string Password)
+        
+        public string DoRegister(string UserName, string Email, string Password)
         {
+            Int64 UserID = 0;
+            string message = "";
             try
             {
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DoRegister");
                 db.AddInParameter(dbCommand, "UserName", DbType.String,UserName);
                 db.AddInParameter(dbCommand, "Email", DbType.String, Email);
                 db.AddInParameter(dbCommand, "Password", DbType.String, Password);
-
-                db.ExecuteNonQuery(dbCommand);
+                
+                UserID = Convert.ToInt64(db.ExecuteScalar(dbCommand));
+                switch (UserID)
+                {
+                    case -1:
+                        message = "Username already exists.\\nPlease choose a different username.";
+                        break;
+                    case -2:
+                        message = "Supplied email address has already been used.";
+                        break;
+                    default:
+                        message = "Registration successful. Activation email has been sent.";
+                        new MailHelper().SendEmailActivation(UserID, Email, UserName);
+                        break;
+                }
+                
+                //db.ExecuteNonQuery(dbCommand);
                 //using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 //{
                     
                 //    dataReader.Close();
                     
                 //}
-                return true ;
+                return message ;
             }
             catch (Exception ex)
             {
-                return false;
+                return "Register Error";
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }

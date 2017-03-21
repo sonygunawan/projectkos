@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label"></label>
                                     <div style="color:darkblue;">
-                                        <asp:Label ID="lblSuccess" runat="server" Text="Register Success.. Loading!!"></asp:Label>
+                                        <asp:Label ID="lblSuccess" runat="server" Text="Register Success.. Activation email has been sent. Loading!!"></asp:Label>
                                     </div>
                                 </div>
                                 </asp:Panel>

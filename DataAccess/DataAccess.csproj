@@ -55,6 +55,7 @@
     <Compile Include="FasilitasDA.cs" />
     <Compile Include="FavoriteDA.cs" />
     <Compile Include="FormKosDA.cs" />
+    <Compile Include="Helper\MailHelper.cs" />
     <Compile Include="LingkunganDA.cs" />
     <Compile Include="PaymentDA.cs" />
     <Compile Include="SatuanHargaDA.cs" />

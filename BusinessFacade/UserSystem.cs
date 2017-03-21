@@ -9,8 +9,9 @@ namespace LihatKos.BusinessFacade
 {
     public class UserSystem
     {
-        public bool DoRegister(string UserName, string Email, string Password)
+        public string DoRegister(string UserName, string Email, string Password)
         {
+            //Return Message
             return new UserDA().DoRegister(UserName, Email, Password);
         }
 
