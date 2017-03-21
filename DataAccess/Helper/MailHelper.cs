@@ -6,6 +6,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 
 namespace LihatKos.DataAccess.Helper
@@ -24,11 +25,11 @@ namespace LihatKos.DataAccess.Helper
                 db = dbConnection.CreateDatabase();
                 try
                 {
-                    SMTPServer = "smtp.binus.ac.id";
+                    SMTPServer = "lihatkos.com"; //"smtp.binus.ac.id";
                 }
                 catch
                 {
-                    SMTPServer = "smtp.binus.ac.id";
+                    SMTPServer = "lihatkos.com";
                 }
             }
             catch (Exception ex)
@@ -39,13 +40,14 @@ namespace LihatKos.DataAccess.Helper
         }
         public void SendEmail(string email, string subject, string message)
         {
-            MailMessage mail = new MailMessage("noreply@psinformatika.com", email);
+            MailMessage mail = new MailMessage("noreply@lihatkos.com", email);
             SmtpClient client = new SmtpClient();
             //client.Port = 25;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             //client.UseDefaultCredentials = false;
             //client.Host = "113.20.31.137";
             mail.Subject = subject;
+            mail.IsBodyHtml = true;
             mail.Body = message;
             client.Send(mail);
         }
@@ -61,9 +63,9 @@ namespace LihatKos.DataAccess.Helper
                 db.ExecuteNonQuery(dbCommand);
 
                 string body = "Hello " + UserName.Trim() + ",";
-                string url = "http://demo.lihatkos.com/CS_Activation.aspx?ActivationCode=";
+                string url = "http://demo.lihatkos.com/EmailConfirmation.aspx?Code=" + activationCode;
                 body += "<br /><br />Please click the following link to activate your account";
-                body += "<br /><a href = '" + url + activationCode + "'>Click here to activate your account.</a>";
+                body += "<br /><a href = '" + url + "'>Click here to activate your account.</a>";
                 body += "<br /><br />Thanks";
                 SendEmail(Email, "Account Activation LihatKos.com", body);
                 //using (MailMessage mm = new MailMessage("AutoEmail@LihatKos.com", Email))
@@ -89,8 +91,34 @@ namespace LihatKos.DataAccess.Helper
             }
             catch (Exception ex)
             {
-                
-                throw;
+
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+
+        }
+        public string DeleteUserActivation(Guid ActivationCode)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DeleteUserActivation");
+                db.AddInParameter(dbCommand, "ActivationCode", DbType.String, ActivationCode);
+
+                string message = "";
+                int rowsAffected = db.ExecuteNonQuery(dbCommand);
+                if (rowsAffected == 1)
+                {
+                    message = "Activation successful.";
+                }
+                else
+                {
+                    message = "Invalid Activation code.";
+                }
+                return message;
+            }
+            catch (Exception ex)
+            {
+
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
 
         }

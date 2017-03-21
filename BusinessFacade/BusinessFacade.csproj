@@ -54,6 +54,7 @@
     <Compile Include="FavoriteSystem.cs" />
     <Compile Include="FormKosSystem.cs" />
     <Compile Include="LingkunganSystem.cs" />
+    <Compile Include="MailSystem.cs" />
     <Compile Include="PaymentSystem.cs" />
     <Compile Include="SatuanHargaSystem.cs" />
     <Compile Include="TipeKosSystem.cs" />
