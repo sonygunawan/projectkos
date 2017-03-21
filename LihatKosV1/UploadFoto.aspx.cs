@@ -101,10 +101,11 @@ namespace LihatKosV1
                 }
                 if (Directory.Exists(MapPath("~/UploadedImage/")))
                 {
-                    Directory.CreateDirectory(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/Kos-" + ID.ToString())); // +"/Kos-1/"));
+                    //Directory.CreateDirectory(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/Kos-" + ID.ToString())); // +"/Kos-1/"));
                 }
                 // In a real app, you would call SaveAs() to save the uploaded file somewhere
-                fuFotoDepan.SaveAs(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/Kos-" + ID.ToString() + "/" + file.FileName));
+                //fuFotoDepan.SaveAs(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/Kos-" + ID.ToString() + "/" + file.FileName));
+                fuFotoDepan.SaveAs(MapPath("~/UploadedImage/") + file.FileName);
             }
             catch (Exception ex)
             {

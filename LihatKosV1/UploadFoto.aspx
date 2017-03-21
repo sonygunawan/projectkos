@@ -111,7 +111,7 @@
                                     <asp:Label runat="server" ID="throbberDepan" Style="display: none;"><img align="absmiddle" alt="" src="images/uploading.gif" /></asp:Label>
                                         <ajaxToolkit:AjaxFileUpload ID="fuFotoDepan" runat="server" Padding-Bottom="4"
                                         Padding-Left="2" Padding-Right="1" Padding-Top="4" ThrobberID="throbberDepan"
-                                        MaxFileSize="1024" MaximumNumberOfFiles="3" AllowedFileTypes="jpg,jpeg,png,tiff" AutoStartUpload="true"  UseAbsoluteHandlerPath="false"
+                                        MaxFileSize="2048" MaximumNumberOfFiles="3" AllowedFileTypes="jpg,jpeg,png,tiff" AutoStartUpload="true"
                                         OnClientUploadComplete="onClientDepanUploadComplete" OnUploadComplete="fuFotoDepan_UploadComplete"
                                         OnClientUploadCompleteAll="onClientDepanUploadCompleteAll" OnUploadCompleteAll="fuFotoDepan_UploadCompleteAll" 
                                         OnUploadStart="fuFotoDepan_UploadStart" OnClientUploadStart="onClientDepanUploadStart" OnClientUploadError="onClientDepanUploadError" />
