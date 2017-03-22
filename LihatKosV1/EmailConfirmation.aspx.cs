@@ -15,8 +15,9 @@ namespace LihatKosV1
             if (!Page.IsPostBack)
             {
                 
-                string activationCode = !string.IsNullOrEmpty(Request.QueryString["ActivationCode"]) ? Request.QueryString["ActivationCode"] : Guid.Empty.ToString();
-                ltMessage.Text = new MailSystem().DeleteUserActivation( new Guid(activationCode));
+                string activationCode = !string.IsNullOrEmpty(Request.QueryString["Code"]) ? Request.QueryString["Code"] : Guid.Empty.ToString();
+                ltMessage.Text = new MailSystem().DeleteUserActivation( new Guid(activationCode.ToUpper()));
+                
             }
         }
     }
