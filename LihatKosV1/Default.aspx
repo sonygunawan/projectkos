@@ -150,16 +150,16 @@
             <div class="row">
                 
                 <div class="col-sm-4">
-                    <label>Propinsi</label>
-                    <asp:DropDownList ID="ddlPropinsi" runat="server" AutoPostBack="true" ClientIDMode="Static" OnSelectedIndexChanged="ddlPropinsi_SelectedIndexChanged"></asp:DropDownList>
+                    <label class="control-label">Propinsi</label>
+                    <asp:DropDownList ID="ddlPropinsi" runat="server" CssClass="form-control" AutoPostBack="true" ClientIDMode="Static" OnSelectedIndexChanged="ddlPropinsi_SelectedIndexChanged"></asp:DropDownList>
                 </div>
                 <div class="col-sm-4">
-                    <label>Kabupaten</label>
-                    <asp:DropDownList ID="ddlKabupaten" runat="server" AutoPostBack="true" ClientIDMode="Static" OnSelectedIndexChanged="ddlKabupaten_SelectedIndexChanged"></asp:DropDownList>
+                    <label class="control-label">Kabupaten</label>
+                    <asp:DropDownList ID="ddlKabupaten" runat="server" CssClass="form-control" AutoPostBack="true" ClientIDMode="Static" OnSelectedIndexChanged="ddlKabupaten_SelectedIndexChanged"></asp:DropDownList>
                 </div>
                 <div class="col-sm-4">
-                    <label>Kecamatan</label>
-                    <asp:DropDownList ID="ddlKecamatan" runat="server" ClientIDMode="Static"></asp:DropDownList>
+                    <label class="control-label">Kecamatan</label>
+                    <asp:DropDownList ID="ddlKecamatan" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:DropDownList>
                 </div>
                     
             </div>

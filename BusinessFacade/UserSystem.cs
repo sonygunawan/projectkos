@@ -15,7 +15,7 @@ namespace LihatKos.BusinessFacade
             return new UserDA().DoRegister(UserName, Email, Password);
         }
 
-        public Int64 DoSignIn(string Email, string Password)
+        public UserData DoSignIn(string Email, string Password)
         {
             return new UserDA().DoSignIn(Email, Password);
         }

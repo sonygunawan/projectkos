@@ -30,24 +30,29 @@ namespace LihatKosV1
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            Int64 retVal = new UserSystem().DoSignIn(txtEmail.Text.Trim(), txtPassword.Text.Trim());
-            if (retVal != 0)
+            //TODO: Please repair immediately
+            var retVal = new UserSystem().DoSignIn(txtEmail.Text.Trim(), txtPassword.Text.Trim());
+            if (retVal.ID != 0)
             {
-                Session["UserID"] = retVal;
-                if (chkRemember.Checked == true)
+                if (retVal.IsActive != 0)
                 {
-                    Response.Cookies["email"].Value = txtEmail.Text;
-                    Response.Cookies["passwrd"].Value = txtPassword.Text;
-                }
-                if (String.IsNullOrEmpty(Request.QueryString["Link"]))
-                {
-                    Response.Redirect("/");
+                    Session["UserID"] = retVal;
+                    if (chkRemember.Checked == true)
+                    {
+                        Response.Cookies["email"].Value = txtEmail.Text;
+                        Response.Cookies["passwrd"].Value = txtPassword.Text;
+                    }
+                    if (String.IsNullOrEmpty(Request.QueryString["Link"]))
+                    {
+                        Response.Redirect("/");
+                    }
+                    else
+                    {
+                        Response.Redirect(Server.HtmlDecode(Request.QueryString["Link"]));
+                    }
                 }
                 else
-                {
-                    Response.Redirect( Server.HtmlDecode(Request.QueryString["Link"]));
-                }
-                
+                    ValidationError.Display("Email belum terverifikasi.");
             }
             else
                 ValidationError.Display("Wrong Username or Password!!");

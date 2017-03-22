@@ -63,12 +63,12 @@ namespace LihatKos.DataAccess
         }
 
 
-        public Int64 DoSignIn(string Email, string Password)
+        public UserData DoSignIn(string Email, string Password)
         {
             try
             {
-                Int64 retVal = 0;
-
+                //Int64 retVal = 0;
+                var retVal = new UserData();
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DoSignIn");
                 db.AddInParameter(dbCommand, "Email", DbType.String, Email);
                 db.AddInParameter(dbCommand, "Password", DbType.String, Password);
@@ -78,7 +78,8 @@ namespace LihatKos.DataAccess
 
                     while (dataReader.Read())
                     {
-                        retVal = Convert.ToInt64(dataReader["ID"]);
+                        retVal.ID = Convert.ToInt64(dataReader["ID"]);
+                        retVal.IsActive = Convert.ToInt32(dataReader["IsActive"]);
                     }
                     dataReader.Close();
                 }

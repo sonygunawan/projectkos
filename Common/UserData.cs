@@ -12,6 +12,7 @@ namespace LihatKos.Common
         public string UserName { get; set; }
         public int TipeUserID { get; set; }
         public string TipeUser { get; set; }
+        public int IsActive { get; set; }
         public DateTime LastActivityDate { get; set; }
     }
 }
