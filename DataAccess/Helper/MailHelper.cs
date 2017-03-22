@@ -63,7 +63,7 @@ namespace LihatKos.DataAccess.Helper
                 db.ExecuteNonQuery(dbCommand);
 
                 string body = "Hello " + UserName.Trim() + ",";
-                string url = "http://demo.lihatkos.com/EmailConfirmation.aspx?Code=" + activationCode;
+                string url = "http://localhost:10981/EmailConfirmation?Code=" + activationCode;
                 body += "<br /><br />Please click the following link to activate your account";
                 body += "<br /><a href = '" + url + "'>Click here to activate your account.</a>";
                 body += "<br /><br />Thanks";
@@ -101,7 +101,7 @@ namespace LihatKos.DataAccess.Helper
             try
             {
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DeleteUserActivation");
-                db.AddInParameter(dbCommand, "ActivationCode", DbType.String, ActivationCode);
+                db.AddInParameter(dbCommand, "ActivationCode", DbType.Guid, ActivationCode);
 
                 string message = "";
                 int rowsAffected = db.ExecuteNonQuery(dbCommand);

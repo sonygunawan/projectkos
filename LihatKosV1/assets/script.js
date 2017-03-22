@@ -1,11 +1,13 @@
 jQuery(document).ready(function($) {
 
-    $(".scroll").click(function(event){
-    event.preventDefault();
-    $('html,body').animate({scrollTop:$(this.hash).offset().top}, 800,'swing');
     });
+function pageLoad()
+{
+    $(".scroll").click(function (event) {
+        event.preventDefault();
+        $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800, 'swing');
     });
-
+}
 
 // uniform
     $(function () {
@@ -14,9 +16,11 @@ jQuery(document).ready(function($) {
 
 // social icon
 $(document).ready(function($) {
-  $('.social i').tooltip('hide')
+  
 });
-
+function pageLoad() {
+    $('.social i').tooltip('hide');
+}
 //
 
 var wow = new WOW(

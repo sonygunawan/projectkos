@@ -6,8 +6,9 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
-    <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>
+  <link type="text/css" rel="stylesheet" href="assets/style.css">
+<%--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
+    <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>--%>
         <style>
             .favList {
                 margin: 0px 25px;
@@ -27,7 +28,15 @@
                 font-family:sans-serif;
 
             }
+            .modalBackground  {
+                background-color:Gray;
+                filter:alpha(opacity=70);
+                opacity:0.7;
+                position: absolute;
+            }
         </style>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
         <!-- Front -->
         <div id="front">
             <div class="container-fluid">
@@ -40,28 +49,28 @@
                         <%--<uc2:SearchControl ID="SearchControl" runat="server" /> --%>
                         <div class="row favList">
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" ></a>
+                                <a href="#"><img src="images/150x110.png" /></a>
                                 <label class="text">Setiabudi, Jakarta</label>
                             </div>
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" ></a>
+                                <a href="#"><img src="images/150x110.png" /></a>
                                 <p class="text">Casablanca, Jakarta</p>
                             </div>
                         
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" ></a>
+                                <a href="#"><img src="images/150x110.png" /></a>
                                 <p class="text">Pluit, Jakarta</p>
                             </div>
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" ></a>
+                                <a href="#"><img src="images/150x110.png" /></a>
                                 <p class="text">Muara Karang, Jakarta</p>
                             </div>
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" ></a>
+                                <a href="#"><img src="images/150x110.png" /></a>
                                 <p class="text">Pagedangan, Tangerang</p>
                             </div>
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" ></a>
+                                <a href="#"><img src="images/150x110.png" /></a>
                                 <p class="text">Kuningan, Jakarta</p>
                             </div>
                         </div>
@@ -96,8 +105,7 @@
             </div>
         </div>
         <!-- End of Front -->
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
+
             <script type="text/javascript">
                 function showLatLng() {
                     var geocoder = new google.maps.Geocoder();
@@ -157,11 +165,7 @@
             </div>
             </div>
         </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <div class="spacersmaller services">
         <div class="container">
             <div class="row">
@@ -175,7 +179,11 @@
                     }
                 </style>
                 <script type="text/javascript">
-                    $(function () {
+                    //$(document).ready(function () {
+                        
+                    //});
+                    function pageLoad()
+                    {
                         $("#slider-3").slider({
                             range: true,
                             min: 0,
@@ -190,7 +198,7 @@
                         });
                         $("#price").val("Rp." + $("#slider-3").slider("values", 0) +
                            " - Rp." + $("#slider-3").slider("values", 1));
-                    });
+                    }
                 </script>
                 <div class="col-sm-8">
                     <div class="form-group">
@@ -233,8 +241,10 @@
         <!-- End of Room -->
     <script  type="text/javascript">
         function show() {
-            document.write("<head id='Head1' runat='server'></head>");
+            document.write("<head id='Head1' runat='server' />");
         }
     </script>
     
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

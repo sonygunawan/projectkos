@@ -1,7 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="LihatKosV1.MasterPage.Main" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,21 +14,21 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800' rel='stylesheet' type='text/css'>
 
     <!-- font awesome -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
 
     <!-- uniform -->
     <link type="text/css" rel="stylesheet" href="assets/uniform/css/uniform.default.min.css" />
 
     <!-- animate.css -->
-    <link rel="stylesheet" href="assets/wow/animate.css" />
+    <link type="text/css" rel="stylesheet" href="assets/wow/animate.css" />
 
 
     <!-- gallery -->
-    <link rel="stylesheet" href="assets/gallery/blueimp-gallery.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/gallery/blueimp-gallery.min.css">
 
 
 <%--    <!-- favicon -->
@@ -36,10 +37,12 @@
 
 
     <!-- Owl Carousel 2 -->
-    <link rel="stylesheet" href="assets/owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/owlcarousel/owl.theme.default.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/owlcarousel/owl.carousel.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/owlcarousel/owl.theme.default.min.css">
 
-    <link rel="stylesheet" href="assets/style.css">
+    <link type="text/css" rel="stylesheet" href="assets/style.css">
+    
+    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <body id="home">
@@ -54,17 +57,12 @@
     </form>
  top -->
     <form id="form1" runat="server">
-            <%--<div style="width: 230px; height: 80px; position:fixed;z-index: 1;">
-                <asp:Panel ID="pnlWelcome" runat="server" Visible="true"
-                    Width="250px" ForeColor="DarkBlue" Style="z-index: 1;">
-                    <div style="width: 100%; height: 100%; vertical-align: ; text-align: center;">
-                        <p>Welcome</p>
-                         BackColor="White" BorderWidth="2" BorderStyle="solid" BorderColor="DarkBlue" 
-                            <span id="currentTime" runat="server" style="font-size: xx-large; font-weight: bold; line-height: 40px;" />
-                    </div>
-                </asp:Panel>
-            </div>
-    --%>
+        
+        <asp:ScriptManager ID="sm2" runat="server" AsyncPostBackTimeout="3000"></asp:ScriptManager>
+        
+        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+            <ContentTemplate>
+            
         <!-- navbar -->
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
@@ -77,7 +75,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img src="" alt="LihatKos"></a>
+                        <img src="" alt="LihatKos" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -90,46 +88,15 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                               <li><a href="/FormApproval">Form Approval</a></li>
-                              <%--<li class="divider"></li>
-                              <li class="nav-header">Nav header</li>
-                              <li><a href="#">Separated link</a></li>--%>
+                              
                             </ul>
                           </li>       
                         <li id="liRegister" runat="server"><a href="/Register">Register</a></li>
-                        <li id="liLogin" runat="server"><a href="/Login">Login</a></li>
-                        <%--<li id="liLogin" runat="server" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Login</a>
-                            <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
-                            <li>
-                                <div class="row">
-                                  <div class="col-md-12">
-                                     <div id="login-nav">
-                                        <div class="form-group">
-                                           <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                           <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
-                                        </div>
-                                        <div class="form-group">
-                                           <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                           <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                        </div>
-                                        <div class="checkbox">
-                                           <label>
-                                           <input type="checkbox"> Remember me
-                                           </label>
-                                        </div>
-                                        <div class="form-group">
-                                           <button type="submit" class="btn btn-success btn-block">Sign in</button>
-                                        </div>
-                                     </div>
-                                  </div>
-                               </div>
-                            </li>
-                            </ul>
-                        </li>--%>
-                        <%--<li id="liLogout" runat="server"><a href="/Logout">Logout</a></li>--%>
-<%--                        <li>Welcome, <asp:Label ID="lblUserName" runat="server"></asp:Label><a href="/Logout">Logout</a></li>--%>
+                        <li id="liLogin" runat="server"><asp:LinkButton ID="lbtnLogin" runat="server" OnClick="lbtnLogin_Click">Login</asp:LinkButton></li>
+                        
                     </ul>
                     <p id="pWelcome" runat="server" class="navbar-text" style="margin-left:50px;"><span class="welcome">Welcome, <a href="#" class="navbar-link"><asp:Literal ID="litUsername" runat="server"></asp:Literal></a>
-                        </span> <br><a href="#" class="navbar-link">My Account</a> | <a href="#" class="navbar-link">My Favorites</a> | <a href="/Logout" class="navbar-link">Logout</a></p>        
+                        </span> <br /><a href="#" class="navbar-link">My Account</a> | <a href="#" class="navbar-link">My Favorites</a> | <a href="/Logout" class="navbar-link">Logout</a></p>        
                                 
                             
                 </div>
@@ -157,9 +124,88 @@ banner-->
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
- 
-
-
+            <asp:Button ID="btn1" runat="server" Style="display:none;" />
+                <cc1:ModalPopupExtender ID="MPELogin" runat="server" TargetControlID="btn1" DropShadow="true" PopupControlID="pnlLogin" 
+                    CancelControlID="btnClose" BackgroundCssClass="modalBackground" />
+                <asp:Panel ID="pnlLogin" runat="server" Style="display:none;background-color: #ffffff;width:600px;border-radius: 6px;background-clip: padding-box;">
+                        <div class="modal-header">
+                        <asp:Button ID="btnClose" CssClass="close" runat="server" Text="x" />
+                        <%--<button type="button" class="close" data-dismiss="modal">x</button>--%>
+                        <h3>Login to LihatKos.com</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                              
+                              <div class="col-xs-6">
+                                  <p class="lead">Register</p>
+                                  <div class="form-group">
+                                      <label>Name</label>
+                                      <asp:TextBox ID="txtName" runat="server" CssClass="form-control"></asp:TextBox>
+                                  </div>
+                                  <div class="form-group">
+                                      <label>E-mail Address</label>
+                                      <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control"></asp:TextBox>
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Password</label>
+                                      <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Confirm Password</label>
+                                      <asp:TextBox ID="txtPasswordConfirm" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                  </div>
+                                  <asp:LinkButton ID="btnRegister" runat="server" CssClass="btn btn-info btn-block">Register</asp:LinkButton>
+                                  <%--<ul class="list-unstyled" style="line-height: 2">
+                                      <li><span class="fa fa-check text-success"></span> See all your orders</li>
+                                      <li><span class="fa fa-check text-success"></span> Fast re-order</li>
+                                      <li><span class="fa fa-check text-success"></span> Save your favorites</li>
+                                      <li><span class="fa fa-check text-success"></span> Fast checkout</li>
+                                      <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
+                                      <li><a href="/read-more/"><u>Read more</u></a></li>
+                                  </ul>
+                                  <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>--%>
+                              </div>
+                            <div class="col-xs-6">
+                                <p class="lead">Login</p>
+                                <div class="well">
+                                    
+                                        <div class="form-group">
+                                            <label for="username" class="control-label">Email Address</label>
+                                            <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="control-label">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                                        <%--<div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="remember" id="remember"> Remember login
+                                            </label>
+                                            <p class="help-block">(if this is a private computer)</p>
+                                        </div>--%>
+                                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                                        <a href="/forgot/" class="btn btn-default btn-block">Forgot Password</a>
+                                    
+                                </div>
+                            </div>
+                            <%--<p><input type="text" class="span3" name="eid" id="email" placeholder="Email"></p>
+                            <p><input type="password" class="span3" name="passwd" placeholder="Password"></p>
+                            <p><button type="submit" class="btn btn-primary">Sign in</button>
+                            <a href="#">Forgot Password?</a>
+                            </p>--%>
+                        </div>
+                        <%--<div class="modal-footer">
+                        New To LihatKos.com?
+                        <a href="#" class="btn btn-primary">Register</a>
+                        </div>--%>
+                </asp:Panel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        
+                 
         <!-- services -->
         <div class="spacer services wowload fadeInUp">
             <div class="container">
@@ -169,11 +215,11 @@ banner-->
                         <div id="RoomCarousel" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img src="images/photos/8.jpg" class="img-responsive" alt="slide"></div>
+                                    <img src="images/photos/8.jpg" class="img-responsive" alt="slide" /></div>
                                 <div class="item  height-full">
-                                    <img src="images/photos/9.jpg" class="img-responsive" alt="slide"></div>
+                                    <img src="images/photos/9.jpg" class="img-responsive" alt="slide" /></div>
                                 <div class="item  height-full">
-                                    <img src="images/photos/10.jpg" class="img-responsive" alt="slide"></div>
+                                    <img src="images/photos/10.jpg" class="img-responsive" alt="slide" /></div>
                             </div>
                             <!-- Controls -->
                             <a class="left carousel-control" href="#RoomCarousel" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
@@ -270,32 +316,17 @@ banner-->
 
             <!--/.footer-bottom-->
         </footer>
-
-<%--        <div class="text-center copyright">Powered by <a href="http://thebootstrapthemes.com">thebootstrapthemes.com</a></div>--%>
-
+        
         <a href="#home" class="toTop scroll"><i class="fa fa-angle-up"></i></a>
 
 
 
 
-        <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
-        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-            <!-- The container for the modal slides -->
-            <div class="slides"></div>
-            <!-- Controls for the borderless lightbox -->
-            <h3 class="title">title</h3>
-            <a class="prev">‹</a>
-            <a class="next">›</a>
-            <a class="close">×</a>
-            <!-- The modal dialog, which will be used to wrap the lightbox content -->
-        </div>
-
-
-
-
-
-        <%--<script src="assets/jquery.js"></script>--%>
-
+       
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
         <!-- wow script -->
         <script src="assets/wow/wow.min.js"></script>
 
@@ -325,7 +356,13 @@ banner-->
 
         <!-- Call Owl Carousel 2 -->
         <script type="text/javascript">
-            $(document).ready(function () {
+            //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(pageLoaded);
+            //$(document).ready(function () {
+                //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(pageLoaded);
+                
+            //});
+            function pageLoad()
+            {
                 $('.owl-carousel').owlCarousel({
                     loop: true,
                     items: 1,
@@ -337,7 +374,8 @@ banner-->
                 $(".owl-carousel").owlCarousel();
 
                 $('.dropdown-toggle').dropdown();
-            });
+            }
+            
         </script>
 
 

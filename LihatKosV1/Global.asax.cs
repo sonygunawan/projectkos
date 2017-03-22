@@ -47,6 +47,9 @@ namespace LihatKosV1
                 "UploadFoto",
                 "~/UploadFoto.aspx");
             routes.MapPageRoute("",
+                "EmailConfirmation",
+                "~/EmailConfirmation.aspx");
+            routes.MapPageRoute("",
                 "Logout",
                 "~/Logout.aspx");
         }

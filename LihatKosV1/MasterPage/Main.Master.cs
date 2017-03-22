@@ -54,5 +54,11 @@ namespace LihatKosV1.MasterPage
 
             }
         }
+
+        protected void lbtnLogin_Click(object sender, EventArgs e)
+        {
+            MPELogin.Show();
+            //pnlLogin.Visible = true;
+        }
     }
 }
