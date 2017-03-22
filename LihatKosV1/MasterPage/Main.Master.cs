@@ -31,18 +31,18 @@ namespace LihatKosV1.MasterPage
             if (Session["UserID"] == null)
             {
                 liTambahKos.Visible = false;
-                liLogin.Visible = true;
-                liRegister.Visible = true;
-                //liLogout.Visible = false;
+                //liLogin.Visible = true;
+                //liRegister.Visible = true;
                 pWelcome.Visible = false;
                 liAdmin.Visible = false;
+
+                MPELogin.Show();
             }
             else
             {
                 liTambahKos.Visible = true;
-                liLogin.Visible = false;
-                liRegister.Visible = false;
-                //liLogout.Visible = true;
+                //liLogin.Visible = false;
+                //liRegister.Visible = false;
                 pWelcome.Visible = true;
                 var user = new UserSystem().GetUsers(Convert.ToInt64(Session["UserID"]))[0];
                 if (user.TipeUserID == 1 || user.TipeUserID == 2)
@@ -58,7 +58,6 @@ namespace LihatKosV1.MasterPage
         protected void lbtnLogin_Click(object sender, EventArgs e)
         {
             MPELogin.Show();
-            //pnlLogin.Visible = true;
         }
     }
 }
