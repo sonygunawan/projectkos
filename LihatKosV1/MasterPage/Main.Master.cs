@@ -43,9 +43,9 @@ namespace LihatKosV1.MasterPage
             }
             else
             {
-                txtEmail.Text = Request.Cookies["email"].Value.ToString().Trim();
-                txtPassword.Attributes["value"] = Request.Cookies["passwrd"].Value.ToString().Trim();
-                //txtPassword.Text = Request.Cookies["passwrd"].Value.ToString().Trim();
+                //txtEmail.Text = Request.Cookies["email"].Value.ToString().Trim();
+                //txtPassword.Attributes["value"] = Request.Cookies["passwrd"].Value.ToString().Trim();
+                
             }
             if (Session["UserID"] == null)
             {
@@ -117,7 +117,7 @@ namespace LihatKosV1.MasterPage
             else
             {
 
-                string retVal = new UserSystem().DoRegister(txtName.Text.Trim(), txtEmail.Text.Trim(), txtPassword.Text.Trim());
+                string retVal = new UserSystem().DoRegister(txtName.Text.Trim(), txtEmailRegister.Text.Trim(), txtPasswordRegister.Text.Trim());
                 if (retVal == "")
                 {
                     lblRegisterSuccessMsg.Text = "Register Success. Activation email has been sent.";

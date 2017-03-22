@@ -61,6 +61,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\FormUser.aspx" />
     <Content Include="assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\bootstrap\js\bootstrap.js" />
@@ -131,6 +132,13 @@
     <Content Include="Default.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\FormUser.aspx.cs">
+      <DependentUpon>FormUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\FormUser.aspx.designer.cs">
+      <DependentUpon>FormUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CariLokasi.aspx.cs">
       <DependentUpon>CariLokasi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

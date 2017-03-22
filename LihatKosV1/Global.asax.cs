@@ -44,6 +44,9 @@ namespace LihatKosV1
                 "FormApproval",
                 "~/FormApproval.aspx");
             routes.MapPageRoute("",
+                "FormUser",
+                "~/Admin/FormUser.aspx");
+            routes.MapPageRoute("",
                 "UploadFoto",
                 "~/UploadFoto.aspx");
             routes.MapPageRoute("",
