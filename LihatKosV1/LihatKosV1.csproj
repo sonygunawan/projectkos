@@ -124,6 +124,7 @@
     <Content Include="UserControl\Home\BannerLeft.ascx" />
     <Content Include="UserControl\Home\HighestControl.ascx" />
     <Content Include="UserControl\Home\MyFavoritesControl.ascx" />
+    <Content Include="UserControl\Home\NewSearchControl.ascx" />
     <Content Include="UserControl\Home\SearchControl.ascx" />
     <Content Include="UserControl\PagingControl.ascx" />
     <Content Include="Web.config">
@@ -275,6 +276,13 @@
     </Compile>
     <Compile Include="UserControl\Home\MyFavoritesControl.ascx.designer.cs">
       <DependentUpon>MyFavoritesControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Home\NewSearchControl.ascx.cs">
+      <DependentUpon>NewSearchControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Home\NewSearchControl.ascx.designer.cs">
+      <DependentUpon>NewSearchControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Home\SearchControl.ascx.cs">
       <DependentUpon>SearchControl.ascx</DependentUpon>

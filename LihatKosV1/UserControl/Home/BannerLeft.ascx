@@ -28,5 +28,5 @@
     </div>
     <div class="item">
         <img src="images/photos/1900x849.png" class="img-responsive" alt="slide">
-    </div>--%>
-</div>
+    </div>
+</div>--%>
