@@ -7,72 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LihatKosV1 {
+namespace LihatKosV1.UserControl.Home {
     
     
-    public partial class Default {
+    public partial class NewSearchControl {
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// UpdatePanel7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel7;
         
         /// <summary>
-        /// BannerLeft control.
+        /// ddlPropinsi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::LihatKosV1.UserControl.BannerLeft BannerLeft;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPropinsi;
         
         /// <summary>
-        /// NewSearchControl control.
+        /// ddlKabupaten control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::LihatKosV1.UserControl.Home.NewSearchControl NewSearchControl;
+        protected global::System.Web.UI.WebControls.DropDownList ddlKabupaten;
         
         /// <summary>
-        /// room control.
+        /// ddlKecamatan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel room;
+        protected global::System.Web.UI.WebControls.DropDownList ddlKecamatan;
         
         /// <summary>
-        /// HighestControl control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::LihatKosV1.UserControl.HighestControl HighestControl;
-        
-        /// <summary>
-        /// MyFavoritesControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::LihatKosV1.UserControl.MyFavoritesControl MyFavoritesControl;
-        
-        /// <summary>
-        /// Head1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
     }
 }
