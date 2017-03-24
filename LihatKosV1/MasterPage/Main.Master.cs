@@ -34,9 +34,9 @@ namespace LihatKosV1.MasterPage
             //}
             LoadPage();
         }
-        private void LoadPage ()
+        private void LoadPage()
         {
-         
+
             if (Request.Cookies["email"] == null || Request.Cookies["email"].Value.ToString().Trim() == "")
             {
                 //txtEmail.Text = txtPassword.Text = "";
@@ -45,7 +45,7 @@ namespace LihatKosV1.MasterPage
             {
                 //txtEmail.Text = Request.Cookies["email"].Value.ToString().Trim();
                 //txtPassword.Attributes["value"] = Request.Cookies["passwrd"].Value.ToString().Trim();
-                
+
             }
             if (Session["UserID"] == null)
             {
@@ -105,7 +105,7 @@ namespace LihatKosV1.MasterPage
                 lblLoginErrorMsg.Text = "Wrong Username or Password!!";
                 //MPELogin.Show();
             }
-        
+
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)

@@ -375,11 +375,10 @@ banner-->
         <script type="text/javascript">
             //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(pageLoaded);
             //$(document).ready(function () {
-                //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(pageLoaded);
-                
+            //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(pageLoaded);
+
             //});
-            function pageLoad()
-            {
+            function pageLoad() {
                 $('.owl-carousel').owlCarousel({
                     loop: true,
                     items: 1,
@@ -392,7 +391,7 @@ banner-->
 
                 $('.dropdown-toggle').dropdown();
             }
-            
+
         </script>
 
 

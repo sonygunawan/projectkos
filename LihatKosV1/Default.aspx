@@ -16,17 +16,28 @@
             .favPadding {
                 padding: 4px;
             }
-            .text 
-            {
-                z-index:100;
-                background-color:lightgray;
-                position:absolute;
-                left:0px;
-                bottom:-30px;
-                padding:2px;
-                font-size:12px;
+            .image-container{
+                height: 110px;
+                width: 150px;
+                position: relative;
+            }
+            #image {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .text {
+                z-index: 100;
+                width:100%;
+                background-color:Gray;
+                position: absolute;
+                color: whitesmoke;
+                font-size: 12px;
                 font-family:sans-serif;
-
+                font-weight: bold;
+                left:0px;
+                bottom: 0px;
+                padding:0px 5px;
             }
             .modalBackground  {
                 background-color:Gray;
@@ -49,30 +60,66 @@
                         <%--<uc2:SearchControl ID="SearchControl" runat="server" /> --%>
                         <div class="row favList">
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" /></a>
-                                <label class="text">Setiabudi, Jakarta</label>
+                                <div class="image-container">
+                                    <a href="#">
+                                        <img id="image" src="images/150x110.png"/>
+                                        <div class="text">
+                                           <span>Casablanca, Jakarta, Indonesia</span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" /></a>
-                                <p class="text">Casablanca, Jakarta</p>
-                            </div>
-                        
-                            <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" /></a>
-                                <p class="text">Pluit, Jakarta</p>
-                            </div>
-                            <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" /></a>
-                                <p class="text">Muara Karang, Jakarta</p>
+                                <div class="image-container">
+                                    <a href="#">
+                                        <img id="image" src="images/150x110.png"/>
+                                        <div class="text">
+                                           <span>Casablanca, Jakarta</span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" /></a>
-                                <p class="text">Pagedangan, Tangerang</p>
+                                <div class="image-container">
+                                    <a href="#">
+                                        <img id="image" src="images/150x110.png"/>
+                                        <div class="text">
+                                           <span>Pluit, Jakarta, Indonesia</span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                             <div class="col-sm-6 col-xs-6 favPadding">
-                                <a href="#"><img src="images/150x110.png" /></a>
-                                <p class="text">Kuningan, Jakarta</p>
+                                <div class="image-container">
+                                    <a href="#">
+                                        <img id="image" src="images/150x110.png"/>
+                                        <div class="text">
+                                           <span>Muara Karang, Jakarta</span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
+                            <div class="col-sm-6 col-xs-6 favPadding">
+                                <div class="image-container">
+                                    <a href="#">
+                                        <img id="image" src="images/150x110.png"/>
+                                        <div class="text">
+                                           <span>Pagedangan, Tangerang</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-6 favPadding">
+                                <div class="image-container">
+                                    <a href="#">
+                                        <img id="image" src="images/150x110.png"/>
+                                        <div class="text">
+                                           <span>Kuningan, Jakarta</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            
                         </div>
                         <%--<div class="row favList ">
                             <div class="col-sm-6 favPadding">
@@ -110,8 +157,8 @@
                 function showLatLng() {
                     var geocoder = new google.maps.Geocoder();
                     var ddlKecamatan = document.getElementById('ddlKecamatan');
-                    var kecamatanText = ddlKecamatan.options[ddlKecamatan.selectedIndex].innerHTML != "- Semua -" ? ddlKecamatan.options[ddlKecamatan.selectedIndex].innerHTML : "" ;
-                    
+                    var kecamatanText = ddlKecamatan.options[ddlKecamatan.selectedIndex].innerHTML != "- Semua -" ? ddlKecamatan.options[ddlKecamatan.selectedIndex].innerHTML : "";
+
                     var ddlKabupaten = document.getElementById('ddlKabupaten');
                     var kabupatenText = ddlKabupaten.options[ddlKabupaten.selectedIndex].innerHTML != "- Semua -" ? ddlKabupaten.options[ddlKabupaten.selectedIndex].innerHTML : "";
 
@@ -119,21 +166,18 @@
                     var propinsiText = ddlPropinsi.options[ddlPropinsi.selectedIndex].innerHTML != "- Semua -" ? ddlPropinsi.options[ddlPropinsi.selectedIndex].innerHTML : "";
 
                     var address = "";
-                    if (kecamatanText == '')
-                    {
+                    if (kecamatanText == '') {
                         address = kabupatenText;
                     }
-                    else
-                    {
+                    else {
                         address = kabupatenText + "," + kecamatanText;
                     }
-                    
-                    if (kabupatenText == "" && kecamatanText == "")
-                    {
+
+                    if (kabupatenText == "" && kecamatanText == "") {
                         address = propinsiText;
                         //alert(address);
                     }
-                    
+
                     geocoder.geocode({ 'address': address }, function (results, status) {
 
                         if (status == google.maps.GeocoderStatus.OK) {
@@ -180,10 +224,9 @@
                 </style>
                 <script type="text/javascript">
                     //$(document).ready(function () {
-                        
+
                     //});
-                    function pageLoad()
-                    {
+                    function pageLoad() {
                         $("#slider-3").slider({
                             range: true,
                             min: 0,
