@@ -89,6 +89,7 @@ namespace LihatKosV1.UserControl.CariLokasi
                 if (!String.IsNullOrEmpty(Request.QueryString["propinsi"]))
                 {
                     ddlPropinsi.SelectedValue = Request.QueryString["propinsi"].ToString();
+                    ddlPropinsi_SelectedIndexChanged(null, null);
                 }
 
             }
@@ -103,9 +104,9 @@ namespace LihatKosV1.UserControl.CariLokasi
                 if (item.Selected == true)
                     fasilitas += item.Value + ",";
             }
-            fasilitas = (fasilitas != "") ? fasilitas.Substring(0,fasilitas.Length - 1) : "";
-            Response.Redirect("/CariLokasi?tipeKos="+ ddlTipeKos.SelectedValue +"&lokasi="+ Server.HtmlEncode(txtSearch.Text) +"&fasilitas=" + fasilitas 
-                + "&jkWkt=" + ddlSatuanHarga.SelectedValue + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value + "&propinsi=" + ddlPropinsi.SelectedValue + 
+            fasilitas = (fasilitas != "") ? fasilitas.Substring(0, fasilitas.Length - 1) : "";
+            Response.Redirect("/CariLokasi?tipeKos=" + ddlTipeKos.SelectedValue + "&lokasi=" + Server.HtmlEncode(txtSearch.Text) + "&fasilitas=" + fasilitas
+                + "&jkWkt=" + ddlSatuanHarga.SelectedValue + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value + "&propinsi=" + ddlPropinsi.SelectedValue +
                 "&kabupaten=" + ddlKabupaten.SelectedValue + "&kecamatan=" + ddlKecamatan.SelectedValue);
         }
 
@@ -131,6 +132,7 @@ namespace LihatKosV1.UserControl.CariLokasi
             {
                 ddlKabupaten.SelectedValue = Request.QueryString["kabupaten"].ToString();
             }
+            ddlKabupaten_SelectedIndexChanged(null, null);
         }
 
         protected void ddlKabupaten_SelectedIndexChanged(object sender, EventArgs e)
@@ -145,6 +147,17 @@ namespace LihatKosV1.UserControl.CariLokasi
             {
                 ddlKecamatan.SelectedValue = Request.QueryString["kecamatan"].ToString();
             }
+            ddlKecamatan_SelectedIndexChanged(null, null);
         }
+        protected void ddlKecamatan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SearchRedirect();
+        }
+        private void SearchRedirect()
+        {
+            
+        }
+
+        
     }
 }

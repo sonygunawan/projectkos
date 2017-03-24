@@ -32,17 +32,23 @@ namespace LihatKosV1.UserControl.CariLokasi
             {
 
                 var propinsiStr = Convert.ToInt32(Request.QueryString["propinsi"].ToString());
+                var propinsi = "";
                 var propinsis = new WilayahSystem().GetAllPropinsi();
-                var propinsi = propinsis.Where(a => a.IDProvinsi == propinsiStr).ToList()[0].Nama; //Request.QueryString["propinsi"].ToString();
+                if (propinsiStr > 0)
+                {
+                    propinsi = propinsis.Where(a => a.IDProvinsi == propinsiStr).ToList()[0].Nama; //Request.QueryString["propinsi"].ToString();
+                }
                 var kabupaten = "";
                 if (Convert.ToInt32(Request.QueryString["kabupaten"].ToString()) > 0)
                 {
-                    kabupaten = new WilayahSystem().GetAllKabupaten(Convert.ToInt32(Request.QueryString["kabupaten"].ToString()))[0].Nama;
+                    var kabupatenStr = Convert.ToInt32(Request.QueryString["kabupaten"].ToString());
+                    kabupaten = new WilayahSystem().GetAllKabupaten(propinsiStr).Where(a => a.IDKabupaten == kabupatenStr).ToList()[0].Nama;
                 }
                 var kecamatan = "";
                 if (Convert.ToInt32(Request.QueryString["kecamatan"].ToString()) > 0)
                 {
-                    kecamatan = new WilayahSystem().GetAllKecamatan(Convert.ToInt32(Request.QueryString["kecamatan"].ToString()))[0].Nama;
+                    var kecamatanStr = Convert.ToInt32(Request.QueryString["kabupaten"].ToString());
+                    kecamatan = new WilayahSystem().GetAllKecamatan(kecamatanStr)[0].Nama;
                 }
                 rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByKecamatan(propinsi,kabupaten,kecamatan);
                 rptListByLoc.DataBind();

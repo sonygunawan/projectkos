@@ -129,7 +129,7 @@ banner-->
             <asp:Button ID="btn1" runat="server" Style="display:none;" />
                 <cc1:ModalPopupExtender ID="MPELogin" runat="server" TargetControlID="btn1" DropShadow="true" PopupControlID="pnlLogin" 
                     CancelControlID="btnClose" BackgroundCssClass="modalBackground" />
-                <asp:Panel ID="pnlLogin" runat="server" Style="display:none;background-color: #ffffff;width:600px;border-radius: 6px;background-clip: padding-box;">
+                <asp:Panel ID="pnlLogin" runat="server" Style="display:none;background-color: #ffffff;width:600px;border-radius: 6px;background-clip: padding-box;" DefaultButton="btnLoginShort">
                         <div class="modal-header">
                         <asp:Button ID="btnClose" CssClass="close" runat="server" Text="x" />
                         <%--<button type="button" class="close" data-dismiss="modal">x</button>--%>

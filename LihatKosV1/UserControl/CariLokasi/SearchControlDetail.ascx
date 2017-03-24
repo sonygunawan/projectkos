@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchControlDetail.ascx.cs" Inherits="LihatKosV1.UserControl.CariLokasi.SearchControlDetail" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="AjaxControlToolkit" %>
 
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
+<%--  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>--%>
 <!-- boostrap -->
 <%--<script src="../../assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>--%>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
@@ -36,28 +36,28 @@
 </style>
 <div class="form-horizontal">
     <div class="form-group">
-        <label>Propinsi</label>
-        <asp:DropDownList ID="ddlPropinsi" runat="server" OnSelectedIndexChanged="ddlPropinsi_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+        <label class="control-label">Propinsi</label>
+        <asp:DropDownList ID="ddlPropinsi" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlPropinsi_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
     </div>
     <div class="form-group">
-        <label>Kabupaten</label>
-        <asp:DropDownList ID="ddlKabupaten" runat="server" OnSelectedIndexChanged="ddlKabupaten_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+        <label class="control-label">Kabupaten</label>
+        <asp:DropDownList ID="ddlKabupaten" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlKabupaten_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
     </div>
     <div class="form-group">
-        <label>Kecamatan</label>
-        <asp:DropDownList ID="ddlKecamatan" runat="server"></asp:DropDownList>
+        <label class="control-label">Kecamatan</label>
+        <asp:DropDownList ID="ddlKecamatan" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlKecamatan_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
     </div>
 
     <div class="form-group">
-        <label>Tipe Kos</label>
-        <asp:DropDownList ID="ddlTipeKos" runat="server"></asp:DropDownList>
+        <label class="control-label">Tipe Kos</label>
+        <asp:DropDownList ID="ddlTipeKos" runat="server" CssClass="form-control"></asp:DropDownList>
     </div>
     <div class="form-group">
-        <label>Jangka Waktu</label>
-        <asp:DropDownList ID="ddlSatuanHarga" runat="server"></asp:DropDownList>
+        <label class="control-label">Jangka Waktu</label>
+        <asp:DropDownList ID="ddlSatuanHarga" runat="server" CssClass="form-control"></asp:DropDownList>
     </div>
     <div class="form-group">
-        <label>Fasilitas</label>
+        <label class="control-label">Fasilitas</label>
         <div class="ui-controlgroup-item">
             <asp:CheckBoxList ID="chkFasilitas" runat="server" RepeatDirection="Vertical" RepeatLayout="Flow" 
                 OnSelectedIndexChanged="chkFasilitas_SelectedIndexChanged" ></asp:CheckBoxList>
