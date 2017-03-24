@@ -57,7 +57,11 @@ namespace LihatKosV1
                 //}
 
             }
-            
+            var test = chkFasilitas.ClientID;
+            ClientScript.RegisterStartupScript(GetType(), "checkboxBeautify", "$(\"input[type='checkbox'], input[type='radio'], select\").uniform();" +
+                  "$('#" + chkFasilitas.ClientID + ").buttonset(); " +
+                  "$('#" + chkLingkungan.ClientID + ").buttonset(); ", true);
+
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -85,7 +89,11 @@ namespace LihatKosV1
 
             Int64 UserID = Convert.ToInt64(Session["UserID"]);
             Data.UserID = UserID;
-
+            //Wilayah
+            Data.NamaProvinsi = hidProvinsi.Value; // txtCity.Text;
+            Data.NamaKabupaten = hidKabupaten.Value; // txtKabupaten.Text;
+            Data.NamaKecamatan = hidKecamatan.Value; //txtKecamatan.Text;
+            Data.NamaKelurahan = hidKelurahan.Value; //txtKelurahan.Text;
             //1. 
             List<KosHargaData> DetailsHarga = new List<KosHargaData>();
             KosHargaData DetHarga = new KosHargaData();

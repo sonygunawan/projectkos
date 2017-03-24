@@ -103,6 +103,42 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.HiddenField hidLongitude;
         
         /// <summary>
+        /// hidProvinsi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidProvinsi;
+        
+        /// <summary>
+        /// hidKabupaten control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidKabupaten;
+        
+        /// <summary>
+        /// hidKecamatan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidKecamatan;
+        
+        /// <summary>
+        /// hidKelurahan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidKelurahan;
+        
+        /// <summary>
         /// txtLatitude control.
         /// </summary>
         /// <remarks>

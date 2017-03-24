@@ -1,4 +1,5 @@
 ﻿using LihatKos.BusinessFacade;
+using LihatKos.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,29 @@ namespace LihatKosV1
 
                 ddlKabupaten.Items.Insert(0, "- Semua -");
                 ddlKecamatan.Items.Insert(0, "- Semua -");
-            }
 
+                hidMinimumPrice.Value = hidMinimumSetValue.Value = "0";
+                hidMaximumPrice.Value = hidMaximumSetValue.Value = "5000000";
+                
+                
+            }
+            RunClientScript();
+        }
+        private void RunClientScript()
+        {
+            ClientScript.RegisterStartupScript(GetType(), "multislider", "$('#slider-3').slider({ " +
+                            " range: true, min: 0, max: 5000000, step: 5000, values: [0, 2000000], " +
+                            " slide: function (event, ui) { " +
+                            " $('#price').val('Rp.' + ui.values[0] + ' - Rp.' + ui.values[1]); " +
+                            " $('#hidMinimumSetValue').val(ui.values[0]); " +
+                            " $('#hidMaximumSetValue').val(ui.values[1]); }  }); " +
+                            " $('#price').val('Rp.' + $('#slider-3').slider('values', 0) + " +
+                            " ' - Rp.' + $('#slider-3').slider('values', 1));"
+                            // + "$('#hidMinimumSetValue').val($('#slider-3').slider('values', 0)); " + 
+                            //"$('#hidMaximumSetValue').val($('#slider-3').slider('values', 1)); "
+                        , true);
 
         }
-
         protected void ddlPropinsi_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlKabupaten.DataSource = new WilayahSystem().GetAllKabupaten(Convert.ToInt32(ddlPropinsi.SelectedValue));
@@ -36,6 +55,8 @@ namespace LihatKosV1
             ddlKabupaten.DataValueField = "IDKabupaten";
             ddlKabupaten.DataBind();
             ddlKabupaten.Items.Insert(0, "- Semua -");
+
+            LoadPriceRange();
             //ddlKabupaten.SelectedValue = "0";
         }
 
@@ -47,8 +68,20 @@ namespace LihatKosV1
             ddlKecamatan.DataBind();
             ddlKecamatan.Items.Insert(0, "- Semua -");
             //ddlKabupaten.SelectedValue = "0";
+            LoadPriceRange();
+            //RunClientScript();
         }
 
+        private void LoadPriceRange()
+        {
+            var provinsi =  (ddlPropinsi.SelectedItem.Text == "- Semua -") ? "" : ddlPropinsi.SelectedItem.Text;
+            var kabupaten = (ddlKabupaten.SelectedItem.Text == "- Semua -") ? "" : ddlKabupaten.SelectedItem.Text;
+            var kecamatan = (ddlKecamatan.SelectedItem.Text == "- Semua -") ? "" : ddlKecamatan.SelectedItem.Text;
 
+            var formKosMin = new FormKosSystem().GetPriceRangeByKecamatan(provinsi, kabupaten, kecamatan);
+            hidMinimumPrice.Value = hidMinimumSetValue.Value = formKosMin.MinimumPrice.ToString("G0");
+            hidMaximumPrice.Value = hidMaximumSetValue.Value = formKosMin.MaximumPrice.ToString("G0");
+            //ClientScript.RegisterStartupScript(GetType(), "multislider5", "$('#slider-3').slider('option', 'max', " + hidMaximumPrice.Value + " );", true);
+        }
     }
 }

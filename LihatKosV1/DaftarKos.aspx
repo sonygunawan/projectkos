@@ -32,7 +32,7 @@
                                     <asp:TextBox ID="txtDeskripsi" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     <%--<textarea class="form-control" id="textarea" name="description" placeholder="Description"></textarea>--%>
                                 </div>
-                                <asp:Panel ID="Panel1" runat="server">
+                                <asp:Panel ID="Panel1" runat="server" Style="display:none;">
                                     This Balloon Popup appears when you click the link. It uses a Rectangle style and it is set to 
                                     appear at the top-right of the link.
                                 </asp:Panel>
@@ -128,18 +128,22 @@
                                                     //find kelurahan
                                                     if (super_var1.types[0] == "administrative_area_level_4") {
                                                         document.getElementById('<%= txtKelurahan.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidKelurahan.ClientID %>').value = super_var1.long_name;
                                                     }
                                                     //find kecamatan
                                                     if (super_var1.types[0] == "administrative_area_level_3") {
                                                         document.getElementById('<%= txtKecamatan.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidKecamatan.ClientID %>').value = super_var1.long_name;
                                                     }
                                                     //find kabupaten
                                                     if (super_var1.types[0] == "administrative_area_level_2") {
                                                         document.getElementById('<%= txtKabupaten.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidKabupaten.ClientID %>').value = super_var1.long_name;
                                                     }
                                                     //find propinsi
                                                     if (super_var1.types[0] == "administrative_area_level_1") {
                                                         document.getElementById('<%= txtCity.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidProvinsi.ClientID %>').value = super_var1.long_name;
                                                     }
                                                 }
 
@@ -274,7 +278,11 @@
                                 <div class="col-md-3">
                                     <asp:HiddenField ID="hidLatitude" runat="server" ClientIDMode="Static" />
                                     <asp:HiddenField ID="hidLongitude" runat="server" ClientIDMode="Static" />
-                                    </div>
+                                    <asp:HiddenField ID="hidProvinsi" runat="server" ClientIDMode="Static" />
+                                    <asp:HiddenField ID="hidKabupaten" runat="server" ClientIDMode="Static" />
+                                    <asp:HiddenField ID="hidKecamatan" runat="server" ClientIDMode="Static" />
+                                    <asp:HiddenField ID="hidKelurahan" runat="server" ClientIDMode="Static" />
+                                </div>
                                     <%--<textarea class="form-control" id="textarea" name="description" placeholder="Description"></textarea>--%>
                                     <div class="col-md-9">
                                         <label class="col-md-2 control-label" for="textarea">Latitude</label>

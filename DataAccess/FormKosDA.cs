@@ -53,6 +53,10 @@ namespace LihatKos.DataAccess
                 //db.AddInParameter(dbCommand, "FormKosLingkunganID", DbType.Int32, Data.FormKosLingkunganID);
                 db.AddInParameter(dbCommand, "Keterangan", DbType.String, Data.Keterangan);
                 db.AddInParameter(dbCommand, "UserID", DbType.Int64, Data.UserID);
+                db.AddInParameter(dbCommand, "NamaProvinsi", DbType.String, Data.NamaProvinsi);
+                db.AddInParameter(dbCommand, "NamaKabupaten", DbType.String, Data.NamaKabupaten.ToString().Replace("Kota ", ""));
+                db.AddInParameter(dbCommand, "NamaKecamatan", DbType.String, Data.NamaKecamatan);
+                db.AddInParameter(dbCommand, "NamaKelurahan", DbType.String, Data.NamaKelurahan);
                 //db.ExecuteNonQuery(dbCommand);
                 db.AddParameter(dbCommand, "RETURN_VALUE", DbType.Int64, ParameterDirection.ReturnValue, null, DataRowVersion.Default, null);
                 db.ExecuteNonQuery(dbCommand);
@@ -444,6 +448,39 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+        public List<FormKosData> GetAllFormKosByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan)
+        {
+            try
+            {
+                List<FormKosData> formKos = new List<FormKosData>();
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetAllFormKosByKecamatan");
+                db.AddInParameter(dbCommand, "NamaProvinsi", DbType.String, NamaProvinsi);
+                db.AddInParameter(dbCommand, "NamaKabupaten", DbType.String, NamaKabupaten);
+                db.AddInParameter(dbCommand, "NamaKecamatan", DbType.String, NamaKecamatan);
+                
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        FormKosData Data = new FormKosData();
+
+                        Data.ID = Convert.ToInt64(dataReader["ID"].ToString());
+                        Data.Nama = dataReader["Nama"].ToString();
+                        Data.Alamat = dataReader["Alamat"].ToString();
+                        Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
+                        Data.SatuanHarga = dataReader["SatuanHarga"].ToString();
+
+                        formKos.Add(Data);
+                    }
+                    dataReader.Close();
+                }
+                return formKos;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
 
         public bool UpdateFormKosView(Int64 Id)
         {
@@ -509,6 +546,36 @@ namespace LihatKos.DataAccess
                 }
                
                 return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+
+
+        public FormKosData  GetPriceRangeByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan)
+        {
+            try
+            {
+                var Data = new FormKosData();
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetPriceRangeByKecamatan");
+                db.AddInParameter(dbCommand, "NamaProvinsi", DbType.String, NamaProvinsi);
+                db.AddInParameter(dbCommand, "NamaKabupaten", DbType.String, NamaKabupaten);
+                db.AddInParameter(dbCommand, "NamaKecamatan", DbType.String, NamaKecamatan);
+                
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        Data.MinimumPrice = Convert.ToDecimal(dataReader["Minimum"].ToString());
+                        Data.MaximumPrice = Convert.ToDecimal(dataReader["Maximum"].ToString());
+
+                    }
+                    dataReader.Close();
+                }
+                return Data;
             }
             catch (Exception ex)
             {

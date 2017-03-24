@@ -152,6 +152,11 @@
             </div>
         </div>
         <!-- End of Front -->
+            
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+        <ContentTemplate>
 
             <script type="text/javascript">
                 function showLatLng() {
@@ -184,7 +189,7 @@
                             var latitude = results[0].geometry.location.lat();
                             var longitude = results[0].geometry.location.lng();
                             //alert(latitude+ ',' + longitude);
-                            alert(JSON.stringify(results));
+                            //alert(JSON.stringify(results));
                         }
                     });
                 }
@@ -235,17 +240,24 @@
                             values: [25000, 2000000],
                             slide: function (event, ui) {
                                 $("#price").val("Rp." + ui.values[0] + " - Rp." + ui.values[1]);
-                                $("#hidLowRate").val(ui.values[0]);
-                                $("#hidHighRate").val(ui.values[1]);
+                                $("#hidMinimumSetValue").val(ui.values[0]);
+                                $("#hidMaximumSetValue").val(ui.values[1]);
                             }
                         });
                         $("#price").val("Rp." + $("#slider-3").slider("values", 0) +
                            " - Rp." + $("#slider-3").slider("values", 1));
+                        
                     }
                 </script>
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <label></label>
+                        <label>Range Harga</label>
+                        <asp:HiddenField ID="hidMinimumPrice" runat="server" ClientIDMode="Static" />
+                        <asp:HiddenField ID="hidMaximumPrice" runat="server" ClientIDMode="Static" />
+                        <asp:HiddenField ID="hidMinimumSetValue" runat="server" ClientIDMode="Static" />
+                        <asp:HiddenField ID="hidMaximumSetValue" runat="server" ClientIDMode="Static" />
+                        <%--<asp:HiddenField ID="hidLowRate" runat="server" />
+                        <asp:HiddenField ID="hidHighRate" runat="server" />--%>
                         <input type="text" id="price" 
                             style="width:100%;border:0; background-color:#dedbd3; color:#756534; font-weight:bold;">
                        <div id="slider-3"></div>

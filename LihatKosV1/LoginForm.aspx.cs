@@ -36,7 +36,7 @@ namespace LihatKosV1
             {
                 if (retVal.IsActive != 0)
                 {
-                    Session["UserID"] = retVal;
+                    Session["UserID"] = retVal.ID;
                     if (chkRemember.Checked == true)
                     {
                         Response.Cookies["email"].Value = txtEmail.Text;

@@ -385,20 +385,20 @@ banner-->
             }
             reloadJQuery = function () {
                 $(function () {
-                    $("#slider-3").slider({
-                        range: true,
-                        min: 0,
-                        max: 5000000,
-                        step: 5000,
-                        values: [25000, 2000000],
-                        slide: function (event, ui) {
-                            $("#price").val("Rp." + ui.values[0] + " - Rp." + ui.values[1]);
-                            $("#hidLowRate").val(ui.values[0]);
-                            $("#hidHighRate").val(ui.values[1]);
-                        }
-                    });
-                    $("#price").val("Rp." + $("#slider-3").slider("values", 0) +
-                       " - Rp." + $("#slider-3").slider("values", 1));
+                    //$("#slider-3").slider({
+                    //    range: true,
+                    //    min: 0,
+                    //    max: 5000000,
+                    //    step: 5000,
+                    //    values: [25000, 2000000],
+                    //    slide: function (event, ui) {
+                    //        $("#price").val("Rp." + ui.values[0] + " - Rp." + ui.values[1]);
+                    //        $("#hidLowRate").val(ui.values[0]);
+                    //        $("#hidHighRate").val(ui.values[1]);
+                    //    }
+                    //});
+                    //$("#price").val("Rp." + $("#slider-3").slider("values", 0) +
+                    //   " - Rp." + $("#slider-3").slider("values", 1));
                 });
             }
             //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(pageLoaded);

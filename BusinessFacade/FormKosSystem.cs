@@ -47,6 +47,7 @@ namespace LihatKos.BusinessFacade
         {
             return new FormKosDA().GetAllFormKosByLocation(Latitude, Longitude, TipeKosID, SatuanHargaID, Fasilitas);
         }
+       
         public bool UpdateFormKosView(Int64 Id)
         {
             return new FormKosDA().UpdateFormKosView(Id);
@@ -58,6 +59,14 @@ namespace LihatKos.BusinessFacade
         public List<FormKosData> GetHighestFormKosByArea(int AreaID)
         {
             return new FormKosDA().GetHighestFormKosByArea(AreaID);
+        }
+        public FormKosData GetPriceRangeByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan)
+        {
+            return new FormKosDA().GetPriceRangeByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan);
+        }
+        public List<FormKosData> GetAllFormKosByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan)
+        {
+            return new FormKosDA().GetAllFormKosByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan);
         }
     }
 }
