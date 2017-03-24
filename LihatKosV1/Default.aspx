@@ -56,6 +56,7 @@
                         <uc1:BannerLeft ID="BannerLeft" runat="server" />
                     </div>
                     
+                        </div>
                     <div class="col-sm-4 topservices" style="position:relative;">
                         <%--<uc2:SearchControl ID="SearchControl" runat="server" /> --%>
                         <div class="row favList">
@@ -119,8 +120,7 @@
                                     </a>
                                 </div>
                             </div>
-                            
-                        </div>
+                            </div>
                         <%--<div class="row favList ">
                             <div class="col-sm-6 favPadding">
                                 <a href="#"><img src="images/150x110.png"</a>

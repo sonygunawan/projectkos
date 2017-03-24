@@ -31,13 +31,40 @@ namespace LihatKosV1 {
         protected global::LihatKosV1.UserControl.BannerLeft BannerLeft;
         
         /// <summary>
-        /// NewSearchControl control.
+        /// ddlPropinsi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::LihatKosV1.UserControl.Home.NewSearchControl NewSearchControl;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPropinsi;
+        
+        /// <summary>
+        /// ddlKabupaten control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlKabupaten;
+        
+        /// <summary>
+        /// ddlKecamatan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlKecamatan;
+        
+        /// <summary>
+        /// btnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
         /// room control.
