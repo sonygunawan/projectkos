@@ -28,18 +28,40 @@ namespace LihatKosV1.UserControl.CariLokasi
             {
                 Fasilitas = Request.QueryString["fasilitas"].ToString();
             }
-            if (String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
+            if (!String.IsNullOrEmpty(Request.QueryString["propinsi"]))
             {
-                rptListByLoc.DataSource = new FormKosSystem().GetAllFormKos(0);
+
+                var propinsiStr = Convert.ToInt32(Request.QueryString["propinsi"].ToString());
+                var propinsis = new WilayahSystem().GetAllPropinsi();
+                var propinsi = propinsis.Where(a => a.IDProvinsi == propinsiStr).ToList()[0].Nama; //Request.QueryString["propinsi"].ToString();
+                var kabupaten = "";
+                if (Convert.ToInt32(Request.QueryString["kabupaten"].ToString()) > 0)
+                {
+                    kabupaten = new WilayahSystem().GetAllKabupaten(Convert.ToInt32(Request.QueryString["kabupaten"].ToString()))[0].Nama;
+                }
+                var kecamatan = "";
+                if (Convert.ToInt32(Request.QueryString["kecamatan"].ToString()) > 0)
+                {
+                    kecamatan = new WilayahSystem().GetAllKecamatan(Convert.ToInt32(Request.QueryString["kecamatan"].ToString()))[0].Nama;
+                }
+                rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByKecamatan(propinsi,kabupaten,kecamatan);
                 rptListByLoc.DataBind();
             }
             else
             {
-                string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
-                rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByLocation(splitLatLng[0], splitLatLng[1], tipeKos, jkWkt, Fasilitas);
-                rptListByLoc.DataBind();
-            }
 
+                if (String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
+                {
+                    rptListByLoc.DataSource = new FormKosSystem().GetAllFormKos(0);
+                    rptListByLoc.DataBind();
+                }
+                else
+                {
+                    string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
+                    rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByLocation(splitLatLng[0], splitLatLng[1], tipeKos, jkWkt, Fasilitas);
+                    rptListByLoc.DataBind();
+                }
+            }
             if (!Page.IsPostBack)
             {
                 

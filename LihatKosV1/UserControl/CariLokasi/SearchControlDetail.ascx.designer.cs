@@ -22,6 +22,33 @@ namespace LihatKosV1.UserControl.CariLokasi {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
+        /// ddlPropinsi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPropinsi;
+        
+        /// <summary>
+        /// ddlKabupaten control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlKabupaten;
+        
+        /// <summary>
+        /// ddlKecamatan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlKecamatan;
+        
+        /// <summary>
         /// ddlTipeKos control.
         /// </summary>
         /// <remarks>

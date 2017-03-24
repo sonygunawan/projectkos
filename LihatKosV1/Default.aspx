@@ -267,7 +267,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label></label>
-                        <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default btn-fullwidth text-uppercase" Text="Cari Kos" OnClientClick="showLatLng();return false;" />
+                        <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default btn-fullwidth text-uppercase" Text="Cari Kos" OnClick="btnSearch_Click" /><%--OnClientClick="showLatLng();return false;"--%>
                     </div>
                 </div>
             </div>

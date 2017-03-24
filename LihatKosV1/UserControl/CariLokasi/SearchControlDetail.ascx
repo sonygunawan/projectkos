@@ -36,6 +36,19 @@
 </style>
 <div class="form-horizontal">
     <div class="form-group">
+        <label>Propinsi</label>
+        <asp:DropDownList ID="ddlPropinsi" runat="server" OnSelectedIndexChanged="ddlPropinsi_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+    </div>
+    <div class="form-group">
+        <label>Kabupaten</label>
+        <asp:DropDownList ID="ddlKabupaten" runat="server" OnSelectedIndexChanged="ddlKabupaten_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+    </div>
+    <div class="form-group">
+        <label>Kecamatan</label>
+        <asp:DropDownList ID="ddlKecamatan" runat="server"></asp:DropDownList>
+    </div>
+
+    <div class="form-group">
         <label>Tipe Kos</label>
         <asp:DropDownList ID="ddlTipeKos" runat="server"></asp:DropDownList>
     </div>
@@ -52,6 +65,9 @@
     </div>
 
 </div>
+        
+</ContentTemplate>
+</asp:UpdatePanel>
 <%--    <div class="form-group">
         <label for="type1" class="control-label">Type</label>
         <select class="form-control" name="" id="type1">
@@ -117,5 +133,3 @@
 <asp:HiddenField ID="hidLongitude" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidLowRate" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="hidHighRate" runat="server" ClientIDMode="Static" />
-</ContentTemplate>
-</asp:UpdatePanel>

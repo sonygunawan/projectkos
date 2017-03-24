@@ -11,7 +11,7 @@ namespace LihatKosV1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["latLng"] != null)
+            if (!String.IsNullOrEmpty(Request.QueryString["latLng"]))
             {
                 string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
                 hidLatitude.Value = splitLatLng[0];

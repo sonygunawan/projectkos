@@ -6,8 +6,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-<%--    <AjaxToolKit:ToolkitScriptManager runat="Server" ID="ScriptManager1" />--%>
+    <%-- <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+   <AjaxToolKit:ToolkitScriptManager runat="Server" ID="ScriptManager1" />--%>
     <asp:HiddenField ID="hidLatitude" runat="server" ClientIDMode="Static" />
     <asp:HiddenField ID="hidLongitude" runat="server" ClientIDMode="Static" />
     <!-- Room -->
@@ -67,4 +67,9 @@
             <!-- #container-fluid -->
         </div>
         <!-- End of Room -->
+        <script  type="text/javascript">
+            function show() {
+                document.write("<head id='Head1' runat='server' />");
+            }
+    </script>
 </asp:Content>

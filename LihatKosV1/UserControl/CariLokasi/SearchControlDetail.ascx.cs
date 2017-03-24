@@ -16,6 +16,17 @@ namespace LihatKosV1.UserControl.CariLokasi
         {
             if (!Page.IsPostBack)
             {
+                ddlPropinsi.DataSource = new WilayahSystem().GetAllPropinsi();
+                ddlPropinsi.DataTextField = "Nama";
+                ddlPropinsi.DataValueField = "IDProvinsi";
+                ddlPropinsi.DataBind();
+                ddlPropinsi.Items.Insert(0, new ListItem("- Semua - ", "0"));
+                ddlPropinsi.SelectedValue = "0";
+
+                ddlKabupaten.Items.Insert(0, new ListItem("- Semua - ", "0"));
+                ddlKecamatan.Items.Insert(0, new ListItem("- Semua - ", "0"));
+               
+
                 if (!String.IsNullOrEmpty(Request.QueryString["lokasi"]))
                 {
                     txtSearch.Text = Server.HtmlDecode(Request.QueryString["lokasi"]);
@@ -53,9 +64,12 @@ namespace LihatKosV1.UserControl.CariLokasi
                 }
                 if (!String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
                 {
-                    string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
-                    hidLatitude.Value = splitLatLng[0];
-                    hidLongitude.Value = splitLatLng[1];
+                    if (Request.QueryString["latLng"] != "")
+                    {
+                        string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
+                        hidLatitude.Value = splitLatLng[0];
+                        hidLongitude.Value = splitLatLng[1];
+                    }
                 }
                 if (!String.IsNullOrEmpty(Request.QueryString["fasilitas"]))
                 {
@@ -72,6 +86,11 @@ namespace LihatKosV1.UserControl.CariLokasi
                         }
                     }
                 }
+                if (!String.IsNullOrEmpty(Request.QueryString["propinsi"]))
+                {
+                    ddlPropinsi.SelectedValue = Request.QueryString["propinsi"].ToString();
+                }
+
             }
             
         }
@@ -86,7 +105,8 @@ namespace LihatKosV1.UserControl.CariLokasi
             }
             fasilitas = (fasilitas != "") ? fasilitas.Substring(0,fasilitas.Length - 1) : "";
             Response.Redirect("/CariLokasi?tipeKos="+ ddlTipeKos.SelectedValue +"&lokasi="+ Server.HtmlEncode(txtSearch.Text) +"&fasilitas=" + fasilitas 
-                + "&jkWkt=" + ddlSatuanHarga.SelectedValue + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value);
+                + "&jkWkt=" + ddlSatuanHarga.SelectedValue + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value + "&propinsi=" + ddlPropinsi.SelectedValue + 
+                "&kabupaten=" + ddlKabupaten.SelectedValue + "&kecamatan=" + ddlKecamatan.SelectedValue);
         }
 
         protected void chkFasilitas_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,6 +118,33 @@ namespace LihatKosV1.UserControl.CariLokasi
             //        item.Selected = true;
             //    }
             //}
+        }
+
+        protected void ddlPropinsi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlKabupaten.DataSource = new WilayahSystem().GetAllKabupaten(Convert.ToInt32(ddlPropinsi.SelectedValue));
+            ddlKabupaten.DataTextField = "Nama";
+            ddlKabupaten.DataValueField = "IDKabupaten";
+            ddlKabupaten.DataBind();
+            ddlKabupaten.Items.Insert(0, new ListItem("- Semua - ", "0"));
+            if (!String.IsNullOrEmpty(Request.QueryString["kabupaten"]))
+            {
+                ddlKabupaten.SelectedValue = Request.QueryString["kabupaten"].ToString();
+            }
+        }
+
+        protected void ddlKabupaten_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlKecamatan.DataSource = new WilayahSystem().GetAllKecamatan(Convert.ToInt32(ddlKabupaten.SelectedValue));
+            ddlKecamatan.DataTextField = "Nama";
+            ddlKecamatan.DataValueField = "IDKecamatan";
+            ddlKecamatan.DataBind();
+            ddlKecamatan.Items.Insert(0, new ListItem("- Semua - ", "0"));
+
+            if (!String.IsNullOrEmpty(Request.QueryString["kecamatan"]))
+            {
+                ddlKecamatan.SelectedValue = Request.QueryString["kecamatan"].ToString();
+            }
         }
     }
 }

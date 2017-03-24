@@ -20,12 +20,13 @@ namespace LihatKosV1
                 ddlPropinsi.DataTextField = "Nama";
                 ddlPropinsi.DataValueField = "IDProvinsi";
                 ddlPropinsi.DataBind();
-                ddlPropinsi.Items.Insert(0, "- Semua -");
+                ddlPropinsi.Items.Insert(0, new ListItem("- Semua - ", "0"));
+                //ddlPropinsi.Items.Insert(0, "- Semua -");
                 ddlPropinsi.SelectedValue = "0";
 
-                ddlKabupaten.Items.Insert(0, "- Semua -");
-                ddlKecamatan.Items.Insert(0, "- Semua -");
-
+                ddlKabupaten.Items.Insert(0, new ListItem("- Semua - ", "0"));
+                ddlKecamatan.Items.Insert(0, new ListItem("- Semua - ", "0"));
+               
                 hidMinimumPrice.Value = hidMinimumSetValue.Value = "0";
                 hidMaximumPrice.Value = hidMaximumSetValue.Value = "5000000";
                 
@@ -53,8 +54,8 @@ namespace LihatKosV1
             ddlKabupaten.DataSource = new WilayahSystem().GetAllKabupaten(Convert.ToInt32(ddlPropinsi.SelectedValue));
             ddlKabupaten.DataTextField = "Nama";
             ddlKabupaten.DataValueField = "IDKabupaten";
-            ddlKabupaten.DataBind();
-            ddlKabupaten.Items.Insert(0, "- Semua -");
+            ddlKabupaten.DataBind(); 
+            ddlKabupaten.Items.Insert(0, new ListItem("- Semua - ", "0"));
 
             LoadPriceRange();
             //ddlKabupaten.SelectedValue = "0";
@@ -66,7 +67,7 @@ namespace LihatKosV1
             ddlKecamatan.DataTextField = "Nama";
             ddlKecamatan.DataValueField = "IDKecamatan";
             ddlKecamatan.DataBind();
-            ddlKecamatan.Items.Insert(0, "- Semua -");
+            ddlKecamatan.Items.Insert(0, new ListItem("- Semua - ", "0"));
             //ddlKabupaten.SelectedValue = "0";
             LoadPriceRange();
             //RunClientScript();
@@ -74,14 +75,24 @@ namespace LihatKosV1
 
         private void LoadPriceRange()
         {
-            var provinsi =  (ddlPropinsi.SelectedItem.Text == "- Semua -") ? "" : ddlPropinsi.SelectedItem.Text;
-            var kabupaten = (ddlKabupaten.SelectedItem.Text == "- Semua -") ? "" : ddlKabupaten.SelectedItem.Text;
-            var kecamatan = (ddlKecamatan.SelectedItem.Text == "- Semua -") ? "" : ddlKecamatan.SelectedItem.Text;
+            //var provinsi =  (ddlPropinsi.SelectedItem.Text == "- Semua -") ? "" : ddlPropinsi.SelectedItem.Text;
+            //var kabupaten = (ddlKabupaten.SelectedItem.Text == "- Semua -") ? "" : ddlKabupaten.SelectedItem.Text;
+            //var kecamatan = (ddlKecamatan.SelectedItem.Text == "- Semua -") ? "" : ddlKecamatan.SelectedItem.Text;
 
-            var formKosMin = new FormKosSystem().GetPriceRangeByKecamatan(provinsi, kabupaten, kecamatan);
-            hidMinimumPrice.Value = hidMinimumSetValue.Value = formKosMin.MinimumPrice.ToString("G0");
-            hidMaximumPrice.Value = hidMaximumSetValue.Value = formKosMin.MaximumPrice.ToString("G0");
-            //ClientScript.RegisterStartupScript(GetType(), "multislider5", "$('#slider-3').slider('option', 'max', " + hidMaximumPrice.Value + " );", true);
+            //var formKosMin = new FormKosSystem().GetPriceRangeByKecamatan(provinsi, kabupaten, kecamatan);
+            //hidMinimumPrice.Value = hidMinimumSetValue.Value = formKosMin.MinimumPrice.ToString("G0");
+            //hidMaximumPrice.Value = hidMaximumSetValue.Value = formKosMin.MaximumPrice.ToString("G0");
+            ////ClientScript.RegisterStartupScript(GetType(), "multislider5", "$('#slider-3').slider('option', 'max', " + hidMaximumPrice.Value + " );", true);
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            var provinsi = ddlPropinsi.SelectedValue; //(ddlPropinsi.SelectedItem.Text == "- Semua -") ? "" : ddlPropinsi.SelectedItem.Text;
+            var kabupaten = ddlKabupaten.SelectedValue; // (ddlKabupaten.SelectedItem.Text == "- Semua -") ? "" : ddlKabupaten.SelectedItem.Text;
+            var kecamatan = ddlKecamatan.SelectedValue; //(ddlKecamatan.SelectedItem.Text == "- Semua -") ? "" : ddlKecamatan.SelectedItem.Text;
+
+            Response.Redirect("/CariLokasi?tipeKos=&lokasi=&latLng=" + 
+                "&propinsi=" + provinsi + "&kabupaten=" +kabupaten + "&kecamatan=" +kecamatan);
         }
     }
 }
