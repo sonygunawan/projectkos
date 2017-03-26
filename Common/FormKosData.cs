@@ -46,7 +46,7 @@ namespace LihatKos.Common
         public List<KosHargaData> KosHarga{get; set;}
         public List<KosFasilitasData> KosFasilitas { get; set; }
         public List<KosLingkunganData> KosLingkungan { get; set; }
-
+        public List<KosTeleponData> KosTelepon { get; set; }
         public string NamaProvinsi { get; set; }
 
         public string NamaKabupaten { get; set; }

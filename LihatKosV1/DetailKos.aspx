@@ -336,26 +336,41 @@
 
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="price">Nama Pemilik</label>
+                                <label class="col-md-3 control-label" for="price">Contact Person</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtPemilik" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                     <%--<input id="price" name="price" type="text" placeholder="Product price" class="form-control input-md" required="">--%>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="image">Alamat Pemilik</label>
+                                <label class="col-md-3 control-label" for="file">Telepon/HP Pemilik<a class="fa fa-info-circle">
+                                  </a></label>
                                 <div class="col-md-9">
-                                    <asp:TextBox ID="txtAlamatPemilik" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2" Enabled="false"></asp:TextBox>
-                                    <%--<input id="image" name="image" type="text" placeholder="Image URL" class="form-control input-md">--%>
+                                    <asp:GridView ID="gvKosTelepon" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="false" GridLines="None"
+                                        ShowFooter="false" ShowHeader="false" OnRowDataBound="gvKosTelepon_RowDataBound">
+                                        <Columns>
+                                            <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-Width="10%" />
+                                            <asp:TemplateField HeaderText="Telepon" ItemStyle-Width="75%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtValue" runat="server" Width="100%" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Tipe Nomor" ItemStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:DropDownList ID="ddlPhoneID" runat="server" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                    
+                                    <%--<asp:TextBox ID="txtTlpPemilik" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
                                 </div>
+                                <%--<div class="col-md-1" style="display: inline-block;vertical-align:middle;float:none;">
+                                    <asp:ImageButton ID="imgBtnPlus" runat="server" ImageUrl="~/images/plus.png" OnClick="imgBtnPlus_Click" />
+                                    &nbsp;
+                                </div>--%>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label" for="file">Telepon/HP Pemilik</label>
-                                <div class="col-md-9">
-                                    <asp:TextBox ID="txtTlpPemilik" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Nama Pengelola</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtNamaPengelola" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
@@ -367,7 +382,7 @@
                                     <asp:TextBox ID="txtTlpPengelola" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                 </div>
                             </div>
-                            
+                            --%>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Minimum Bayar</label>
                                 <div class="col-md-9">

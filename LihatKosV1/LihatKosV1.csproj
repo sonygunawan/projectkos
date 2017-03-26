@@ -113,6 +113,7 @@
     <Content Include="images\photos\9.jpg" />
     <Content Include="images\photos\banner.jpg" />
     <Content Include="Default2.aspx" />
+    <Content Include="images\plus.png" />
     <Content Include="images\uploading.gif" />
     <Content Include="LoginForm.aspx" />
     <Content Include="Logout.aspx" />

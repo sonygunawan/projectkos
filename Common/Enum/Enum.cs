@@ -17,4 +17,10 @@ namespace LihatKos.Common.Enum
         Prev = -4,
         Ordinary = 0
     }
+    public enum Phone : int
+    {
+        Ponsel = 1,
+        Rumah = 2, 
+        Kantor = 3
+    }
 }

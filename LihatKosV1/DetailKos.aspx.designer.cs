@@ -193,40 +193,13 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.TextBox txtPemilik;
         
         /// <summary>
-        /// txtAlamatPemilik control.
+        /// gvKosTelepon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAlamatPemilik;
-        
-        /// <summary>
-        /// txtTlpPemilik control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTlpPemilik;
-        
-        /// <summary>
-        /// txtNamaPengelola control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNamaPengelola;
-        
-        /// <summary>
-        /// txtTlpPengelola control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTlpPengelola;
+        protected global::System.Web.UI.WebControls.GridView gvKosTelepon;
         
         /// <summary>
         /// ddlMinimumBayarMonth control.

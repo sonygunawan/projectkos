@@ -64,10 +64,10 @@ namespace LihatKosV1
                 hidLatitude.Value = txtLatitude.Text = Data.Latitude.ToString().Replace(',','.');
                 hidLongitude.Value = txtLongitude.Text = Data.Longitude.ToString().Replace(',', '.');
                 txtPemilik.Text = Data.NamaPemilik;
-                txtAlamatPemilik.Text = Data.AlamatPemilik;
-                txtTlpPemilik.Text = Data.KontakPemilik;
-                txtNamaPengelola.Text = Data.NamaPengelola;
-                txtTlpPengelola.Text = Data.KontakPengelola;
+                //txtAlamatPemilik.Text = Data.AlamatPemilik;
+                //txtTlpPemilik.Text = Data.KontakPemilik;
+                //txtNamaPengelola.Text = Data.NamaPengelola;
+                //txtTlpPengelola.Text = Data.KontakPengelola;
                 ddlMinimumBayarMonth.SelectedValue = Data.MinimumBayarMonth.ToString();
                 txtMinimumBayarDesc.Text = Data.MinimumBayarDesc;
                 //txtJmlKamar.Text = Data.JmlKamar.ToString();
@@ -104,6 +104,7 @@ namespace LihatKosV1
 
                 Data.KosFasilitas = new FormKosSystem().GetKosFasilitasByFormID(ID);
                 Data.KosLingkungan = new FormKosSystem().GetKosLingkunganByFormID(ID);
+                Data.KosTelepon = new FormKosSystem().GetKosTeleponByFormID(ID);
                 chkFasilitas.DataSource = Data.KosFasilitas;
                 chkFasilitas.DataValueField = "FormKosFasilitasID";
                 chkFasilitas.DataTextField = "NamaFasilitas";
@@ -127,6 +128,9 @@ namespace LihatKosV1
                     if (dataLink.Count > 0)
                         item.Selected = true;
                 }
+                //KosTelepon 
+                gvKosTelepon.DataSource = Data.KosTelepon;
+                gvKosTelepon.DataBind();
 
                 if (Session["UserID"] != null)
                 {
@@ -155,7 +159,28 @@ namespace LihatKosV1
             }
             return listStr;
         }
-        
+
+        private void LoadDropDownTelepon(ref DropDownList ddlPhone)
+        {
+            ddlPhone.Items.Add(new ListItem("Ponsel", "1"));
+            ddlPhone.Items.Add(new ListItem("Rumah", "2"));
+            ddlPhone.Items.Add(new ListItem("Kantor", "3"));
+            ddlPhone.SelectedIndex = 0;
+        }
+        protected void gvKosTelepon_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                KosTeleponData data = (KosTeleponData)e.Row.DataItem;
+                e.Row.Cells[0].Text = data.OrderID.ToString();
+                TextBox txtValue = (TextBox)e.Row.Cells[1].FindControl("txtValue");
+                txtValue.Text = data.Value;
+                DropDownList ddlPhoneID = (DropDownList)e.Row.Cells[2].FindControl("ddlPhoneID");
+                LoadDropDownTelepon(ref ddlPhoneID);
+                ddlPhoneID.SelectedValue = data.PhoneID.ToString();
+
+            }
+        }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             

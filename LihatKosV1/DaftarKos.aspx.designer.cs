@@ -202,121 +202,49 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.TextBox txtPemilik;
         
         /// <summary>
-        /// txtTlpPemilik control.
+        /// UpdatePanel15 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTlpPemilik;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel15;
         
         /// <summary>
-        /// txtNamaPengelola control.
+        /// gvKosTelepon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNamaPengelola;
+        protected global::System.Web.UI.WebControls.GridView gvKosTelepon;
         
         /// <summary>
-        /// txtTlpPengelola control.
+        /// imgBtnPlus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTlpPengelola;
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnPlus;
         
         /// <summary>
-        /// txtHarian control.
+        /// UpdatePanel16 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHarian;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel16;
         
         /// <summary>
-        /// FilteredTextBoxExtender1 control.
+        /// gvKosHarga control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender1;
-        
-        /// <summary>
-        /// txtMingguan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMingguan;
-        
-        /// <summary>
-        /// FilteredTextBoxExtender2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender2;
-        
-        /// <summary>
-        /// txtBulanan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBulanan;
-        
-        /// <summary>
-        /// FilteredTextBoxExtender3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender3;
-        
-        /// <summary>
-        /// txtTahunan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTahunan;
-        
-        /// <summary>
-        /// FilteredTextBoxExtender4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender4;
-        
-        /// <summary>
-        /// ddlMinimumBayarMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMinimumBayarMonth;
-        
-        /// <summary>
-        /// txtMinimumBayarDesc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMinimumBayarDesc;
+        protected global::System.Web.UI.WebControls.GridView gvKosHarga;
         
         /// <summary>
         /// txtJmlKamar control.

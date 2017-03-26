@@ -290,6 +290,15 @@ namespace LihatKos.DataAccess
                         if (retVal == false)
                             throw new DataAccessException("error InsertKosLingkungan. ");
                     }
+
+                    foreach(KosTeleponData detail in Data.KosTelepon)
+                    {
+                        detail.FormKosID = FormID;
+                        retVal = InsertKosTelepon(detail);
+
+                        if (retVal == false)
+                            throw new DataAccessException("error InsertKosTelepon. ");
+                    }
                 }
                 catch 
                 {
@@ -582,5 +591,60 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+
+        #region KosTelepon
+
+        public List<KosTeleponData> GetKosTeleponByFormID(Int64 Id)
+        {
+            try
+            {
+                List<KosTeleponData> formKos = new List<KosTeleponData>();
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetKosTeleponByFormID");
+                db.AddInParameter(dbCommand, "FormID", DbType.Int64, Id);
+
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        KosTeleponData Data = new KosTeleponData();
+                        Data.FormKosID = Convert.ToInt64(dataReader["FormKosID"].ToString());
+                        Data.OrderID = Convert.ToInt32(dataReader["OrderID"].ToString());
+                        Data.PhoneID = Convert.ToInt32(dataReader["PhoneID"].ToString());
+                        Data.Value = dataReader["Value"].ToString();
+                        Data.Deskripsi = dataReader["Deskripsi"].ToString(); 
+
+                        formKos.Add(Data);
+                    }
+                    dataReader.Close();
+                }
+                return formKos;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+        public bool InsertKosTelepon(KosTeleponData Data)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_InsertFormKosTelepon");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, Data.FormKosID);
+                db.AddInParameter(dbCommand, "OrderID", DbType.Int32, Data.OrderID);
+                db.AddInParameter(dbCommand, "PhoneID", DbType.Int32, Data.PhoneID);
+                db.AddInParameter(dbCommand, "Value", DbType.Decimal, Data.Value);
+                db.AddInParameter(dbCommand, "Deskripsi", DbType.String, Data.Deskripsi);
+                db.ExecuteNonQuery(dbCommand);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+        #endregion
     }
 }

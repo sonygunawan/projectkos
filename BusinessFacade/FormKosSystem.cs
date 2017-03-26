@@ -68,5 +68,14 @@ namespace LihatKos.BusinessFacade
         {
             return new FormKosDA().GetAllFormKosByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan);
         }
+
+        #region Kos Telepon
+
+        public List<KosTeleponData> GetKosTeleponByFormID(Int64 Id)
+        {
+            return new FormKosDA().GetKosTeleponByFormID(Id);
+        }
+
+        #endregion 
     }
 }

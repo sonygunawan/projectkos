@@ -1,6 +1,7 @@
 ﻿using AjaxControlToolkit;
 using LihatKos.BusinessFacade;
 using LihatKos.Common;
+using LihatKos.Web.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,22 +43,17 @@ namespace LihatKosV1
                 rdlTipeKos.SelectedValue = "1";
                 rdlPet.SelectedValue = "0";
 
-                ddlMinimumBayarMonth.DataSource = new PaymentSystem().GetAllPaymentBulan();
-                ddlMinimumBayarMonth.DataTextField = "Nama";
-                ddlMinimumBayarMonth.DataValueField = "ID";
-                ddlMinimumBayarMonth.DataBind();
-                //using (var webClient = new System.Net.WebClient())
-                //{
+                //ddlMinimumBayarMonth.DataSource = new PaymentSystem().GetAllPaymentBulan();
+                //ddlMinimumBayarMonth.DataTextField = "Nama";
+                //ddlMinimumBayarMonth.DataValueField = "ID";
+                //ddlMinimumBayarMonth.DataBind();
 
-                //    var data = webClient.DownloadString("https://geoip-db.com/json");
-                //    JavaScriptSerializer jss = new JavaScriptSerializer();
-                //    var d = jss.Deserialize<dynamic>(data);
+                ViewState["CurrentTeleponList"] = null;
+                SetInitialTeleponRow();
 
-                //    ddlArea.SelectedItem.Text = d["city"];
-                //}
-
+                BindGridHarga();
             }
-            var test = chkFasilitas.ClientID;
+            
             ClientScript.RegisterStartupScript(GetType(), "checkboxBeautify", "$(\"input[type='checkbox'], input[type='radio'], select\").uniform();" +
                   "$('#" + chkFasilitas.ClientID + ").buttonset(); " +
                   "$('#" + chkLingkungan.ClientID + ").buttonset(); ", true);
@@ -75,11 +71,11 @@ namespace LihatKosV1
             Data.Latitude = Convert.ToDecimal(Convert.ToDecimal(hidLatitude.Value.Replace('.',',')).ToString("N6"));
             Data.Longitude = Convert.ToDecimal(Convert.ToDecimal(hidLongitude.Value.Replace('.', ',')).ToString("N6"));
             Data.NamaPemilik = txtPemilik.Text;
-            Data.KontakPemilik = txtTlpPemilik.Text;
-            Data.NamaPengelola = txtNamaPengelola.Text;
-            Data.KontakPengelola = txtTlpPengelola.Text;
-            Data.MinimumBayarMonth = Convert.ToInt32(ddlMinimumBayarMonth.SelectedValue);
-            Data.MinimumBayarDesc = txtMinimumBayarDesc.Text;
+            //Data.KontakPemilik = txtTlpPemilik.Text;
+            //Data.NamaPengelola = txtNamaPengelola.Text;
+            //Data.KontakPengelola = txtTlpPengelola.Text;
+            //Data.MinimumBayarMonth = Convert.ToInt32(ddlMinimumBayarMonth.SelectedValue);
+            //Data.MinimumBayarDesc = txtMinimumBayarDesc.Text;
             Data.JmlKamar = Convert.ToInt32(txtJmlKamar.Text);
             Data.LuasKamar = Convert.ToSingle(txtLuasKamar.Text.Replace(',','.'));
             Data.TipeKosID = Convert.ToInt32(rdlTipeKos.SelectedValue);
@@ -94,30 +90,18 @@ namespace LihatKosV1
             Data.NamaKabupaten = hidKabupaten.Value; // txtKabupaten.Text;
             Data.NamaKecamatan = hidKecamatan.Value; //txtKecamatan.Text;
             Data.NamaKelurahan = hidKelurahan.Value; //txtKelurahan.Text;
-            //1. 
-            List<KosHargaData> DetailsHarga = new List<KosHargaData>();
-            KosHargaData DetHarga = new KosHargaData();
-            DetHarga.Harga = (txtHarian.Text != "") ? Convert.ToDecimal(txtHarian.Text) : 0;
-            DetHarga.SatuanHargaID = 1;
-            DetailsHarga.Add(DetHarga);
 
-            //2.
-            DetHarga = new KosHargaData();
-            DetHarga.Harga = (txtMingguan.Text != "") ? Convert.ToDecimal(txtMingguan.Text) : 0;
-            DetHarga.SatuanHargaID = 2;
-            DetailsHarga.Add(DetHarga);
-
-            //3.
-            DetHarga = new KosHargaData();
-            DetHarga.Harga =  (txtBulanan.Text != "") ? Convert.ToDecimal(txtBulanan.Text) : 0;
-            DetHarga.SatuanHargaID = 3;
-            DetailsHarga.Add(DetHarga);
-
-            //4.
-            DetHarga = new KosHargaData();
-            DetHarga.Harga =  (txtTahunan.Text != "") ? Convert.ToDecimal(txtTahunan.Text) : 0;
-            DetHarga.SatuanHargaID = 4;
-            DetailsHarga.Add(DetHarga);
+            List<KosTeleponData> DetailsTelepon = new List<KosTeleponData>();
+            foreach (GridViewRow item in gvKosTelepon.Rows)
+            {
+                KosTeleponData DetTel = new KosTeleponData();
+                DropDownList ddlPhoneID = (DropDownList)item.Cells[2].FindControl("ddlPhoneID");
+                TextBox txtValue = (TextBox)item.Cells[1].FindControl("txtValue");
+                DetTel.OrderID = Convert.ToInt32(item.Cells[0].Text);
+                DetTel.PhoneID = Convert.ToInt32(ddlPhoneID.SelectedValue);
+                DetTel.Value = txtValue.Text;
+                DetailsTelepon.Add(DetTel);
+            }
 
             List<KosFasilitasData> DetailsFasi = new List<KosFasilitasData>();
             foreach(ListItem item in chkFasilitas.Items)
@@ -142,15 +126,276 @@ namespace LihatKosV1
                     DetLink.Status = 0;
                 DetailsLink.Add(DetLink);
             }
-
             //List
-            Data.KosHarga = DetailsHarga;
+            //Data.KosHarga = DetailsHarga;
             Data.KosFasilitas = DetailsFasi;
             Data.KosLingkungan = DetailsLink;
+            Data.KosTelepon = DetailsTelepon;
 
             var retFormID = new FormKosSystem().InsertFormKosLengkap(Data);
             Response.Redirect("/UploadFoto?ID=" + retFormID.ToString());
         }
+
+        #region Telepon
+        private void SetInitialTeleponRow ()
+        { 
+            //List<KosHargaData> DetailsHarga = new List<KosHargaData>();
+            var kosTels = new List<KosTeleponData>();
+            var data = new KosTeleponData();
+            data.FormKosID = 0;
+            data.OrderID = 1; data.PhoneID = 1;
+            data.Value = string.Empty;
+            data.Deskripsi = string.Empty;
+            kosTels.Add(data);
+
+            ViewState["CurrentTeleponList"] = kosTels;
+            gvKosTelepon.DataSource = kosTels;
+            gvKosTelepon.DataBind();
+        }
+        private void BindTeleponGrid()
+        {
+            var kosTels = ViewState["CurrentTeleponList"] as List<KosTeleponData>;
+            int rowCount = 1;
+            foreach (var data in kosTels)
+            {
+                data.OrderID = rowCount;
+                rowCount += 1;
+            }
+            gvKosTelepon.DataSource = ViewState["CurrentTeleponList"] as List<KosTeleponData>;
+            gvKosTelepon.DataBind();
+        }
+
+        private void AddNewRowToTeleponGrid()
+        {
+            int rowIndex = 0;
+            if (ViewState["CurrentTeleponList"] != null)
+            {
+                var kosTels = (List<KosTeleponData>)ViewState["CurrentTeleponList"];
+                if (kosTels.Count > 0)
+                {
+                    foreach (var Data in kosTels)
+                    {
+                        TextBox txtValue = (TextBox)gvKosTelepon.Rows[rowIndex].Cells[1].FindControl("txtValue");
+                        Data.Value = txtValue.Text;
+                        DropDownList ddlPhoneID = (DropDownList)gvKosTelepon.Rows[rowIndex].Cells[2].FindControl("ddlPhoneID");
+                        Data.PhoneID = Convert.ToInt32(ddlPhoneID.SelectedValue);
+                        rowIndex++;
+                    }
+                }
+                var countRow = kosTels.Count;
+                var data = new KosTeleponData();
+                data.FormKosID = 0;
+                data.OrderID = countRow + 1; //data.PhoneID = 2;
+                data.Value = string.Empty;
+                data.Deskripsi = string.Empty;
+                kosTels.Add(data);
+
+                ViewState["CurrentTeleponList"] = kosTels;
+                gvKosTelepon.DataSource = kosTels;
+                gvKosTelepon.DataBind();
+            }
+            else
+                ValidationError.Display("ViewState is null.");
+        }
+        private void SaveToViewState()
+        {
+            int rowIndex = 0;
+            if (ViewState["CurrentTeleponList"] != null)
+            {
+                var kosTels = (List<KosTeleponData>)ViewState["CurrentTeleponList"];
+                if (kosTels.Count > 0)
+                {
+                    foreach (var Data in kosTels)
+                    {
+                        TextBox txtValue = (TextBox)gvKosTelepon.Rows[rowIndex].Cells[1].FindControl("txtValue");
+                        Data.Value = txtValue.Text;
+                        DropDownList ddlPhoneID = (DropDownList)gvKosTelepon.Rows[rowIndex].Cells[2].FindControl("ddlPhoneID");
+                        Data.PhoneID = Convert.ToInt32(ddlPhoneID.SelectedValue);
+                        rowIndex++;
+                    }
+                }
+            }
+
+        }
+        private List<ListItem> LoadDropDownTelepon()
+        {
+
+            List<ListItem> items = new List<ListItem>();
+            items.Add(new ListItem("Ponsel", "1"));
+            items.Add(new ListItem("Rumah", "2"));
+            items.Add(new ListItem("Kantor", "3"));
+
+            return items;
+        }
+
+        private void LoadDropDownTelepon(ref DropDownList ddlPhone)
+        {
+            ddlPhone.Items.Add(new ListItem("Ponsel", "1"));
+            ddlPhone.Items.Add(new ListItem("Rumah", "2"));
+            ddlPhone.Items.Add(new ListItem("Kantor", "3"));
+            ddlPhone.SelectedIndex = 0;
+        }
+        protected void gvKosTelepon_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                KosTeleponData data = (KosTeleponData)e.Row.DataItem;
+                e.Row.Cells[0].Text = data.OrderID.ToString();
+                TextBox txtValue = (TextBox)e.Row.Cells[1].FindControl("txtValue");
+                txtValue.Text = data.Value;
+                DropDownList ddlPhoneID = (DropDownList)e.Row.Cells[2].FindControl("ddlPhoneID");
+                LoadDropDownTelepon(ref ddlPhoneID);
+                ddlPhoneID.SelectedValue = data.PhoneID.ToString();
+                
+            }
+        }
+
+        protected void imgBtnPlus_Click(object sender, ImageClickEventArgs e)
+        {
+            AddNewRowToTeleponGrid();
+        }
+        protected void gvKosTelepon_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            SaveToViewState();
+            Int32 idx = Convert.ToInt32(e.RowIndex);
+            var datas = (List<KosTeleponData>)ViewState["CurrentTeleponList"];
+            datas.RemoveAt(idx);
+            ViewState["CurrentTeleponList"] = datas;
+            BindTeleponGrid();
+        }
+        #endregion 
+
+        #region Harga
+        private void BindGridHarga()
+        {
+            var kosHarga = GenerateHarga();
+            gvKosHarga.DataSource = kosHarga;
+            gvKosHarga.DataBind();
+        }
+        private List<KosHargaData> GenerateHarga()
+        {
+            var KosHarga = new List<KosHargaData>();
+            //1.
+            var Data = new KosHargaData();
+            Data.SatuanHargaID = 1;
+            Data.isChecked = false;
+            Data.perText = "per Hari";
+            KosHarga.Add(Data);
+            //2. 
+            Data = new KosHargaData();
+            Data.SatuanHargaID = 2;
+            Data.isChecked = false;
+            Data.perText = "per Minggu";
+            KosHarga.Add(Data);
+            //3.
+            Data = new KosHargaData();
+            Data.SatuanHargaID = 3;
+            Data.isChecked = false;
+            Data.perText = "per Bulan";
+            KosHarga.Add(Data);
+            //4.
+            Data = new KosHargaData();
+            Data.SatuanHargaID = 4;
+            Data.isChecked = false;
+            Data.perText = "per Tahun";
+            KosHarga.Add(Data);
+
+            return KosHarga;
+            ////1. 
+            //List<KosHargaData> DetailsHarga = new List<KosHargaData>();
+            //KosHargaData DetHarga = new KosHargaData();
+            //DetHarga.Harga = (txtHarian.Text != "") ? Convert.ToDecimal(txtHarian.Text) : 0;
+            //DetHarga.SatuanHargaID = 1;
+            //DetailsHarga.Add(DetHarga);
+
+            ////2.
+            //DetHarga = new KosHargaData();
+            //DetHarga.Harga = (txtMingguan.Text != "") ? Convert.ToDecimal(txtMingguan.Text) : 0;
+            //DetHarga.SatuanHargaID = 2;
+            //DetailsHarga.Add(DetHarga);
+
+            ////3.
+            //DetHarga = new KosHargaData();
+            //DetHarga.Harga =  (txtBulanan.Text != "") ? Convert.ToDecimal(txtBulanan.Text) : 0;
+            //DetHarga.SatuanHargaID = 3;
+            //DetailsHarga.Add(DetHarga);
+
+            ////4.
+            //DetHarga = new KosHargaData();
+            //DetHarga.Harga =  (txtTahunan.Text != "") ? Convert.ToDecimal(txtTahunan.Text) : 0;
+            //DetHarga.SatuanHargaID = 4;
+            //DetailsHarga.Add(DetHarga);
+            
+        }
+        protected void gvKosHarga_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                KosHargaData data = (KosHargaData)e.Row.DataItem;
+                CheckBox chkIsChecked = (CheckBox)e.Row.Cells[0].FindControl("chkIsChecked");
+                TextBox txtHarga = (TextBox)e.Row.Cells[1].FindControl("txtHarga");
+                DropDownList ddlMinimumBayar = (DropDownList)e.Row.Cells[4].FindControl("ddlMinimumBayar");
+                //isChecked.Enabled = tr
+                LoadDropDownHarga(data.SatuanHargaID, ref ddlMinimumBayar);
+                ddlMinimumBayar.SelectedValue = data.MinimumBayar.ToString();
+
+                if (chkIsChecked.Checked == false)
+                {
+                    txtHarga.Text = "";
+                    txtHarga.Enabled = false;
+                    ddlMinimumBayar.SelectedValue = "1";
+                    ddlMinimumBayar.Enabled = false;
+                }
+
+            }
+        }
+
+        private void LoadDropDownHarga(int SatuanHargaID, ref DropDownList ddlMinimumBayar)
+        {
+            int countItems = 0;
+            switch (SatuanHargaID)
+            {
+                case 1:
+                    {
+                        countItems = 120;
+                    }
+                    break;
+                case 2:
+                    {
+                        countItems = 10;
+                    }
+                    break;
+                case 3:
+                    {
+                        countItems = 24;
+                    }
+                    break;
+                case 4:
+                    {
+                        countItems = 10;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            for (int i = 1; i<= countItems; i++)
+            {
+                ddlMinimumBayar.Items.Add(i.ToString());
+            }
+        }
+        //protected void gvKosHarga_RowEditing(object sender, GridViewEditEventArgs e)
+        //{
+        //    gvKosHarga.EditIndex = e.NewEditIndex;
+        //    BindGridHarga();
+        //}
+        //protected void gvKosHarga_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        //{
+        //    gvKosHarga.EditIndex = -1;
+        //    BindGridHarga();
+        //}
+        #endregion 
+
 
         //protected void fuFotoDepan_UploadStart(object sender, AjaxControlToolkit.AjaxFileUploadStartEventArgs e)
         //{

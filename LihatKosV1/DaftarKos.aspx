@@ -321,14 +321,86 @@
                                     <%--<input id="price" name="price" type="text" placeholder="Product price" class="form-control input-md" required="">--%>
                                 </div>
                             </div>
+                            <asp:UpdatePanel ID="UpdatePanel15" runat="server">
+                                <ContentTemplate>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="file">Telepon/HP Pemilik<a class="fa fa-info-circle">
                                   </a></label>
-                                <div class="col-md-9">
-                                    <asp:TextBox ID="txtTlpPemilik" runat="server" CssClass="form-control input-sm"></asp:TextBox>
+                                <div class="col-md-8">
+                                    <asp:GridView ID="gvKosTelepon" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="false" GridLines="None"
+                                        ShowFooter="false" ShowHeader="false" OnRowDataBound="gvKosTelepon_RowDataBound" OnRowDeleting="gvKosTelepon_RowDeleting">
+                                        <Columns>
+                                            <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-Width="10%" />
+                                            <asp:TemplateField HeaderText="Telepon" ItemStyle-Width="70%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtValue" runat="server" Width="100%" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Tipe Nomor" ItemStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:DropDownList ID="ddlPhoneID" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="" ItemStyle-Width="5%">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgBtnMinus" runat="server" ImageUrl="~/images/minus.png" OnClientClick="return confirm('Apakah Anda yakin ingin menghapus nomor telepon ini?');" CommandName="Delete" />
+                                                    <%--<asp:LinkButton ID="lbtnApprove" OnCommand="lbApprove_Command" runat="server" CssClass="btn btn-info btn-xs" OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Approve</asp:LinkButton>
+                                                    <asp:LinkButton ID="lbtnAbort" OnCommand="lbAbort_Command" runat="server" CssClass="btn btn-danger btn-xs"  OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Abort</asp:LinkButton>--%>
+                                                </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="Center" />
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                    
+                                    <%--<asp:TextBox ID="txtTlpPemilik" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
+                                </div>
+                                <div class="col-md-1" style="display: inline-block;vertical-align:middle;float:none;">
+                                    <asp:ImageButton ID="imgBtnPlus" runat="server" ImageUrl="~/images/plus.png" OnClick="imgBtnPlus_Click" />
+                                    &nbsp;
                                 </div>
                             </div>
+                                    </ContentTemplate>
+                            </asp:UpdatePanel>
+                            <asp:UpdatePanel ID="UpdatePanel16" runat="server">
+                                <ContentTemplate>
                             <div class="form-group">
+                                <label class="col-md-3 control-label">Harga Sewa<a class="fa fa-info-circle">
+                                  </a></label>
+                                <div class="col-md-9">
+                                    <asp:GridView ID="gvKosHarga" runat="server" GridLines="None" CssClass="table table-hover table-striped" AutoGenerateColumns="false" 
+                                        ShowHeader="false" ShowFooter="false" OnRowDataBound="gvKosHarga_RowDataBound" >
+                                        <Columns>
+                                            <asp:TemplateField HeaderText="isChecked" ItemStyle-Width="10%">
+                                                <ItemTemplate>
+                                                    <asp:CheckBox ID="chkIsChecked" runat="server" AutoPostBack="true"  />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <%--<asp:CheckBoxField DataField="isChecked" ItemStyle-Width="10%" />--%>
+                                            <asp:TemplateField HeaderText="Harga" ItemStyle-Width="30%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtHarga" runat="server" Width="100%" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="perText" ItemStyle-Width="20%" />
+                                            <asp:BoundField DataField="minimumBayarText" ItemStyle-Width="20%" />
+                                            <asp:TemplateField HeaderText="Minimum" ItemStyle-Width="20%">
+                                                <ItemTemplate>
+                                                    <asp:DropDownList ID="ddlMinimumBayar" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                    <%--<asp:TextBox ID="txtHarian" runat="server" 
+                                        CssClass="col-md-8"></asp:TextBox>
+                                    <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" Enabled="True" TargetControlID="txtHarian" FilterType="Numbers" FilterMode="ValidChars">
+                                    </cc1:FilteredTextBoxExtender>
+                                    <label class="col-md-4">per Hari</label>
+                                    --%>
+                                </div>
+                            </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Nama Pengelola<a class="fa fa-info-circle">
                                   </a></label>
                                 <div class="col-md-9">
@@ -341,8 +413,8 @@
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtTlpPengelola" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                 </div>
-                            </div>
-                            <div class="form-group">
+                            </div>--%>
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label">Harga Sewa<a class="fa fa-info-circle">
                                   </a></label>
                                 <div class="col-md-9">
@@ -351,8 +423,6 @@
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" Enabled="True" TargetControlID="txtHarian" FilterType="Numbers" FilterMode="ValidChars">
                                     </cc1:FilteredTextBoxExtender>
                                     <label class="col-md-4">per Hari</label>
-                                    <%--<label class="col-md-3">Mingguan</label>--%>
-                                    <%--<label class="col-md-3">Harian</label>--%>
                                     
                                 </div>
                             </div>
@@ -364,7 +434,6 @@
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" Enabled="True" TargetControlID="txtMingguan" FilterType="Numbers" FilterMode="ValidChars">
                                     </cc1:FilteredTextBoxExtender>
                                     <label class="col-md-4">per Minggu</label>
-                                    <%--<label class="col-md-3">Harian</label>--%>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -375,7 +444,6 @@
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server" Enabled="True" TargetControlID="txtBulanan" FilterType="Numbers" FilterMode="ValidChars">
                                     </cc1:FilteredTextBoxExtender>
                                     <label class="col-md-4">per Bulan</label>
-                                    <%--<label class="col-md-3">Harian</label>--%>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -387,8 +455,8 @@
                                     </cc1:FilteredTextBoxExtender>
                                     <label class="col-md-4">per Tahun</label>
                                 </div>
-                            </div>
-                            <div class="form-group">
+                            </div>--%>
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Minimum Bayar<a class="fa fa-info-circle">
                                   </a></label>
                                 <div class="col-md-9">
@@ -401,7 +469,7 @@
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtMinimumBayarDesc" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Jumlah Kamar<a class="fa fa-info-circle">
                                   </a></label>
