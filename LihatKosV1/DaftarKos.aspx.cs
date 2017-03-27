@@ -52,6 +52,10 @@ namespace LihatKosV1
                 SetInitialTeleponRow();
 
                 BindGridHarga();
+
+                ViewState["CurrentKamarList"] = null;
+                SetInitialKamarRow();
+
             }
             
             ClientScript.RegisterStartupScript(GetType(), "checkboxBeautify", "$(\"input[type='checkbox'], input[type='radio'], select\").uniform();" +
@@ -421,6 +425,68 @@ namespace LihatKosV1
             }
         }
 
+        //protected void gvKosHarga_RowEditing(object sender, GridViewEditEventArgs e)
+        //{
+        //    gvKosHarga.EditIndex = e.NewEditIndex;
+        //    BindGridHarga();
+        //}
+        //protected void gvKosHarga_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        //{
+        //    gvKosHarga.EditIndex = -1;
+        //    BindGridHarga();
+        //}
+        #endregion 
+
+        #region Kamar
+        private void SetInitialKamarRow()
+        {
+            //List<KosHargaData> DetailsHarga = new List<KosHargaData>();
+            var kosKams = new List<KosKamarData>();
+            var data = new KosKamarData();
+            data.FormKosID = 0;
+            data.OrderID = 1;
+            data.FasilitasKamar = 1;
+            //data.JmlKamar = 0;
+            //data.KamarKosong = 0;
+            data.Luas = "";
+            kosKams.Add(data);
+
+            ViewState["CurrentKamarList"] = kosKams;
+            gvKamarKos.DataSource = kosKams;
+            gvKamarKos.DataBind();
+        }
+        private void AddNewRowToKamarGrid()
+        {
+            int rowIndex = 0;
+            if (ViewState["CurrentKamarList"] != null)
+            {
+                var kosKams = (List<KosKamarData>)ViewState["CurrentKamarList"];
+                if (kosKams.Count > 0)
+                {
+                    foreach (var Data in kosKams)
+                    {
+                        TextBox txtLuas = (TextBox)gvKamarKos.Rows[rowIndex].Cells[1].FindControl("txtLuas");
+                        Data.Luas = txtLuas.Text;
+                        DropDownList ddlPhoneID = (DropDownList)gvKosTelepon.Rows[rowIndex].Cells[2].FindControl("ddlPhoneID");
+                        Data.PhoneID = Convert.ToInt32(ddlPhoneID.SelectedValue);
+                        rowIndex++;
+                    }
+                }
+                var countRow = kosKams.Count;
+                var data = new KosKamarData();
+                data.FormKosID = 0;
+                data.OrderID = countRow + 1; //data.PhoneID = 2;
+                data.Value = string.Empty;
+                data.Deskripsi = string.Empty;
+                kosKams.Add(data);
+
+                ViewState["CurrentKamarList"] = kosKams;
+                gvKamarKos.DataSource = kosKams;
+                gvKamarKos.DataBind();
+            }
+            else
+                ValidationError.Display("ViewState is null.");
+        }
         protected void gvKamarKos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -448,18 +514,8 @@ namespace LihatKosV1
             ViewState["CurrentKamarList"] = datas;
             BindKamarGrid();
         }
-        //protected void gvKosHarga_RowEditing(object sender, GridViewEditEventArgs e)
-        //{
-        //    gvKosHarga.EditIndex = e.NewEditIndex;
-        //    BindGridHarga();
-        //}
-        //protected void gvKosHarga_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        //{
-        //    gvKosHarga.EditIndex = -1;
-        //    BindGridHarga();
-        //}
-        #endregion 
 
+        #endregion
 
         //protected void fuFotoDepan_UploadStart(object sender, AjaxControlToolkit.AjaxFileUploadStartEventArgs e)
         //{
