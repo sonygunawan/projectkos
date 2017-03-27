@@ -466,18 +466,22 @@ namespace LihatKosV1
                     foreach (var Data in kosKams)
                     {
                         TextBox txtLuas = (TextBox)gvKamarKos.Rows[rowIndex].Cells[1].FindControl("txtLuas");
+                        RadioButtonList rblFasilitas = (RadioButtonList)gvKamarKos.Rows[rowIndex].Cells[2].FindControl("rblFasilitas");
+                        TextBox txtJmlKamar = (TextBox)gvKamarKos.Rows[rowIndex].Cells[3].FindControl("txtJmlKamar");
+                        TextBox txtKamarKosong = (TextBox)gvKamarKos.Rows[rowIndex].Cells[4].FindControl("txtKamarKosong");
+
                         Data.Luas = txtLuas.Text;
-                        DropDownList ddlPhoneID = (DropDownList)gvKosTelepon.Rows[rowIndex].Cells[2].FindControl("ddlPhoneID");
-                        Data.PhoneID = Convert.ToInt32(ddlPhoneID.SelectedValue);
+                        Data.FasilitasKamar = Convert.ToInt32(rblFasilitas.SelectedValue);
+                        Data.JmlKamar = Convert.ToInt32(txtJmlKamar.Text);
+                        Data.KamarKosong = Convert.ToInt32(txtKamarKosong.Text);
                         rowIndex++;
                     }
                 }
                 var countRow = kosKams.Count;
                 var data = new KosKamarData();
                 data.FormKosID = 0;
-                data.OrderID = countRow + 1; //data.PhoneID = 2;
-                data.Value = string.Empty;
-                data.Deskripsi = string.Empty;
+                data.OrderID = countRow + 1;
+                data.Luas = string.Empty;
                 kosKams.Add(data);
 
                 ViewState["CurrentKamarList"] = kosKams;
