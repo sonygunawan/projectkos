@@ -119,8 +119,9 @@ namespace LihatKos.DataAccess
                         KosHargaData Data = new KosHargaData();
                         Data.FormKosID = Convert.ToInt64(dataReader["FormKosID"].ToString());
                         Data.SatuanHargaID = Convert.ToInt32(dataReader["SatuanHargaID"].ToString());
-                        Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString()); ;
-                        Data.Deskripsi = dataReader["Deskripsi"].ToString(); ;
+                        Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
+                        Data.MinimumBayar = Convert.ToInt32(dataReader["MinimumBayar"]);
+                        Data.Deskripsi = dataReader["Deskripsi"].ToString(); 
 
                         formKos.Add(Data);
                     }
@@ -201,6 +202,7 @@ namespace LihatKos.DataAccess
                 db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, Data.FormKosID);
                 db.AddInParameter(dbCommand, "SatuanHargaID", DbType.Int32, Data.SatuanHargaID);
                 db.AddInParameter(dbCommand, "Harga", DbType.Decimal, Data.Harga);
+                db.AddInParameter(dbCommand, "MinimumBayar", DbType.Int32, Data.MinimumBayar);
                 db.AddInParameter(dbCommand, "Deskripsi", DbType.String, Data.Deskripsi);
                 db.ExecuteNonQuery(dbCommand);
                 
@@ -645,6 +647,65 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+
         #endregion
+
+        #region Kamar
+
+        public List<KosKamarData> GetKosKamarByFormID(Int64 Id)
+        {
+            try
+            {
+                List<KosKamarData> formKos = new List<KosKamarData>();
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetKosKamarByFormID");
+                db.AddInParameter(dbCommand, "FormID", DbType.Int64, Id);
+
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        KosKamarData Data = new KosKamarData();
+                        Data.FormKosID = Convert.ToInt64(dataReader["FormKosID"].ToString());
+                        Data.OrderID = Convert.ToInt32(dataReader["OrderID"].ToString());
+                        Data.Luas = dataReader["Luas"].ToString();
+                        Data.FasilitasKamar = Convert.ToInt32(dataReader["FasilitasKamar"].ToString());
+                        Data.JmlKamar = Convert.ToInt32(dataReader["JmlKamar"].ToString());
+                        Data.KamarKosong = Convert.ToInt32(dataReader["KamarKosong"].ToString());
+                        
+                        formKos.Add(Data);
+                    }
+                    dataReader.Close();
+                }
+                return formKos;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+        public bool InsertKosKamar(KosKamarData Data)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_InsertFormKosKamar");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, Data.FormKosID);
+                db.AddInParameter(dbCommand, "OrderID", DbType.Int32, Data.OrderID);
+                db.AddInParameter(dbCommand, "Luas", DbType.String, Data.Luas);
+                db.AddInParameter(dbCommand, "FasilitasKamar", DbType.Int32, Data.FasilitasKamar);
+                db.AddInParameter(dbCommand, "JmlKamar", DbType.Int32, Data.JmlKamar);
+                db.AddInParameter(dbCommand, "KamarKosong", DbType.Int32, Data.KamarKosong);
+                db.ExecuteNonQuery(dbCommand);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+        #endregion 
     }
 }

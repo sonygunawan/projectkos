@@ -77,5 +77,19 @@ namespace LihatKos.BusinessFacade
         }
 
         #endregion 
+        
+        #region Kamar
+
+        public List<KosKamarData> GetKosKamarByFormID(Int64 Id)
+        {
+            return new FormKosDA().GetKosKamarByFormID(Id);
+        }
+        public bool InsertKosKamar(KosKamarData Data)
+        {
+            return new FormKosDA().InsertKosKamar(Data);
+        }
+
+        #endregion 
+
     }
 }

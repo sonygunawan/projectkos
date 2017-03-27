@@ -40,10 +40,10 @@ namespace LihatKosV1
                 rdlTipeKos.SelectedValue = "1";
                 rdlPet.SelectedValue = "0";
 
-                ddlMinimumBayarMonth.DataSource = new PaymentSystem().GetAllPaymentBulan();
-                ddlMinimumBayarMonth.DataTextField = "Nama";
-                ddlMinimumBayarMonth.DataValueField = "ID";
-                ddlMinimumBayarMonth.DataBind();
+                //ddlMinimumBayarMonth.DataSource = new PaymentSystem().GetAllPaymentBulan();
+                //ddlMinimumBayarMonth.DataTextField = "Nama";
+                //ddlMinimumBayarMonth.DataValueField = "ID";
+                //ddlMinimumBayarMonth.DataBind();
                 //if (Request.QueryString["latLng"] != null)
                 //{
                 //    string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
@@ -68,8 +68,8 @@ namespace LihatKosV1
                 //txtTlpPemilik.Text = Data.KontakPemilik;
                 //txtNamaPengelola.Text = Data.NamaPengelola;
                 //txtTlpPengelola.Text = Data.KontakPengelola;
-                ddlMinimumBayarMonth.SelectedValue = Data.MinimumBayarMonth.ToString();
-                txtMinimumBayarDesc.Text = Data.MinimumBayarDesc;
+                //ddlMinimumBayarMonth.SelectedValue = Data.MinimumBayarMonth.ToString();
+                //txtMinimumBayarDesc.Text = Data.MinimumBayarDesc;
                 //txtJmlKamar.Text = Data.JmlKamar.ToString();
                 txtLuasKamar.Text = Data.LuasKamar.ToString().Replace('.', ',');
                 rdlTipeKos.SelectedValue = Data.TipeKosID.ToString();

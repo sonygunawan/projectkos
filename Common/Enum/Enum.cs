@@ -23,4 +23,9 @@ namespace LihatKos.Common.Enum
         Rumah = 2, 
         Kantor = 3
     }
+    public enum FasilitasKamar : int
+    {
+        KamarMandiDalam = 1,
+        KamarMandiLuar = 2
+    }
 }

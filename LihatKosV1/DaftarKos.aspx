@@ -344,8 +344,6 @@
                                             <asp:TemplateField HeaderText="" ItemStyle-Width="5%">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgBtnMinus" runat="server" ImageUrl="~/images/minus.png" OnClientClick="return confirm('Apakah Anda yakin ingin menghapus nomor telepon ini?');" CommandName="Delete" />
-                                                    <%--<asp:LinkButton ID="lbtnApprove" OnCommand="lbApprove_Command" runat="server" CssClass="btn btn-info btn-xs" OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Approve</asp:LinkButton>
-                                                    <asp:LinkButton ID="lbtnAbort" OnCommand="lbAbort_Command" runat="server" CssClass="btn btn-danger btn-xs"  OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Abort</asp:LinkButton>--%>
                                                 </ItemTemplate>
                                                 <ItemStyle HorizontalAlign="Center" />
                                             </asp:TemplateField>
@@ -361,18 +359,18 @@
                             </div>
                                     </ContentTemplate>
                             </asp:UpdatePanel>
-                            <asp:UpdatePanel ID="UpdatePanel16" runat="server">
-                                <ContentTemplate>
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Harga Sewa<a class="fa fa-info-circle">
                                   </a></label>
                                 <div class="col-md-9">
+                                    <asp:UpdatePanel ID="UpdatePanel16" runat="server">
+                                    <ContentTemplate>
                                     <asp:GridView ID="gvKosHarga" runat="server" GridLines="None" CssClass="table table-hover table-striped" AutoGenerateColumns="false" 
                                         ShowHeader="false" ShowFooter="false" OnRowDataBound="gvKosHarga_RowDataBound" >
                                         <Columns>
                                             <asp:TemplateField HeaderText="isChecked" ItemStyle-Width="10%">
                                                 <ItemTemplate>
-                                                    <asp:CheckBox ID="chkIsChecked" runat="server" AutoPostBack="true"  />
+                                                    <asp:CheckBox ID="chkIsChecked" runat="server" AutoPostBack="true" OnCheckedChanged="chkIsChecked_CheckedChanged"  />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <%--<asp:CheckBoxField DataField="isChecked" ItemStyle-Width="10%" />--%>
@@ -388,18 +386,63 @@
                                                     <asp:DropDownList ID="ddlMinimumBayar" runat="server" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+                                            <asp:BoundField DataField="SatuanHargaID" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
                                         </Columns>
                                     </asp:GridView>
-                                    <%--<asp:TextBox ID="txtHarian" runat="server" 
-                                        CssClass="col-md-8"></asp:TextBox>
-                                    <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" Enabled="True" TargetControlID="txtHarian" FilterType="Numbers" FilterMode="ValidChars">
-                                    </cc1:FilteredTextBoxExtender>
-                                    <label class="col-md-4">per Hari</label>
-                                    --%>
-                                </div>
-                            </div>
+                                    
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Kamar<a class="fa fa-info-circle">
+                                  </a></label>
+                                <div class="col-md-8">
+                                    <asp:UpdatePanel ID="UpdatePanel17" runat="server">
+                                        <ContentTemplate>
+                                            <asp:GridView ID="gvKamarKos" runat="server" GridLines="None" ShowHeader="true" ShowFooter="false"
+                                                CssClass="table table-hover table-striped" AutoGenerateColumns="false" OnRowDataBound="gvKamarKos_RowDataBound" OnRowDeleting="gvKamarKos_RowDeleting" >
+                                                <Columns>
+                                                    <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-Width="10%" />
+                                                    <asp:TemplateField HeaderText="Luas" ItemStyle-Width="20%">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="txtLuas" runat="server" Width="100%" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Fasilitas" ItemStyle-Width="25%">
+                                                        <ItemTemplate>
+                                                            <asp:RadioButtonList ID="rblFasilitas" runat="server">
+                                                                <asp:ListItem Value="1" Text="Kamar Mandi Dalam" />
+                                                                <asp:ListItem Value="2" Text="Kamar Mandi Luar" />
+                                                            </asp:RadioButtonList>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Jml Kmr" ItemStyle-Width="20%">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="txtJmlKamar" runat="server" Width="100%" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Kmr Kosong" ItemStyle-Width="20%">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="txtKamarKosong" runat="server" Width="100%" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="" ItemStyle-Width="5%">
+                                                        <ItemTemplate>
+                                                            <asp:ImageButton ID="imgBtnMinus" runat="server" ImageUrl="~/images/minus.png" OnClientClick="return confirm('Apakah Anda yakin ingin menghapus kamar ini?');" CommandName="Delete" />
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <div class="col-md-1" style="display: inline-block;vertical-align:middle;float:none;">
+                                    <asp:ImageButton ID="imgBtnKamarPlus" runat="server" ImageUrl="~/images/plus.png" OnClick="imgBtnKamarPlus_Click" />
+                                    &nbsp;
+                                </div>
+                            </div>
                             <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Nama Pengelola<a class="fa fa-info-circle">
                                   </a></label>
@@ -701,4 +744,9 @@
                 </div>
             </div>
         </div>
+     <script  type="text/javascript">
+         function show() {
+             document.write("<head id='Head1' runat='server' />");
+         }
+    </script>
 </asp:Content>

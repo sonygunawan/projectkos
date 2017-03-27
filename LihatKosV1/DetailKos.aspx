@@ -382,7 +382,7 @@
                                     <asp:TextBox ID="txtTlpPengelola" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                 </div>
                             </div>
-                            --%>
+                            
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Minimum Bayar</label>
                                 <div class="col-md-9">
@@ -394,7 +394,7 @@
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtMinimumBayarDesc" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2" Enabled="false"></asp:TextBox>
                                 </div>
-                            </div>
+                            </div>--%>
                             
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Luas Kamar</label>

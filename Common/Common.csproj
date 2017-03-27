@@ -46,6 +46,7 @@
     <Compile Include="FormKosData.cs" />
     <Compile Include="KosFasilitasData.cs" />
     <Compile Include="KosHargaData.cs" />
+    <Compile Include="KosKamarData.cs" />
     <Compile Include="KosLingkunganData.cs" />
     <Compile Include="KosTeleponData.cs" />
     <Compile Include="LingkunganData.cs" />

@@ -99,6 +99,7 @@
     <Content Include="images\favicon.png" />
     <Content Include="images\fileTooBig.gif" />
     <Content Include="images\logo.png" />
+    <Content Include="images\minus.png" />
     <Content Include="images\photos\1.jpg" />
     <Content Include="images\photos\10.jpg" />
     <Content Include="images\photos\11.jpg" />

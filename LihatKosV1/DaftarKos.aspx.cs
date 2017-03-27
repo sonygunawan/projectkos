@@ -127,7 +127,19 @@ namespace LihatKosV1
                 DetailsLink.Add(DetLink);
             }
             //List
-            //Data.KosHarga = DetailsHarga;
+            List<KosHargaData> DetailsHarga = new List<KosHargaData>();
+            foreach (GridViewRow item in gvKosHarga.Rows)
+            {
+                KosHargaData DetHrg = new KosHargaData();
+                var txtHarga = (TextBox)item.Cells[1].FindControl("txtHarga");
+                var ddlMinimumBayar = (DropDownList)item.Cells[4].FindControl("ddlMinimumBayar");
+                DetHrg.SatuanHargaID = Convert.ToInt32(item.Cells[5].Text);
+                DetHrg.Harga = (txtHarga.Text != "") ? Convert.ToDecimal(txtHarga.Text) : 0;
+                DetHrg.MinimumBayar = Convert.ToInt32(ddlMinimumBayar.SelectedValue);
+                DetailsHarga.Add(DetHrg);
+            }
+            //Add to List
+            Data.KosHarga = DetailsHarga;
             Data.KosFasilitas = DetailsFasi;
             Data.KosLingkungan = DetailsLink;
             Data.KosTelepon = DetailsTelepon;
@@ -345,6 +357,7 @@ namespace LihatKosV1
                     txtHarga.Enabled = false;
                     ddlMinimumBayar.SelectedValue = "1";
                     ddlMinimumBayar.Enabled = false;
+                    ddlMinimumBayar.BackColor = System.Drawing.ColorTranslator.FromHtml("#EBEBE4");
                 }
 
             }
@@ -383,6 +396,57 @@ namespace LihatKosV1
             {
                 ddlMinimumBayar.Items.Add(i.ToString());
             }
+        }
+
+        protected void chkIsChecked_CheckedChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = (GridViewRow)((Control)sender).NamingContainer;
+            var txtHarga = (TextBox)row.FindControl("txtHarga");
+            var ddlMinimumBayar = (DropDownList)row.FindControl("ddlMinimumBayar");
+                
+            var chkIsChecked = (CheckBox)row.FindControl("chkIsChecked");
+            if (chkIsChecked.Checked)
+            {
+                txtHarga.Enabled = true;
+                ddlMinimumBayar.Enabled = true;
+                ddlMinimumBayar.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFFFFF");
+            }
+            else
+            {
+                txtHarga.Enabled = false;
+                txtHarga.Text = "";
+                ddlMinimumBayar.Enabled = false;
+                ddlMinimumBayar.BackColor = System.Drawing.ColorTranslator.FromHtml("#EBEBE4");
+                ddlMinimumBayar.SelectedIndex = 0;
+            }
+        }
+
+        protected void gvKamarKos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                KosKamarData data = (KosKamarData)e.Row.DataItem;
+                TextBox txtLuas = (TextBox)e.Row.Cells[1].FindControl("txtLuas");
+                RadioButtonList rblFasilitas = (RadioButtonList)e.Row.Cells[2].FindControl("rblFasilitas");
+                TextBox txtJmlKamar = (TextBox)e.Row.Cells[3].FindControl("txtJmlKamar");
+                TextBox txtKamarKosong = (TextBox)e.Row.Cells[4].FindControl("txtKamarKosong");
+
+            }
+        }
+
+        protected void imgBtnKamarPlus_Click(object sender, ImageClickEventArgs e)
+        {
+            AddNewRowToKamarGrid();
+        }
+
+        protected void gvKamarKos_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            SaveKamarToViewState();
+            Int32 idx = Convert.ToInt32(e.RowIndex);
+            var datas = (List<KosKamarData>)ViewState["CurrentKamarList"];
+            datas.RemoveAt(idx);
+            ViewState["CurrentKamarList"] = datas;
+            BindKamarGrid();
         }
         //protected void gvKosHarga_RowEditing(object sender, GridViewEditEventArgs e)
         //{
