@@ -140,7 +140,6 @@ namespace LihatKosV1
         {
             try
             {
-                
                 //Directory.CreateDirectory()
                 // User can save file to File System, database or in session state
                 if (file.ContentType.Contains("jpg") || file.ContentType.Contains("gif")
