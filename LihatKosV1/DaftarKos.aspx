@@ -394,12 +394,12 @@
                                 </asp:UpdatePanel>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">Kamar<a class="fa fa-info-circle">
-                                  </a></label>
-                                <div class="col-md-8">
-                                    <asp:UpdatePanel ID="UpdatePanel17" runat="server">
-                                        <ContentTemplate>
+                            <asp:UpdatePanel ID="UpdatePanel17" runat="server">
+                                <ContentTemplate>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Kamar<a class="fa fa-info-circle">
+                                          </a></label>
+                                        <div class="col-md-8">
                                             <asp:GridView ID="gvKamarKos" runat="server" GridLines="None" ShowHeader="true" ShowFooter="false"
                                                 CssClass="table table-hover table-striped" AutoGenerateColumns="false" OnRowDataBound="gvKamarKos_RowDataBound" OnRowDeleting="gvKamarKos_RowDeleting" >
                                                 <Columns>
@@ -412,8 +412,8 @@
                                                     <asp:TemplateField HeaderText="Fasilitas" ItemStyle-Width="25%">
                                                         <ItemTemplate>
                                                             <asp:RadioButtonList ID="rblFasilitas" runat="server">
+                                                                <asp:ListItem Value="2" Text="Kamar Mandi Luar" Selected="True" />
                                                                 <asp:ListItem Value="1" Text="Kamar Mandi Dalam" />
-                                                                <asp:ListItem Value="2" Text="Kamar Mandi Luar" />
                                                             </asp:RadioButtonList>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
@@ -435,14 +435,14 @@
                                                     </asp:TemplateField>
                                                 </Columns>
                                             </asp:GridView>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </div>
-                                <div class="col-md-1" style="display: inline-block;vertical-align:middle;float:none;">
-                                    <asp:ImageButton ID="imgBtnKamarPlus" runat="server" ImageUrl="~/images/plus.png" OnClick="imgBtnKamarPlus_Click" />
-                                    &nbsp;
-                                </div>
-                            </div>
+                                        </div>
+                                        <div class="col-md-1" style="display: inline-block;vertical-align:middle;float:none;">
+                                            <asp:ImageButton ID="imgBtnKamarPlus" runat="server" ImageUrl="~/images/plus.png" OnClick="imgBtnKamarPlus_Click" />
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                             <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Nama Pengelola<a class="fa fa-info-circle">
                                   </a></label>
@@ -513,7 +513,7 @@
                                     <asp:TextBox ID="txtMinimumBayarDesc" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                 </div>
                             </div>--%>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Jumlah Kamar<a class="fa fa-info-circle">
                                   </a></label>
                                 <div class="col-md-9">
@@ -528,17 +528,16 @@
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtLuasKamar" runat="server" CssClass="form-control input-sm"></asp:TextBox>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Tipe Kos<a class="fa fa-info-circle">
                                   </a></label>
                                 <div class="col-md-9">
                                     <asp:RadioButtonList ID="rdlTipeKos" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow"
                                         CellSpacing="50" CellPadding="50" />
-                                    <%--<asp:DropDownList ID="ddlTipeKos" runat="server" CssClass="form-control ui-controlgroup-item" ></asp:DropDownList>--%>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Jumlah Kamar Kosong<a class="fa fa-info-circle">
                                   </a></label>
                                 <div class="col-md-9">
@@ -546,14 +545,11 @@
                                     <cc1:FilteredTextBoxExtender ID="FilteredTextBoxExtender6" runat="server" Enabled="True" TargetControlID="txtJmlKamarKosong" FilterType="Numbers" FilterMode="ValidChars">
                                     </cc1:FilteredTextBoxExtender>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Binatang Peliharaan<a class="fa fa-info-circle">
                                   </a></label>
                                 <div class="col-md-9">
-                                    <%--<asp:RadioButton ID="rdlPet1" runat="server" GroupName="Pet" CssClass="form-control radio-inline" Text="Boleh" />
-                                    <asp:RadioButton ID="rdlPet2" runat="server" GroupName="Pet" CssClass="form-control radio-inline" Text="Tidak Boleh" />--%>
-                                    
                                     <asp:RadioButtonList ID="rdlPet" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
                                         <asp:ListItem Value="1" Text="Boleh&nbsp;&nbsp;&nbsp;&nbsp;"></asp:ListItem>
                                         <asp:ListItem Value="0" Text="Tidak Boleh"></asp:ListItem>
@@ -744,9 +740,5 @@
                 </div>
             </div>
         </div>
-     <script  type="text/javascript">
-         function show() {
-             document.write("<head id='Head1' runat='server' />");
-         }
-    </script>
+     
 </asp:Content>

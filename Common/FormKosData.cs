@@ -47,6 +47,7 @@ namespace LihatKos.Common
         public List<KosFasilitasData> KosFasilitas { get; set; }
         public List<KosLingkunganData> KosLingkungan { get; set; }
         public List<KosTeleponData> KosTelepon { get; set; }
+        public List<KosKamarData> KosKamar { get; set; }
         public string NamaProvinsi { get; set; }
 
         public string NamaKabupaten { get; set; }
@@ -57,5 +58,7 @@ namespace LihatKos.Common
 
         public decimal MinimumPrice { get; set; }
         public decimal MaximumPrice { get; set; }
+
+        
     }
 }

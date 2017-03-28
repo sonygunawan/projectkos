@@ -274,33 +274,6 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.ImageButton imgBtnKamarPlus;
         
         /// <summary>
-        /// txtJmlKamar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtJmlKamar;
-        
-        /// <summary>
-        /// FilteredTextBoxExtender5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender5;
-        
-        /// <summary>
-        /// txtLuasKamar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLuasKamar;
-        
-        /// <summary>
         /// rdlTipeKos control.
         /// </summary>
         /// <remarks>
@@ -308,24 +281,6 @@ namespace LihatKosV1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdlTipeKos;
-        
-        /// <summary>
-        /// txtJmlKamarKosong control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtJmlKamarKosong;
-        
-        /// <summary>
-        /// FilteredTextBoxExtender6 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender FilteredTextBoxExtender6;
         
         /// <summary>
         /// rdlPet control.
@@ -371,14 +326,5 @@ namespace LihatKosV1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
-        
-        /// <summary>
-        /// Head1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
     }
 }

@@ -80,10 +80,10 @@ namespace LihatKosV1
             //Data.KontakPengelola = txtTlpPengelola.Text;
             //Data.MinimumBayarMonth = Convert.ToInt32(ddlMinimumBayarMonth.SelectedValue);
             //Data.MinimumBayarDesc = txtMinimumBayarDesc.Text;
-            Data.JmlKamar = Convert.ToInt32(txtJmlKamar.Text);
-            Data.LuasKamar = Convert.ToSingle(txtLuasKamar.Text.Replace(',','.'));
+            //Data.JmlKamar = Convert.ToInt32(txtJmlKamar.Text);
+            //Data.LuasKamar = Convert.ToSingle(txtLuasKamar.Text.Replace(',','.'));
             Data.TipeKosID = Convert.ToInt32(rdlTipeKos.SelectedValue);
-            Data.JmlKamarKosong = Convert.ToInt32(txtJmlKamarKosong.Text);
+            //Data.JmlKamarKosong = Convert.ToInt32(txtJmlKamarKosong.Text);
             Data.PetID = (rdlPet.SelectedValue == "1") ? true : false;
             Data.Keterangan = txtKeteranganLain.Text;
 
@@ -142,18 +142,34 @@ namespace LihatKosV1
                 DetHrg.MinimumBayar = Convert.ToInt32(ddlMinimumBayar.SelectedValue);
                 DetailsHarga.Add(DetHrg);
             }
+            //List Kamar
+            List<KosKamarData> DetailsKamar = new List<KosKamarData>();
+            foreach (GridViewRow item in gvKamarKos.Rows)
+            {
+                KosKamarData DetKam = new KosKamarData();
+                var txtLuas = (TextBox)item.Cells[1].FindControl("txtLuas");
+                var rblFasilitas = (RadioButtonList)item.Cells[2].FindControl("rblFasilitas");
+                var txtJmlKamar = (TextBox)item.Cells[3].FindControl("txtJmlKamar");
+                var txtKamarKosong = (TextBox)item.Cells[4].FindControl("txtKamarKosong");
+                DetKam.OrderID = Convert.ToInt32(item.Cells[0].Text);
+                DetKam.Luas = txtLuas.Text;
+                DetKam.FasilitasKamar = Convert.ToInt32(rblFasilitas.SelectedValue);
+                DetKam.JmlKamar = Convert.ToInt32(txtJmlKamar.Text == "" ? "0" : txtJmlKamar.Text);
+                DetKam.KamarKosong = Convert.ToInt32(txtKamarKosong.Text == "" ? "0" : txtKamarKosong.Text);
+                DetailsKamar.Add(DetKam);
+            }
             //Add to List
             Data.KosHarga = DetailsHarga;
             Data.KosFasilitas = DetailsFasi;
             Data.KosLingkungan = DetailsLink;
             Data.KosTelepon = DetailsTelepon;
-
+            Data.KosKamar = DetailsKamar;
             var retFormID = new FormKosSystem().InsertFormKosLengkap(Data);
             Response.Redirect("/UploadFoto?ID=" + retFormID.ToString());
         }
 
         #region Telepon
-        private void SetInitialTeleponRow ()
+        private void SetInitialTeleponRow()
         { 
             //List<KosHargaData> DetailsHarga = new List<KosHargaData>();
             var kosTels = new List<KosTeleponData>();
@@ -177,7 +193,7 @@ namespace LihatKosV1
                 data.OrderID = rowCount;
                 rowCount += 1;
             }
-            gvKosTelepon.DataSource = ViewState["CurrentTeleponList"] as List<KosTeleponData>;
+            gvKosTelepon.DataSource = kosTels; //ViewState["CurrentTeleponList"] as List<KosTeleponData>;
             gvKosTelepon.DataBind();
         }
 
@@ -445,7 +461,7 @@ namespace LihatKosV1
             var data = new KosKamarData();
             data.FormKosID = 0;
             data.OrderID = 1;
-            data.FasilitasKamar = 1;
+            data.FasilitasKamar = 2;
             //data.JmlKamar = 0;
             //data.KamarKosong = 0;
             data.Luas = "";
@@ -472,8 +488,8 @@ namespace LihatKosV1
 
                         Data.Luas = txtLuas.Text;
                         Data.FasilitasKamar = Convert.ToInt32(rblFasilitas.SelectedValue);
-                        Data.JmlKamar = Convert.ToInt32(txtJmlKamar.Text);
-                        Data.KamarKosong = Convert.ToInt32(txtKamarKosong.Text);
+                        Data.JmlKamar = Convert.ToInt32(txtJmlKamar.Text == "" ? "0" : txtJmlKamar.Text);
+                        Data.KamarKosong = Convert.ToInt32(txtKamarKosong.Text == "" ? "0" : txtKamarKosong.Text);
                         rowIndex++;
                     }
                 }
@@ -481,6 +497,7 @@ namespace LihatKosV1
                 var data = new KosKamarData();
                 data.FormKosID = 0;
                 data.OrderID = countRow + 1;
+                data.FasilitasKamar = 2;
                 data.Luas = string.Empty;
                 kosKams.Add(data);
 
@@ -491,6 +508,44 @@ namespace LihatKosV1
             else
                 ValidationError.Display("ViewState is null.");
         }
+        private void SaveKamarToViewState()
+        {
+            int rowIndex = 0;
+            if (ViewState["CurrentKamarList"] != null)
+            {
+                var kosKams = (List<KosKamarData>)ViewState["CurrentKamarList"];
+                if (kosKams.Count > 0)
+                {
+                    foreach (var Data in kosKams)
+                    {
+                        TextBox txtLuas = (TextBox)gvKamarKos.Rows[rowIndex].Cells[1].FindControl("txtLuas");
+                        RadioButtonList rblFasilitas = (RadioButtonList)gvKamarKos.Rows[rowIndex].Cells[2].FindControl("rblFasilitas");
+                        TextBox txtJmlKamar = (TextBox)gvKamarKos.Rows[rowIndex].Cells[3].FindControl("txtJmlKamar");
+                        TextBox txtKamarKosong = (TextBox)gvKamarKos.Rows[rowIndex].Cells[4].FindControl("txtKamarKosong");
+
+                        Data.Luas = txtLuas.Text;
+                        Data.FasilitasKamar = Convert.ToInt32(rblFasilitas.SelectedValue);
+                        Data.JmlKamar = Convert.ToInt32(txtJmlKamar.Text == "" ? "0" : txtJmlKamar.Text);
+                        Data.KamarKosong = Convert.ToInt32(txtKamarKosong.Text == "" ? "0" : txtKamarKosong.Text);
+                        rowIndex++;
+                    }
+                }
+            }
+
+        }
+        private void BindKamarGrid()
+        {
+            var kosKams = ViewState["CurrentKamarList"] as List<KosKamarData>;
+            int rowCount = 1;
+            foreach (var data in kosKams)
+            {
+                data.OrderID = rowCount;
+                rowCount += 1;
+            }
+            gvKamarKos.DataSource = kosKams; //ViewState["CurrentKamarList"] as List<KosKamarData>;
+            gvKamarKos.DataBind();
+        }
+
         protected void gvKamarKos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -500,7 +555,10 @@ namespace LihatKosV1
                 RadioButtonList rblFasilitas = (RadioButtonList)e.Row.Cells[2].FindControl("rblFasilitas");
                 TextBox txtJmlKamar = (TextBox)e.Row.Cells[3].FindControl("txtJmlKamar");
                 TextBox txtKamarKosong = (TextBox)e.Row.Cells[4].FindControl("txtKamarKosong");
-
+                txtLuas.Text = data.Luas;
+                rblFasilitas.SelectedValue = data.FasilitasKamar.ToString();
+                txtJmlKamar.Text = data.JmlKamar.ToString();
+                txtKamarKosong.Text = data.KamarKosong.ToString();
             }
         }
 

@@ -202,13 +202,13 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.GridView gvKosTelepon;
         
         /// <summary>
-        /// txtLuasKamar control.
+        /// gvKamarKos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLuasKamar;
+        protected global::System.Web.UI.WebControls.GridView gvKamarKos;
         
         /// <summary>
         /// rdlTipeKos control.

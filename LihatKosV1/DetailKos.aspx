@@ -370,6 +370,40 @@
                                     &nbsp;
                                 </div>--%>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Kamar</label>
+                                <div class="col-md-8">
+                                    <asp:GridView ID="gvKamarKos" runat="server" GridLines="None" ShowHeader="true" ShowFooter="false"
+                                        CssClass="table table-hover table-striped" AutoGenerateColumns="false" OnRowDataBound="gvKamarKos_RowDataBound" >
+                                        <Columns>
+                                            <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-Width="10%" />
+                                            <asp:TemplateField HeaderText="Luas" ItemStyle-Width="20%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtLuas" runat="server" Width="100%" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Fasilitas" ItemStyle-Width="25%">
+                                                <ItemTemplate>
+                                                    <asp:RadioButtonList ID="rblFasilitas" runat="server" Enabled="false">
+                                                        <asp:ListItem Value="2" Text="Kamar Mandi Luar" Selected="True" />
+                                                        <asp:ListItem Value="1" Text="Kamar Mandi Dalam" />
+                                                    </asp:RadioButtonList>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Jml Kmr" ItemStyle-Width="20%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtJmlKamar" runat="server" Width="100%" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Kmr Kosong" ItemStyle-Width="20%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtKamarKosong" runat="server" Width="100%" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
+                            </div>
                             <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Nama Pengelola</label>
                                 <div class="col-md-9">
@@ -394,29 +428,25 @@
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtMinimumBayarDesc" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2" Enabled="false"></asp:TextBox>
                                 </div>
-                            </div>--%>
+                            </div>
                             
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Luas Kamar</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtLuasKamar" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Tipe Kos</label>
                                 <div class="col-md-9">
                                     <asp:RadioButtonList ID="rdlTipeKos" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow"
                                         CellSpacing="50" CellPadding="50" Enabled="false" />
-                                    <%--<asp:DropDownList ID="ddlTipeKos" runat="server" CssClass="form-control ui-controlgroup-item" ></asp:DropDownList>--%>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Binatang Peliharaan</label>
                                 <div class="col-md-9">
-                                    <%--<asp:RadioButton ID="rdlPet1" runat="server" GroupName="Pet" CssClass="form-control radio-inline" Text="Boleh" />
-                                    <asp:RadioButton ID="rdlPet2" runat="server" GroupName="Pet" CssClass="form-control radio-inline" Text="Tidak Boleh" />--%>
-                                    
                                     <asp:RadioButtonList ID="rdlPet" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" Enabled="false">
                                         <asp:ListItem Value="1" Text="Boleh&nbsp;&nbsp;&nbsp;&nbsp;"></asp:ListItem>
                                         <asp:ListItem Value="0" Text="Tidak Boleh"></asp:ListItem>
@@ -430,7 +460,6 @@
                                     <asp:CheckBoxList ID="chkFasilitas" runat="server" ClientIDMode="Static" 
                                         RepeatDirection="Horizontal" RepeatLayout="Table" CellSpacing="10" CellPadding="10" CssClass="chkMargin" Enabled="false">
                                     </asp:CheckBoxList>
-                                    <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -438,7 +467,6 @@
                                 <div class="col-md-9 ui-controlgroup-item">
                                     <asp:CheckBoxList ID="chkLingkungan" runat="server" ClientIDMode="Static" 
                                         RepeatDirection="Horizontal" RepeatLayout="Flow" CellSpacing="10" CellPadding="10" CssClass="chkMargin" Enabled="false"></asp:CheckBoxList>
-                                    <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -451,53 +479,9 @@
                                 <label class="col-md-3 control-label" for="submit"></label>
                                 <div class="col-md-9">
                                     <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Submit" OnClick="btnSubmit_Click" Visible="false" />
-                                    <%--<button id="submit" name="submit" class="btn btn-primary">Insert</button>--%>
                                 </div>
                             </div>
-                            <!-- 
-                                <fieldset>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="title">Title</label>
-                        <div class="col-md-9">
-                            <input id="title" name="title" type="text" placeholder="Product name" class="form-control input-md" required="">
- 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="textarea">Description</label>
-                        <div class="col-md-9">
-                            <textarea class="form-control" id="textarea" name="description" placeholder="Description" ></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="price">Price</label>
-                        <div class="col-md-9">
-                            <input id="price" name="price" type="text" placeholder="Product price" class="form-control input-md" required="">
- 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="image">Image URL</label>
-                        <div class="col-md-9">
-                            <input id="image" name="image" type="text" placeholder="Image URL" class="form-control input-md" >
- 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="file">File</label>
-                        <div class="col-md-9">
-                            <input id="file" name="file" class="input-file" type="file">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="submit"></label>
-                        <div class="col-md-9">
-                            <button id="submit" name="submit" class="btn btn-primary">Insert</button>
-                        </div>
-                    </div>
- 
-                </fieldset>
-                                -->
+                            
                         </div>
                     </div>
 

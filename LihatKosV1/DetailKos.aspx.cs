@@ -40,17 +40,6 @@ namespace LihatKosV1
                 rdlTipeKos.SelectedValue = "1";
                 rdlPet.SelectedValue = "0";
 
-                //ddlMinimumBayarMonth.DataSource = new PaymentSystem().GetAllPaymentBulan();
-                //ddlMinimumBayarMonth.DataTextField = "Nama";
-                //ddlMinimumBayarMonth.DataValueField = "ID";
-                //ddlMinimumBayarMonth.DataBind();
-                //if (Request.QueryString["latLng"] != null)
-                //{
-                //    string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
-                //}
-                //FormKosData Data = new FormKosData();
-                //Data.Kode = new FormKosSystem().GetMaxFormKos();
-                //Data.Nama = txtNama.Text;
                 if (!String.IsNullOrEmpty(Request.QueryString["ID"]))
                 {
                     ID = Convert.ToInt64(Request.QueryString["ID"]);
@@ -71,7 +60,7 @@ namespace LihatKosV1
                 //ddlMinimumBayarMonth.SelectedValue = Data.MinimumBayarMonth.ToString();
                 //txtMinimumBayarDesc.Text = Data.MinimumBayarDesc;
                 //txtJmlKamar.Text = Data.JmlKamar.ToString();
-                txtLuasKamar.Text = Data.LuasKamar.ToString().Replace('.', ',');
+                //txtLuasKamar.Text = Data.LuasKamar.ToString().Replace('.', ',');
                 rdlTipeKos.SelectedValue = Data.TipeKosID.ToString();
                 //txtJmlKamarKosong.Text = Data.JmlKamarKosong.ToString();
                 rdlPet.SelectedValue = (Data.PetID == true) ? "1" : "0";
@@ -105,6 +94,8 @@ namespace LihatKosV1
                 Data.KosFasilitas = new FormKosSystem().GetKosFasilitasByFormID(ID);
                 Data.KosLingkungan = new FormKosSystem().GetKosLingkunganByFormID(ID);
                 Data.KosTelepon = new FormKosSystem().GetKosTeleponByFormID(ID);
+                Data.KosKamar = new FormKosSystem().GetKosKamarByFormID(ID);
+
                 chkFasilitas.DataSource = Data.KosFasilitas;
                 chkFasilitas.DataValueField = "FormKosFasilitasID";
                 chkFasilitas.DataTextField = "NamaFasilitas";
@@ -131,6 +122,9 @@ namespace LihatKosV1
                 //KosTelepon 
                 gvKosTelepon.DataSource = Data.KosTelepon;
                 gvKosTelepon.DataBind();
+                //KosKamar
+                gvKamarKos.DataSource = Data.KosKamar;
+                gvKamarKos.DataBind();
 
                 if (Session["UserID"] != null)
                 {
@@ -227,6 +221,22 @@ namespace LihatKosV1
                 ////lblHargaBulanan.Text = Data.Harga.ToString("N2");
                 //lblKeterangan.Text = Data.Keterangan;
                 //hlDetailLink.NavigateUrl = "../../DetailKos?id=" + Data.ID.ToString();
+            }
+        }
+
+        protected void gvKamarKos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                KosKamarData data = (KosKamarData)e.Row.DataItem;
+                TextBox txtLuas = (TextBox)e.Row.Cells[1].FindControl("txtLuas");
+                RadioButtonList rblFasilitas = (RadioButtonList)e.Row.Cells[2].FindControl("rblFasilitas");
+                TextBox txtJmlKamar = (TextBox)e.Row.Cells[3].FindControl("txtJmlKamar");
+                TextBox txtKamarKosong = (TextBox)e.Row.Cells[4].FindControl("txtKamarKosong");
+                txtLuas.Text = data.Luas;
+                rblFasilitas.SelectedValue = data.FasilitasKamar.ToString();
+                txtJmlKamar.Text = data.JmlKamar.ToString();
+                txtKamarKosong.Text = data.KamarKosong.ToString();
             }
         }
     }

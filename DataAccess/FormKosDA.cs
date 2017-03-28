@@ -301,6 +301,14 @@ namespace LihatKos.DataAccess
                         if (retVal == false)
                             throw new DataAccessException("error InsertKosTelepon. ");
                     }
+                    foreach (KosKamarData detail in Data.KosKamar)
+                    {
+                        detail.FormKosID = FormID;
+                        retVal = InsertKosKamar(detail);
+
+                        if (retVal == false)
+                            throw new DataAccessException("error InsertKosKamar. ");
+                    }
                 }
                 catch 
                 {

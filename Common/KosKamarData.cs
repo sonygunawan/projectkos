@@ -5,6 +5,7 @@ using System.Text;
 
 namespace LihatKos.Common
 {
+    [Serializable]
     public class KosKamarData
     {
         public Int64 FormKosID { get; set; }
