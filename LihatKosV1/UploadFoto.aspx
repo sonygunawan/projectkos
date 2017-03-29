@@ -31,8 +31,9 @@
                                 </div>
                             </div>
                             
-                            <asp:UpdatePanel ID="UpdatePanel21" runat="server">
-                                <ContentTemplate>
+                            
+                            <asp:UpdatePanel ID="UpdatePanelFoto" runat="server" OnLoad="UpdatePanelFoto_Load">
+                            <ContentTemplate>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Upload Foto <br />(Pastikan mencantumkan tanda default pada salah satu foto.)</label>
                                 <div class="col-md-9">
@@ -46,7 +47,7 @@
 
                                         function onClientDepanUploadComplete(sender, e) {
                                             if (sender._filesInQueue[sender._filesInQueue.length - 1]._isUploaded)
-                                                __doPostBack('UploadPanel', '');
+                                                __doPostBack('UpdatePanelFoto', '');
                                             //onImageValidated1("TRUE", e);
                                         }
 
@@ -90,25 +91,25 @@
                                         }
 
                                         function onClientDepanUploadStart(sender, e) {
-                                            //document.getElementById('uploadCompleteInfo').innerHTML = 'Please wait while uploading ' + e.get_filesInQueue() + ' files...';
+                                            document.getElementById('uploadCompleteInfo').innerHTML = 'Please wait while uploading ' + e.get_filesInQueue() + ' files...';
 
                                         }
 
                                         function onClientDepanUploadError(sender, e) {
-                                            //document.getElementById('uploadCompleteInfo').innerHTML = "There was an error while uploading.";
+                                            document.getElementById('uploadCompleteInfo').innerHTML = "There was an error while uploading.";
                                         }
 
                                         function onClientDepanUploadCompleteAll(sender, e) {
-                                            //var args = JSON.parse(e.get_serverArguments()),
-                                            //    unit = args.duration > 60 ? 'minutes' : 'seconds',
-                                            //    duration = (args.duration / (args.duration > 60 ? 60 : 1)).toFixed(2);
+                                            var args = JSON.parse(e.get_serverArguments()),
+                                                unit = args.duration > 60 ? 'minutes' : 'seconds',
+                                                duration = (args.duration / (args.duration > 60 ? 60 : 1)).toFixed(2);
 
-                                            //var info = 'At <b>' + args.time + '</b> server time <b>'
-                                            //    + e.get_filesUploaded() + '</b> of <b>' + e.get_filesInQueue()
-                                            //    + '</b> files were uploaded with status code <b>"' + e.get_reason()
-                                            //    + '"</b> in <b>' + duration + ' ' + unit + '</b>';
+                                            var info = 'At <b>' + args.time + '</b> server time <b>'
+                                                + e.get_filesUploaded() + '</b> of <b>' + e.get_filesInQueue()
+                                                + '</b> files were uploaded with status code <b>"' + e.get_reason()
+                                                + '"</b> in <b>' + duration + ' ' + unit + '</b>';
 
-                                            //document.getElementById('uploadCompleteInfo').innerHTML = info;
+                                            document.getElementById('uploadCompleteInfo').innerHTML = info;
                                         }
                                     </script>
                                     <asp:Label runat="server" ID="throbberDepan" Style="display: none;"><img align="absmiddle" alt="" src="images/uploading.gif" /></asp:Label>
@@ -126,6 +127,7 @@
                                         <h4>list of uploaded files:</h4>
                                         <hr />
                                         <div style="border:0.5px dotted black;">
+                                            <%--<div id="fileList"></div>--%>
                                             <asp:GridView ID="gvFileList" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="false"
                                                  ShowHeader="false" ShowFooter="false" GridLines="None" OnRowDataBound="gvFileList_RowDataBound" OnRowCommand="gvFileList_RowCommand">
                                                 <Columns>
@@ -147,12 +149,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                                </ContentTemplate>
-                                <Triggers>
-                                    <asp:PostBackTrigger ControlID="gvFileList" />
-                                </Triggers>
-                            </asp:UpdatePanel>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                             <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Foto Bagian Dalam</label>
                                 <div class="col-md-9">

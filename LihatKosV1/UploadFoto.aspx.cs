@@ -24,6 +24,7 @@ namespace LihatKosV1
         private Int64 ID = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(gvFileList);
             if (!Page.IsPostBack)
             {
                 if (!String.IsNullOrEmpty(Request.QueryString["ID"]))
@@ -36,9 +37,18 @@ namespace LihatKosV1
 
                 
             }
+            //BindFromBankFiles();
             if (!Page.IsPostBack && !Page.IsCallback && !fuFotoDepan.IsInFileUploadPostBack)
             {
-                BindFromBankFiles();
+                //BindFromBankFiles();
+                if (!String.IsNullOrEmpty(Request.QueryString["ID"]))
+                {
+                    ID = Convert.ToInt64(Request.QueryString["ID"]);
+                }
+                FormKosData Data = new FormKosSystem().GetAllFormKos(ID)[0];
+                lblNama.Text = Data.Nama;
+                lblAlamat.Text = Data.Alamat;
+
             }
             if (Session["UserID"] == null)
             {
@@ -188,10 +198,11 @@ namespace LihatKosV1
                         fileName = "new" + imgTmp.Width.ToString() + "x" + imgTmp.Height.ToString() + ".jpg";
                         imgTmp.Save(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder) + "/" + fileName, ImageFormat.Jpeg);
 
-                        BindFromBankFiles();
                         //file.DeleteTemporaryData();
                     }
                 }
+
+                //BindFromBankFiles();
                 // In a real app, you would call SaveAs() to save the uploaded file somewhere
                 //fuFotoDepan.SaveAs(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/Kos-" + ID.ToString() + "/" + file.FileName));
                 //fuFotoDepan.SaveAs(MapPath("~/UploadedImage/") + file.FileName);
@@ -292,6 +303,11 @@ namespace LihatKosV1
             {
 
             }
+        }
+
+        protected void UpdatePanelFoto_Load(object sender, EventArgs e)
+        {
+            BindFromBankFiles();
         }
     }
 }
