@@ -3,6 +3,7 @@ using LihatKos.BusinessFacade;
 using LihatKos.Common;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,12 @@ using System.Web.UI.WebControls;
 
 namespace LihatKosV1
 {
+    public class ImageData
+    {
+        public string FilePath { get; set; }
+        public string Status { get; set; }
+
+    }
     public partial class UploadFoto : System.Web.UI.Page
     {
         private Int64 ID = 0;
@@ -26,6 +33,16 @@ namespace LihatKosV1
                 FormKosData Data = new FormKosSystem().GetAllFormKos(ID)[0];
                 lblNama.Text = Data.Nama;
                 lblAlamat.Text = Data.Alamat;
+
+                
+            }
+            if (!Page.IsPostBack && !Page.IsCallback && !fuFotoDepan.IsInFileUploadPostBack)
+            {
+                BindFromBankFiles();
+            }
+            if (Session["UserID"] == null)
+            {
+                Response.Redirect("/Login");
             }
             //|| Request.QueryString["preview"] != "2"|| string.IsNullOrEmpty(Request.QueryString["fileId2"])
             if (Request.QueryString["preview"] != "1"  || string.IsNullOrEmpty(Request.QueryString["fileId"]))
@@ -45,6 +62,44 @@ namespace LihatKosV1
             Response.ContentType = fileContentType;
             Response.BinaryWrite(fileContents);
             Response.End();
+        }
+        private void BindFromBankFiles()
+        {
+            string StrUserID = "User-" + Session["UserID"].ToString();
+            string StrKosID = "Kos-" + ID.ToString();
+            if (!Directory.Exists(MapPath("~/UploadedImage/" + StrUserID)))
+            {
+                Directory.CreateDirectory(MapPath("~/UploadedImage/" + StrUserID)); // +"/Kos-1/"));
+            }
+            if (!Directory.Exists(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID)))
+            {
+                Directory.CreateDirectory(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID)); // +"/Kos-1/"));
+            }
+            string[] folderList = Directory.GetDirectories(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID));
+            var imgList = new List<ImageData>();
+            foreach (var folder in folderList)
+            {
+                var folderName = folder.Split('\\');
+                string[] files = Directory.GetFiles(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + folderName[folderName.Length -1]));
+                var fileIn = files[0].Split('\\');
+                ImageData imgId = new ImageData();
+                imgId.FilePath = "~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + folderName[folderName.Length - 1] + "/" + fileIn[fileIn.Length-1] ;
+                imgList.Add(imgId);
+            }
+            gvFileList.DataSource = imgList;
+            gvFileList.DataBind();
+            //var imgList = new List<ImageData>();
+            //ImageData imgId = new ImageData();
+            //imgId.FilePath = "~/UploadedImage/User-1/Kos-11/bloomingflower.jpg";
+            //imgId.Status = "bloomingflower.jpg";
+            //imgList.Add(imgId);
+            //imgId = new ImageData();
+            //imgId.FilePath = "~/UploadedImage/User-1/Kos-11/monochrome2.jpg";
+            //imgId.Status = "bloomingflower.jpg";
+            //imgList.Add(imgId);
+
+            //gvFileList.DataSource = imgList;
+            //gvFileList.DataBind();
         }
 
         protected void fuFotoDepan_UploadStart(object sender, AjaxControlToolkit.AjaxFileUploadStartEventArgs e)
@@ -75,7 +130,7 @@ namespace LihatKosV1
                 {
                     ID = Convert.ToInt64(Request.QueryString["ID"]);
                 }
-                //Directory.CreateDirectory()
+                System.Drawing.Image imgStr = System.Drawing.Image.FromStream(file.GetStreamContents());
                 // User can save file to File System, database or in session state
                 if (file.ContentType.Contains("jpg") || file.ContentType.Contains("gif")
                     || file.ContentType.Contains("png") || file.ContentType.Contains("jpeg"))
@@ -90,6 +145,7 @@ namespace LihatKosV1
 
                         // Set PostedUrl to preview the uploaded file.
                         file.PostedUrl = string.Format("?preview=1&fileId={0}", file.FileId);
+                        
                     }
                     else
                     {
@@ -101,11 +157,44 @@ namespace LihatKosV1
                 }
                 if (Directory.Exists(MapPath("~/UploadedImage/")))
                 {
+                    string StrUserID = "User-" + Session["UserID"].ToString();
+                    string StrKosID = "Kos-" + ID.ToString();
                     //Directory.CreateDirectory(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/Kos-" + ID.ToString())); // +"/Kos-1/"));
+                    if (!Directory.Exists(MapPath("~/UploadedImage/" + StrUserID)))
+                    {
+                        Directory.CreateDirectory(MapPath("~/UploadedImage/" + StrUserID)); // +"/Kos-1/"));
+                    }
+                    if (Directory.Exists(MapPath("~/UploadedImage/" + StrUserID)))
+                    {
+                        if (!Directory.Exists(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID)))
+                        {
+                            Directory.CreateDirectory(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID)); // +"/Kos-1/"));
+                        }
+                        string[] FolderList = Directory.GetDirectories(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID));
+                        int CountFolder = FolderList.Count();
+                        string newFolder = "folder-" + (CountFolder + 1).ToString();
+                        if (!Directory.Exists(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder )))
+                        {
+                            Directory.CreateDirectory(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder)); // +"/Kos-1/"));
+                        }
+                        System.Drawing.Image imgTmp = imgStr;
+                        //image width: 110px
+                        imgTmp = Web.Controls.ImageResize.ScaleImage(imgTmp, 110);
+                        var fileName = "new" + imgTmp.Width.ToString() + "x" + imgTmp.Height.ToString() + ".jpg";
+                        //fuFotoDepan.SaveAs(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID) + "/" + file.FileName);
+                        imgTmp.Save(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder) + "/" + fileName, ImageFormat.Jpeg);
+                        //image width: 849px
+                        imgTmp = Web.Controls.ImageResize.ScaleImage(imgTmp, 849);
+                        fileName = "new" + imgTmp.Width.ToString() + "x" + imgTmp.Height.ToString() + ".jpg";
+                        imgTmp.Save(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder) + "/" + fileName, ImageFormat.Jpeg);
+
+                        BindFromBankFiles();
+                        //file.DeleteTemporaryData();
+                    }
                 }
                 // In a real app, you would call SaveAs() to save the uploaded file somewhere
                 //fuFotoDepan.SaveAs(MapPath("~/UploadedImage/User-" + Session["UserID"] + "/Kos-" + ID.ToString() + "/" + file.FileName));
-                fuFotoDepan.SaveAs(MapPath("~/UploadedImage/") + file.FileName);
+                //fuFotoDepan.SaveAs(MapPath("~/UploadedImage/") + file.FileName);
             }
             catch (Exception ex)
             {
@@ -178,9 +267,31 @@ namespace LihatKosV1
             }
 
         }
+
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             Response.Redirect("/");
+        }
+
+        protected void gvFileList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var data = (ImageData)e.Row.DataItem;
+                //Literal litStatus = (Literal)e.Row.Cells[0].FindControl("litStatus");
+                Image imgFile = (Image)e.Row.Cells[0].FindControl("imgFile");
+                //litStatus.Text = data.Status;
+                imgFile.ImageUrl = data.FilePath;
+                
+            }
+        }
+
+        protected void gvFileList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Default")
+            {
+
+            }
         }
     }
 }

@@ -30,8 +30,11 @@
                                     <asp:Label ID="lblAlamat" runat="server"></asp:Label>
                                 </div>
                             </div>
+                            
+                            <asp:UpdatePanel ID="UpdatePanel21" runat="server">
+                                <ContentTemplate>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="image">Foto Depan</label>
+                                <label class="col-md-3 control-label" for="image">Upload Foto <br />(Pastikan mencantumkan tanda default pada salah satu foto.)</label>
                                 <div class="col-md-9">
                                     <style>
                                         .ajax__fileupload_button {
@@ -42,70 +45,70 @@
                                     <script type="text/javascript">
 
                                         function onClientDepanUploadComplete(sender, e) {
-
-                                            onImageValidated1("TRUE", e);
+                                            if (sender._filesInQueue[sender._filesInQueue.length - 1]._isUploaded)
+                                                __doPostBack('UploadPanel', '');
+                                            //onImageValidated1("TRUE", e);
                                         }
 
                                         function onImageValidated1(arg, context) {
-                                            var test = document.getElementById("testuploaded");
-                                            test.style.display = 'block';
+                                            //var test = document.getElementById("testuploaded");
+                                            //test.style.display = 'block';
 
-                                            var fileList = document.getElementById("fileList");
-                                            var item = document.createElement('div');
-                                            item.style.padding = '4px';
+                                            //var fileList = document.getElementById("fileList");
+                                            //var item = document.createElement('div');
+                                            //item.style.padding = '4px';
 
-                                            if (arg == "TRUE") {
-                                                var url = context.get_postedUrl();
-                                                url = url.replace('&amp;', '&');
-                                                item.appendChild(createThumbnail1(context, url));
-                                            } else {
-                                                item.appendChild(createFileInfo1(context));
-                                            }
+                                            //if (arg == "TRUE") {
+                                            //    var url = context.get_postedUrl();
+                                            //    url = url.replace('&amp;', '&');
+                                            //    item.appendChild(createThumbnail1(context, url));
+                                            //} else {
+                                            //    item.appendChild(createFileInfo1(context));
+                                            //}
 
-                                            fileList.appendChild(item);
+                                            //fileList.appendChild(item);
                                         }
 
                                         function createFileInfo1(e) {
-                                            var holder = document.createElement('div');
-                                            holder.appendChild(document.createTextNode(e.get_fileName() + ' with size ' + e.get_fileSize() + ' bytes'));
+                                            //var holder = document.createElement('div');
+                                            //holder.appendChild(document.createTextNode(e.get_fileName() + ' with size ' + e.get_fileSize() + ' bytes'));
 
-                                            return holder;
+                                            //return holder;
                                         }
 
                                         function createThumbnail1(e, url) {
-                                            var holder = document.createElement('div');
-                                            var img = document.createElement("img");
-                                            img.style.width = '80px';
-                                            img.style.height = '80px';
-                                            img.setAttribute("src", url);
+                                            //var holder = document.createElement('div');
+                                            //var img = document.createElement("img");
+                                            //img.style.width = '80px';
+                                            //img.style.height = '80px';
+                                            //img.setAttribute("src", url);
 
-                                            holder.appendChild(createFileInfo1(e));
-                                            holder.appendChild(img);
+                                            //holder.appendChild(createFileInfo1(e));
+                                            //holder.appendChild(img);
 
-                                            return holder;
+                                            //return holder;
                                         }
 
                                         function onClientDepanUploadStart(sender, e) {
-                                            document.getElementById('uploadCompleteInfo').innerHTML = 'Please wait while uploading ' + e.get_filesInQueue() + ' files...';
+                                            //document.getElementById('uploadCompleteInfo').innerHTML = 'Please wait while uploading ' + e.get_filesInQueue() + ' files...';
 
                                         }
 
                                         function onClientDepanUploadError(sender, e) {
-                                            document.getElementById('uploadCompleteInfo').innerHTML = "There was an error while uploading.";
+                                            //document.getElementById('uploadCompleteInfo').innerHTML = "There was an error while uploading.";
                                         }
 
                                         function onClientDepanUploadCompleteAll(sender, e) {
-                                            //alert('upload complete all');
-                                            var args = JSON.parse(e.get_serverArguments()),
-                                                unit = args.duration > 60 ? 'minutes' : 'seconds',
-                                                duration = (args.duration / (args.duration > 60 ? 60 : 1)).toFixed(2);
+                                            //var args = JSON.parse(e.get_serverArguments()),
+                                            //    unit = args.duration > 60 ? 'minutes' : 'seconds',
+                                            //    duration = (args.duration / (args.duration > 60 ? 60 : 1)).toFixed(2);
 
-                                            var info = 'At <b>' + args.time + '</b> server time <b>'
-                                                + e.get_filesUploaded() + '</b> of <b>' + e.get_filesInQueue()
-                                                + '</b> files were uploaded with status code <b>"' + e.get_reason()
-                                                + '"</b> in <b>' + duration + ' ' + unit + '</b>';
+                                            //var info = 'At <b>' + args.time + '</b> server time <b>'
+                                            //    + e.get_filesUploaded() + '</b> of <b>' + e.get_filesInQueue()
+                                            //    + '</b> files were uploaded with status code <b>"' + e.get_reason()
+                                            //    + '"</b> in <b>' + duration + ' ' + unit + '</b>';
 
-                                            document.getElementById('uploadCompleteInfo').innerHTML = info;
+                                            //document.getElementById('uploadCompleteInfo').innerHTML = info;
                                         }
                                     </script>
                                     <asp:Label runat="server" ID="throbberDepan" Style="display: none;"><img align="absmiddle" alt="" src="images/uploading.gif" /></asp:Label>
@@ -115,16 +118,41 @@
                                         OnClientUploadComplete="onClientDepanUploadComplete" OnUploadComplete="fuFotoDepan_UploadComplete"
                                         OnClientUploadCompleteAll="onClientDepanUploadCompleteAll" OnUploadCompleteAll="fuFotoDepan_UploadCompleteAll" 
                                         OnUploadStart="fuFotoDepan_UploadStart" OnClientUploadStart="onClientDepanUploadStart" OnClientUploadError="onClientDepanUploadError" />
-                                    <div id="uploadCompleteInfo"></div>
+                                    
+                                    <asp:Label ID="uploadCompleteInfo" runat="server" ClientIDMode="Static" />
+                                    <%--<div id="uploadCompleteInfo"></div>--%>
                                     <br />
-                                    <div id="testuploaded" style="display: none; padding: 4px; border: gray 1px solid;">
+                                    <div id="testuploaded" style="display: block; padding: 4px; border: gray 1px solid;">
                                         <h4>list of uploaded files:</h4>
                                         <hr />
-                                        <div id="fileList">
+                                        <div style="border:0.5px dotted black;">
+                                            <asp:GridView ID="gvFileList" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="false"
+                                                 ShowHeader="false" ShowFooter="false" GridLines="None" OnRowDataBound="gvFileList_RowDataBound" OnRowCommand="gvFileList_RowCommand">
+                                                <Columns>
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <div style="padding:4px;">
+                                                                <div>
+                                                                    <div><asp:Literal ID="litStatus" runat="server"></asp:Literal></div>
+                                                                    <asp:Image ID="imgFile" runat="server" Style="width:80px;height:80px;" />
+                                                                    <asp:ImageButton ID="imgBtnDefault" runat="server" CommandName="Default" />
+                                                                </div>
+                                                            </div>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:PostBackTrigger ControlID="gvFileList" />
+                                </Triggers>
+                            </asp:UpdatePanel>
                             <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Foto Bagian Dalam</label>
                                 <div class="col-md-9">
