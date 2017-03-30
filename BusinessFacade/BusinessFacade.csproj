@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AreaSystem.cs" />
     <Compile Include="BannerSystem.cs" />
+    <Compile Include="DefaultImageSystem.cs" />
     <Compile Include="FasilitasSystem.cs" />
     <Compile Include="FavoriteSystem.cs" />
     <Compile Include="FormKosSystem.cs" />

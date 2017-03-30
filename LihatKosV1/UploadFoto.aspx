@@ -35,7 +35,7 @@
                             <asp:UpdatePanel ID="UpdatePanelFoto" runat="server" OnLoad="UpdatePanelFoto_Load">
                             <ContentTemplate>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="image">Upload Foto <br />(Pastikan mencantumkan tanda default pada salah satu foto. Maksimum upload 7 foto.)</label>
+                                <label class="col-md-3 control-label" for="image">Upload Foto <br />(Pastikan mencantumkan tanda default pada salah satu foto. Maksimum upload 8 foto.)</label>
                                 <div class="col-md-9">
                                     <style>
                                         .ajax__fileupload_button {
@@ -161,7 +161,7 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Default" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                                <asp:CheckBox ID="chkDefault" runat="server" CssClass="checkbox" />
+                                                                <asp:CheckBox ID="chkDefault" runat="server" CssClass="checkbox" AutoPostBack="true" OnCheckedChanged="chkDefault_CheckedChanged" />
                                                             </div>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>

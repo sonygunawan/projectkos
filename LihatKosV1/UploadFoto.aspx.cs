@@ -210,7 +210,7 @@ namespace LihatKosV1
                         }
                         else
                         {
-                            ValidationError.Display("Maximum file upload: 7 photos.");
+                            ValidationError.Display("Maximum file upload: 8 photos.");
                         }
                         //file.DeleteTemporaryData();
                     }
@@ -304,9 +304,8 @@ namespace LihatKosV1
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 var data = (ImageData)e.Row.DataItem;
-                //Literal litStatus = (Literal)e.Row.Cells[0].FindControl("litStatus");
                 Image imgFile = (Image)e.Row.Cells[0].FindControl("imgFile");
-                //litStatus.Text = data.Status;
+                CheckBox chkDefault = (CheckBox)e.Row.Cells[1].FindControl("chkDefault");
                 imgFile.ImageUrl = data.FilePath;
                 
             }
@@ -323,6 +322,30 @@ namespace LihatKosV1
         protected void UpdatePanelFoto_Load(object sender, EventArgs e)
         {
             BindFromBankFiles();
+        }
+
+        protected void chkDefault_CheckedChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = (GridViewRow)((Control)sender).NamingContainer;
+            
+            var chkDefault = (CheckBox)row.FindControl("chkDefault");
+            var imgFile = (Image)row.FindControl("imgFile");
+            //imgFile.ImageUrl
+            if (chkDefault.Checked)
+            {
+                foreach (GridViewRow item in gvFileList.Rows)
+                {
+                    var imgBanding = (Image)item.Cells[0].FindControl("imgFile");
+                    if (imgFile.ImageUrl == imgBanding.ImageUrl)
+                        chkDefault.Checked = true;
+                    else
+                        chkDefault.Checked = false;
+                }
+            }
+            else
+            {
+
+            }
         }
     }
 }

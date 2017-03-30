@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AreaData.cs" />
+    <Compile Include="DefaultImageData.cs" />
     <Compile Include="Enum\Enum.cs" />
     <Compile Include="FasilitasData.cs" />
     <Compile Include="FavoriteData.cs" />
