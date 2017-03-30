@@ -52,7 +52,9 @@
     <Compile Include="BannerDA.cs" />
     <Compile Include="DataAccessConnection.cs" />
     <Compile Include="DataAccessException.cs" />
-    <Compile Include="DefaultImageDA.cs" />
+    <Compile Include="DefaultImageDA.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FasilitasDA.cs" />
     <Compile Include="FavoriteDA.cs" />
     <Compile Include="FormKosDA.cs" />
