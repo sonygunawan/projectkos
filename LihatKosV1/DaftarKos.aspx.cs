@@ -58,9 +58,9 @@ namespace LihatKosV1
 
             }
             
-            ClientScript.RegisterStartupScript(GetType(), "checkboxBeautify", "$(\"input[type='checkbox'], input[type='radio'], select\").uniform();" +
-                  "$('#" + chkFasilitas.ClientID + ").buttonset(); " +
-                  "$('#" + chkLingkungan.ClientID + ").buttonset(); ", true);
+            ClientScript.RegisterStartupScript(GetType(), "checkboxBeautify", 
+                  "$('#" + chkFasilitas.ClientID + "').buttonset(); " +
+                  "$('#" + chkLingkungan.ClientID + "').buttonset(); ", true);
 
         }
 

@@ -1,6 +1,7 @@
 ﻿using AjaxControlToolkit;
 using LihatKos.BusinessFacade;
 using LihatKos.Common;
+using LihatKos.Web.Controls;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
@@ -22,6 +23,7 @@ namespace LihatKosV1
     public partial class UploadFoto : System.Web.UI.Page
     {
         private Int64 ID = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ScriptManager.GetCurrent(this.Page).RegisterPostBackControl(gvFileList);
@@ -34,26 +36,29 @@ namespace LihatKosV1
                 FormKosData Data = new FormKosSystem().GetAllFormKos(ID)[0];
                 lblNama.Text = Data.Nama;
                 lblAlamat.Text = Data.Alamat;
-
+                ViewState["FormKosID"] = null;
                 
             }
             //BindFromBankFiles();
             if (!Page.IsPostBack && !Page.IsCallback && !fuFotoDepan.IsInFileUploadPostBack)
             {
-                //BindFromBankFiles();
                 if (!String.IsNullOrEmpty(Request.QueryString["ID"]))
                 {
                     ID = Convert.ToInt64(Request.QueryString["ID"]);
+                    ViewState["FormKosID"] = ID;
                 }
                 FormKosData Data = new FormKosSystem().GetAllFormKos(ID)[0];
                 lblNama.Text = Data.Nama;
                 lblAlamat.Text = Data.Alamat;
 
+                BindFromBankFiles();
             }
+            
             if (Session["UserID"] == null)
             {
                 Response.Redirect("/Login");
             }
+            
             //|| Request.QueryString["preview"] != "2"|| string.IsNullOrEmpty(Request.QueryString["fileId2"])
             if (Request.QueryString["preview"] != "1"  || string.IsNullOrEmpty(Request.QueryString["fileId"]))
                 return;
@@ -75,8 +80,9 @@ namespace LihatKosV1
         }
         private void BindFromBankFiles()
         {
+            var FormKosID = Convert.ToInt64(ViewState["FormKosID"].ToString());
             string StrUserID = "User-" + Session["UserID"].ToString();
-            string StrKosID = "Kos-" + ID.ToString();
+            string StrKosID = "Kos-" + FormKosID;
             if (!Directory.Exists(MapPath("~/UploadedImage/" + StrUserID)))
             {
                 Directory.CreateDirectory(MapPath("~/UploadedImage/" + StrUserID)); // +"/Kos-1/"));
@@ -130,6 +136,8 @@ namespace LihatKosV1
                     duration = (now - startedAt).Seconds,
                     time = DateTime.Now.ToShortTimeString()
                 });
+
+            BindFromBankFiles();
         }
 
         protected void fuFotoDepan_UploadComplete(object sender, AjaxFileUploadEventArgs file)
@@ -182,22 +190,28 @@ namespace LihatKosV1
                         }
                         string[] FolderList = Directory.GetDirectories(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID));
                         int CountFolder = FolderList.Count();
-                        string newFolder = "folder-" + (CountFolder + 1).ToString();
-                        if (!Directory.Exists(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder )))
+                        if (CountFolder <= 7)
                         {
-                            Directory.CreateDirectory(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder)); // +"/Kos-1/"));
+                            string newFolder = "folder-" + (CountFolder + 1).ToString();
+                            if (!Directory.Exists(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder)))
+                            {
+                                Directory.CreateDirectory(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder)); // +"/Kos-1/"));
+                            }
+                            System.Drawing.Image imgTmp = imgStr;
+                            //image width: 110px
+                            imgTmp = Web.Controls.ImageResize.ScaleImage(imgTmp, 110);
+                            var fileName = "new" + imgTmp.Width.ToString() + "x" + imgTmp.Height.ToString() + ".jpg";
+                            //fuFotoDepan.SaveAs(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID) + "/" + file.FileName);
+                            imgTmp.Save(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder) + "/" + fileName, ImageFormat.Jpeg);
+                            //image width: 849px
+                            imgTmp = Web.Controls.ImageResize.ScaleImage(imgTmp, 849);
+                            fileName = "new" + imgTmp.Width.ToString() + "x" + imgTmp.Height.ToString() + ".jpg";
+                            imgTmp.Save(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder) + "/" + fileName, ImageFormat.Jpeg);
                         }
-                        System.Drawing.Image imgTmp = imgStr;
-                        //image width: 110px
-                        imgTmp = Web.Controls.ImageResize.ScaleImage(imgTmp, 110);
-                        var fileName = "new" + imgTmp.Width.ToString() + "x" + imgTmp.Height.ToString() + ".jpg";
-                        //fuFotoDepan.SaveAs(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID) + "/" + file.FileName);
-                        imgTmp.Save(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder) + "/" + fileName, ImageFormat.Jpeg);
-                        //image width: 849px
-                        imgTmp = Web.Controls.ImageResize.ScaleImage(imgTmp, 849);
-                        fileName = "new" + imgTmp.Width.ToString() + "x" + imgTmp.Height.ToString() + ".jpg";
-                        imgTmp.Save(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID + "/" + newFolder) + "/" + fileName, ImageFormat.Jpeg);
-
+                        else
+                        {
+                            ValidationError.Display("Maximum file upload: 7 photos.");
+                        }
                         //file.DeleteTemporaryData();
                     }
                 }
@@ -234,6 +248,7 @@ namespace LihatKosV1
                     duration = (now - startedAt).Seconds,
                     time = DateTime.Now.ToShortTimeString()
                 });
+            Response.Redirect("/UploadFoto?ID=" + ID);
         }
 
         protected void fuFotoDalam_UploadComplete(object sender, AjaxFileUploadEventArgs file)

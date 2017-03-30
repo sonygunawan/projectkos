@@ -1,26 +1,20 @@
 jQuery(document).ready(function($) {
-
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800, 'swing');
+        });
     });
-function pageLoad()
-{
-    $(".scroll").click(function (event) {
-        event.preventDefault();
-        $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800, 'swing');
-    });
-}
 
 // uniform
     $(function () {
-    $('input[type="checkbox"], input[type="radio"], select').uniform();
+        $('input[type="checkbox"], input[type="radio"], select').uniform();
+
     });
 
 // social icon
 $(document).ready(function($) {
-  
-});
-function pageLoad() {
     $('.social i').tooltip('hide');
-}
+});
 //
 
 var wow = new WOW(

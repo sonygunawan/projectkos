@@ -35,11 +35,31 @@
                             <asp:UpdatePanel ID="UpdatePanelFoto" runat="server" OnLoad="UpdatePanelFoto_Load">
                             <ContentTemplate>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="image">Upload Foto <br />(Pastikan mencantumkan tanda default pada salah satu foto.)</label>
+                                <label class="col-md-3 control-label" for="image">Upload Foto <br />(Pastikan mencantumkan tanda default pada salah satu foto. Maksimum upload 7 foto.)</label>
                                 <div class="col-md-9">
                                     <style>
                                         .ajax__fileupload_button {
                                             background-color: green;
+                                        }
+                                        input[type='checkbox'] + label:before, input[type='checkbox'] + label:after{
+                                            position: relative;
+                                            top: 1px;
+	                                        left: -2px;
+                                            display: inline-block;
+                                            font-family: 'Glyphicons Halflings';
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: 1;
+                                            -webkit-font-smoothing: antialiased;
+                                            -moz-osx-font-smoothing: grayscale;
+                                        }
+                                        /*unchecked icon*/
+                                        input[type='checkbox'] + label:before{
+                                            content: "\e157";
+                                        }
+                                        /*checked icon*/
+                                        input[type='checkbox']:checked + label:before{
+                                            content: "\e067";
                                         }
                                     </style>
 
@@ -129,18 +149,24 @@
                                         <div style="border:0.5px dotted black;">
                                             <%--<div id="fileList"></div>--%>
                                             <asp:GridView ID="gvFileList" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="false"
-                                                 ShowHeader="false" ShowFooter="false" GridLines="None" OnRowDataBound="gvFileList_RowDataBound" OnRowCommand="gvFileList_RowCommand">
+                                                 ShowHeader="true" ShowFooter="false" GridLines="None" OnRowDataBound="gvFileList_RowDataBound" OnRowCommand="gvFileList_RowCommand">
                                                 <Columns>
-                                                    <asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Image" ItemStyle-Width="30%">
                                                         <ItemTemplate>
                                                             <div style="padding:4px;">
-                                                                <div>
                                                                     <div><asp:Literal ID="litStatus" runat="server"></asp:Literal></div>
                                                                     <asp:Image ID="imgFile" runat="server" Style="width:80px;height:80px;" />
-                                                                    <asp:ImageButton ID="imgBtnDefault" runat="server" CommandName="Default" />
-                                                                </div>
+                                                                
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Default" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                                        <ItemTemplate>
+                                                                <asp:CheckBox ID="chkDefault" runat="server" CssClass="checkbox" />
                                                             </div>
                                                         </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField ItemStyle-Width="55%">
+
                                                     </asp:TemplateField>
                                                 </Columns>
                                             </asp:GridView>

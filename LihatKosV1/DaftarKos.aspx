@@ -2,6 +2,10 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
         <div style="margin-top: 20px;"></div>
         <div class="container">
             <div class="row">
@@ -556,10 +560,7 @@
                                     </asp:RadioButtonList>
                                 </div>
                             </div>
-                            <script type="text/javascript"> $(document).ready(function () {
-                                $("#<%= chkFasilitas.ClientID %>").buttonset();
-                                 $("#<%= chkLingkungan.ClientID %>").buttonset();
-                             }); </script> 
+                            
                             <style>.chkMargin{ margin-left:4px; margin-right:4px; padding-left:4px;padding-right:4px;}</style>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Fasilitas Kamar<a class="fa fa-info-circle">
@@ -580,6 +581,10 @@
                                     <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
                                 </div>
                             </div>
+                            <script type="text/javascript"> <%--$(document).ready(function ($) {
+                                 $("#<%= chkFasilitas.ClientID %>").buttonset();
+                                 $("#<%= chkLingkungan.ClientID %>").buttonset();
+                             });--%> </script> 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Keterangan Lain-lain<a class="fa fa-info-circle">
                                   </a></label>
