@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/Admin.Master" AutoEventWireup="true" CodeBehind="UploadFoto.aspx.cs" Inherits="LihatKosV1.UploadFoto" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/Admin.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="UploadFoto.aspx.cs" Inherits="LihatKosV1.UploadFoto" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -32,8 +32,7 @@
                             </div>
                             
                             
-                            <asp:UpdatePanel ID="UpdatePanelFoto" runat="server" OnLoad="UpdatePanelFoto_Load">
-                            <ContentTemplate>
+                            
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Upload Foto <br />(Pastikan mencantumkan tanda default pada salah satu foto. Maksimum upload 8 foto.)</label>
                                 <div class="col-md-9">
@@ -62,7 +61,8 @@
                                             content: "\e067";
                                         }
                                     </style>
-
+                                    <asp:UpdatePanel ID="UpdatePanelFoto" runat="server" OnLoad="UpdatePanelFoto_Load">
+                                    <ContentTemplate>
                                     <script type="text/javascript">
 
                                         function onClientDepanUploadComplete(sender, e) {
@@ -143,40 +143,50 @@
                                     <asp:Label ID="uploadCompleteInfo" runat="server" ClientIDMode="Static" />
                                     <%--<div id="uploadCompleteInfo"></div>--%>
                                     <br />
+                                    
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    <asp:UpdatePanel ID="UpdatePanelGrid" runat="server">
+                                        <ContentTemplate>
                                     <div id="testuploaded" style="display: block; padding: 4px; border: gray 1px solid;">
                                         <h4>list of uploaded files:</h4>
                                         <hr />
                                         <div style="border:0.5px dotted black;">
                                             <%--<div id="fileList"></div>--%>
                                             <asp:GridView ID="gvFileList" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="false"
-                                                 ShowHeader="true" ShowFooter="false" GridLines="None" OnRowDataBound="gvFileList_RowDataBound" OnRowCommand="gvFileList_RowCommand">
+                                                 ShowHeader="true" ShowFooter="false" GridLines="None" OnRowDataBound="gvFileList_RowDataBound">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Image" ItemStyle-Width="30%">
                                                         <ItemTemplate>
                                                             <div style="padding:4px;">
-                                                                    <div><asp:Literal ID="litStatus" runat="server"></asp:Literal></div>
-                                                                    <asp:Image ID="imgFile" runat="server" Style="width:80px;height:80px;" />
-                                                                
+                                                                <asp:Image ID="imgFile" runat="server" Style="width:80px;height:80px;" />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Default" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                         <ItemTemplate>
-                                                                <asp:CheckBox ID="chkDefault" runat="server" CssClass="checkbox" AutoPostBack="true" OnCheckedChanged="chkDefault_CheckedChanged" />
-                                                            </div>
+                                                            <asp:Button ID="btnDefault" runat="server" Text="Default" OnCommand="btnDefault_Command" />
+                                                            <asp:Literal ID="litStatus" runat="server"></asp:Literal>
+                                                                <%--<asp:CheckBox ID="chkDefault" runat="server" CssClass="checkbox" AutoPostBack="true" OnCheckedChanged="chkDefault_CheckedChanged" />--%>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField ItemStyle-Width="55%">
-
+                                                        <ItemTemplate>
+                                                            </div>
+                                                        </ItemTemplate>
                                                     </asp:TemplateField>
                                                 </Columns>
                                             </asp:GridView>
 
                                         </div>
                                     </div>
+                                    </ContentTemplate>
+                                        <Triggers>
+                                            <asp:PostBackTrigger ControlID="gvFileList" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
                                 </div>
+                                
                             </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
                             <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Foto Bagian Dalam</label>
                                 <div class="col-md-9">

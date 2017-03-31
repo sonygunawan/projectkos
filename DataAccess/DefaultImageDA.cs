@@ -48,7 +48,7 @@ namespace LihatKos.DataAccess
                     while (dataReader.Read())
                     {
                         //retVal = true;
-                        data.FormKosID = Convert.ToInt64(dataReader["ID"].ToString());
+                        data.FormKosID = Convert.ToInt64(dataReader["FormKosID"].ToString());
                         data.FilePath = dataReader["FilePath"].ToString();
                     }
                     dataReader.Close();

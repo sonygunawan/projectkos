@@ -303,19 +303,27 @@ namespace LihatKosV1
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                var FormKosID = Convert.ToInt64(ViewState["FormKosID"].ToString());
+            
                 var data = (ImageData)e.Row.DataItem;
                 Image imgFile = (Image)e.Row.Cells[0].FindControl("imgFile");
-                CheckBox chkDefault = (CheckBox)e.Row.Cells[1].FindControl("chkDefault");
+                Button btnDefault = (Button)e.Row.Cells[1].FindControl("btnDefault");
+                Literal litStatus = (Literal)e.Row.Cells[1].FindControl("litStatus");
+                btnDefault.CommandArgument = e.Row.RowIndex.ToString() + "|" + data.FilePath;
+                //CheckBox chkDefault = (CheckBox)e.Row.Cells[1].FindControl("chkDefault");
+                var foto = new DefaultImageSystem().GetDefaultPhotoByFormID(FormKosID);
+                if (foto.FilePath == data.FilePath)
+                {
+                    btnDefault.Visible = false;
+                    litStatus.Text = "Default";
+                }
+                else
+                {
+                    btnDefault.Visible = true;
+                    litStatus.Text = "";
+                }
                 imgFile.ImageUrl = data.FilePath;
-                
-            }
-        }
-
-        protected void gvFileList_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Default")
-            {
-
+                //chkDefault.CheckedChanged += chkDefault_CheckedChanged;
             }
         }
 
@@ -324,28 +332,40 @@ namespace LihatKosV1
             BindFromBankFiles();
         }
 
-        protected void chkDefault_CheckedChanged(object sender, EventArgs e)
+        protected void btnDefault_Command(object sender, CommandEventArgs e)
         {
-            GridViewRow row = (GridViewRow)((Control)sender).NamingContainer;
-            
-            var chkDefault = (CheckBox)row.FindControl("chkDefault");
-            var imgFile = (Image)row.FindControl("imgFile");
-            //imgFile.ImageUrl
-            if (chkDefault.Checked)
-            {
-                foreach (GridViewRow item in gvFileList.Rows)
-                {
-                    var imgBanding = (Image)item.Cells[0].FindControl("imgFile");
-                    if (imgFile.ImageUrl == imgBanding.ImageUrl)
-                        chkDefault.Checked = true;
-                    else
-                        chkDefault.Checked = false;
-                }
-            }
-            else
-            {
+            string[] args = e.CommandArgument.ToString().Split('|');
+            var FilePath = "";
+            if (args.Count() > 0)
+                FilePath = args[1]; 
+            var FormKosID = Convert.ToInt64(ViewState["FormKosID"].ToString());
+            new DefaultImageSystem().UpdateDefaultPhotoByFormID(FormKosID, FilePath);
 
-            }
+            BindFromBankFiles();
         }
+
+        //protected void chkDefault_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    GridViewRow row = (GridViewRow)((Control)sender).NamingContainer;
+            
+        //    var chkDefault = (CheckBox)row.FindControl("chkDefault");
+        //    var imgFile = (Image)row.FindControl("imgFile");
+        //    //imgFile.ImageUrl
+        //    if (chkDefault.Checked)
+        //    {
+        //        foreach (GridViewRow item in gvFileList.Rows)
+        //        {
+        //            var imgBanding = (Image)item.Cells[0].FindControl("imgFile");
+        //            if (imgFile.ImageUrl == imgBanding.ImageUrl)
+        //                chkDefault.Checked = true;
+        //            else
+        //                chkDefault.Checked = false;
+        //        }
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //}
     }
 }

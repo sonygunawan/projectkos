@@ -1,7 +1,93 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/Admin.Master" AutoEventWireup="true" CodeBehind="DetailKos.aspx.cs" Inherits="LihatKosV1.DetailKos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DetailKos.aspx.cs" Inherits="LihatKosV1.DetailKos" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>LihatKos.com | Website Pencari Tempat Kos Terbaik dan Terkini</title>
+
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800|Old+Standard+TT' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:300,500,800' rel='stylesheet' type='text/css'>
+
+    <!-- font awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/login.css" />
+    
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    
+    <!-- font awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- uniform -->
+    <link type="text/css" rel="stylesheet" href="assets/uniform/css/uniform.default.min.css" />
+
+    <!-- animate.css -->
+    <link rel="stylesheet" href="assets/wow/animate.css" />
+
+
+    <!-- gallery -->
+    <link rel="stylesheet" href="assets/gallery/blueimp-gallery.min.css">
+
+
+<%--    <!-- favicon -->
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">--%>
+
+
+    <!-- Owl Carousel 2 -->
+    <link rel="stylesheet" href="assets/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/owlcarousel/owl.theme.default.min.css">
+
+</head>
+
+<body id="home">
+    <form class="form-horizontal" id="form1" runat="server">
+        <asp:ScriptManager ID="sm" AsyncPostBackTimeout="36000" runat="server" ></asp:ScriptManager>
+        <!-- header -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.php">
+                        <img src="" alt="LihatKos"></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav">
+                        <!--
+        <li><a href="index.php">Home </a></li>
+        <li><a href="rooms-tariff.php">Rooms & Tariff</a></li>
+        <li><a href="introduction.php">Introduction</a></li>
+        <li><a href="gallery.php">Gallery</a></li>
+        <li><a href="contact.php">Contact</a></li>
+      -->
+
+                        <li><a href="/Register">Register</a></li>
+                        <li><a href="/Login">Login</a></li>
+                    </ul>
+                </div>
+                <!-- navbar-collapse -->
+            </div>
+            <!-- container-fluid -->
+        </nav>
         <div style="margin-top: 20px;"></div>
         <div class="container">
             <div class="row">
@@ -18,15 +104,8 @@
                                 </div>
                             </div>
                              <div class="form-group">
-                                <div class="col-sm-8 slide no-gutter">
+                                <div class="col-sm-8">
                                     <div class="owl-carousel owl-theme">
-                                        <%--<asp:Repeater ID="rptGambarKos" runat="server" OnItemDataBound="rptGambarKos_ItemDataBound">
-                                            <ItemTemplate>
-                                                <div class="item">
-                                                    <asp:Image ID="imgKos" runat="server" CssClass="img-responsive" AlternateText="slide" />
-                                                </div>
-                                            </ItemTemplate>
-                                        </asp:Repeater>--%>
                                         <div class="item">
                                             <img src="images/photos/banner.jpg" class="img-responsive" alt="slide">
                                         </div>
@@ -42,7 +121,7 @@
                                         <div class="item">
                                             <img src="images/photos/1900x849.png" class="img-responsive" alt="slide">
                                         </div>
-                                    </div>  
+                                    </div>
                                 </div>
 
                                 <div class="col-sm-4 search">
@@ -69,12 +148,8 @@
                                             </div>
                                     </div>
                                     <div style="text-align:center;">
-                                    <asp:Button ID="btnFavorit" runat="server" BackColor="DarkGoldenrod" CssClass="btn btn-primary text-center text-capitalize" Text="Favorit" OnClick="btnFavorit_Click" />
+                                    <asp:Button ID="btnHubungi" runat="server" CssClass="btn btn-primary text-center text-capitalize" Text="Hubungi" />
                                     <br />
-                                    <asp:Button ID="btnBook" runat="server" CssClass="btn btn-primary text-center text-capitalize" Text="Book" OnClick="btnBook_Click" />
-                                    <br />
-                                    
-
                                     <asp:Label ID="lblNamaPengelola" runat="server" Font-Bold="true"></asp:Label>
                                         <br />
                                     <asp:Label ID="lblNmrTlpnPengelola" runat="server"></asp:Label>
@@ -115,7 +190,7 @@
                                     function init_map() {
                                         var latitude = document.getElementById('hidLatitude').value;
                                         var longitude = document.getElementById('hidLongitude').value;
-                                        var myOptions = { zoom: 16, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(latitude, longitude), animation: google.maps.Animation.DROP }); marker.addListener('click', toggleBounce);
+                                        var myOptions = { zoom: 13, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(latitude, longitude), animation: google.maps.Animation.DROP }); marker.addListener('click', toggleBounce);
                                     }
 
                                     function toggleBounce() {
@@ -336,75 +411,26 @@
 
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="price">Contact Person</label>
+                                <label class="col-md-3 control-label" for="price">Nama Pemilik</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtPemilik" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                     <%--<input id="price" name="price" type="text" placeholder="Product price" class="form-control input-md" required="">--%>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="file">Telepon/HP Pemilik<a class="fa fa-info-circle">
-                                  </a></label>
+                                <label class="col-md-3 control-label" for="image">Alamat Pemilik</label>
                                 <div class="col-md-9">
-                                    <asp:GridView ID="gvKosTelepon" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="false" GridLines="None"
-                                        ShowFooter="false" ShowHeader="false" OnRowDataBound="gvKosTelepon_RowDataBound">
-                                        <Columns>
-                                            <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-Width="10%" />
-                                            <asp:TemplateField HeaderText="Telepon" ItemStyle-Width="75%">
-                                                <ItemTemplate>
-                                                    <asp:TextBox ID="txtValue" runat="server" Width="100%" Enabled="false" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Tipe Nomor" ItemStyle-Width="15%">
-                                                <ItemTemplate>
-                                                    <asp:DropDownList ID="ddlPhoneID" runat="server" Enabled="false" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
-                                    </asp:GridView>
-                                    
-                                    <%--<asp:TextBox ID="txtTlpPemilik" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
+                                    <asp:TextBox ID="txtAlamatPemilik" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2" Enabled="false"></asp:TextBox>
+                                    <%--<input id="image" name="image" type="text" placeholder="Image URL" class="form-control input-md">--%>
                                 </div>
-                                <%--<div class="col-md-1" style="display: inline-block;vertical-align:middle;float:none;">
-                                    <asp:ImageButton ID="imgBtnPlus" runat="server" ImageUrl="~/images/plus.png" OnClick="imgBtnPlus_Click" />
-                                    &nbsp;
-                                </div>--%>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Kamar</label>
-                                <div class="col-md-8">
-                                    <asp:GridView ID="gvKamarKos" runat="server" GridLines="None" ShowHeader="true" ShowFooter="false"
-                                        CssClass="table table-hover table-striped" AutoGenerateColumns="false" OnRowDataBound="gvKamarKos_RowDataBound" >
-                                        <Columns>
-                                            <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-Width="10%" />
-                                            <asp:TemplateField HeaderText="Luas" ItemStyle-Width="20%">
-                                                <ItemTemplate>
-                                                    <asp:TextBox ID="txtLuas" runat="server" Width="100%" Enabled="false" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Fasilitas" ItemStyle-Width="25%">
-                                                <ItemTemplate>
-                                                    <asp:RadioButtonList ID="rblFasilitas" runat="server" Enabled="false">
-                                                        <asp:ListItem Value="2" Text="Kamar Mandi Luar" Selected="True" />
-                                                        <asp:ListItem Value="1" Text="Kamar Mandi Dalam" />
-                                                    </asp:RadioButtonList>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Jml Kmr" ItemStyle-Width="20%">
-                                                <ItemTemplate>
-                                                    <asp:TextBox ID="txtJmlKamar" runat="server" Width="100%" Enabled="false" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Kmr Kosong" ItemStyle-Width="20%">
-                                                <ItemTemplate>
-                                                    <asp:TextBox ID="txtKamarKosong" runat="server" Width="100%" Enabled="false" />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                        </Columns>
-                                    </asp:GridView>
+                                <label class="col-md-3 control-label" for="file">Telepon/HP Pemilik</label>
+                                <div class="col-md-9">
+                                    <asp:TextBox ID="txtTlpPemilik" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                 </div>
                             </div>
-                            <%--<div class="form-group">
+                            <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Nama Pengelola</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtNamaPengelola" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
@@ -435,18 +461,22 @@
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtLuasKamar" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                 </div>
-                            </div>--%>
+                            </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Tipe Kos</label>
                                 <div class="col-md-9">
                                     <asp:RadioButtonList ID="rdlTipeKos" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow"
                                         CellSpacing="50" CellPadding="50" Enabled="false" />
+                                    <%--<asp:DropDownList ID="ddlTipeKos" runat="server" CssClass="form-control ui-controlgroup-item" ></asp:DropDownList>--%>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Binatang Peliharaan</label>
                                 <div class="col-md-9">
+                                    <%--<asp:RadioButton ID="rdlPet1" runat="server" GroupName="Pet" CssClass="form-control radio-inline" Text="Boleh" />
+                                    <asp:RadioButton ID="rdlPet2" runat="server" GroupName="Pet" CssClass="form-control radio-inline" Text="Tidak Boleh" />--%>
+                                    
                                     <asp:RadioButtonList ID="rdlPet" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" Enabled="false">
                                         <asp:ListItem Value="1" Text="Boleh&nbsp;&nbsp;&nbsp;&nbsp;"></asp:ListItem>
                                         <asp:ListItem Value="0" Text="Tidak Boleh"></asp:ListItem>
@@ -460,6 +490,7 @@
                                     <asp:CheckBoxList ID="chkFasilitas" runat="server" ClientIDMode="Static" 
                                         RepeatDirection="Horizontal" RepeatLayout="Table" CellSpacing="10" CellPadding="10" CssClass="chkMargin" Enabled="false">
                                     </asp:CheckBoxList>
+                                    <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -467,6 +498,7 @@
                                 <div class="col-md-9 ui-controlgroup-item">
                                     <asp:CheckBoxList ID="chkLingkungan" runat="server" ClientIDMode="Static" 
                                         RepeatDirection="Horizontal" RepeatLayout="Flow" CellSpacing="10" CellPadding="10" CssClass="chkMargin" Enabled="false"></asp:CheckBoxList>
+                                    <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -479,9 +511,53 @@
                                 <label class="col-md-3 control-label" for="submit"></label>
                                 <div class="col-md-9">
                                     <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary" Text="Submit" OnClick="btnSubmit_Click" Visible="false" />
+                                    <%--<button id="submit" name="submit" class="btn btn-primary">Insert</button>--%>
                                 </div>
                             </div>
-                            
+                            <!-- 
+                                <fieldset>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="title">Title</label>
+                        <div class="col-md-9">
+                            <input id="title" name="title" type="text" placeholder="Product name" class="form-control input-md" required="">
+ 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="textarea">Description</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" id="textarea" name="description" placeholder="Description" ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="price">Price</label>
+                        <div class="col-md-9">
+                            <input id="price" name="price" type="text" placeholder="Product price" class="form-control input-md" required="">
+ 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="image">Image URL</label>
+                        <div class="col-md-9">
+                            <input id="image" name="image" type="text" placeholder="Image URL" class="form-control input-md" >
+ 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="file">File</label>
+                        <div class="col-md-9">
+                            <input id="file" name="file" class="input-file" type="file">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="submit"></label>
+                        <div class="col-md-9">
+                            <button id="submit" name="submit" class="btn btn-primary">Insert</button>
+                        </div>
+                    </div>
+ 
+                </fieldset>
+                                -->
                         </div>
                     </div>
 
@@ -519,4 +595,7 @@
                 $("#<%= chkLingkungan.ClientID %>").buttonset();
             });
         </script>
-</asp:Content>
+    </form>
+</body>
+</html>
+

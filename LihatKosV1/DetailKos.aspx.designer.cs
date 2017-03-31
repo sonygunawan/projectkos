@@ -76,22 +76,13 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.Label lblTahunan;
         
         /// <summary>
-        /// btnFavorit control.
+        /// btnHubungi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFavorit;
-        
-        /// <summary>
-        /// btnBook control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBook;
+        protected global::System.Web.UI.WebControls.Button btnHubungi;
         
         /// <summary>
         /// lblNamaPengelola control.
@@ -193,22 +184,67 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.TextBox txtPemilik;
         
         /// <summary>
-        /// gvKosTelepon control.
+        /// txtAlamatPemilik control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvKosTelepon;
+        protected global::System.Web.UI.WebControls.TextBox txtAlamatPemilik;
         
         /// <summary>
-        /// gvKamarKos control.
+        /// txtTlpPemilik control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvKamarKos;
+        protected global::System.Web.UI.WebControls.TextBox txtTlpPemilik;
+        
+        /// <summary>
+        /// txtNamaPengelola control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNamaPengelola;
+        
+        /// <summary>
+        /// txtTlpPengelola control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTlpPengelola;
+        
+        /// <summary>
+        /// ddlMinimumBayarMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMinimumBayarMonth;
+        
+        /// <summary>
+        /// txtMinimumBayarDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMinimumBayarDesc;
+        
+        /// <summary>
+        /// txtLuasKamar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLuasKamar;
         
         /// <summary>
         /// rdlTipeKos control.

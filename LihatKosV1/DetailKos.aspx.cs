@@ -120,19 +120,16 @@ namespace LihatKosV1
                         item.Selected = true;
                 }
                 //KosTelepon 
-                gvKosTelepon.DataSource = Data.KosTelepon;
-                gvKosTelepon.DataBind();
+                //gvKosTelepon.DataSource = Data.KosTelepon;
+                //gvKosTelepon.DataBind();
                 //KosKamar
-                gvKamarKos.DataSource = Data.KosKamar;
-                gvKamarKos.DataBind();
+                //gvKamarKos.DataSource = Data.KosKamar;
+                //gvKamarKos.DataBind();
 
                 if (Session["UserID"] != null)
                 {
-                    //lblNamaPengelola.Text = Data.NamaPengelola;
-                    //lblNmrTlpnPengelola.Text = Data.KontakPengelola;
-                    //btnBook.Visible = false;
                     bool favVal = new FavoriteSystem().GetFormKosFavorit(ID, Convert.ToInt64(Session["UserID"]));
-                    btnFavorit.Enabled = (favVal == true) ? false : true;
+                    //btnFavorit.Enabled = (favVal == true) ? false : true;
                 }
                 //rptGambarKos.DataSource = AmbilListGambar(Data.UserID,ID);
                 //rptGambarKos.DataBind();
@@ -204,7 +201,7 @@ namespace LihatKosV1
                     ID = Convert.ToInt64(Request.QueryString["ID"]);
                 }
                 bool retVal = new FavoriteSystem().InsertFormKosFavorit(ID, Convert.ToInt64(Session["UserID"]));
-                btnFavorit.Enabled = (retVal == true) ? false : true;
+                //btnFavorit.Enabled = (retVal == true) ? false : true;
             }
         }
 
@@ -216,11 +213,6 @@ namespace LihatKosV1
                 
                 Image imgKos = (Image)e.Item.FindControl("imgKos");
                 imgKos.ImageUrl = DataStr;
-                //HyperLink hlDetailLink = (HyperLink)e.Item.FindControl("hlDetailLink");
-
-                ////lblHargaBulanan.Text = Data.Harga.ToString("N2");
-                //lblKeterangan.Text = Data.Keterangan;
-                //hlDetailLink.NavigateUrl = "../../DetailKos?id=" + Data.ID.ToString();
             }
         }
 
