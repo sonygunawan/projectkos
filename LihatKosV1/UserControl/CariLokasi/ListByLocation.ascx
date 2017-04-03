@@ -18,7 +18,8 @@
             <tr>
                 <td>
                     <asp:HyperLink ID="hlDetailLink" runat="server" NavigateUrl="~/DetailKos.aspx">
-                    <img src="images/64x64.png" class="img-responsive center-block" alt=""></asp:HyperLink></td>
+                        <asp:Image ID="imgDetail" runat="server" CssClass="img-responsive center-block" />
+                    <%--<img src="images/64x64.png" class="img-responsive center-block" alt="">--%></asp:HyperLink></td>
                 <td><asp:Label ID="lblHargaBulanan" runat="server"></asp:Label> /bln</td>
                 <td><asp:Label ID="lblLocation" runat="server"></asp:Label></td>
             </tr>

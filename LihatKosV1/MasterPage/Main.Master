@@ -91,6 +91,7 @@
                             <ul class="dropdown-menu">
                               <li><a href="/FormApproval">Form Approval</a></li>
                               <li><a href="/FormUser">Form User</a></li>
+                              <li><a href="/FormBanner">Form Banner</a></li>
                             </ul>
                           </li>       
                         <%--<li id="liRegister" runat="server"><a href="/Register">Register</a></li>

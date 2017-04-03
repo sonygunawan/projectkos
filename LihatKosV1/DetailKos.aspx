@@ -118,9 +118,18 @@
         <li><a href="contact.php">Contact</a></li>
       -->
 
-                        <li><a href="/Register">Register</a></li>
-                        <li><a href="/Login">Login</a></li>
+                        <li id="liAdmin" runat="server" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="/FormApproval">Form Approval</a></li>
+                              <li><a href="/FormUser">Form User</a></li>
+                              <li><a href="/FormBanner">Form Banner</a></li>
+                            </ul>
+                          </li>    
                     </ul>
+                    <p id="pWelcome" runat="server" class="navbar-text" style="margin-left:50px;"><span class="welcome">Welcome, <a href="#" class="navbar-link"><asp:Literal ID="litUsername" runat="server"></asp:Literal></a>
+                        </span> <br /><a href="#" class="navbar-link">My Account</a> | <a href="#" class="navbar-link">My Favorites</a> | <a href="/Logout" class="navbar-link">Logout</a></p>        
+                     
                 </div>
                 <!-- navbar-collapse -->
             </div>

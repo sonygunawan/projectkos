@@ -134,9 +134,38 @@ namespace LihatKosV1
                 rptGambarKos.DataSource = AmbilListGambar(Data.UserID,ID);
                 rptGambarKos.DataBind();
                 new FormKosSystem().UpdateFormKosView(ID);
+
+            }
+            LoadPage();
+        }
+        private void LoadPage()
+        {
+
+            if (Session["UserID"] == null)
+            {
+                //liTambahKos.Visible = false;
+                //liLogin.Visible = true;
+                //liRegister.Visible = true;
+                pWelcome.Visible = false;
+                liAdmin.Visible = false;
+
+                //MPELogin.Show();
+            }
+            else
+            {
+                //liTambahKos.Visible = true;
+                pWelcome.Visible = true;
+                var user = new UserSystem().GetUsers(Convert.ToInt64(Session["UserID"]))[0];
+                if (user.TipeUserID == 1 || user.TipeUserID == 2)
+                    liAdmin.Visible = true;
+                else
+                    liAdmin.Visible = false;
+
+                litUsername.Text = user.UserName;
+
+                //MPELogin.Hide();
             }
         }
-
         private List<string> AmbilListGambar(Int64 UserID, Int64 ID)
         {
             string StrUserID = "User-" + UserID.ToString();
@@ -223,6 +252,8 @@ namespace LihatKosV1
                 string DataStr = (string)e.Item.DataItem;
                 
                 Image imgKos = (Image)e.Item.FindControl("imgKos");
+                imgKos.Width = 600;
+                imgKos.Height = 400;
                 imgKos.ImageUrl = DataStr;
                 //imgKos.Attributes.Add("Style", "width:100%;");
             }

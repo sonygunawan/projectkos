@@ -43,5 +43,30 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+
+        public List<string> GetAllBanner()
+        {
+            try
+            {
+                List<string> retVal = new List<string>();
+
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetAllBanner");
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    string data = "";
+                    while (dataReader.Read())
+                    {
+                        data = Convert.ToString(dataReader["FilePath"]);
+                        retVal.Add(data);
+                    }
+                    dataReader.Close();
+                }
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
     }
 }

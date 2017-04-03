@@ -83,10 +83,14 @@ namespace LihatKosV1.UserControl.CariLokasi
                 Label lblHargaBulanan = (Label)e.Item.FindControl("lblHargaBulanan");
                 Label lblLocation = (Label)e.Item.FindControl("lblLocation");
                 HyperLink hlDetailLink = (HyperLink)e.Item.FindControl("hlDetailLink");
-
+                Image imgDetail = (Image)e.Item.FindControl("imgDetail");
                 lblHargaBulanan.Text = Data.Harga.ToString("N2");
                 lblLocation.Text = Data.Nama;
                 hlDetailLink.NavigateUrl = "../../DetailKos?id=" + Data.ID.ToString();
+                var defaultImage = new DefaultImageSystem().GetDefaultPhotoByFormID(Data.ID);
+                imgDetail.Width = 64;
+                imgDetail.Height = 64;
+                imgDetail.ImageUrl = defaultImage.FilePath;
             }
         }
     }

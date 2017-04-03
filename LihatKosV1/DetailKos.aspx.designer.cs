@@ -31,6 +31,33 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.ScriptManager sm;
         
         /// <summary>
+        /// liAdmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liAdmin;
+        
+        /// <summary>
+        /// pWelcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pWelcome;
+        
+        /// <summary>
+        /// litUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litUsername;
+        
+        /// <summary>
         /// lblNama control.
         /// </summary>
         /// <remarks>
