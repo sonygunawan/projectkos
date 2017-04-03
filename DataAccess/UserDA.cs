@@ -125,5 +125,26 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+
+        public bool UpdateUser(UserData user)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdateUser");
+                db.AddInParameter(dbCommand, "ID", DbType.Int64, user.ID);
+                db.AddInParameter(dbCommand, "UserName", DbType.String, user.UserName);
+                db.AddInParameter(dbCommand, "LastActivityDate", DbType.DateTime, user.LastActivityDate);
+                db.AddInParameter(dbCommand, "Email", DbType.String, user.Email);
+                db.AddInParameter(dbCommand, "TipeUser", DbType.Int32, user.TipeUserID);
+
+                db.ExecuteNonQuery(dbCommand);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
     }
 }

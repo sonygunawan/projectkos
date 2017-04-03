@@ -12,11 +12,11 @@ namespace LihatKosV1.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            LoadBanner();
         }
         private void LoadBanner()
         {
-            gvBanner.DataSource = new BannerSystem().GetAllBanner();
+            gvBanner.DataSource = new BannerSystem().GetListBanner();
             gvBanner.DataBind();
         }
         protected void gvBanner_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -29,6 +29,13 @@ namespace LihatKosV1.Admin
             gvBanner.PageIndex = e.NewPageIndex;
         }
 
+        protected void btnAddBanner_Click(object sender, EventArgs e)
+        {
+            string maxBanner = new BannerSystem().GetMaxBanner();
+            ViewState["MaxBanner"] = maxBanner;
+            litPopupTitle.Text = "Add Banner: " + maxBanner;
+            MPEForm.Show();
+        }
         protected void lbtnEdit_Command(object sender, CommandEventArgs e)
         {
 
@@ -38,5 +45,11 @@ namespace LihatKosV1.Admin
         {
 
         }
+
+        protected void btnTambah_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
