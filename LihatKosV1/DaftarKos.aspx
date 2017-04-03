@@ -3,9 +3,21 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://jqueryui.com/jquery-wp-content/themes/jqueryui.com/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        
+        <script type="text/javascript">
+            $(function () {
+                $("input").checkboxradio({
+                    icon: false
+                });
+            });
+            <%-- $("#<%= chkFasilitas.ClientID %>").buttonset();
+                                 $("#<%= chkLingkungan.ClientID %>").buttonset();--%>
+                                
+
+                            </script> 
         <div style="margin-top: 20px;"></div>
         <div class="container">
             <div class="row">
@@ -581,10 +593,7 @@
                                     <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control input-sm"></asp:TextBox>--%>
                                 </div>
                             </div>
-                            <script type="text/javascript"> <%--$(document).ready(function ($) {
-                                 $("#<%= chkFasilitas.ClientID %>").buttonset();
-                                 $("#<%= chkLingkungan.ClientID %>").buttonset();
-                             });--%> </script> 
+                            
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Keterangan Lain-lain<a class="fa fa-info-circle">
                                   </a></label>

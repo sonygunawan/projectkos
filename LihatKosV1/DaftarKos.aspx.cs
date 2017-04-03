@@ -58,9 +58,9 @@ namespace LihatKosV1
 
             }
             
-            ClientScript.RegisterStartupScript(GetType(), "checkboxBeautify",
-                  "$('input[id=*chkFasilitas]').buttonset(); " +
-                  "$('input[id=*chkLingkungan]').buttonset(); ", true);
+            //ClientScript.RegisterStartupScript(GetType(), "checkboxBeautify",
+            //      "$('input[id=*chkFasilitas]').buttonset(); " +
+            //      "$('input[id=*chkLingkungan]').buttonset(); ", true);
 
         }
 

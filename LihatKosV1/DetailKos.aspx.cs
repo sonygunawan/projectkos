@@ -131,22 +131,33 @@ namespace LihatKosV1
                     bool favVal = new FavoriteSystem().GetFormKosFavorit(ID, Convert.ToInt64(Session["UserID"]));
                     //btnFavorit.Enabled = (favVal == true) ? false : true;
                 }
-                //rptGambarKos.DataSource = AmbilListGambar(Data.UserID,ID);
-                //rptGambarKos.DataBind();
+                rptGambarKos.DataSource = AmbilListGambar(Data.UserID,ID);
+                rptGambarKos.DataBind();
                 new FormKosSystem().UpdateFormKosView(ID);
             }
         }
 
         private List<string> AmbilListGambar(Int64 UserID, Int64 ID)
         {
+            string StrUserID = "User-" + UserID.ToString();
+            string StrKosID = "Kos-" + ID.ToString();
             List<string> listStr = new List<string>();
             var remPath = System.Web.Hosting.HostingEnvironment.MapPath("~/"); //Path.GetFullPath("/");
-            
-            string[] arrFiles = Directory.GetFiles(MapPath("~/UploadedImage/User-" + UserID + "/Kos-" + ID.ToString() + "/"));
-            foreach(string arrItem in arrFiles)
+            string[] FolderList = Directory.GetDirectories(MapPath("~/UploadedImage/" + StrUserID + "/" + StrKosID));
+            int CountFolder = FolderList.Count();
+            //string[] FolderList = Directory.GetFiles(MapPath("~/UploadedImage/User-" + UserID + "/Kos-" + ID.ToString() + "/"));
+            foreach(string arrItem in FolderList)
             {
-                var arr = arrItem.Replace(remPath, "");
-                listStr.Add(arr);
+                string[] files = Directory.GetFiles(arrItem);
+                foreach (string file in files)
+                {
+                    //string newFolder = "folder-" + (CountFolder + 1).ToString();
+                    if (file.Contains("849.jpg"))
+                    {
+                        var arr = file.Replace(remPath, "");
+                        listStr.Add(arr);
+                    }
+                }
             }
             return listStr;
         }
@@ -213,6 +224,7 @@ namespace LihatKosV1
                 
                 Image imgKos = (Image)e.Item.FindControl("imgKos");
                 imgKos.ImageUrl = DataStr;
+                //imgKos.Attributes.Add("Style", "width:100%;");
             }
         }
 
@@ -230,6 +242,11 @@ namespace LihatKosV1
                 txtJmlKamar.Text = data.JmlKamar.ToString();
                 txtKamarKosong.Text = data.KamarKosong.ToString();
             }
+        }
+
+        protected void rptImageKos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
         }
     }
 }

@@ -53,6 +53,44 @@
 <body id="home">
     <form class="form-horizontal" id="form1" runat="server">
         <asp:ScriptManager ID="sm" AsyncPostBackTimeout="36000" runat="server" ></asp:ScriptManager>
+        <style type="text/css">
+            /*.child {
+                 display: block;
+                 position: absolute;
+                 top: 50%;
+                 left: 50%;
+                 transform: translate(-50%, -50%);
+                 -webkit-transform: translate(-50%, -50%); 
+                 -moz-transform: translate(-50%, -50%);
+                 -ms-transform: translate(-50%, -50%); 
+                 -o-transform: translate(-50%, -50%);
+                 
+                }
+             #item
+            {
+                width:1000px;
+                height:625px;
+                border: 1px solid gray;
+                margin:1px;
+            }
+            #item img
+            {
+                max-width:1000px; 
+                max-height:625px;
+                margin:auto;
+                width:100%;
+                display:block;
+            }*/
+            .owl-carousel .owl-item img {
+                height:auto;
+                width:100%;
+                display: block;
+            }
+
+            .owl-carousel .item {
+                margin:0px;
+            }
+        </style>
         <!-- header -->
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
@@ -106,7 +144,14 @@
                              <div class="form-group">
                                 <div class="col-sm-8">
                                     <div class="owl-carousel owl-theme">
-                                        <div class="item">
+                                        <asp:Repeater ID="rptGambarKos" runat="server" OnItemDataBound="rptGambarKos_ItemDataBound">
+                                            <ItemTemplate>
+                                                <div class="item">
+                                                    <asp:Image ID="imgKos" runat="server" CssClass="imgKos" AlternateText="slide" />
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        <%--<div class="item">
                                             <img src="images/photos/banner.jpg" class="img-responsive" alt="slide">
                                         </div>
                                         <div class="item">
@@ -120,7 +165,7 @@
                                         </div>
                                         <div class="item">
                                             <img src="images/photos/1900x849.png" class="img-responsive" alt="slide">
-                                        </div>
+                                        </div>--%>
                                     </div>
                                 </div>
 
@@ -590,7 +635,22 @@
                 });
 
                 $(".owl-carousel").owlCarousel();
-
+                //$(".owl-carousel").owlCarousel({
+                //    afterUpdate: function () {
+                //        updateSize();
+                //    },
+                //    afterInit: function () {
+                //        updateSize();
+                //    }
+                //});
+                //function updateSize() {
+                //    var minHeight = parseInt($('.owl-item').eq(0).css('height'));
+                //    $('.owl-item').each(function () {
+                //        var thisHeight = parseInt($(this).css('height'));
+                //        minHeight = (minHeight <= thisHeight ? minHeight : thisHeight);
+                //    });
+                //    $('.owl-wrapper-outer').css('height', minHeight + 'px');
+                //}
                 $("#<%= chkFasilitas.ClientID %>").buttonset();
                 $("#<%= chkLingkungan.ClientID %>").buttonset();
             });

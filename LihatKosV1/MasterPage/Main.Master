@@ -410,6 +410,7 @@ banner-->
                 $('.owl-carousel').owlCarousel({
                     loop: true,
                     items: 1,
+                    height:849,
                     autoplay: true,
                     autoplayTimeout: 5000,
                     autoplayHoverPause: true
