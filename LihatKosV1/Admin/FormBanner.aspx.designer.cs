@@ -121,6 +121,42 @@ namespace LihatKosV1.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtUrl;
         
         /// <summary>
+        /// throbberBanner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label throbberBanner;
+        
+        /// <summary>
+        /// fuFotoBanner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AjaxFileUpload fuFotoBanner;
+        
+        /// <summary>
+        /// uploadCompleteInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label uploadCompleteInfo;
+        
+        /// <summary>
+        /// gvFileList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvFileList;
+        
+        /// <summary>
         /// btnTambah control.
         /// </summary>
         /// <remarks>

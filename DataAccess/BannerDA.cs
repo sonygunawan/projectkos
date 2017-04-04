@@ -74,9 +74,9 @@ namespace LihatKos.DataAccess
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetAllBanner");
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 {
-                    var data = new BannerData();
                     while (dataReader.Read())
                     {
+                        var data = new BannerData();
                         data.ID = Convert.ToInt32(dataReader["ID"]);
                         data.Kode = Convert.ToString(dataReader["Kode"]);
                         data.Nama = Convert.ToString(dataReader["Nama"]);
@@ -108,6 +108,7 @@ namespace LihatKos.DataAccess
                     {
                         data.ID = Convert.ToInt32(dataReader["ID"]);
                         data.Kode = Convert.ToString(dataReader["Kode"]);
+                        data.Nama = Convert.ToString(dataReader["Nama"]);
                         data.FilePath = Convert.ToString(dataReader["FilePath"]);
                         data.Url = Convert.ToString(dataReader["Url"]);
                         data.Prioritas = Convert.ToInt32(dataReader["Prioritas"]);
@@ -135,6 +136,24 @@ namespace LihatKos.DataAccess
 
                 db.ExecuteNonQuery(dbCommand);
                 return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+        public bool DeleteBanner(int ID)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DeleteBannerByID");
+                db.AddInParameter(dbCommand, "ID", DbType.Int32, ID);
+                
+                db.ExecuteNonQuery(dbCommand);
+                return true;
+
             }
             catch (Exception ex)
             {

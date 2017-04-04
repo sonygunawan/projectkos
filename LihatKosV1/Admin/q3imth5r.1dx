@@ -2,11 +2,6 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <script>
-        $(function () {
-            $(".ajax__fileupload_footer").hide();
-        })
-</script> 
     <div style="margin-top:20px;"></div>
         <div class="container">
             <div class="row col-md-6 custyle">
@@ -22,7 +17,7 @@
                                     AllowPaging="true" PageSize="10" OnPageIndexChanging="gvBanner_PageIndexChanging" >
                                     <Columns>
                                         <asp:BoundField DataField="ID" HeaderText="ID" />
-                                        <asp:BoundField DataField="Nama" HeaderText="Label" />
+                                        <asp:BoundField DataField="Nama" HeaderText="Nama Banner" />
                                         <asp:BoundField DataField="FilePath" HeaderText="File" />
                                         <asp:BoundField DataField="Url" HeaderText="Url" />
                                         <asp:BoundField DataField="Prioritas" HeaderText="Prioritas" />
@@ -70,23 +65,23 @@
                             }
 
                             function createFileInfo1(e) {
-                                var holder = document.createElement('div');
-                                holder.appendChild(document.createTextNode(e.get_fileName() + ' with size ' + e.get_fileSize() + ' bytes'));
+                                //var holder = document.createElement('div');
+                                //holder.appendChild(document.createTextNode(e.get_fileName() + ' with size ' + e.get_fileSize() + ' bytes'));
 
-                                return holder;
+                                //return holder;
                             }
 
                             function createThumbnail1(e, url) {
-                                var holder = document.createElement('div');
-                                var img = document.createElement("img");
-                                img.style.width = '179px';
-                                img.style.height = '80px';
-                                img.setAttribute("src", url);
+                                //var holder = document.createElement('div');
+                                //var img = document.createElement("img");
+                                //img.style.width = '80px';
+                                //img.style.height = '80px';
+                                //img.setAttribute("src", url);
 
-                                holder.appendChild(createFileInfo1(e));
-                                holder.appendChild(img);
+                                //holder.appendChild(createFileInfo1(e));
+                                //holder.appendChild(img);
 
-                                return holder;
+                                //return holder;
                             }
 
                             function onClientBannerUploadStart(sender, e) {
@@ -114,7 +109,7 @@
                         <asp:Button ID="btn1" runat="server" Style="display:none;" />
                         <cc1:ModalPopupExtender ID="MPEForm" runat="server" TargetControlID="btn1" DropShadow="true" PopupControlID="pnlForm" 
                             CancelControlID="btnClose" BackgroundCssClass="modalBackground" />
-                        <asp:Panel ID="pnlForm" runat="server" Style="display:none;background-color: #ffffff;width:900px;border-radius: 6px;background-clip: padding-box;overflow-y:auto;">
+                        <asp:Panel ID="pnlForm" runat="server" Style="display:none;background-color: #ffffff;width:900px;border-radius: 6px;background-clip: padding-box;">
                             <div class="modal-header">
                                 <asp:Button ID="btnClose" CssClass="close" runat="server" Text="x" />
                                 <h3><asp:Literal ID="litPopupTitle" runat="server"></asp:Literal></h3>
@@ -128,55 +123,28 @@
                                             <asp:TextBox ID="txtKode" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
                                         </div>--%>
                                         <div class="form-group">
-                                            <label>Label</label>
+                                            <label>Nama</label>
                                             <asp:TextBox ID="txtNama" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                        <div class="form-group">
+                                            <asp:UpdatePanel ID="UpdatePanelFoto" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:Label runat="server" ID="throbberBanner" Style="display: none;"><img align="absmiddle" alt="" src="../images/uploading.gif" /></asp:Label>
+                                                    <ajaxToolkit:AjaxFileUpload ID="fuFotoBanner" runat="server" Padding-Bottom="4"
+                                                    Padding-Left="2" Padding-Right="1" Padding-Top="4" ThrobberID="throbberBanner"
+                                                    MaxFileSize="2048" MaximumNumberOfFiles="3" AllowedFileTypes="jpg,jpeg,png,tiff" AutoStartUpload="true"
+                                                    OnClientUploadComplete="onClientBannerUploadComplete" OnUploadComplete="fuFotoBanner_UploadComplete"
+                                                    OnClientUploadCompleteAll="onClientBannerUploadCompleteAll" OnUploadCompleteAll="fuFotoBanner_UploadCompleteAll"
+                                                    OnUploadStart="fuFotoBanner_UploadStart" OnClientUploadStart="onClientDepanUploadStart" OnClientUploadError="onClientDepanUploadError" />
+                                    
+                                                    <asp:Label ID="uploadCompleteInfo" runat="server" ClientIDMode="Static" />
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
                                         </div>
                                         <div class="form-group">
                                             <label>Url</label>
                                             <asp:TextBox ID="txtUrl" runat="server" CssClass="form-control"></asp:TextBox>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Agar hasil maksimal, gunakan gambar dengan ukuran 1900x849 px </label>
-                                            
-                                                    <asp:Label runat="server" ID="throbberBanner" Style="display: none;"><img align="absmiddle" alt="" src="../images/uploading.gif" /></asp:Label>
-                                                    <ajaxToolkit:AjaxFileUpload ID="fuFotoBanner" runat="server" Padding-Bottom="4"
-                                                    Padding-Left="2" Padding-Right="1" Padding-Top="4" ThrobberID="throbberBanner"
-                                                    MaxFileSize="4096" Mode="Client" MaximumNumberOfFiles="1" AllowedFileTypes="jpg,jpeg,png,tiff"
-                                                    OnClientUploadComplete="onClientBannerUploadComplete" OnUploadComplete="fuFotoBanner_UploadComplete"
-                                                    OnClientUploadCompleteAll="onClientBannerUploadCompleteAll" OnUploadCompleteAll="fuFotoBanner_UploadCompleteAll"
-                                                    OnUploadStart="fuFotoBanner_UploadStart" OnClientUploadStart="onClientBannerUploadStart" OnClientUploadError="onClientBannerUploadError" />
-                                    
-                                                    <asp:Label ID="uploadCompleteInfo" runat="server" ClientIDMode="Static" />
-                                                    <div id="testuploaded" style="display: block; padding: 4px; border: gray 1px solid;">
-                                                        <h4>list of uploaded files:</h4>
-                                                        <hr />
-                                                        <div style="border:0.5px dotted black;">
-                                                            <asp:GridView ID="gvFileList" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="false"
-                                                                 ShowHeader="true" ShowFooter="false" GridLines="None" OnRowDataBound="gvFileList_RowDataBound">
-                                                                <Columns>
-                                                                    <asp:TemplateField HeaderText="Image" ItemStyle-Width="30%">
-                                                                        <ItemTemplate>
-                                                                            <div style="padding:4px;">
-                                                                                <asp:Image ID="imgFile" runat="server" Style="width:179px;height:80px;" />
-                                                                        </ItemTemplate>
-                                                                    </asp:TemplateField>
-                                                                    <%--<asp:TemplateField HeaderText="Default" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                                                        <ItemTemplate>
-                                                                            <asp:Button ID="btnDefault" runat="server" Text="Default" />
-                                                                            <asp:Literal ID="litStatus" runat="server"></asp:Literal>
-                                                                        </ItemTemplate>
-                                                                    </asp:TemplateField>--%>
-                                                                    <asp:TemplateField ItemStyle-Width="55%">
-                                                                        <ItemTemplate>
-                                                                            </div>
-                                                                        </ItemTemplate>
-                                                                    </asp:TemplateField>
-                                                                </Columns>
-                                                            </asp:GridView>
-                                                        </div>
-                                                    </div>
-                                        </div>
-                                        
                                         <asp:LinkButton ID="btnTambah" runat="server" CssClass="btn btn-info" OnClick="btnTambah_Click">Tambah</asp:LinkButton>
                                         </div>
                                     </div>
