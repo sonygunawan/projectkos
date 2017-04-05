@@ -22,6 +22,12 @@ namespace LihatKosV1.Admin
             }
             LoadBanner();
 
+            if (Page.IsPostBack)
+            {
+                if (!string.IsNullOrEmpty(Request.QueryString["fileId"]))
+                    ScriptManager.RegisterStartupScript(UpdatePanelPopup, UpdatePanelPopup.GetType(), "", "return $('#ContentPlaceHolder1_fuFotoBanner_UploadOrCancelButton').click();", true);
+                    //ClientScript.RegisterStartupScript(UpdatePanelPopup, UpdatePanelPopup.GetType(), "", "return $('#ContentPlaceHolder1_fuFotoBanner_UploadOrCancelButton').click();", true);
+            }
             if (Request.QueryString["preview"] != "1" || string.IsNullOrEmpty(Request.QueryString["fileId"]))
                 return;
 
@@ -78,8 +84,10 @@ namespace LihatKosV1.Admin
         protected void btnAddBanner_Click(object sender, EventArgs e)
         {
             string maxBanner = new BannerSystem().GetMaxBanner();
-            ViewState["BannerID"] = maxBanner;
-            litPopupTitle.Text = "Add Banner: " + maxBanner;
+            Session["maxBanner"] = maxBanner.Replace(';','~');
+            litPopupTitle.Text = "Add Banner: " + maxBanner.Split(';')[1];
+            txtNama.Text = "";
+            txtUrl.Text = "";
             btnTambah.Text = "Tambah";
             MPEForm.Show();
         }
@@ -87,6 +95,7 @@ namespace LihatKosV1.Admin
         {
             string[] args = e.CommandArgument.ToString().Split('|');
             int BannerID = Convert.ToInt32(args[0]);
+            Session["BannerID"] = BannerID;
             var data = new BannerSystem().GetBanner(BannerID);
             txtNama.Text = data.Nama;
             txtUrl.Text = data.Url;
@@ -116,9 +125,59 @@ namespace LihatKosV1.Admin
             LoadBanner();
         }
 
+        //private string UpdateFotoBanner(int BannerID)
+        //{
+        //    try
+        //    {
+        //        fuFotoBanner.SaveAs(MapPath(filePath));
+        //        fuFotoBanner.up
+        //        return filePath;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return "";
+        //        throw ex;
+        //    }
+            
+        //}
+        private void InsertBanner()
+        {
+            var Kode = Session["maxBanner"].ToString().Split('~');
+            var data = new BannerData();
+            data.Kode = Kode[1];
+            data.Nama = txtNama.Text;
+            data.Url = txtUrl.Text;
+            
+            //fuFotoBanner.UploadComplete += fuFotoBanner_UploadComplete;
+            data.FilePath = Session["filePath"].ToString();// UpdateFotoBanner(Convert.ToInt32(Kode[0]));
+            data.Prioritas = Convert.ToInt32(Kode[2]);
+            new BannerSystem().UpdateBanner(data);
+        }
+        private void EditBanner()
+        {
+            var BannerID = Convert.ToInt32(Session["BannerID"]);
+            var data = new BannerData();
+            data.ID = BannerID;
+            data.Nama = txtNama.Text;
+            data.FilePath = Session["filePath"].ToString();
+            data.Url = txtUrl.Text;
+            new BannerSystem().UpdateBanner(data);
+        }
         protected void btnTambah_Click(object sender, EventArgs e)
         {
-
+            //ScriptManager.RegisterStartupScript(UpdatePanelPopup, UpdatePanelPopup.GetType(), "", "return $('#ContentPlaceHolder1_fuFotoBanner_UploadOrCancelButton').click();", true);
+            
+            if (btnTambah.Text == "Tambah")
+            {
+                //Insert
+                InsertBanner();
+            }
+            else if (btnTambah.Text == "Save")
+            {
+                //Edit
+                EditBanner();
+            }
+            Response.Redirect("/FormBanner");
         }
 
         protected void fuFotoBanner_UploadStart(object sender, AjaxControlToolkit.AjaxFileUploadStartEventArgs e)
@@ -161,7 +220,12 @@ namespace LihatKosV1.Admin
             }
             if (Directory.Exists(MapPath("~/images/photos")))
             {
-                imgStr.Save(MapPath("~/images/photos/" + file.FileName));
+                string maxBanner = Session["maxBanner"].ToString();
+                var Kode = maxBanner.Split('~');
+                var filePath = "~/images/photos/banner-" + Kode[0].ToString() + ".jpg";
+                Session["filePath"] = filePath.Replace("~/","");
+
+                imgStr.Save(MapPath(filePath));
                 //file.DeleteTemporaryData();
             }
         }

@@ -23,17 +23,19 @@ namespace LihatKos.DataAccess
         {
             try
             {
-                string MaxCode = "";
+                string ID = "0"; string MaxCode = ""; string Prioritas = "0";
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetMaxBanner");
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 {
                     while (dataReader.Read())
                     {
+                        ID = Convert.ToString(dataReader["ID"]);
                         MaxCode = Convert.ToString(dataReader["Kode"]);
+                        Prioritas = Convert.ToString(dataReader["Prioritas"]);
                     }
                     dataReader.Close();
                 }
-                return MaxCode;
+                return ID + ";" + MaxCode + ";" + Prioritas;
             }
             catch (Exception ex)
             {

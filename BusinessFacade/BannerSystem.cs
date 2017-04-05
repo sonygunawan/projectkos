@@ -25,6 +25,10 @@ namespace BusinessFacade
         {
             return new BannerDA().GetBanner(ID);
         }
+        public bool UpdateBanner(BannerData data)
+        {
+            return new BannerDA().UpdateBanner(data);
+        }
         public bool DeleteBanner(int ID)
         {
             return new BannerDA().DeleteBanner(ID);

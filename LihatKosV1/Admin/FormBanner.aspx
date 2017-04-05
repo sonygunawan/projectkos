@@ -4,8 +4,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script>
         $(function () {
-            $(".ajax__fileupload_footer").hide();
-        })
+            //$(".ajax__fileupload_footer").hide();
+            $("#btnTambah").click(function () {
+                $('#ContentPlaceHolder1_fuFotoBanner_UploadOrCancelButton').click();
+            });
+        });
 </script> 
     <div style="margin-top:20px;"></div>
         <div class="container">
@@ -177,7 +180,8 @@
                                                     </div>
                                         </div>
                                         
-                                        <asp:LinkButton ID="btnTambah" runat="server" CssClass="btn btn-info" OnClick="btnTambah_Click">Tambah</asp:LinkButton>
+                                        <asp:LinkButton ID="btnTambah" runat="server" CssClass="btn btn-info" 
+                                            OnClick="btnTambah_Click" ClientIDMode="Static">Tambah</asp:LinkButton>
                                         </div>
                                     </div>
                                 </div>
