@@ -133,6 +133,8 @@
                                         <div class="form-group">
                                             <label>Label</label>
                                             <asp:TextBox ID="txtNama" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <label>Prioritas</label>
+                                            <asp:TextBox ID="txtPrioritas" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                             <label>Url</label>

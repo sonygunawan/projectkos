@@ -35,18 +35,39 @@ namespace LihatKosV1
                 FormKosData data = (FormKosData)e.Row.DataItem;
                 LinkButton lbtnApprove = (LinkButton)e.Row.Cells[12].FindControl("lbtnApprove");
                 LinkButton lbtnAbort = (LinkButton)e.Row.Cells[12].FindControl("lbtnAbort");
-                if (data.StatusApproval == 1)
+                LinkButton lbtnActive = (LinkButton)e.Row.Cells[12].FindControl("lbtnActive");
+                LinkButton lbtnDeactive = (LinkButton)e.Row.Cells[12].FindControl("lbtnDeactive");
+                
+                if (data.StatusApproval == 0)
                 {
-                    lbtnApprove.Visible = false;
+                    lbtnApprove.Visible = true;
                     lbtnAbort.Visible = true;
                 }
                 else
                 {
-                    lbtnApprove.Visible = true;
+                    lbtnApprove.Visible = false;
                     lbtnAbort.Visible = false;
                 }
-                lbtnApprove.CommandArgument = data.ID.ToString();
-                lbtnAbort.CommandArgument = data.ID.ToString();
+                if (data.StatusAktif == 1)
+                {
+                    if (data.StatusApproval == 1)
+                        lbtnDeactive.Visible = true;
+                    else
+                        lbtnDeactive.Visible = false;
+
+                    lbtnActive.Visible = false;
+                }
+                else
+                {
+                    lbtnDeactive.Visible = false;
+                    lbtnActive.Visible = true;
+                }
+                //lbtnActive.Visible = true;
+                //lbtnDeactive.Visible = true;
+                lbtnApprove.CommandArgument = lbtnAbort.CommandArgument = 
+                    lbtnActive.CommandArgument = lbtnDeactive.CommandArgument = 
+                    data.ID.ToString();
+                
             }
         }
         protected void lbApprove_Command(object sender, CommandEventArgs e)
@@ -58,7 +79,21 @@ namespace LihatKosV1
         protected void lbAbort_Command(object sender, CommandEventArgs e)
         {
             Int64 idx = Convert.ToInt64(e.CommandArgument);
-            new FormKosSystem().UpdateFormKosApproval(idx, 0);
+            new FormKosSystem().UpdateFormKosApproval(idx, -1);
+            LoadApproval();
+        }
+
+        protected void lbtnActive_Command(object sender, CommandEventArgs e)
+        {
+            Int64 idx = Convert.ToInt64(e.CommandArgument);
+            new FormKosSystem().UpdateFormKosAktif(idx, 1, "admin");
+            LoadApproval();
+        }
+
+        protected void lbtnDeactive_Command(object sender, CommandEventArgs e)
+        {
+            Int64 idx = Convert.ToInt64(e.CommandArgument);
+            new FormKosSystem().UpdateFormKosAktif(idx, 0, "admin");
             LoadApproval();
         }
         //protected void rptApprovalKos_ItemCommand(object source, RepeaterCommandEventArgs e)

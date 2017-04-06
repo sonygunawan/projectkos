@@ -43,6 +43,9 @@ namespace LihatKos.Common
         public string NamaArea { get; set; }
         public int StatusApproval { get; set; }
         public DateTime AuditTime { get; set; }
+        public int StatusAktif { get; set; }
+        public DateTime LastActiveDate { get; set; }
+
         public List<KosHargaData> KosHarga{get; set;}
         public List<KosFasilitasData> KosFasilitas { get; set; }
         public List<KosLingkunganData> KosLingkungan { get; set; }

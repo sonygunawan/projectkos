@@ -14,5 +14,6 @@ namespace LihatKos.Common
         public string TipeUser { get; set; }
         public int IsActive { get; set; }
         public DateTime LastActivityDate { get; set; }
+        public DateTime LastChangeAktifDate { get; set; }
     }
 }

@@ -368,6 +368,8 @@ namespace LihatKos.DataAccess
                         data.UserName = dataReader["UserName"].ToString();
                         data.StatusApproval = Convert.ToInt32(dataReader["StatusApproval"].ToString());
                         data.AuditTime = Convert.ToDateTime(dataReader["AuditTime"].ToString());
+                        data.StatusAktif = Convert.ToInt32(dataReader["StatusAktif"].ToString());
+                        data.LastActiveDate = Convert.ToDateTime(dataReader["LastActiveDate"].ToString());
                         formKos.Add(data);
                     }
                     dataReader.Close();
@@ -517,7 +519,6 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
-        
         public bool UpdateFormKosApproval(Int64 Id, int StatusApproval)
         {
             try
@@ -525,6 +526,24 @@ namespace LihatKos.DataAccess
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdateFormKosApproval");
                 db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, Id);
                 db.AddInParameter(dbCommand, "StatusApproval", DbType.Int32, StatusApproval);
+
+                db.ExecuteNonQuery(dbCommand);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+        public bool UpdateFormKosAktif(Int64 Id, int StatusAktif, string AuditUserName)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdateFormKosAktif");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, Id);
+                db.AddInParameter(dbCommand, "StatusAktif", DbType.Int32, StatusAktif);
+                db.AddInParameter(dbCommand, "AuditUserName", DbType.String, AuditUserName);
 
                 db.ExecuteNonQuery(dbCommand);
                 return true;

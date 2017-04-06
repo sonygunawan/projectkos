@@ -30,6 +30,8 @@
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lbtnApprove" OnCommand="lbApprove_Command" runat="server" CssClass="btn btn-info btn-xs" OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Approve</asp:LinkButton>
                                         <asp:LinkButton ID="lbtnAbort" OnCommand="lbAbort_Command" runat="server" CssClass="btn btn-danger btn-xs"  OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Abort</asp:LinkButton>
+                                        <asp:LinkButton ID="lbtnActive" OnCommand="lbtnActive_Command" runat="server" CssClass="btn btn-block btn-xs" OnClientClick="return confirm('Apakah Anda yakin ingin mengaktifkan Form ini?');">Aktifkan</asp:LinkButton>
+                                        <asp:LinkButton ID="lbtnDeactive" OnCommand="lbtnDeactive_Command" runat="server" CssClass="btn btn-danger btn-xs"  OnClientClick="return confirm('Apakah Anda yakin ingin menonaktifkan Form ini?');">Deaktifkan</asp:LinkButton>
                                     </ItemTemplate>
                                     <HeaderStyle Width="140px"></HeaderStyle>
                                     <ItemStyle HorizontalAlign="Center" />

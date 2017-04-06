@@ -111,7 +111,9 @@ namespace LihatKos.DataAccess
                         data.UserName = dataReader["UserName"].ToString();
                         data.TipeUser = dataReader["TipeUser"].ToString();
                         data.TipeUserID = Convert.ToInt32(dataReader["TipeUserID"].ToString());
+                        data.IsActive = Convert.ToInt32(dataReader["Aktif"]);
                         data.LastActivityDate = Convert.ToDateTime(dataReader["LastActivityDate"].ToString());
+                        data.LastChangeAktifDate = Convert.ToDateTime(dataReader["LastChangeAktifDate"].ToString());
                         retVal.Add(data);
                     }
                     dataReader.Close();
@@ -125,7 +127,6 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
-
         public bool UpdateUser(UserData user)
         {
             try
@@ -146,5 +147,54 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+        public bool UpdateUserAktif(UserData user)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdateUserAktif");
+                db.AddInParameter(dbCommand, "ID", DbType.Int64, user.ID);
+                db.AddInParameter(dbCommand, "Aktif", DbType.Int32, user.IsActive);
+
+                db.ExecuteNonQuery(dbCommand);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+
+        #region TipeUser
+        public List<TipeUserData> GetAllTipeUser()
+        {
+            try
+            {
+                List<TipeUserData> retVal = new List<TipeUserData>();
+
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetAllTipeUser");
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        TipeUserData data = new TipeUserData();
+                        data.ID = Convert.ToInt32(dataReader["ID"]);
+                        data.Kode = Convert.ToString(dataReader["Kode"]);
+                        data.Nama = Convert.ToString(dataReader["Nama"]);
+                        retVal.Add(data);
+                    }
+                    dataReader.Close();
+                }
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+        #endregion
+
     }
 }

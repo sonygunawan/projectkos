@@ -88,6 +88,7 @@ namespace LihatKosV1.Admin
             litPopupTitle.Text = "Add Banner: " + maxBanner.Split(';')[1];
             txtNama.Text = "";
             txtUrl.Text = "";
+            txtPrioritas.Text = "";
             btnTambah.Text = "Tambah";
             MPEForm.Show();
         }
@@ -99,6 +100,7 @@ namespace LihatKosV1.Admin
             var data = new BannerSystem().GetBanner(BannerID);
             txtNama.Text = data.Nama;
             txtUrl.Text = data.Url;
+            txtPrioritas.Text = data.Prioritas.ToString();
             BindFromBankFiles(BannerID);
             btnTambah.Text = "Save";
             MPEForm.Show();
@@ -150,17 +152,24 @@ namespace LihatKosV1.Admin
             
             //fuFotoBanner.UploadComplete += fuFotoBanner_UploadComplete;
             data.FilePath = Session["filePath"].ToString();// UpdateFotoBanner(Convert.ToInt32(Kode[0]));
-            data.Prioritas = Convert.ToInt32(Kode[2]);
+            data.Prioritas = Convert.ToInt32(txtPrioritas.Text); // Convert.ToInt32(Kode[2]);
             new BannerSystem().UpdateBanner(data);
         }
         private void EditBanner()
         {
             var BannerID = Convert.ToInt32(Session["BannerID"]);
+            var dataEx = new BannerSystem().GetBanner(BannerID);
+            var filePath = (dataEx.FilePath.Contains("~/") == true ? dataEx.FilePath : "~/" + dataEx.FilePath);
+            if (File.Exists(MapPath(filePath)))
+            {
+                File.Delete(MapPath(filePath));
+            }
             var data = new BannerData();
             data.ID = BannerID;
             data.Nama = txtNama.Text;
-            data.FilePath = Session["filePath"].ToString();
+            data.FilePath = filePath; //Session["filePath"].ToString();
             data.Url = txtUrl.Text;
+            data.Prioritas = Convert.ToInt32(txtPrioritas.Text);
             new BannerSystem().UpdateBanner(data);
         }
         protected void btnTambah_Click(object sender, EventArgs e)

@@ -55,6 +55,7 @@
     <Compile Include="PaymentData.cs" />
     <Compile Include="SatuanHargaData.cs" />
     <Compile Include="TipeKosData.cs" />
+    <Compile Include="TipeUserData.cs" />
     <Compile Include="UserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WilayahData.cs" />

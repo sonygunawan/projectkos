@@ -52,10 +52,7 @@ namespace LihatKos.BusinessFacade
         {
             return new FormKosDA().UpdateFormKosView(Id);
         }
-        public bool UpdateFormKosApproval(Int64 Id, int StatusApproval)
-        {
-            return new FormKosDA().UpdateFormKosApproval(Id, StatusApproval);
-        }
+        
         public List<FormKosData> GetHighestFormKosByArea(int AreaID)
         {
             return new FormKosDA().GetHighestFormKosByArea(AreaID);
@@ -67,6 +64,14 @@ namespace LihatKos.BusinessFacade
         public List<FormKosData> GetAllFormKosByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan)
         {
             return new FormKosDA().GetAllFormKosByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan);
+        }
+        public bool UpdateFormKosApproval(Int64 Id, int StatusApproval)
+        {
+            return new FormKosDA().UpdateFormKosApproval(Id, StatusApproval);
+        }
+        public bool UpdateFormKosAktif(Int64 Id, int StatusAktif, string AuditUserName)
+        {
+            return new FormKosDA().UpdateFormKosAktif(Id, StatusAktif, AuditUserName);
         }
 
         #region Kos Telepon
