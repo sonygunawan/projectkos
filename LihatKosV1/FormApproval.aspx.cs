@@ -96,6 +96,11 @@ namespace LihatKosV1
             new FormKosSystem().UpdateFormKosAktif(idx, 0, "admin");
             LoadApproval();
         }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
         //protected void rptApprovalKos_ItemCommand(object source, RepeaterCommandEventArgs e)
         //{
 

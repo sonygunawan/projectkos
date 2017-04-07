@@ -6,6 +6,7 @@
             <div class="row col-md-6 custyle">
                 <div class="card mb-12">
                 <h2>Form Approval</h2>
+                <asp:TextBox ID="txtSearch" runat="server" Width="200"></asp:TextBox><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <div class="card-block p-0">
@@ -17,7 +18,7 @@
                                 <asp:BoundField DataField="Nama" HeaderText="Nama" ItemStyle-Width="30%" />
                                 <asp:BoundField DataField="NamaTipeKos" HeaderText="TipeKos" />
                                 <asp:BoundField DataField="Hewan" HeaderText="Hewan" />
-                                <asp:BoundField DataField="NamaArea" HeaderText="Area" />
+                                <%--<asp:BoundField DataField="NamaArea" HeaderText="Area" />--%>
                                 <asp:BoundField DataField="NamaPemilik" HeaderText="Pemilik" />
                                 <asp:BoundField DataField="Harga" HeaderText="Harga" DataFormatString="{0:0}" />
                                 <%--<asp:BoundField DataField="SatuanHarga" HeaderText="Satuan Hrg" />--%>
@@ -25,6 +26,7 @@
                                 <asp:BoundField DataField="LuasKamar" HeaderText="Luas Kmr" />
                                 <asp:BoundField DataField="JmlKamar" HeaderText="Jml Kmr" />
                                 <asp:BoundField DataField="JmlKamarKosong" HeaderText="Jml Kmr Kosong" />
+
                                 <asp:BoundField DataField="UserName" HeaderText="User" />
                                 <asp:TemplateField HeaderText="Action" HeaderStyle-Width="150px">
                                     <ItemTemplate>
