@@ -75,13 +75,19 @@ namespace LihatKosV1
 
         private void LoadPriceRange()
         {
-            //var provinsi =  (ddlPropinsi.SelectedItem.Text == "- Semua -") ? "" : ddlPropinsi.SelectedItem.Text;
-            //var kabupaten = (ddlKabupaten.SelectedItem.Text == "- Semua -") ? "" : ddlKabupaten.SelectedItem.Text;
-            //var kecamatan = (ddlKecamatan.SelectedItem.Text == "- Semua -") ? "" : ddlKecamatan.SelectedItem.Text;
+            var provinsi =  (ddlPropinsi.SelectedItem.Text == "- Semua - ") ? "" : ddlPropinsi.SelectedItem.Text;
+            var kabupaten = (ddlKabupaten.SelectedItem.Text == "- Semua - ") ? "" : ddlKabupaten.SelectedItem.Text;
+            var kecamatan = (ddlKecamatan.SelectedItem.Text == "- Semua - ") ? "" : ddlKecamatan.SelectedItem.Text;
 
-            //var formKosMin = new FormKosSystem().GetPriceRangeByKecamatan(provinsi, kabupaten, kecamatan);
-            //hidMinimumPrice.Value = hidMinimumSetValue.Value = formKosMin.MinimumPrice.ToString("G0");
-            //hidMaximumPrice.Value = hidMaximumSetValue.Value = formKosMin.MaximumPrice.ToString("G0");
+            var formKosMin = new FormKosSystem().GetPriceRangeByKecamatan(provinsi, kabupaten, kecamatan);
+
+            var MinimumPrice = formKosMin.MinimumPrice.ToString("G0");
+            var MaximumPrice = formKosMin.MaximumPrice.ToString("G0");
+            multiHandle2_1_BoundControl.Text = hidMinimumPrice.Value = hidMinimumSetValue.Value = MinimumPrice;// formKosMin.MinimumPrice.ToString("G0");
+            multiHandleSliderExtenderTwo.Minimum = Convert.ToInt32(MinimumPrice);
+            multiHandle2_2_BoundControl.Text = hidMaximumPrice.Value = hidMaximumSetValue.Value = MaximumPrice;// formKosMin.MaximumPrice.ToString("G0");
+            multiHandleSliderExtenderTwo.Maximum = Convert.ToInt32(MaximumPrice);
+            //multiHandle2_1_BoundControl.
             ////ClientScript.RegisterStartupScript(GetType(), "multislider5", "$('#slider-3').slider('option', 'max', " + hidMaximumPrice.Value + " );", true);
         }
 

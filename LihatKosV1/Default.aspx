@@ -6,7 +6,8 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-  <link type="text/css" rel="stylesheet" href="assets/style.css">
+  <link type="text/css" rel="stylesheet" href="assets/style.css" />
+    
 <%--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
     <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>--%>
         <style>
@@ -45,6 +46,87 @@
                 opacity:0.7;
                 position: absolute;
             }
+            .ajax__multi_slider_default .outer_rail_vertical {
+                background: repeat-y;
+                height: 150px;
+                position: absolute;
+                width: 22px;
+            }
+
+            .ajax__multi_slider_default .inner_rail_vertical {
+                background: repeat-y;
+                position: absolute;
+                width: 22px;
+                z-index: 100;
+            }
+
+            .ajax__multi_slider_default .inner_rail_horizontal {
+                background: repeat-x;
+                height: 22px;
+                position: absolute;
+                z-index: 100;
+                background-image: url(../Images/MultiHandleSlider.Rail-Horizontal.gif);
+            }
+
+            .ajax__multi_slider_default .outer_rail_horizontal {
+                background: repeat-x;
+                height: 22px;
+                position: absolute;
+                width: 150px;
+                background-image: url(../Images/MultiHandleSlider.RailOuter-Horizontal.gif);
+            }
+
+            .ajax__multi_slider_default .handle_horizontal {
+                background: no-repeat;
+                height: 22px;
+                position: absolute;
+                width: 10px;
+                z-index: 200;
+                background-image: url(../Images/MultiHandleSlider.Handle-Horizontal.gif);
+            }
+
+            .ajax__multi_slider_default .handle_horizontal_hover {
+                background: no-repeat;
+                height: 22px;
+                position: absolute;
+                width: 10px;
+                z-index: 200;
+                background-image: url(../Images/MultiHandleSlider.HandleHover-Horizontal.gif);
+            }
+
+            .ajax__multi_slider_default .handle_horizontal_down {
+                background: no-repeat;
+                height: 22px;
+                position: absolute;
+                width: 10px;
+                z-index: 200;
+                background-image: url(../Images/MultiHandleSlider.HandleDown-Horizontal.gif);
+            }
+
+            .ajax__multi_slider_default .handle_vertical {
+                background: no-repeat;
+                height: 10px;
+                position: absolute;
+                width: 22px;
+                z-index: 200;
+            }
+
+            .ajax__multi_slider_default .handle_vertical_hover {
+                background: no-repeat;
+                height: 10px;
+                position: absolute;
+                width: 22px;
+                z-index: 200;
+            }
+
+            .ajax__multi_slider_default .handle_vertical_down {
+                background: no-repeat;
+                height: 10px;
+                position: absolute;
+                width: 22px;
+                z-index: 200;
+            }
+
         </style>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
@@ -219,7 +301,6 @@
         <div class="container">
             <div class="row">
                 <style>
-                    
                     .ui-widget-header {
                         border: 1px solid #dddddd;
                         background: #bfa145;
@@ -228,26 +309,23 @@
                     }
                 </style>
                 <script type="text/javascript">
-                    //$(document).ready(function () {
-
-                    //});
-                    function pageLoad() {
-                        $("#slider-3").slider({
-                            range: true,
-                            min: 0,
-                            max: 5000000,
-                            step: 5000,
-                            values: [25000, 2000000],
-                            slide: function (event, ui) {
-                                $("#price").val("Rp." + ui.values[0] + " - Rp." + ui.values[1]);
-                                $("#hidMinimumSetValue").val(ui.values[0]);
-                                $("#hidMaximumSetValue").val(ui.values[1]);
-                            }
-                        });
-                        $("#price").val("Rp." + $("#slider-3").slider("values", 0) +
-                           " - Rp." + $("#slider-3").slider("values", 1));
+                    //function pageLoad() {
+                    //    $("#slider-3").slider({
+                    //        range: true,
+                    //        min: 0,
+                    //        max: 5000000,
+                    //        step: 5000,
+                    //        values: [25000, 2000000],
+                    //        slide: function (event, ui) {
+                    //            $("#price").val("Rp." + ui.values[0] + " - Rp." + ui.values[1]);
+                    //            $("#hidMinimumSetValue").val(ui.values[0]);
+                    //            $("#hidMaximumSetValue").val(ui.values[1]);
+                    //        }
+                    //    });
+                    //    $("#price").val("Rp." + $("#slider-3").slider("values", 0) +
+                    //       " - Rp." + $("#slider-3").slider("values", 1));
                         
-                    }
+                    //}
                 </script>
                 <div class="col-sm-8">
                     <div class="form-group">
@@ -256,11 +334,31 @@
                         <asp:HiddenField ID="hidMaximumPrice" runat="server" ClientIDMode="Static" />
                         <asp:HiddenField ID="hidMinimumSetValue" runat="server" ClientIDMode="Static" />
                         <asp:HiddenField ID="hidMaximumSetValue" runat="server" ClientIDMode="Static" />
-                        <%--<asp:HiddenField ID="hidLowRate" runat="server" />
-                        <asp:HiddenField ID="hidHighRate" runat="server" />--%>
-                        <input type="text" id="price" 
+                        <asp:TextBox ID="multiHandle2_1_BoundControl" runat="server" Width="150" Text="25000" ClientIDMode="Static" />&nbsp; - &nbsp;
+                        <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" ClientIDMode="Static" />
+                        <asp:TextBox ID="sliderTwo" runat="server" Style="display: none;" />
+                            <cc1:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server"
+                                BehaviorID="multiHandleSliderExtenderTwo"
+                                TargetControlID="sliderTwo"
+                                Minimum="0" Steps="25000"
+                                Maximum="1000000"
+                                Length="600"
+                                TooltipText="{0}"
+                                Orientation="Horizontal"
+                                EnableHandleAnimation="true"
+                                EnableKeyboard="false"
+                                EnableMouseWheel="false"
+                                ShowHandleDragStyle="true"
+                                ShowHandleHoverStyle="true" 
+                                ShowInnerRail="true">
+                                <MultiHandleSliderTargets>
+                                    <cc1:MultiHandleSliderTarget ControlID="multiHandle2_1_BoundControl" />
+                                    <cc1:MultiHandleSliderTarget ControlID="multiHandle2_2_BoundControl" />
+                                </MultiHandleSliderTargets>
+                            </cc1:MultiHandleSliderExtender>
+                        <%--<input type="text" id="price" 
                             style="width:100%;border:0; background-color:#dedbd3; color:#756534; font-weight:bold;">
-                       <div id="slider-3"></div>
+                       <div id="slider-3"></div>--%>
                     </div>
     
                 </div>
