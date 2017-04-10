@@ -1,11 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchControlDetail.ascx.cs" Inherits="LihatKosV1.UserControl.CariLokasi.SearchControlDetail" %>
-<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="AjaxControlToolkit" %>
 
-<%--  <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>--%>
-<!-- boostrap -->
-<%--<script src="../../assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>--%>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
     <script type="text/javascript">
         google.maps.event.addDomListener(window, 'load', function () {
@@ -45,7 +40,7 @@
     </div>
     <div class="form-group">
         <label class="control-label">Kecamatan</label>
-        <asp:DropDownList ID="ddlKecamatan" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlKecamatan_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+        <asp:DropDownList ID="ddlKecamatan" runat="server" CssClass="form-control"></asp:DropDownList>
     </div>
 
     <div class="form-group">
@@ -114,10 +109,33 @@
   </script>
 <div class="form-horizontal">
     <div class="form-group">
-        <label>Harga</label>
-        <input type="text" id="price" 
+        <label>Range Harga</label>
+        <asp:TextBox ID="multiHandle2_1_BoundControl" runat="server" Width="150" Text="0" ClientIDMode="Static" />&nbsp; - &nbsp;
+                        <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" ClientIDMode="Static" />
+                        <asp:TextBox ID="sliderTwo" runat="server" Style="display: none;" />
+                            <cc1:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server"
+                                BehaviorID="multiHandleSliderExtenderTwo"
+                                TargetControlID="sliderTwo"
+                                Minimum="0" 
+                                Maximum="1000000"
+                                Steps="25000"
+                                Length="600"
+                                TooltipText="{0}"
+                                Orientation="Horizontal"
+                                EnableHandleAnimation="true"
+                                EnableKeyboard="false"
+                                EnableMouseWheel="false"
+                                ShowHandleDragStyle="true"
+                                ShowHandleHoverStyle="true" 
+                                ShowInnerRail="true">
+                                <MultiHandleSliderTargets>
+                                    <cc1:MultiHandleSliderTarget ControlID="multiHandle2_1_BoundControl" />
+                                    <cc1:MultiHandleSliderTarget ControlID="multiHandle2_2_BoundControl" />
+                                </MultiHandleSliderTargets>
+                            </cc1:MultiHandleSliderExtender>
+        <%--<input type="text" id="price" 
             style="border:0; color:#b9cd6d; font-weight:bold;">
-       <div id="slider-3"></div>
+       <div id="slider-3"></div>--%>
     </div>
     
 </div>

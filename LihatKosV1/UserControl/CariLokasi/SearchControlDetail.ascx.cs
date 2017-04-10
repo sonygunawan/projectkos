@@ -31,11 +31,6 @@ namespace LihatKosV1.UserControl.CariLokasi
                 {
                     txtSearch.Text = Server.HtmlDecode(Request.QueryString["lokasi"]);
                 }
-                //ToolkitScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "testSearch",
-                //    "$(function () {$(\"#slider-3\").slider({" +
-                //        "range: true, min: 0, max: 500, values: [75, 300], slide: function (event, ui) { $(\"#price\").val(\"$\" + ui.values[0] + \" - $\" + ui.values[1]); } " +
-                //    "}); $(\"#price\").val(\"$\" + $(\"#slider-3\").slider(\"values\", 0) + \" - $\" + $(\"#slider-3\").slider(\"values\", 1)); }); "
-                //    , true);
                 ddlTipeKos.DataSource = new TipeKosSystem().GetAllTipeKos();
                 ddlTipeKos.DataTextField = "Nama";
                 ddlTipeKos.DataValueField = "ID";
@@ -96,20 +91,6 @@ namespace LihatKosV1.UserControl.CariLokasi
             
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            fasilitas = "";
-            foreach (ListItem item in chkFasilitas.Items)
-            {
-                if (item.Selected == true)
-                    fasilitas += item.Value + ",";
-            }
-            fasilitas = (fasilitas != "") ? fasilitas.Substring(0, fasilitas.Length - 1) : "";
-            Response.Redirect("/CariLokasi?tipeKos=" + ddlTipeKos.SelectedValue + "&lokasi=" + Server.HtmlEncode(txtSearch.Text) + "&fasilitas=" + fasilitas
-                + "&jkWkt=" + ddlSatuanHarga.SelectedValue + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value + "&propinsi=" + ddlPropinsi.SelectedValue +
-                "&kabupaten=" + ddlKabupaten.SelectedValue + "&kecamatan=" + ddlKecamatan.SelectedValue);
-        }
-
         protected void chkFasilitas_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if (chkFasilitas.Items[0].Selected == true)
@@ -120,7 +101,21 @@ namespace LihatKosV1.UserControl.CariLokasi
             //    }
             //}
         }
+        private void LoadPriceRange()
+        {
+            var provinsi = (ddlPropinsi.SelectedItem.Text == "- Semua - ") ? "" : ddlPropinsi.SelectedItem.Text;
+            var kabupaten = (ddlKabupaten.SelectedItem.Text == "- Semua - ") ? "" : ddlKabupaten.SelectedItem.Text;
+            var kecamatan = (ddlKecamatan.SelectedItem.Text == "- Semua - ") ? "" : ddlKecamatan.SelectedItem.Text;
 
+            var formKosMin = new FormKosSystem().GetPriceRangeByKecamatan(provinsi, kabupaten, kecamatan);
+
+            var MinimumPrice = formKosMin.MinimumPrice.ToString("G0");
+            var MaximumPrice = formKosMin.MaximumPrice.ToString("G0");
+            multiHandle2_1_BoundControl.Text = MinimumPrice;
+            multiHandleSliderExtenderTwo.Minimum = Convert.ToInt32(MinimumPrice);
+            multiHandle2_2_BoundControl.Text = MaximumPrice;
+            multiHandleSliderExtenderTwo.Maximum = Convert.ToInt32(MaximumPrice);
+        }
         protected void ddlPropinsi_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlKabupaten.DataSource = new WilayahSystem().GetAllKabupaten(Convert.ToInt32(ddlPropinsi.SelectedValue));
@@ -132,6 +127,8 @@ namespace LihatKosV1.UserControl.CariLokasi
             {
                 ddlKabupaten.SelectedValue = Request.QueryString["kabupaten"].ToString();
             }
+
+            LoadPriceRange();
             ddlKabupaten_SelectedIndexChanged(null, null);
         }
 
@@ -147,17 +144,24 @@ namespace LihatKosV1.UserControl.CariLokasi
             {
                 ddlKecamatan.SelectedValue = Request.QueryString["kecamatan"].ToString();
             }
-            ddlKecamatan_SelectedIndexChanged(null, null);
+
+            LoadPriceRange();
+            //ddlKecamatan_SelectedIndexChanged(null, null);
         }
-        protected void ddlKecamatan_SelectedIndexChanged(object sender, EventArgs e)
+        protected void btnSearch_Click(object sender, EventArgs e)
         {
-            SearchRedirect();
-        }
-        private void SearchRedirect()
-        {
-            
+            fasilitas = "";
+            foreach (ListItem item in chkFasilitas.Items)
+            {
+                if (item.Selected == true)
+                    fasilitas += item.Value + ",";
+            }
+            fasilitas = (fasilitas != "") ? fasilitas.Substring(0, fasilitas.Length - 1) : "";
+            Response.Redirect("/CariLokasi?tipeKos=" + ddlTipeKos.SelectedValue + "&lokasi=" + Server.HtmlEncode(txtSearch.Text) + "&fasilitas=" + fasilitas
+                + "&jkWkt=" + ddlSatuanHarga.SelectedValue + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value + "&propinsi=" + ddlPropinsi.SelectedValue 
+                + "&kabupaten=" + ddlKabupaten.SelectedValue + "&kecamatan=" + ddlKecamatan.SelectedValue + "&minimum=" + multiHandle2_1_BoundControl.Text 
+                + "&maximum=" + multiHandle2_2_BoundControl.Text);
         }
 
-        
     }
 }

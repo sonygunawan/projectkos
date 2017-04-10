@@ -334,14 +334,15 @@
                         <asp:HiddenField ID="hidMaximumPrice" runat="server" ClientIDMode="Static" />
                         <asp:HiddenField ID="hidMinimumSetValue" runat="server" ClientIDMode="Static" />
                         <asp:HiddenField ID="hidMaximumSetValue" runat="server" ClientIDMode="Static" />
-                        <asp:TextBox ID="multiHandle2_1_BoundControl" runat="server" Width="150" Text="25000" ClientIDMode="Static" />&nbsp; - &nbsp;
+                        <asp:TextBox ID="multiHandle2_1_BoundControl" runat="server" Width="150" Text="0" ClientIDMode="Static" />&nbsp; - &nbsp;
                         <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" ClientIDMode="Static" />
                         <asp:TextBox ID="sliderTwo" runat="server" Style="display: none;" />
                             <cc1:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server"
                                 BehaviorID="multiHandleSliderExtenderTwo"
                                 TargetControlID="sliderTwo"
-                                Minimum="0" Steps="25000"
+                                Minimum="0" 
                                 Maximum="1000000"
+                                Steps="25000"
                                 Length="600"
                                 TooltipText="{0}"
                                 Orientation="Horizontal"
