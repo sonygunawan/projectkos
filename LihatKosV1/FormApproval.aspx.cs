@@ -19,7 +19,7 @@ namespace LihatKosV1
 
         private void LoadApproval()
         {
-            gvApprovalKos.DataSource = new FormKosSystem().GetAllFormKos(0);
+            gvApprovalKos.DataSource = new FormKosSystem().GetAllFormKos(0, txtSearch.Text);
             gvApprovalKos.DataBind();
         }
         protected void gvApprovalKos_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -99,7 +99,17 @@ namespace LihatKosV1
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            LoadApproval();
+        }
 
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lbtnEdit_Command(object sender, CommandEventArgs e)
+        {
+            Response.Redirect("DaftarKos");
         }
         //protected void rptApprovalKos_ItemCommand(object source, RepeaterCommandEventArgs e)
         //{

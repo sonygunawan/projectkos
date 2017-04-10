@@ -33,7 +33,7 @@ namespace LihatKosV1
                 {
                     ID = Convert.ToInt64(Request.QueryString["ID"]);
                 }
-                FormKosData Data = new FormKosSystem().GetAllFormKos(ID)[0];
+                FormKosData Data = new FormKosSystem().GetAllFormKos(ID,"")[0];
                 lblNama.Text = Data.Nama;
                 lblAlamat.Text = Data.Alamat;
                 ViewState["FormKosID"] = null;
@@ -47,7 +47,7 @@ namespace LihatKosV1
                     ID = Convert.ToInt64(Request.QueryString["ID"]);
                     ViewState["FormKosID"] = ID;
                 }
-                FormKosData Data = new FormKosSystem().GetAllFormKos(ID)[0];
+                FormKosData Data = new FormKosSystem().GetAllFormKos(ID,"")[0];
                 lblNama.Text = Data.Nama;
                 lblAlamat.Text = Data.Alamat;
 

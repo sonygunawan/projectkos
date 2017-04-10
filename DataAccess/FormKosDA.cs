@@ -327,13 +327,14 @@ namespace LihatKos.DataAccess
             
         }
 
-        public List<FormKosData> GetAllFormKos(Int64 Id)
+        public List<FormKosData> GetAllFormKos(Int64 Id, string Search)
         {
             try
             {
                 List<FormKosData> formKos = new List<FormKosData>();
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetAllFormKos");
                 db.AddInParameter(dbCommand, "ID", DbType.Int64, Id);
+                db.AddInParameter(dbCommand, "Search", DbType.String, Search);
                 
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 {
@@ -370,6 +371,10 @@ namespace LihatKos.DataAccess
                         data.AuditTime = Convert.ToDateTime(dataReader["AuditTime"].ToString());
                         data.StatusAktif = Convert.ToInt32(dataReader["StatusAktif"].ToString());
                         data.LastActiveDate = Convert.ToDateTime(dataReader["LastActiveDate"].ToString());
+                        data.NamaProvinsi = Convert.ToString(dataReader["NamaProvinsi"]);
+                        data.NamaKabupaten = Convert.ToString(dataReader["NamaKabupaten"]);
+                        data.NamaKecamatan = Convert.ToString(dataReader["NamaKecamatan"]);
+                        data.NamaKelurahan = Convert.ToString(dataReader["NamaKelurahan"]);
                         formKos.Add(data);
                     }
                     dataReader.Close();

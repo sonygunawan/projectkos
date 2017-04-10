@@ -6,7 +6,7 @@
             <div class="row col-md-6 custyle">
                 <div class="card mb-12">
                 <h2>Form Approval</h2>
-                <asp:TextBox ID="txtSearch" runat="server" Width="200"></asp:TextBox><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
+                <asp:TextBox ID="txtSearch" runat="server" Width="200" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>&nbsp;&nbsp;<asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <div class="card-block p-0">
@@ -20,16 +20,20 @@
                                 <asp:BoundField DataField="Hewan" HeaderText="Hewan" />
                                 <%--<asp:BoundField DataField="NamaArea" HeaderText="Area" />--%>
                                 <asp:BoundField DataField="NamaPemilik" HeaderText="Pemilik" />
-                                <asp:BoundField DataField="Harga" HeaderText="Harga" DataFormatString="{0:0}" />
+                                <asp:BoundField DataField="Harga" HeaderText="Harga Bulanan" DataFormatString="{0:0}" />
                                 <%--<asp:BoundField DataField="SatuanHarga" HeaderText="Satuan Hrg" />--%>
                                 <asp:BoundField DataField="MinimumBayarMonth" HeaderText="Minimum Bayar" />
                                 <asp:BoundField DataField="LuasKamar" HeaderText="Luas Kmr" />
                                 <asp:BoundField DataField="JmlKamar" HeaderText="Jml Kmr" />
                                 <asp:BoundField DataField="JmlKamarKosong" HeaderText="Jml Kmr Kosong" />
-
+                                <asp:BoundField DataField="NamaProvinsi" HeaderText="Provinsi" />
+                                <asp:BoundField DataField="NamaKabupaten" HeaderText="Kabupaten" />
+                                <asp:BoundField DataField="NamaKecamatan" HeaderText="Kecamatan" />
+                                <asp:BoundField DataField="NamaKelurahan" HeaderText="Kelurahan" />
                                 <asp:BoundField DataField="UserName" HeaderText="User" />
                                 <asp:TemplateField HeaderText="Action" HeaderStyle-Width="150px">
                                     <ItemTemplate>
+                                        <asp:LinkButton ID="lbtnEdit" OnCommand="lbtnEdit_Command" runat="server" CssClass="btn btn-default btn-sm" >Edit</asp:LinkButton>
                                         <asp:LinkButton ID="lbtnApprove" OnCommand="lbApprove_Command" runat="server" CssClass="btn btn-info btn-xs" OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Approve</asp:LinkButton>
                                         <asp:LinkButton ID="lbtnAbort" OnCommand="lbAbort_Command" runat="server" CssClass="btn btn-danger btn-xs"  OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Abort</asp:LinkButton>
                                         <asp:LinkButton ID="lbtnActive" OnCommand="lbtnActive_Command" runat="server" CssClass="btn btn-block btn-xs" OnClientClick="return confirm('Apakah Anda yakin ingin mengaktifkan Form ini?');">Aktifkan</asp:LinkButton>

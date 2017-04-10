@@ -38,9 +38,9 @@ namespace LihatKos.BusinessFacade
             return new FormKosDA().InsertFormKosLengkap(Data);
         }
 
-        public List<FormKosData> GetAllFormKos(Int64 Id)
+        public List<FormKosData> GetAllFormKos(Int64 Id, string Search)
         {
-            return new FormKosDA().GetAllFormKos(Id);
+            return new FormKosDA().GetAllFormKos(Id, Search);
         }
 
         public List<FormKosData> GetAllFormKosByLocation(string Latitude, string Longitude, int TipeKosID, int SatuanHargaID, string Fasilitas)
