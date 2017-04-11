@@ -271,12 +271,14 @@
                             Maximum="1000000"
                             Steps="25000"
                             Length="600"
+                            TooltipText="{0}"
                             Orientation="Horizontal"
                             EnableHandleAnimation="true"
                             EnableKeyboard="false"
                             EnableMouseWheel="false"
                             ShowHandleDragStyle="true"
-                            ShowHandleHoverStyle="true">
+                            ShowHandleHoverStyle="true"
+                            ShowInnerRail="true">
                             <MultiHandleSliderTargets>
                                 <cc1:MultiHandleSliderTarget ControlID="multiHandle2_1_BoundControl" />
                                 <cc1:MultiHandleSliderTarget ControlID="multiHandle2_2_BoundControl" />
