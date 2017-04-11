@@ -41,7 +41,9 @@
     <link type="text/css" rel="stylesheet" href="assets/owlcarousel/owl.theme.default.min.css">
 
     <link type="text/css" rel="stylesheet" href="assets/style.css">
-    
+    <link href="/Content/AjaxControlToolkit/Styles/Bundle?v=hash" rel="stylesheet"/>
+
+    <script src="/Scripts/AjaxControlToolkit/Bundle?v=hash" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
     <asp:ContentPlaceHolder ID="cphHead" runat="server"></asp:ContentPlaceHolder>
@@ -60,7 +62,11 @@
  top -->
     <form id="form1" runat="server">
         
-        <asp:ScriptManager ID="sm2" runat="server" AsyncPostBackTimeout="3000"></asp:ScriptManager>
+        <asp:ScriptManager ID="sm2" runat="server" AsyncPostBackTimeout="3000">
+            <Scripts>
+                <asp:ScriptReference Path="~/Scripts/AjaxControlToolkit/Bundle" />
+            </Scripts>
+        </asp:ScriptManager>
         
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
             <ContentTemplate>
