@@ -87,7 +87,7 @@ namespace LihatKosV1
             multiHandleSliderExtenderTwo.Minimum = Convert.ToInt32(MinimumPrice);
             multiHandle2_2_BoundControl.Text = hidMaximumPrice.Value = hidMaximumSetValue.Value = MaximumPrice;
             multiHandleSliderExtenderTwo.Maximum = Convert.ToInt32(MaximumPrice);
-
+            multiHandleSliderExtenderTwo.ClientState = MinimumPrice + "," + MaximumPrice;          
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

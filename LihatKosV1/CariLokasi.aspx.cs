@@ -35,7 +35,7 @@ namespace LihatKosV1
                 ddlTipeKos.DataValueField = "ID";
                 ddlTipeKos.DataBind();
                 ddlTipeKos.Items.Insert(0, new ListItem { Value = "0", Text = "Semua" });
-                ddlTipeKos.SelectedValue = "1";
+                //ddlTipeKos.SelectedValue = "1";
 
                 ddlSatuanHarga.DataSource = new SatuanHargaSystem().GetAllSatuanHarga();
                 ddlSatuanHarga.DataTextField = "Nama";
@@ -85,50 +85,83 @@ namespace LihatKosV1
                     ddlPropinsi.SelectedValue = Request.QueryString["propinsi"].ToString();
                     ddlPropinsi_SelectedIndexChanged(null, null);
                 }
-
-            }
-            int tipeKos = 0;
-            int jkWkt = 0;
-            if (!String.IsNullOrEmpty(Request.QueryString["propinsi"]))
-            {
-                var propinsiStr = Convert.ToInt32(Request.QueryString["propinsi"].ToString());
-                var propinsi = "";
-                var propinsis = new WilayahSystem().GetAllPropinsi();
-                if (propinsiStr > 0)
+                if (!String.IsNullOrEmpty(Request.QueryString["kabupaten"]))
                 {
-                    propinsi = propinsis.Where(a => a.IDProvinsi == propinsiStr).ToList()[0].Nama; //Request.QueryString["propinsi"].ToString();
+                    ddlKabupaten.SelectedValue = Request.QueryString["kabupaten"].ToString();
+                    //ddlKabupaten_SelectedIndexChanged(null, null);
                 }
-                var kabupaten = "";
-                if (Convert.ToInt32(Request.QueryString["kabupaten"].ToString()) > 0)
+                if (!String.IsNullOrEmpty(Request.QueryString["kecamatan"]))
                 {
-                    var kabupatenStr = Convert.ToInt32(Request.QueryString["kabupaten"].ToString());
-                    kabupaten = new WilayahSystem().GetAllKabupaten(propinsiStr).Where(a => a.IDKabupaten == kabupatenStr).ToList()[0].Nama;
+                    ddlKecamatan.SelectedValue = Request.QueryString["kecamatan"].ToString();
+                    //ddlKecamatan_SelectedIndexChanged(null, null);
                 }
-                var kecamatan = "";
-                if (Convert.ToInt32(Request.QueryString["kecamatan"].ToString()) > 0)
+                //Load Minimum-Maximum Price
+                LoadPriceRange();
+                var MinimumPrice = 0;
+                if (!String.IsNullOrEmpty(Request.QueryString["minimum"]))
                 {
-                    var kecamatanStr = Convert.ToInt32(Request.QueryString["kabupaten"].ToString());
-                    kecamatan = new WilayahSystem().GetAllKecamatan(kecamatanStr)[0].Nama;
+                    MinimumPrice = Convert.ToInt32(Request.QueryString["minimum"]);
+                    if (MinimumPrice > 0)
+                    {
+                        multiHandle2_1_BoundControl.Text = MinimumPrice.ToString();
+                        multiHandleSliderExtenderTwo.Minimum = MinimumPrice;
+                    }
                 }
-                rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByKecamatan(propinsi, kabupaten, kecamatan);
-                rptListByLoc.DataBind();
-            }
-            else
-            {
-
-                if (String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
+                var MaximumPrice = 0;
+                if (!String.IsNullOrEmpty(Request.QueryString["maximum"]))
                 {
-                    rptListByLoc.DataSource = new FormKosSystem().GetAllFormKos(0, "");
+                    MaximumPrice = Convert.ToInt32(Request.QueryString["maximum"]);
+                    if (Convert.ToInt32(Request.QueryString["maximum"]) > 0)
+                    {
+                        multiHandle2_2_BoundControl.Text = MaximumPrice.ToString();
+                        multiHandleSliderExtenderTwo.Maximum = MaximumPrice;
+                    }
+                }
+                multiHandleSliderExtenderTwo.ClientState = MinimumPrice + "," + MaximumPrice;          
+                int tipeKos = 0;
+                int jkWkt = 0;
+                if (!String.IsNullOrEmpty(Request.QueryString["propinsi"]))
+                {
+                    var propinsiStr = Convert.ToInt32(Request.QueryString["propinsi"].ToString());
+                    var propinsi = "";
+                    var propinsis = new WilayahSystem().GetAllPropinsi();
+                    if (propinsiStr > 0)
+                    {
+                        propinsi = propinsis.Where(a => a.IDProvinsi == propinsiStr).ToList()[0].Nama; //Request.QueryString["propinsi"].ToString();
+                    }
+                    var kabupaten = "";
+                    if (Convert.ToInt32(Request.QueryString["kabupaten"].ToString()) > 0)
+                    {
+                        var kabupatenStr = Convert.ToInt32(Request.QueryString["kabupaten"].ToString());
+                        kabupaten = new WilayahSystem().GetAllKabupaten(propinsiStr).Where(a => a.IDKabupaten == kabupatenStr).ToList()[0].Nama;
+                    }
+                    var kecamatan = "";
+                    if (Convert.ToInt32(Request.QueryString["kecamatan"].ToString()) > 0)
+                    {
+                        var kecamatanStr = Convert.ToInt32(Request.QueryString["kabupaten"].ToString());
+                        kecamatan = new WilayahSystem().GetAllKecamatan(kecamatanStr)[0].Nama;
+                    }
+                    rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByKecamatan(propinsi, kabupaten, kecamatan);
                     rptListByLoc.DataBind();
                 }
                 else
                 {
-                    string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
-                    //Fasilitas
-                    rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByLocation(splitLatLng[0], splitLatLng[1], tipeKos, jkWkt, fasilitas);
-                    rptListByLoc.DataBind();
+
+                    if (String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
+                    {
+                        rptListByLoc.DataSource = new FormKosSystem().GetAllFormKos(0, "");
+                        rptListByLoc.DataBind();
+                    }
+                    else
+                    {
+                        string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
+                        //Fasilitas
+                        rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByLocation(splitLatLng[0], splitLatLng[1], tipeKos, jkWkt, fasilitas);
+                        rptListByLoc.DataBind();
+                    }
                 }
             }
+            
             //if (!String.IsNullOrEmpty(Request.QueryString["latLng"]))
             //{
             //    string[] splitLatLng = Convert.ToString(Request.QueryString["latLng"]).Split(',');
@@ -151,6 +184,7 @@ namespace LihatKosV1
             multiHandleSliderExtenderTwo.Minimum = Convert.ToInt32(MinimumPrice);
             multiHandle2_2_BoundControl.Text = MaximumPrice;
             multiHandleSliderExtenderTwo.Maximum = Convert.ToInt32(MaximumPrice);
+            multiHandleSliderExtenderTwo.ClientState = MinimumPrice + "," + MaximumPrice;          
         }
         protected void ddlPropinsi_SelectedIndexChanged(object sender, EventArgs e)
         {
