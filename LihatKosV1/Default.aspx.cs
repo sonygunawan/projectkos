@@ -30,7 +30,7 @@ namespace LihatKosV1
                 hidMinimumPrice.Value = hidMinimumSetValue.Value = "0";
                 hidMaximumPrice.Value = hidMaximumSetValue.Value = "5000000";
 
-
+                LoadPriceRange();
             }
             //RunClientScript();
         }

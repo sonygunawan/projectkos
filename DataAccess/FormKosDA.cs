@@ -474,7 +474,7 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
-        public List<FormKosData> GetAllFormKosByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan)
+        public List<FormKosData> GetAllFormKosByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan, int minimum = 0, int maximum = 0)
         {
             try
             {
@@ -483,7 +483,9 @@ namespace LihatKos.DataAccess
                 db.AddInParameter(dbCommand, "NamaProvinsi", DbType.String, NamaProvinsi);
                 db.AddInParameter(dbCommand, "NamaKabupaten", DbType.String, NamaKabupaten);
                 db.AddInParameter(dbCommand, "NamaKecamatan", DbType.String, NamaKecamatan);
-                
+                db.AddInParameter(dbCommand, "minimum", DbType.Int32, minimum);
+                db.AddInParameter(dbCommand, "maximum", DbType.Int32, maximum);
+
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 {
                     while (dataReader.Read())

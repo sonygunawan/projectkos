@@ -65,6 +65,11 @@ namespace LihatKos.BusinessFacade
         {
             return new FormKosDA().GetAllFormKosByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan);
         }
+        public List<FormKosData> GetAllFormKosByKecamatanMinMax(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan, int minimum, int maximum)
+        {
+            return new FormKosDA().GetAllFormKosByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan, minimum, maximum);
+        }
+
         public bool UpdateFormKosApproval(Int64 Id, int StatusApproval)
         {
             return new FormKosDA().UpdateFormKosApproval(Id, StatusApproval);

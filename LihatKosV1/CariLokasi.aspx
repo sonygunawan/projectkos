@@ -13,6 +13,9 @@
     <div id="room" runat="server">
         <div class="container-fluid">
             <div class="row">
+                
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
                 <div class="col-sm-6">
                     <div class="search" style="margin-bottom: 10px;">
                         <%--<uc4:SearchControlDetail ID="SearchControlDetail" runat="server" /> --%>
@@ -34,8 +37,6 @@
                                 });
                             });
                         </script>
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                            <ContentTemplate>
                                 <h3 class="text-center text-uppercase">Search</h3>
 
                                 <style>
@@ -76,14 +77,14 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Range Harga</label>
-                                        <asp:TextBox ID="multiHandle2_1_BoundControl" runat="server" Width="150" Text="0" ClientIDMode="Static" />&nbsp; - &nbsp;
-                                                        <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" ClientIDMode="Static" />
+                                        <asp:TextBox ID="multiHandle2_1_BoundControl" runat="server" Width="150" Text="0" />&nbsp; - &nbsp;
+                                        <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" />
                                         <asp:TextBox ID="sliderTwo" runat="server" Style="display: none;" />
                                         <cc1:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server"
                                             BehaviorID="multiHandleSliderExtenderTwo"
                                             TargetControlID="sliderTwo"
                                             Minimum="0"
-                                            Maximum="1000000"
+                                            Maximum="1000000" 
                                             Steps="25000"
                                             Length="600"
                                             Orientation="Horizontal"
@@ -92,16 +93,24 @@
                                             EnableMouseWheel="false"
                                             ShowHandleDragStyle="true"
                                             ShowHandleHoverStyle="true"
-                                            ShowInnerRail="true">
+                                            ShowInnerRail="true" 
+                                            OnClientValueChanged="OnClientValueChanged">
                                             <MultiHandleSliderTargets>
                                                 <cc1:MultiHandleSliderTarget ControlID="multiHandle2_1_BoundControl" />
                                                 <cc1:MultiHandleSliderTarget ControlID="multiHandle2_2_BoundControl" />
                                             </MultiHandleSliderTargets>
                                         </cc1:MultiHandleSliderExtender>
+                                        <script type="text/javascript">
+                                            function OnClientValueChanged(sender, args) {
+                                                document.getElementById("<%=lnkSliderChanged.ClientID %>").click();
+                                                return false;
+                                            }
+                                        </script>
                                         <%--<input type="text" id="price" 
                                             style="border:0; color:#b9cd6d; font-weight:bold;">
                                         <div id="slider-3"></div>--%>
                                     </div>
+                                    <br />
                                     <div class="form-group">
                                         <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Cari Lokasi.." ClientIDMode="Static"></asp:TextBox>
                                     </div>
@@ -113,8 +122,6 @@
                                     <asp:HiddenField ID="hidHighRate" runat="server" ClientIDMode="Static" />
                                 </div>
 
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
                         <br />
                     </div>
                     <%--<div style='overflow: hidden; height: 700px; width: 100%;'>
@@ -151,9 +158,14 @@
                         }
                         google.maps.event.addDomListener(window, 'load', init_map);</script>--%>
                 </div>
+                    </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                        <ContentTemplate>
                 <!-- #.col-sm-6 -->
 
                 <div class="col-sm-6" style="height: 820px; overflow: auto;">
+                    <asp:LinkButton ID="lnkSliderChanged" OnClick="lnkSliderChanged_Click" runat="server" ClientIDMode="Static" />
                     <%--<uc2:ListByLocation ID="ListByLocation" runat="server" />--%>
                     <div class="table-responsive">
                         <asp:Repeater ID="rptListByLoc" runat="server" OnItemDataBound="rptListByLoc_ItemDataBound">
@@ -191,7 +203,14 @@
                     </div>
                 </div>
                 <!-- #.col-sm-6 -->
+                    
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:PostBackTrigger ControlID="lnkSliderChanged" />
+                            </Triggers>
+                        </asp:UpdatePanel>
             </div>
+            
             <!-- #row -->
         </div>
         <!-- #container-fluid -->

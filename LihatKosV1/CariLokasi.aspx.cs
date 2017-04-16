@@ -47,6 +47,10 @@ namespace LihatKosV1
                 chkFasilitas.DataTextField = "NamaFasilitas";
                 chkFasilitas.DataValueField = "ID";
                 chkFasilitas.DataBind();
+                foreach (ListItem item in chkFasilitas.Items)
+                {
+                    item.Selected = true;
+                }
                 if (!String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
                 {
                     if (Request.QueryString["latLng"] != "")
@@ -103,8 +107,7 @@ namespace LihatKosV1
                     MinimumPrice = Convert.ToInt32(Request.QueryString["minimum"]);
                     if (MinimumPrice > 0)
                     {
-                        multiHandle2_1_BoundControl.Text = MinimumPrice.ToString();
-                        multiHandleSliderExtenderTwo.Minimum = MinimumPrice;
+                        //multiHandle2_1_BoundControl.Text = MinimumPrice.ToString();
                     }
                 }
                 var MaximumPrice = 0;
@@ -113,11 +116,11 @@ namespace LihatKosV1
                     MaximumPrice = Convert.ToInt32(Request.QueryString["maximum"]);
                     if (Convert.ToInt32(Request.QueryString["maximum"]) > 0)
                     {
-                        multiHandle2_2_BoundControl.Text = MaximumPrice.ToString();
-                        multiHandleSliderExtenderTwo.Maximum = MaximumPrice;
+                        //multiHandle2_2_BoundControl.Text = MaximumPrice.ToString();
                     }
                 }
                 multiHandleSliderExtenderTwo.ClientState = MinimumPrice + "," + MaximumPrice;          
+                
                 int tipeKos = 0;
                 int jkWkt = 0;
                 if (!String.IsNullOrEmpty(Request.QueryString["propinsi"]))
@@ -161,6 +164,10 @@ namespace LihatKosV1
                     }
                 }
             }
+            //else
+            //{
+            //    LoadPriceRange();
+            //}
             
             //if (!String.IsNullOrEmpty(Request.QueryString["latLng"]))
             //{
@@ -219,13 +226,15 @@ namespace LihatKosV1
         }
         protected void chkFasilitas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (chkFasilitas.Items[0].Selected == true)
-            //{
-            //    foreach (ListItem item in chkFasilitas.Items)
-            //    {
-            //        item.Selected = true;
-            //    }
-            //}
+            string strFasilitas = "";
+            foreach (ListItem item in chkFasilitas.Items)
+            {
+                if (item.Selected == true)
+                    strFasilitas += item.Value + ",";
+            }
+            strFasilitas = (strFasilitas == "") ? "" : strFasilitas.Substring(0, strFasilitas.Length - 1);
+            Session["Fasilitas"] = strFasilitas;
+            BindGridView();
         }
         protected void rptListByLoc_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -249,17 +258,41 @@ namespace LihatKosV1
         String fasilitas;
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            fasilitas = "";
-            foreach (ListItem item in chkFasilitas.Items)
-            {
-                if (item.Selected == true)
-                    fasilitas += item.Value + ",";
-            }
-            fasilitas = (fasilitas != "") ? fasilitas.Substring(0, fasilitas.Length - 1) : "";
+            //fasilitas = "";
+            //foreach (ListItem item in chkFasilitas.Items)
+            //{
+            //    if (item.Selected == true)
+            //        fasilitas += item.Value + ",";
+            //}
+            //fasilitas = (fasilitas != "") ? fasilitas.Substring(0, fasilitas.Length - 1) : "";
+
             //Response.Redirect("/CariLokasi?tipeKos=" + ddlTipeKos.SelectedValue + "&lokasi=" + Server.HtmlEncode(txtSearch.Text) + "&fasilitas=" + fasilitas
             //    + "&jkWkt=" + ddlSatuanHarga.SelectedValue + "&latLng=" + hidLatitude.Value + "," + hidLongitude.Value + "&propinsi=" + ddlPropinsi.SelectedValue
             //    + "&kabupaten=" + ddlKabupaten.SelectedValue + "&kecamatan=" + ddlKecamatan.SelectedValue + "&minimum=" + multiHandle2_1_BoundControl.Text
             //    + "&maximum=" + multiHandle2_2_BoundControl.Text);
+        }
+        private void BindGridView()
+        {
+            var provinsi = (ddlPropinsi.SelectedItem.Text == "- Semua - ") ? "" : ddlPropinsi.SelectedItem.Text;
+            var kabupaten = (ddlKabupaten.SelectedItem.Text == "- Semua - ") ? "" : ddlKabupaten.SelectedItem.Text;
+            var kecamatan = (ddlKecamatan.SelectedItem.Text == "- Semua - ") ? "" : ddlKecamatan.SelectedItem.Text;
+            var minimum = Convert.ToInt32(multiHandle2_1_BoundControl.Text);
+            var maximum = Convert.ToInt32(multiHandle2_2_BoundControl.Text);
+
+            var formKosMin = new FormKosSystem().GetPriceRangeByKecamatan(provinsi, kabupaten, kecamatan);
+
+            var MinimumPrice = formKosMin.MinimumPrice.ToString("G0");
+            var MaximumPrice = formKosMin.MaximumPrice.ToString("G0");
+            multiHandleSliderExtenderTwo.Minimum = Convert.ToInt32(MinimumPrice);
+            multiHandleSliderExtenderTwo.Maximum = Convert.ToInt32(MaximumPrice);
+            multiHandleSliderExtenderTwo.ClientState = minimum + "," + maximum;
+
+            rptListByLoc.DataSource = new FormKosSystem().GetAllFormKosByKecamatanMinMax(provinsi, kabupaten, kecamatan, minimum, maximum);
+            rptListByLoc.DataBind();
+        }
+        protected void lnkSliderChanged_Click(object sender, EventArgs e)
+        {
+            BindGridView();
         }
     }
 }
