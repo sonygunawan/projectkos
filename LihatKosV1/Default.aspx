@@ -6,7 +6,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-  <link type="text/css" rel="stylesheet" href="assets/style.css">
+  <link type="text/css" rel="stylesheet" href="assets/style.css" />
 <%--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
     <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>--%>
         <style>

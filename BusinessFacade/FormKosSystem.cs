@@ -57,17 +57,25 @@ namespace LihatKos.BusinessFacade
         {
             return new FormKosDA().GetHighestFormKosByArea(AreaID);
         }
+        //default
         public FormKosData GetPriceRangeByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan)
         {
             return new FormKosDA().GetPriceRangeByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan);
         }
+        //SatuanHargaID
+        public FormKosData GetPriceRangeByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan, int SatuanHargaID)
+        {
+            return new FormKosDA().GetPriceRangeByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan, SatuanHargaID);
+        }
+        //default
         public List<FormKosData> GetAllFormKosByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan)
         {
             return new FormKosDA().GetAllFormKosByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan);
         }
-        public List<FormKosData> GetAllFormKosByKecamatanMinMax(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan, int minimum, int maximum)
+        //minimum,maximum,fasilitas,tipekosid,satuanhargaid
+        public List<FormKosData> GetAllFormKosByKecamatanMinMax(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan, int minimum, int maximum, string fasilitas, int tipeKosId, int satuanHargaId)
         {
-            return new FormKosDA().GetAllFormKosByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan, minimum, maximum);
+            return new FormKosDA().GetAllFormKosByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan, minimum, maximum, fasilitas, tipeKosId, satuanHargaId);
         }
 
         public bool UpdateFormKosApproval(Int64 Id, int StatusApproval)

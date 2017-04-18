@@ -28,4 +28,12 @@ namespace LihatKos.Common.Enum
         KamarMandiDalam = 1,
         KamarMandiLuar = 2
     }
+
+    public enum SatuanHarga : int
+    {
+        HARIAN = 1,
+        MINGGUAN = 2,
+        BULANAN = 3,
+        TAHUNAN = 4
+    }
 }

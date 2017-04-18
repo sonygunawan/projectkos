@@ -474,7 +474,7 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
-        public List<FormKosData> GetAllFormKosByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan, int minimum = 0, int maximum = 0)
+        public List<FormKosData> GetAllFormKosByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan, int minimum = 0, int maximum = 0, string fasilitas = "", int tipeKosId = 0, int satuanHargaID = 3)
         {
             try
             {
@@ -485,6 +485,9 @@ namespace LihatKos.DataAccess
                 db.AddInParameter(dbCommand, "NamaKecamatan", DbType.String, NamaKecamatan);
                 db.AddInParameter(dbCommand, "minimum", DbType.Int32, minimum);
                 db.AddInParameter(dbCommand, "maximum", DbType.Int32, maximum);
+                db.AddInParameter(dbCommand, "TipeKosId", DbType.Int32, tipeKosId);
+                db.AddInParameter(dbCommand, "SatuanHargaId", DbType.Int32, satuanHargaID);
+                db.AddInParameter(dbCommand, "fasilitas", DbType.String, fasilitas);
 
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 {
@@ -598,9 +601,7 @@ namespace LihatKos.DataAccess
             }
         }
 
-
-
-        public FormKosData  GetPriceRangeByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan)
+        public FormKosData  GetPriceRangeByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan, int SatuanHargaID = 3 )
         {
             try
             {
@@ -609,6 +610,7 @@ namespace LihatKos.DataAccess
                 db.AddInParameter(dbCommand, "NamaProvinsi", DbType.String, NamaProvinsi);
                 db.AddInParameter(dbCommand, "NamaKabupaten", DbType.String, NamaKabupaten);
                 db.AddInParameter(dbCommand, "NamaKecamatan", DbType.String, NamaKecamatan);
+                db.AddInParameter(dbCommand, "SatuanHargaID", DbType.Int32, SatuanHargaID);
                 
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 {

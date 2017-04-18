@@ -6,7 +6,6 @@
 <%--<%@ Register Assembly="AjaxControls" Namespace="AjaxControls" TagPrefix="CustomAjaxControls" %>--%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
     <asp:HiddenField ID="hidLatitude" runat="server" ClientIDMode="Static" />
     <asp:HiddenField ID="hidLongitude" runat="server" ClientIDMode="Static" />
     <!-- Room -->
@@ -14,7 +13,7 @@
         <div class="container-fluid">
             <div class="row">
                 
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                 <div class="col-sm-6">
                     <div class="search" style="margin-bottom: 10px;">
@@ -56,22 +55,21 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Kecamatan</label>
-                                        <asp:DropDownList ID="ddlKecamatan" runat="server" CssClass="form-control"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlKecamatan" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlKecamatan_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                     </div>
-
                                     <div class="form-group">
                                         <label class="control-label">Tipe Kos</label>
-                                        <asp:DropDownList ID="ddlTipeKos" runat="server" CssClass="form-control"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlTipeKos" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlTipeKos_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Jangka Waktu</label>
-                                        <asp:DropDownList ID="ddlSatuanHarga" runat="server" CssClass="form-control"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlSatuanHarga" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlSatuanHarga_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Fasilitas</label>
                                         <div class="ui-controlgroup-item">
                                             <asp:CheckBoxList ID="chkFasilitas" runat="server" RepeatDirection="Vertical" RepeatLayout="Flow"
-                                                OnSelectedIndexChanged="chkFasilitas_SelectedIndexChanged">
+                                                OnSelectedIndexChanged="chkFasilitas_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:CheckBoxList>
                                         </div>
                                     </div>
@@ -81,7 +79,7 @@
                                         <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" />
                                         <asp:TextBox ID="sliderTwo" runat="server" Style="display: none;" />
                                         <cc1:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server"
-                                            BehaviorID="multiHandleSliderExtenderTwo"
+                                            BehaviorID="multiHandleSliderExtenderTwo" 
                                             TargetControlID="sliderTwo"
                                             Minimum="0"
                                             Maximum="1000000" 
@@ -103,7 +101,7 @@
                                         <script type="text/javascript">
                                             function OnClientValueChanged(sender, args) {
                                                 document.getElementById("<%=lnkSliderChanged.ClientID %>").click();
-                                                return false;
+                                                //return false;
                                             }
                                         </script>
                                         <%--<input type="text" id="price" 
@@ -112,9 +110,9 @@
                                     </div>
                                     <br />
                                     <div class="form-group">
-                                        <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Cari Lokasi.." ClientIDMode="Static"></asp:TextBox>
+                                        <%--<asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Cari Lokasi.." ClientIDMode="Static"></asp:TextBox>--%>
                                     </div>
-                                    <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default btn-fullwidth text-uppercase" Text="Cari Kos" OnClick="btnSearch_Click" />
+                                    <%--<asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default btn-fullwidth text-uppercase" Text="Cari Kos" OnClick="btnSearch_Click" />--%>
 
                                     <asp:HiddenField ID="HiddenField1" runat="server" ClientIDMode="Static" />
                                     <asp:HiddenField ID="HiddenField2" runat="server" ClientIDMode="Static" />
@@ -158,13 +156,14 @@
                         }
                         google.maps.event.addDomListener(window, 'load', init_map);</script>--%>
                 </div>
-                    </ContentTemplate>
+                    <%--</ContentTemplate>
                     </asp:UpdatePanel>
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
-                        <ContentTemplate>
+                        <ContentTemplate>--%>
                 <!-- #.col-sm-6 -->
 
                 <div class="col-sm-6" style="height: 820px; overflow: auto;">
+                    
                     <asp:LinkButton ID="lnkSliderChanged" OnClick="lnkSliderChanged_Click" runat="server" ClientIDMode="Static" />
                     <%--<uc2:ListByLocation ID="ListByLocation" runat="server" />--%>
                     <div class="table-responsive">
@@ -206,7 +205,14 @@
                     
                             </ContentTemplate>
                             <Triggers>
+                                <%--Jika menggunakan AsyncPostBackTrigger multihandleslider akan menghilang/error--%>
                                 <asp:PostBackTrigger ControlID="lnkSliderChanged" />
+                                <asp:PostBackTrigger ControlID="ddlPropinsi" />
+                                <asp:PostBackTrigger ControlID="ddlKabupaten" />
+                                <asp:PostBackTrigger ControlID="ddlKecamatan" />
+                                <asp:PostBackTrigger ControlID="ddlTipeKos" />
+                                <asp:PostBackTrigger ControlID="ddlSatuanHarga" />
+                                <asp:PostBackTrigger ControlID="chkFasilitas" />
                             </Triggers>
                         </asp:UpdatePanel>
             </div>
