@@ -33,7 +33,7 @@
                                 <asp:BoundField DataField="UserName" HeaderText="User" />
                                 <asp:TemplateField HeaderText="Action" HeaderStyle-Width="150px">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lbtnEdit" OnCommand="lbtnEdit_Command" runat="server" CssClass="btn btn-default btn-sm" >Edit</asp:LinkButton>
+                                        <asp:LinkButton ID="lbtnEdit" runat="server" CssClass="btn btn-default btn-sm" >Edit</asp:LinkButton>
                                         <asp:LinkButton ID="lbtnApprove" OnCommand="lbApprove_Command" runat="server" CssClass="btn btn-info btn-xs" OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Approve</asp:LinkButton>
                                         <asp:LinkButton ID="lbtnAbort" OnCommand="lbAbort_Command" runat="server" CssClass="btn btn-danger btn-xs"  OnClientClick="return confirm('Apakah Anda yakin ingin mengubah status Form ini?');">Abort</asp:LinkButton>
                                         <asp:LinkButton ID="lbtnActive" OnCommand="lbtnActive_Command" runat="server" CssClass="btn btn-block btn-xs" OnClientClick="return confirm('Apakah Anda yakin ingin mengaktifkan Form ini?');">Aktifkan</asp:LinkButton>

@@ -37,7 +37,8 @@ namespace LihatKosV1
                 LinkButton lbtnAbort = (LinkButton)e.Row.Cells[12].FindControl("lbtnAbort");
                 LinkButton lbtnActive = (LinkButton)e.Row.Cells[12].FindControl("lbtnActive");
                 LinkButton lbtnDeactive = (LinkButton)e.Row.Cells[12].FindControl("lbtnDeactive");
-                
+                LinkButton lbtnEdit = (LinkButton)e.Row.Cells[12].FindControl("lbtnEdit");
+
                 if (data.StatusApproval == 0)
                 {
                     lbtnApprove.Visible = true;
@@ -67,6 +68,8 @@ namespace LihatKosV1
                 lbtnApprove.CommandArgument = lbtnAbort.CommandArgument = 
                     lbtnActive.CommandArgument = lbtnDeactive.CommandArgument = 
                     data.ID.ToString();
+
+                lbtnEdit.PostBackUrl = "/EditKos?ID=" + data.ID.ToString();
                 
             }
         }
@@ -107,10 +110,10 @@ namespace LihatKosV1
 
         }
 
-        protected void lbtnEdit_Command(object sender, CommandEventArgs e)
-        {
-            Response.Redirect("DaftarKos");
-        }
+        //protected void lbtnEdit_Command(object sender, CommandEventArgs e)
+        //{
+        //    Response.Redirect("EditKos");
+        //}
         //protected void rptApprovalKos_ItemCommand(object source, RepeaterCommandEventArgs e)
         //{
 

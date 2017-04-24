@@ -9,9 +9,11 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript">
             $(function () {
-                $("input").checkboxradio({
-                    icon: false
-                });
+                $("input[id*=chkFasilitas]").buttonset();
+                
+                //$("input").checkboxradio({
+                //    icon: false
+                //});
             });
             <%-- $("#<%= chkFasilitas.ClientID %>").buttonset();
                                  $("#<%= chkLingkungan.ClientID %>").buttonset();--%>
@@ -24,7 +26,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Form Pendaftaran LihatKos
+                            <asp:Label ID="lblTitle" runat="server" />
                         </div>
 
                         <div class="panel-body">
@@ -56,16 +58,14 @@
                                     BalloonPopupControlID="Panel1" Position="BottomRight" BalloonStyle="Cloud" BalloonSize="Small"
                                     UseShadow="true" />
                             </div>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="textarea">Area<a class="fa fa-info-circle">
                                   </a></label>
                                 <div class="col-md-9">
-                                    <asp:DropDownList ID="ddlArea" runat="server" CssClass="form-control ui-controlgroup-item"></asp:DropDownList>
-                                    <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>--%>
-                                    
+                                    <asp:DropDownList ID="ddlArea" runat="server" CssClass="form-control ui-controlgroup-item"></asp:DropDownList>        
                                 </div>
                             </div>
-                            <%--<div class="form-group">
+                            <div class="form-group">
                                 <label class="col-md-3 control-label" for="textarea">Alamat</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtAlamat" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>

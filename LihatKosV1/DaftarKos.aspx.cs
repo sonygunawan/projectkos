@@ -31,31 +31,40 @@ namespace LihatKosV1
                 chkLingkungan.DataValueField = "ID";
                 chkLingkungan.DataBind();
 
-                ddlArea.DataSource = new AreaSystem().GetAllArea();
-                ddlArea.DataTextField = "Nama";
-                ddlArea.DataValueField = "ID";
-                ddlArea.DataBind(); 
+                //ddlArea.DataSource = new AreaSystem().GetAllArea();
+                //ddlArea.DataTextField = "Nama";
+                //ddlArea.DataValueField = "ID";
+                //ddlArea.DataBind(); 
 
                 rdlTipeKos.DataSource = new TipeKosSystem().GetAllTipeKos();
                 rdlTipeKos.DataTextField = "NamaRdl";
                 rdlTipeKos.DataValueField = "ID";
                 rdlTipeKos.DataBind();
-                rdlTipeKos.SelectedValue = "1";
-                rdlPet.SelectedValue = "0";
+                if (Request.QueryString["ID"] == null)
+                {
+                    lblTitle.Text = "Form Pendaftaran LihatKos";
+                    rdlTipeKos.SelectedValue = "1";
+                    rdlPet.SelectedValue = "0";
 
-                //ddlMinimumBayarMonth.DataSource = new PaymentSystem().GetAllPaymentBulan();
-                //ddlMinimumBayarMonth.DataTextField = "Nama";
-                //ddlMinimumBayarMonth.DataValueField = "ID";
-                //ddlMinimumBayarMonth.DataBind();
+                    //ddlMinimumBayarMonth.DataSource = new PaymentSystem().GetAllPaymentBulan();
+                    //ddlMinimumBayarMonth.DataTextField = "Nama";
+                    //ddlMinimumBayarMonth.DataValueField = "ID";
+                    //ddlMinimumBayarMonth.DataBind();
 
-                ViewState["CurrentTeleponList"] = null;
-                SetInitialTeleponRow();
+                    ViewState["CurrentTeleponList"] = null;
+                    SetInitialTeleponRow();
 
-                BindGridHarga();
+                    BindGridHarga();
 
-                ViewState["CurrentKamarList"] = null;
-                SetInitialKamarRow();
-
+                    ViewState["CurrentKamarList"] = null;
+                    SetInitialKamarRow();
+                }
+                else
+                {
+                    var ID = Request.QueryString["ID"].ToString();
+                    lblTitle.Text = "Form Edit Kos";
+                    LoadFormKosByID(Convert.ToInt64(ID));
+                }
             }
             
             //ClientScript.RegisterStartupScript(GetType(), "checkboxBeautify",
@@ -64,13 +73,83 @@ namespace LihatKosV1
 
         }
 
+        private void LoadFormKosByID(long ID)
+        {
+            var formKos = new FormKosSystem().GetAllFormKos(ID, "");
+            txtNama.Text = formKos[0].Nama;
+            txtDeskripsi.Text = formKos[0].Deskripsi;
+            txtLokasi.Text = formKos[0].Alamat;
+            txtLatitude.Text = formKos[0].Latitude.ToString().Replace(',','.');
+            txtLongitude.Text = formKos[0].Longitude.ToString().Replace(',', '.');
+            txtPemilik.Text = formKos[0].NamaPemilik;
+            //telepon
+            var kosTelepon = new FormKosSystem().GetKosTeleponByFormID(ID);
+            ViewState["CurrentTeleponList"] = kosTelepon;
+            gvKosTelepon.DataSource = kosTelepon;
+            gvKosTelepon.DataBind();
+            //harga
+            var kosHarga = GenerateHarga();
+            var inputKosHarga = new FormKosSystem().GetKosHargaByFormID(ID);
+            foreach (var kosHargaTemp in kosHarga)
+            {
+                var satuanHargaId = kosHargaTemp.SatuanHargaID;
+                var inputHarga = from hrg in inputKosHarga
+                                         where hrg.SatuanHargaID == satuanHargaId
+                                         select hrg;
+                //default
+                kosHargaTemp.isChecked = false;
+                if (inputHarga.ToList().Count > 0)
+                {
+                    kosHargaTemp.Harga = inputHarga.ToList()[0].Harga;
+                    kosHargaTemp.isChecked = true;
+                }
+            }
+            gvKosHarga.DataSource = kosHarga; 
+            gvKosHarga.DataBind();
+            //kamar
+            var kosKamar = new FormKosSystem().GetKosKamarByFormID(ID);
+            ViewState["CurrentKamarList"] = kosKamar;
+            gvKamarKos.DataSource = kosKamar;
+            gvKamarKos.DataBind();
+            //TipeKos
+            rdlTipeKos.SelectedValue = formKos[0].TipeKosID.ToString();
+            //Pet
+            rdlPet.SelectedValue = formKos[0].PetID.ToString();
+            //fasilitas
+            var fasilitas = new FormKosSystem().GetKosFasilitasByFormID(ID);
+            chkFasilitas.DataSource = fasilitas;
+            chkFasilitas.DataValueField = "FormKosFasilitasID";
+            chkFasilitas.DataTextField = "NamaFasilitas";
+            chkFasilitas.DataBind();
+            foreach (ListItem item in chkFasilitas.Items)
+            {
+                var dataFasi = fasilitas.Where(i => i.FormKosFasilitasID == Convert.ToInt32(item.Value) && i.Status == 1).ToList();
+                if (dataFasi.Count > 0 )
+                    item.Selected = true;
+            }
+            //lingkungan
+            var lingkungan = new FormKosSystem().GetKosLingkunganByFormID(ID);
+            chkLingkungan.DataSource = lingkungan;
+            chkLingkungan.DataValueField = "FormKosLingkunganID";
+            chkLingkungan.DataTextField = "NamaLingkungan";
+            chkLingkungan.DataBind();
+            foreach (ListItem item in chkLingkungan.Items)
+            {
+                var dataLink = lingkungan.Where(i => i.FormKosLingkunganID == Convert.ToInt32(item.Value) && i.Status == 1).ToList();
+                if (dataLink.Count > 0)
+                    item.Selected = true;
+            }
+            //Keterangan
+            txtKeteranganLain.Text = formKos[0].Keterangan;
+        }
+
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             FormKosData Data = new FormKosData();
             Data.Kode = new FormKosSystem().GetMaxFormKos();
             Data.Nama = txtNama.Text;
             Data.Deskripsi = txtDeskripsi.Text;
-            Data.AreaID = Convert.ToInt32(ddlArea.SelectedValue);
+            //Data.AreaID = Convert.ToInt32(ddlArea.SelectedValue);
             Data.Alamat = txtLokasi.Text;
             Data.Latitude = Convert.ToDecimal(Convert.ToDecimal(hidLatitude.Value.Replace('.',',')).ToString("N6"));
             Data.Longitude = Convert.ToDecimal(Convert.ToDecimal(hidLongitude.Value.Replace('.', ',')).ToString("N6"));
@@ -370,7 +449,13 @@ namespace LihatKosV1
                 //isChecked.Enabled = tr
                 LoadDropDownHarga(data.SatuanHargaID, ref ddlMinimumBayar);
                 ddlMinimumBayar.SelectedValue = data.MinimumBayar.ToString();
+                if (data.Harga > 0)
+                {
+                    chkIsChecked.Checked = data.isChecked;
+                    txtHarga.Text = data.Harga.ToString("N0");
+                    ddlMinimumBayar.SelectedValue = data.MinimumBayar.ToString();
 
+                }
                 if (chkIsChecked.Checked == false)
                 {
                     txtHarga.Text = "";

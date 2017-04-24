@@ -13,6 +13,15 @@ namespace LihatKosV1 {
     public partial class DaftarKos {
         
         /// <summary>
+        /// lblTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitle;
+        
+        /// <summary>
         /// vs control.
         /// </summary>
         /// <remarks>
@@ -65,15 +74,6 @@ namespace LihatKosV1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.BalloonPopupExtender BalloonPopupExtender1;
-        
-        /// <summary>
-        /// ddlArea control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlArea;
         
         /// <summary>
         /// txtLokasi control.

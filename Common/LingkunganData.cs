@@ -11,5 +11,6 @@ namespace LihatKos.Common
         public string Kode { get; set; }
         public string Nama { get; set; }
         public string Deskripsi { get; set; }
+        public int Status { get; set; }
     }
 }

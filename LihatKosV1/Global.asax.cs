@@ -38,6 +38,9 @@ namespace LihatKosV1
                 "DaftarKos",
                 "~/DaftarKos.aspx");
             routes.MapPageRoute("",
+                "EditKos",
+                "~/DaftarKos.aspx");
+            routes.MapPageRoute("",
                 "DetailKos",
                 "~/DetailKos.aspx");
             routes.MapPageRoute("",
