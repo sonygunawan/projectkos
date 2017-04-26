@@ -37,7 +37,7 @@ namespace LihatKos.BusinessFacade
         {
             return new FormKosDA().InsertFormKosLengkap(Data);
         }
-
+        
         public List<FormKosData> GetAllFormKos(Int64 Id, string Search)
         {
             return new FormKosDA().GetAllFormKos(Id, Search);
@@ -109,5 +109,11 @@ namespace LihatKos.BusinessFacade
 
         #endregion 
 
+        #region Update
+        public Int64 UpdateFormKosLengkap(FormKosData Data)
+        {
+            return new FormKosDA().UpdateFormKosLengkap(Data);
+        }
+        #endregion
     }
 }

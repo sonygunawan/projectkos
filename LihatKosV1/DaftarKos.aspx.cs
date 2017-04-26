@@ -82,6 +82,7 @@ namespace LihatKosV1
             txtLatitude.Text = formKos[0].Latitude.ToString().Replace(',','.');
             txtLongitude.Text = formKos[0].Longitude.ToString().Replace(',', '.');
             txtPemilik.Text = formKos[0].NamaPemilik;
+
             //telepon
             var kosTelepon = new FormKosSystem().GetKosTeleponByFormID(ID);
             ViewState["CurrentTeleponList"] = kosTelepon;
@@ -114,7 +115,7 @@ namespace LihatKosV1
             //TipeKos
             rdlTipeKos.SelectedValue = formKos[0].TipeKosID.ToString();
             //Pet
-            rdlPet.SelectedValue = formKos[0].PetID.ToString();
+            rdlPet.SelectedValue = (formKos[0].PetID == true) ? "1" : "0";
             //fasilitas
             var fasilitas = new FormKosSystem().GetKosFasilitasByFormID(ID);
             chkFasilitas.DataSource = fasilitas;
@@ -145,105 +146,195 @@ namespace LihatKosV1
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            FormKosData Data = new FormKosData();
-            Data.Kode = new FormKosSystem().GetMaxFormKos();
-            Data.Nama = txtNama.Text;
-            Data.Deskripsi = txtDeskripsi.Text;
-            //Data.AreaID = Convert.ToInt32(ddlArea.SelectedValue);
-            Data.Alamat = txtLokasi.Text;
-            Data.Latitude = Convert.ToDecimal(Convert.ToDecimal(hidLatitude.Value.Replace('.',',')).ToString("N6"));
-            Data.Longitude = Convert.ToDecimal(Convert.ToDecimal(hidLongitude.Value.Replace('.', ',')).ToString("N6"));
-            Data.NamaPemilik = txtPemilik.Text;
-            //Data.KontakPemilik = txtTlpPemilik.Text;
-            //Data.NamaPengelola = txtNamaPengelola.Text;
-            //Data.KontakPengelola = txtTlpPengelola.Text;
-            //Data.MinimumBayarMonth = Convert.ToInt32(ddlMinimumBayarMonth.SelectedValue);
-            //Data.MinimumBayarDesc = txtMinimumBayarDesc.Text;
-            //Data.JmlKamar = Convert.ToInt32(txtJmlKamar.Text);
-            //Data.LuasKamar = Convert.ToSingle(txtLuasKamar.Text.Replace(',','.'));
-            Data.TipeKosID = Convert.ToInt32(rdlTipeKos.SelectedValue);
-            //Data.JmlKamarKosong = Convert.ToInt32(txtJmlKamarKosong.Text);
-            Data.PetID = (rdlPet.SelectedValue == "1") ? true : false;
-            Data.Keterangan = txtKeteranganLain.Text;
+            long retFormID = 0;
+            if (lblTitle.Text != "Form Edit Kos")
+            {
+                FormKosData Data = new FormKosData();
+                Data.Kode = new FormKosSystem().GetMaxFormKos();
+                Data.Nama = txtNama.Text;
+                Data.Deskripsi = txtDeskripsi.Text;
+                Data.Alamat = txtLokasi.Text;
+                Data.Latitude = Convert.ToDecimal(Convert.ToDecimal(hidLatitude.Value.Replace('.', ',')).ToString("N6"));
+                Data.Longitude = Convert.ToDecimal(Convert.ToDecimal(hidLongitude.Value.Replace('.', ',')).ToString("N6"));
+                Data.NamaPemilik = txtPemilik.Text;
+                Data.TipeKosID = Convert.ToInt32(rdlTipeKos.SelectedValue);
+                Data.PetID = (rdlPet.SelectedValue == "1") ? true : false;
+                Data.Keterangan = txtKeteranganLain.Text;
 
-            Int64 UserID = Convert.ToInt64(Session["UserID"]);
-            Data.UserID = UserID;
-            //Wilayah
-            Data.NamaProvinsi = hidProvinsi.Value; // txtCity.Text;
-            Data.NamaKabupaten = hidKabupaten.Value; // txtKabupaten.Text;
-            Data.NamaKecamatan = hidKecamatan.Value; //txtKecamatan.Text;
-            Data.NamaKelurahan = hidKelurahan.Value; //txtKelurahan.Text;
+                Int64 UserID = Convert.ToInt64(Session["UserID"]);
+                Data.UserID = UserID;
+                //Wilayah
+                Data.NamaProvinsi = hidProvinsi.Value; 
+                Data.NamaKabupaten = hidKabupaten.Value;
+                Data.NamaKecamatan = hidKecamatan.Value;
+                Data.NamaKelurahan = hidKelurahan.Value;
 
-            List<KosTeleponData> DetailsTelepon = new List<KosTeleponData>();
-            foreach (GridViewRow item in gvKosTelepon.Rows)
+                List<KosTeleponData> DetailsTelepon = new List<KosTeleponData>();
+                foreach (GridViewRow item in gvKosTelepon.Rows)
+                {
+                    KosTeleponData DetTel = new KosTeleponData();
+                    DropDownList ddlPhoneID = (DropDownList)item.Cells[2].FindControl("ddlPhoneID");
+                    TextBox txtValue = (TextBox)item.Cells[1].FindControl("txtValue");
+                    DetTel.OrderID = Convert.ToInt32(item.Cells[0].Text);
+                    DetTel.PhoneID = Convert.ToInt32(ddlPhoneID.SelectedValue);
+                    DetTel.Value = txtValue.Text;
+                    DetailsTelepon.Add(DetTel);
+                }
+
+                List<KosFasilitasData> DetailsFasi = new List<KosFasilitasData>();
+                foreach (ListItem item in chkFasilitas.Items)
+                {
+                    KosFasilitasData DetFasi = new KosFasilitasData();
+                    DetFasi.FormKosFasilitasID = Convert.ToInt32(item.Value);
+                    if (item.Selected == true)
+                        DetFasi.Status = 1;
+                    else
+                        DetFasi.Status = 0;
+                    DetailsFasi.Add(DetFasi);
+                }
+
+                List<KosLingkunganData> DetailsLink = new List<KosLingkunganData>();
+                foreach (ListItem item in chkLingkungan.Items)
+                {
+                    KosLingkunganData DetLink = new KosLingkunganData();
+                    DetLink.FormKosLingkunganID = Convert.ToInt32(item.Value);
+                    if (item.Selected == true)
+                        DetLink.Status = 1;
+                    else
+                        DetLink.Status = 0;
+                    DetailsLink.Add(DetLink);
+                }
+                //List
+                List<KosHargaData> DetailsHarga = new List<KosHargaData>();
+                foreach (GridViewRow item in gvKosHarga.Rows)
+                {
+                    KosHargaData DetHrg = new KosHargaData();
+                    var txtHarga = (TextBox)item.Cells[1].FindControl("txtHarga");
+                    var ddlMinimumBayar = (DropDownList)item.Cells[4].FindControl("ddlMinimumBayar");
+                    DetHrg.SatuanHargaID = Convert.ToInt32(item.Cells[5].Text);
+                    DetHrg.Harga = (txtHarga.Text != "") ? Convert.ToDecimal(txtHarga.Text) : 0;
+                    DetHrg.MinimumBayar = Convert.ToInt32(ddlMinimumBayar.SelectedValue);
+                    DetailsHarga.Add(DetHrg);
+                }
+                //List Kamar
+                List<KosKamarData> DetailsKamar = new List<KosKamarData>();
+                foreach (GridViewRow item in gvKamarKos.Rows)
+                {
+                    KosKamarData DetKam = new KosKamarData();
+                    var txtLuas = (TextBox)item.Cells[1].FindControl("txtLuas");
+                    var rblFasilitas = (RadioButtonList)item.Cells[2].FindControl("rblFasilitas");
+                    var txtJmlKamar = (TextBox)item.Cells[3].FindControl("txtJmlKamar");
+                    var txtKamarKosong = (TextBox)item.Cells[4].FindControl("txtKamarKosong");
+                    DetKam.OrderID = Convert.ToInt32(item.Cells[0].Text);
+                    DetKam.Luas = txtLuas.Text;
+                    DetKam.FasilitasKamar = Convert.ToInt32(rblFasilitas.SelectedValue);
+                    DetKam.JmlKamar = Convert.ToInt32(txtJmlKamar.Text == "" ? "0" : txtJmlKamar.Text);
+                    DetKam.KamarKosong = Convert.ToInt32(txtKamarKosong.Text == "" ? "0" : txtKamarKosong.Text);
+                    DetailsKamar.Add(DetKam);
+                }
+                //Add to List
+                Data.KosHarga = DetailsHarga;
+                Data.KosFasilitas = DetailsFasi;
+                Data.KosLingkungan = DetailsLink;
+                Data.KosTelepon = DetailsTelepon;
+                Data.KosKamar = DetailsKamar;
+                retFormID = new FormKosSystem().InsertFormKosLengkap(Data);
+            }
+            else
             {
-                KosTeleponData DetTel = new KosTeleponData();
-                DropDownList ddlPhoneID = (DropDownList)item.Cells[2].FindControl("ddlPhoneID");
-                TextBox txtValue = (TextBox)item.Cells[1].FindControl("txtValue");
-                DetTel.OrderID = Convert.ToInt32(item.Cells[0].Text);
-                DetTel.PhoneID = Convert.ToInt32(ddlPhoneID.SelectedValue);
-                DetTel.Value = txtValue.Text;
-                DetailsTelepon.Add(DetTel);
+                var ID = Request.QueryString["ID"].ToString();
+                FormKosData Data = new FormKosData();
+                Data.ID = Convert.ToInt64(ID);
+                Data.Nama = txtNama.Text;
+                Data.Deskripsi = txtDeskripsi.Text;
+                Data.Alamat = txtLokasi.Text;
+                Data.Latitude = Convert.ToDecimal(Convert.ToDecimal(txtLatitude.Text.Replace('.', ',')).ToString("N6"));
+                Data.Longitude = Convert.ToDecimal(Convert.ToDecimal(txtLongitude.Text.Replace('.', ',')).ToString("N6"));
+                Data.NamaPemilik = txtPemilik.Text;
+                Data.TipeKosID = Convert.ToInt32(rdlTipeKos.SelectedValue);
+                Data.PetID = (rdlPet.SelectedValue == "1") ? true : false;
+                Data.Keterangan = txtKeteranganLain.Text;
+
+                Int64 UserID = Convert.ToInt64(Session["UserID"]);
+                Data.UserID = UserID;
+                //Wilayah
+                Data.NamaProvinsi = hidProvinsi.Value;
+                Data.NamaKabupaten = hidKabupaten.Value;
+                Data.NamaKecamatan = hidKecamatan.Value;
+                Data.NamaKelurahan = hidKelurahan.Value;
+
+                List<KosTeleponData> DetailsTelepon = new List<KosTeleponData>();
+                foreach (GridViewRow item in gvKosTelepon.Rows)
+                {
+                    KosTeleponData DetTel = new KosTeleponData();
+                    DropDownList ddlPhoneID = (DropDownList)item.Cells[2].FindControl("ddlPhoneID");
+                    TextBox txtValue = (TextBox)item.Cells[1].FindControl("txtValue");
+                    DetTel.OrderID = Convert.ToInt32(item.Cells[0].Text);
+                    DetTel.PhoneID = Convert.ToInt32(ddlPhoneID.SelectedValue);
+                    DetTel.Value = txtValue.Text;
+                    DetailsTelepon.Add(DetTel);
+                }
+
+                List<KosFasilitasData> DetailsFasi = new List<KosFasilitasData>();
+                foreach (ListItem item in chkFasilitas.Items)
+                {
+                    KosFasilitasData DetFasi = new KosFasilitasData();
+                    DetFasi.FormKosFasilitasID = Convert.ToInt32(item.Value);
+                    if (item.Selected == true)
+                        DetFasi.Status = 1;
+                    else
+                        DetFasi.Status = 0;
+                    DetailsFasi.Add(DetFasi);
+                }
+
+                List<KosLingkunganData> DetailsLink = new List<KosLingkunganData>();
+                foreach (ListItem item in chkLingkungan.Items)
+                {
+                    KosLingkunganData DetLink = new KosLingkunganData();
+                    DetLink.FormKosLingkunganID = Convert.ToInt32(item.Value);
+                    if (item.Selected == true)
+                        DetLink.Status = 1;
+                    else
+                        DetLink.Status = 0;
+                    DetailsLink.Add(DetLink);
+                }
+                //List
+                List<KosHargaData> DetailsHarga = new List<KosHargaData>();
+                foreach (GridViewRow item in gvKosHarga.Rows)
+                {
+                    KosHargaData DetHrg = new KosHargaData();
+                    var txtHarga = (TextBox)item.Cells[1].FindControl("txtHarga");
+                    var ddlMinimumBayar = (DropDownList)item.Cells[4].FindControl("ddlMinimumBayar");
+                    DetHrg.SatuanHargaID = Convert.ToInt32(item.Cells[5].Text);
+                    DetHrg.Harga = (txtHarga.Text != "") ? Convert.ToDecimal(txtHarga.Text) : 0;
+                    DetHrg.MinimumBayar = Convert.ToInt32(ddlMinimumBayar.SelectedValue);
+                    DetailsHarga.Add(DetHrg);
+                }
+                //List Kamar
+                List<KosKamarData> DetailsKamar = new List<KosKamarData>();
+                foreach (GridViewRow item in gvKamarKos.Rows)
+                {
+                    KosKamarData DetKam = new KosKamarData();
+                    var txtLuas = (TextBox)item.Cells[1].FindControl("txtLuas");
+                    var rblFasilitas = (RadioButtonList)item.Cells[2].FindControl("rblFasilitas");
+                    var txtJmlKamar = (TextBox)item.Cells[3].FindControl("txtJmlKamar");
+                    var txtKamarKosong = (TextBox)item.Cells[4].FindControl("txtKamarKosong");
+                    DetKam.OrderID = Convert.ToInt32(item.Cells[0].Text);
+                    DetKam.Luas = txtLuas.Text;
+                    DetKam.FasilitasKamar = Convert.ToInt32(rblFasilitas.SelectedValue);
+                    DetKam.JmlKamar = Convert.ToInt32(txtJmlKamar.Text == "" ? "0" : txtJmlKamar.Text);
+                    DetKam.KamarKosong = Convert.ToInt32(txtKamarKosong.Text == "" ? "0" : txtKamarKosong.Text);
+                    DetailsKamar.Add(DetKam);
+                }
+                //Add to List
+                Data.KosHarga = DetailsHarga;
+                Data.KosFasilitas = DetailsFasi;
+                Data.KosLingkungan = DetailsLink;
+                Data.KosTelepon = DetailsTelepon;
+                Data.KosKamar = DetailsKamar;
+                retFormID = new FormKosSystem().UpdateFormKosLengkap(Data);
             }
 
-            List<KosFasilitasData> DetailsFasi = new List<KosFasilitasData>();
-            foreach(ListItem item in chkFasilitas.Items)
-            {
-                KosFasilitasData DetFasi = new KosFasilitasData();
-                DetFasi.FormKosFasilitasID = Convert.ToInt32(item.Value);
-                if (item.Selected == true)
-                    DetFasi.Status = 1;
-                else
-                    DetFasi.Status = 0;
-                DetailsFasi.Add(DetFasi);
-            }
-
-            List<KosLingkunganData> DetailsLink = new List<KosLingkunganData>();
-            foreach (ListItem item in chkLingkungan.Items)
-            {
-                KosLingkunganData DetLink = new KosLingkunganData();
-                DetLink.FormKosLingkunganID = Convert.ToInt32(item.Value);
-                if (item.Selected == true)
-                    DetLink.Status = 1;
-                else
-                    DetLink.Status = 0;
-                DetailsLink.Add(DetLink);
-            }
-            //List
-            List<KosHargaData> DetailsHarga = new List<KosHargaData>();
-            foreach (GridViewRow item in gvKosHarga.Rows)
-            {
-                KosHargaData DetHrg = new KosHargaData();
-                var txtHarga = (TextBox)item.Cells[1].FindControl("txtHarga");
-                var ddlMinimumBayar = (DropDownList)item.Cells[4].FindControl("ddlMinimumBayar");
-                DetHrg.SatuanHargaID = Convert.ToInt32(item.Cells[5].Text);
-                DetHrg.Harga = (txtHarga.Text != "") ? Convert.ToDecimal(txtHarga.Text) : 0;
-                DetHrg.MinimumBayar = Convert.ToInt32(ddlMinimumBayar.SelectedValue);
-                DetailsHarga.Add(DetHrg);
-            }
-            //List Kamar
-            List<KosKamarData> DetailsKamar = new List<KosKamarData>();
-            foreach (GridViewRow item in gvKamarKos.Rows)
-            {
-                KosKamarData DetKam = new KosKamarData();
-                var txtLuas = (TextBox)item.Cells[1].FindControl("txtLuas");
-                var rblFasilitas = (RadioButtonList)item.Cells[2].FindControl("rblFasilitas");
-                var txtJmlKamar = (TextBox)item.Cells[3].FindControl("txtJmlKamar");
-                var txtKamarKosong = (TextBox)item.Cells[4].FindControl("txtKamarKosong");
-                DetKam.OrderID = Convert.ToInt32(item.Cells[0].Text);
-                DetKam.Luas = txtLuas.Text;
-                DetKam.FasilitasKamar = Convert.ToInt32(rblFasilitas.SelectedValue);
-                DetKam.JmlKamar = Convert.ToInt32(txtJmlKamar.Text == "" ? "0" : txtJmlKamar.Text);
-                DetKam.KamarKosong = Convert.ToInt32(txtKamarKosong.Text == "" ? "0" : txtKamarKosong.Text);
-                DetailsKamar.Add(DetKam);
-            }
-            //Add to List
-            Data.KosHarga = DetailsHarga;
-            Data.KosFasilitas = DetailsFasi;
-            Data.KosLingkungan = DetailsLink;
-            Data.KosTelepon = DetailsTelepon;
-            Data.KosKamar = DetailsKamar;
-            var retFormID = new FormKosSystem().InsertFormKosLengkap(Data);
             Response.Redirect("/UploadFoto?ID=" + retFormID.ToString());
         }
 

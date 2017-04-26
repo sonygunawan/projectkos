@@ -42,22 +42,18 @@ namespace LihatKos.DataAccess
                 db.AddInParameter(dbCommand, "AlamatPengelola", DbType.String, Data.AlamatPengelola);
                 db.AddInParameter(dbCommand, "KontakPengelola", DbType.String, Data.KontakPengelola);
                 db.AddInParameter(dbCommand, "MinimumBayarMonth", DbType.Int32, Data.MinimumBayarMonth);
-                //@MinimumBayarDesc
                 db.AddInParameter(dbCommand, "MinimumBayarDesc", DbType.String, Data.MinimumBayarDesc);
                 db.AddInParameter(dbCommand, "JmlKamar", DbType.Int32, Data.JmlKamar);
                 db.AddInParameter(dbCommand, "LuasKamar", DbType.Double, Data.LuasKamar);
                 db.AddInParameter(dbCommand, "TipeKosID", DbType.Int32, Data.TipeKosID);
                 db.AddInParameter(dbCommand, "JmlKamarKosong", DbType.Int32, Data.JmlKamarKosong);
                 db.AddInParameter(dbCommand, "PetID", DbType.Boolean, Data.PetID);
-                //db.AddInParameter(dbCommand, "FormKosFasilitasID", DbType.Int32, Data.FormKosFasilitasID);
-                //db.AddInParameter(dbCommand, "FormKosLingkunganID", DbType.Int32, Data.FormKosLingkunganID);
                 db.AddInParameter(dbCommand, "Keterangan", DbType.String, Data.Keterangan);
                 db.AddInParameter(dbCommand, "UserID", DbType.Int64, Data.UserID);
                 db.AddInParameter(dbCommand, "NamaProvinsi", DbType.String, Data.NamaProvinsi);
                 db.AddInParameter(dbCommand, "NamaKabupaten", DbType.String, Data.NamaKabupaten.ToString().Replace("Kota ", ""));
                 db.AddInParameter(dbCommand, "NamaKecamatan", DbType.String, Data.NamaKecamatan);
                 db.AddInParameter(dbCommand, "NamaKelurahan", DbType.String, Data.NamaKelurahan);
-                //db.ExecuteNonQuery(dbCommand);
                 db.AddParameter(dbCommand, "RETURN_VALUE", DbType.Int64, ParameterDirection.ReturnValue, null, DataRowVersion.Default, null);
                 db.ExecuteNonQuery(dbCommand);
 
@@ -69,12 +65,6 @@ namespace LihatKos.DataAccess
                 else
                 { return 0; }
 
-                //using (IDataReader dataReader = db.ExecuteReader(dbCommand))
-                //{
-
-                //    dataReader.Close();
-
-                //}
                 return Convert.ToInt64(FormID);
             }
             catch (Exception ex)
@@ -139,7 +129,7 @@ namespace LihatKos.DataAccess
             try
             {
                 List<KosFasilitasData> formKos = new List<KosFasilitasData>();
-                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetKosFasilitasOnlyByFormID");
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetKosFasilitasByFormID");
                 db.AddInParameter(dbCommand, "FormID", DbType.Int64, Id);
 
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
@@ -168,7 +158,7 @@ namespace LihatKos.DataAccess
             try
             {
                 List<KosLingkunganData> formKos = new List<KosLingkunganData>();
-                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetKosLingkunganOnlyByFormID");
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetKosLingkunganByFormID");
                 db.AddInParameter(dbCommand, "FormID", DbType.Int64, Id);
 
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
@@ -214,6 +204,22 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+        public bool DeleteKosHarga(long FormKosID)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DeleteKosHarga");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, FormKosID);
+                db.ExecuteNonQuery(dbCommand);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
         public bool InsertKosFasilitas(KosFasilitasData Data)
         {
             try
@@ -232,6 +238,22 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+        public bool DeleteKosFasilitas(long FormKosID)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DeleteKosFasilitas");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, FormKosID);
+                db.ExecuteNonQuery(dbCommand);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
         public bool InsertKosLingkungan(KosLingkunganData Data)
         {
             try
@@ -240,6 +262,22 @@ namespace LihatKos.DataAccess
                 db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, Data.FormKosID);
                 db.AddInParameter(dbCommand, "FormKosLingkunganID", DbType.Int32, Data.FormKosLingkunganID);
                 db.AddInParameter(dbCommand, "Status", DbType.Decimal, Data.Status);
+                db.ExecuteNonQuery(dbCommand);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+        public bool DeleteKosLingkungan(long FormKosID)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DeleteKosLingkungan");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, FormKosID);
                 db.ExecuteNonQuery(dbCommand);
 
                 return true;
@@ -663,6 +701,22 @@ namespace LihatKos.DataAccess
             }
         }
 
+        public bool DeleteKosTelepon(long FormKosID)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DeleteKosTlp");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, FormKosID);
+                db.ExecuteNonQuery(dbCommand);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
         public bool InsertKosTelepon(KosTeleponData Data)
         {
             try
@@ -684,6 +738,22 @@ namespace LihatKos.DataAccess
             }
         }
 
+        public bool DeleteKosKamar(long FormKosID)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_DeleteKosKamar");
+                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, FormKosID);
+                db.ExecuteNonQuery(dbCommand);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
         #endregion
 
         #region Kamar
@@ -743,5 +813,140 @@ namespace LihatKos.DataAccess
         }
 
         #endregion 
+
+        
+        #region Update
+        public Int64 UpdateFormKos(FormKosData Data)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdateFormKos");
+                db.AddInParameter(dbCommand, "ID", DbType.Int64, Data.ID);
+                db.AddInParameter(dbCommand, "Nama", DbType.String, Data.Nama);
+                db.AddInParameter(dbCommand, "Deskripsi", DbType.String, Data.Deskripsi);
+                db.AddInParameter(dbCommand, "Alamat", DbType.String, Data.Alamat);
+                db.AddInParameter(dbCommand, "AreaID", DbType.Int32, Data.AreaID);
+                db.AddInParameter(dbCommand, "Altitude", DbType.Decimal, Data.Latitude);
+                db.AddInParameter(dbCommand, "Longitude", DbType.Decimal, Data.Longitude);
+                db.AddInParameter(dbCommand, "ImageID", DbType.Int64, Data.ImageID);
+                db.AddInParameter(dbCommand, "NamaPemilik", DbType.String, Data.NamaPemilik);
+                db.AddInParameter(dbCommand, "AlamatPemilik", DbType.String, Data.AlamatPemilik);
+                db.AddInParameter(dbCommand, "KontakPemilik", DbType.String, Data.KontakPemilik);
+                db.AddInParameter(dbCommand, "NamaPengelola", DbType.String, Data.NamaPengelola);
+                db.AddInParameter(dbCommand, "AlamatPengelola", DbType.String, Data.AlamatPengelola);
+                db.AddInParameter(dbCommand, "KontakPengelola", DbType.String, Data.KontakPengelola);
+                db.AddInParameter(dbCommand, "MinimumBayarMonth", DbType.Int32, Data.MinimumBayarMonth);
+                db.AddInParameter(dbCommand, "MinimumBayarDesc", DbType.String, Data.MinimumBayarDesc);
+                db.AddInParameter(dbCommand, "JmlKamar", DbType.Int32, Data.JmlKamar);
+                db.AddInParameter(dbCommand, "LuasKamar", DbType.Double, Data.LuasKamar);
+                db.AddInParameter(dbCommand, "TipeKosID", DbType.Int32, Data.TipeKosID);
+                db.AddInParameter(dbCommand, "JmlKamarKosong", DbType.Int32, Data.JmlKamarKosong);
+                db.AddInParameter(dbCommand, "PetID", DbType.Boolean, Data.PetID);
+                db.AddInParameter(dbCommand, "Keterangan", DbType.String, Data.Keterangan);
+                db.AddInParameter(dbCommand, "UserID", DbType.Int64, Data.UserID);
+                db.AddInParameter(dbCommand, "NamaProvinsi", DbType.String, Data.NamaProvinsi);
+                db.AddInParameter(dbCommand, "NamaKabupaten", DbType.String, Data.NamaKabupaten.ToString().Replace("Kota ", ""));
+                db.AddInParameter(dbCommand, "NamaKecamatan", DbType.String, Data.NamaKecamatan);
+                db.AddInParameter(dbCommand, "NamaKelurahan", DbType.String, Data.NamaKelurahan);
+                db.AddParameter(dbCommand, "RETURN_VALUE", DbType.Int64, ParameterDirection.ReturnValue, null, DataRowVersion.Default, null);
+                db.ExecuteNonQuery(dbCommand);
+
+                string FormID = "";
+                if (Convert.ToInt64(db.GetParameterValue(dbCommand, "RETURN_VALUE")) >= 0)
+                {
+                    FormID = db.GetParameterValue(dbCommand, "RETURN_VALUE").ToString();
+                }
+                else
+                { return 0; }
+
+                return Convert.ToInt64(FormID);
+            }
+            catch (Exception ex)
+            {
+                return 0;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+
+        public long UpdateFormKosLengkap(FormKosData Data)
+        {
+            bool retVal = true;
+            Int64 retFormID = 0;
+            using (DbConnection connection = db.CreateConnection())
+            {
+                connection.Open();
+                DbTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+                    Int64 FormID = UpdateFormKos(Data);
+                    //set return
+                    retFormID = FormID;
+                    DeleteKosHarga(FormID);
+                    foreach (KosHargaData detail in Data.KosHarga)
+                    {
+                        detail.FormKosID = FormID;
+                        
+                        retVal = InsertKosHarga(detail);
+
+                        if (retVal == false)
+                            throw new DataAccessException("error UpdateKosHarga. ");
+                    }
+                    DeleteKosFasilitas(FormID);
+                    foreach (KosFasilitasData detail in Data.KosFasilitas)
+                    {
+                        detail.FormKosID = FormID;
+                        retVal = InsertKosFasilitas(detail);
+
+                        if (retVal == false)
+                            throw new DataAccessException("error UpdateKosFasilitas. ");
+                    }
+                    DeleteKosLingkungan(FormID);
+                    foreach (KosLingkunganData detail in Data.KosLingkungan)
+                    {
+                        detail.FormKosID = FormID;
+                        //todo:
+                        retVal = InsertKosLingkungan(detail);
+
+                        if (retVal == false)
+                            throw new DataAccessException("error UpdateKosLingkungan. ");
+                    }
+                    DeleteKosTelepon(FormID);
+                    foreach (KosTeleponData detail in Data.KosTelepon)
+                    {
+                        detail.FormKosID = FormID;
+                        retVal = InsertKosTelepon(detail);
+
+                        if (retVal == false)
+                            throw new DataAccessException("error UpdateKosTelepon. ");
+                    }
+                    DeleteKosKamar(FormID);
+                    foreach (KosKamarData detail in Data.KosKamar)
+                    {
+                        detail.FormKosID = FormID;
+                        retVal = InsertKosKamar(detail);
+
+                        if (retVal == false)
+                            throw new DataAccessException("error updateKosKamar. ");
+                    }
+                }
+                catch
+                {
+                    retVal = false;
+                }
+
+
+                if (retVal)
+                    transaction.Commit();
+                else
+                    transaction.Rollback();
+                connection.Close();
+            }
+            return retFormID;
+            
+        }
+        #endregion 
+
+    
     }
 }

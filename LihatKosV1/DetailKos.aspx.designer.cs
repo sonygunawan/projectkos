@@ -166,24 +166,6 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.TextBox txtDeskripsi;
         
         /// <summary>
-        /// ddlArea control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlArea;
-        
-        /// <summary>
-        /// txtAlamat control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAlamat;
-        
-        /// <summary>
         /// txtLokasi control.
         /// </summary>
         /// <remarks>
@@ -211,6 +193,42 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.HiddenField hidLongitude;
         
         /// <summary>
+        /// hidProvinsi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidProvinsi;
+        
+        /// <summary>
+        /// hidKabupaten control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidKabupaten;
+        
+        /// <summary>
+        /// hidKecamatan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidKecamatan;
+        
+        /// <summary>
+        /// hidKelurahan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidKelurahan;
+        
+        /// <summary>
         /// txtLatitude control.
         /// </summary>
         /// <remarks>
@@ -227,6 +245,42 @@ namespace LihatKosV1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLongitude;
+        
+        /// <summary>
+        /// txtCity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCity;
+        
+        /// <summary>
+        /// txtKabupaten control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtKabupaten;
+        
+        /// <summary>
+        /// txtKecamatan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtKecamatan;
+        
+        /// <summary>
+        /// txtKelurahan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtKelurahan;
         
         /// <summary>
         /// txtPemilik control.

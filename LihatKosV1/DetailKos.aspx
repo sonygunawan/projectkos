@@ -221,21 +221,18 @@
                                     <%--<textarea class="form-control" id="textarea" name="description" placeholder="Description"></textarea>--%>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="textarea">Area</label>
                                 <div class="col-md-9">
                                     <asp:DropDownList ID="ddlArea" runat="server" CssClass="form-control ui-controlgroup-item" Enabled="false"></asp:DropDownList>
-                                    <%--<asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2"></asp:TextBox>--%>
-                                    
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="textarea">Alamat</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtAlamat" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2" Enabled="false"></asp:TextBox>
-                                    <%--<textarea class="form-control" id="textarea" name="description" placeholder="Description"></textarea>--%>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 
                                 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w"></script>
@@ -244,7 +241,7 @@
                                     function init_map() {
                                         var latitude = document.getElementById('hidLatitude').value;
                                         var longitude = document.getElementById('hidLongitude').value;
-                                        var myOptions = { zoom: 13, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(latitude, longitude), animation: google.maps.Animation.DROP }); marker.addListener('click', toggleBounce);
+                                        var myOptions = { zoom: 13, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP, scrollwheel: false }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(latitude, longitude), animation: google.maps.Animation.DROP }); marker.addListener('click', toggleBounce);
                                     }
 
                                     function toggleBounce() {
@@ -419,7 +416,7 @@
                                 <label class="col-md-3 control-label" for="textarea">Lokasi</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtLokasi" runat="server" CssClass="form-control" ClientIDMode="Static"
-                                         MaxLength="1000" Visible="false" ></asp:TextBox>
+                                         MaxLength="1000" ></asp:TextBox>
                                     <div style='overflow: hidden; height: 400px; width: 100%;'>
                                     <div id='gmap_canvas' style='height: 400px;  width: 100%;'>
                                     </div>
@@ -450,7 +447,11 @@
                                 <div class="col-md-3">
                                     <asp:HiddenField ID="hidLatitude" runat="server" ClientIDMode="Static" />
                                     <asp:HiddenField ID="hidLongitude" runat="server" ClientIDMode="Static" />
-                                    </div>
+                                    <asp:HiddenField ID="hidProvinsi" runat="server" ClientIDMode="Static" />
+                                    <asp:HiddenField ID="hidKabupaten" runat="server" ClientIDMode="Static" />
+                                    <asp:HiddenField ID="hidKecamatan" runat="server" ClientIDMode="Static" />
+                                    <asp:HiddenField ID="hidKelurahan" runat="server" ClientIDMode="Static" />
+                                </div>
                                     <%--<textarea class="form-control" id="textarea" name="description" placeholder="Description"></textarea>--%>
                                     <div class="col-md-9">
                                         <label class="col-md-2 control-label" for="textarea">Latitude</label>
@@ -461,6 +462,23 @@
                                         <div class="col-md-4">
                                             <asp:TextBox ID="txtLongitude" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
                                         </div>
+                                        <label class="col-md-2 control-label" for="textarea">Kota</label>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtCity" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
+                                        </div>
+                                        <label class="col-md-2 control-label" for="textarea">Kabupaten</label>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtKabupaten" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
+                                        </div>
+                                        <label class="col-md-2 control-label" for="textarea">Kecamatan</label>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtKecamatan" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
+                                        </div>
+                                        <label class="col-md-2 control-label" for="textarea">Kelurahan</label>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtKelurahan" runat="server" CssClass="form-control" Enabled="false" ClientIDMode="Static"></asp:TextBox>
+                                        </div>
+                                        
                                     </div>
 
                             </div>

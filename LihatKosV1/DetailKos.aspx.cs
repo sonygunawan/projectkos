@@ -28,10 +28,10 @@ namespace LihatKosV1
                 chkLingkungan.DataValueField = "ID";
                 chkLingkungan.DataBind();
 
-                ddlArea.DataSource = new AreaSystem().GetAllArea();
-                ddlArea.DataTextField = "Nama";
-                ddlArea.DataValueField = "ID";
-                ddlArea.DataBind();
+                //ddlArea.DataSource = new AreaSystem().GetAllArea();
+                //ddlArea.DataTextField = "Nama";
+                //ddlArea.DataValueField = "ID";
+                //ddlArea.DataBind();
 
                 rdlTipeKos.DataSource = new TipeKosSystem().GetAllTipeKos();
                 rdlTipeKos.DataTextField = "NamaRdl";
@@ -48,8 +48,9 @@ namespace LihatKosV1
                 lblSisaKamar.Text = (Data.JmlKamar - Data.JmlKamarKosong).ToString();
                 lblNama.Text = Data.Nama;
                 txtDeskripsi.Text = Data.Deskripsi;
-                ddlArea.SelectedValue = Data.AreaID.ToString();
-                txtAlamat.Text = Data.Alamat;
+                txtLokasi.Text = Data.Alamat;
+                //ddlArea.SelectedValue = Data.AreaID.ToString();
+                //txtAlamat.Text = Data.Alamat;
                 hidLatitude.Value = txtLatitude.Text = Data.Latitude.ToString().Replace(',','.');
                 hidLongitude.Value = txtLongitude.Text = Data.Longitude.ToString().Replace(',', '.');
                 txtPemilik.Text = Data.NamaPemilik;
