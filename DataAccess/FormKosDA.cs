@@ -616,8 +616,8 @@ namespace LihatKos.DataAccess
                 {
                     while (dataReader.Read())
                     {
-                        Data.MinimumPrice = Convert.ToDecimal(dataReader["Minimum"].ToString());
-                        Data.MaximumPrice = Convert.ToDecimal(dataReader["Maximum"].ToString());
+                        Data.MinimumPrice = Convert.ToDecimal(dataReader["Minimum"].ToString() == "" ? "0" : dataReader["Minimum"].ToString());
+                        Data.MaximumPrice = Convert.ToDecimal(dataReader["Maximum"].ToString() == "" ? "0" : dataReader["Maximum"].ToString());
 
                     }
                     dataReader.Close();

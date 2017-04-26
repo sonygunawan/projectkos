@@ -73,6 +73,47 @@
                             </div>--%>
                             <div class="form-group">
                                 <script type="text/javascript">
+                                    function geocodeAddress(geocoder, resultsMap) {
+                                        
+                                        var address = document.getElementById('txtLokasi').value;
+                                        geocoder.geocode({ 'address': address }, function (results, status) {
+                                            if (status === 'OK') {
+                                                resultsMap.setCenter(results[0].geometry.location);
+                                                resultsMap.setZoom(15);
+                                                var marker = new google.maps.Marker({
+                                                    map: resultsMap,
+                                                    position: results[0].geometry.location
+                                                });
+                                                
+                                                for (i = 0 ; i < results[0].address_components.length ; ++i) {
+                                                    var super_var1 = results[0].address_components[i];
+                                                    //find kelurahan
+                                                    if (super_var1.types[0] == "administrative_area_level_4") {
+                                                        document.getElementById('<%= txtKelurahan.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidKelurahan.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                    //find kecamatan
+                                                    if (super_var1.types[0] == "administrative_area_level_3") {
+                                                        document.getElementById('<%= txtKecamatan.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidKecamatan.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                    //find kabupaten
+                                                    if (super_var1.types[0] == "administrative_area_level_2") {
+                                                        document.getElementById('<%= txtKabupaten.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidKabupaten.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                    //find propinsi
+                                                    if (super_var1.types[0] == "administrative_area_level_1") {
+                                                        document.getElementById('<%= txtCity.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidProvinsi.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                }
+
+                                            } else {
+                                                alert('Geocode was not successful for the following reason: ' + status);
+                                            }
+                                        });
+                                    }
                                     function initAutocomplete() {
                                         var map = new google.maps.Map(document.getElementById('gmap_canvas'), {
                                             center: { lat: -6.2297264, lng: 106.6894331 },
@@ -83,6 +124,13 @@
 
                                         // Create the search box and link it to the UI element.
                                         var input = document.getElementById('txtLokasi');
+                                        if (input.value != '') {
+                                            var geocoder = new google.maps.Geocoder();
+                                            geocodeAddress(geocoder, map);
+                                            //initAutocomplete();
+                                            //google.maps.event.trigger('places_changed');
+                                            //searchBox.getPlaces();
+                                        }
                                         var searchBox = new google.maps.places.SearchBox(input);
                                         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -173,6 +221,7 @@
                                             });
                                             map.fitBounds(bounds);
                                         });
+                                        
                                         //google.maps.event.addDomListener(window, 'load', function () {
                                             //var places = new google.maps.places.Autocomplete(document.getElementById('txtLokasi'));
                                             //google.maps.event.addListener(places, 'place_changed', function () {
@@ -189,6 +238,7 @@
 
                                             //});
                                     }
+                                    
                                     //google.maps.event.addDomListener(window, 'load', function () {
                                     //    var places = new google.maps.places.Autocomplete(document.getElementById('txtLokasi'));
                                     //    google.maps.event.addListener(places, 'place_changed', function () {

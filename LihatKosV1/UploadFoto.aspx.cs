@@ -36,7 +36,7 @@ namespace LihatKosV1
                 FormKosData Data = new FormKosSystem().GetAllFormKos(ID,"")[0];
                 lblNama.Text = Data.Nama;
                 lblAlamat.Text = Data.Alamat;
-                ViewState["FormKosID"] = null;
+                ViewState["FormKosID"] = ID;
                 
             }
             //BindFromBankFiles();
