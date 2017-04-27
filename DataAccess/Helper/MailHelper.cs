@@ -107,12 +107,13 @@ namespace LihatKos.DataAccess.Helper
                 var formKos = new FormKosDA().GetAllFormKos(Id, "")[0];
                 var user = new UserDA().GetUsers(formKos.UserID)[0];
                 string body = "Hello " + user.UserName.Trim() + ",";
-                string url = "http://localhost:10981/EmailConfirmation?Code=" + activationCode;
-                body += "<br /><br />Please click the following link to activate your account";
-                body += "<br /><a href = '" + url + "'>Click here to activate your account.</a>";
+                var statusBackground = StatusAktif == 1 ? "<p style='background-color:green;'>Re-activate</p>" : "<p style='background-color:red;'>Deactivated</p>";
+                var statusSubject = StatusAktif == 1 ? "Re-activated" : "Deactivated";
+                body += "<br /><br />Your Data Kos has been " + statusBackground;
+                body += "<br />Please follow this link: <a href='\\DetailKos?ID=" + formKos.ID + "' />" +  formKos.Nama + "(lokasi: " + formKos.Alamat + ")</a>";
                 body += "<br /><br />Thanks";
-                var subjectStatus = StatusAktif == 1 );
-                SendEmail(user.Email, "LihatKos.com: Data Kos has been", body);
+                
+                SendEmail(user.Email, "LihatKos.com: Data Kos has been " + statusSubject, body);
             }
             catch (Exception ex)
             {
