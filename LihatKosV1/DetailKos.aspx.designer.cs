@@ -292,67 +292,31 @@ namespace LihatKosV1 {
         protected global::System.Web.UI.WebControls.TextBox txtPemilik;
         
         /// <summary>
-        /// txtAlamatPemilik control.
+        /// gvKosTelepon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAlamatPemilik;
+        protected global::System.Web.UI.WebControls.GridView gvKosTelepon;
         
         /// <summary>
-        /// txtTlpPemilik control.
+        /// gvKamarKos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTlpPemilik;
+        protected global::System.Web.UI.WebControls.GridView gvKamarKos;
         
         /// <summary>
-        /// txtNamaPengelola control.
+        /// imgBtnKamarPlus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNamaPengelola;
-        
-        /// <summary>
-        /// txtTlpPengelola control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTlpPengelola;
-        
-        /// <summary>
-        /// ddlMinimumBayarMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMinimumBayarMonth;
-        
-        /// <summary>
-        /// txtMinimumBayarDesc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMinimumBayarDesc;
-        
-        /// <summary>
-        /// txtLuasKamar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLuasKamar;
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnKamarPlus;
         
         /// <summary>
         /// rdlTipeKos control.

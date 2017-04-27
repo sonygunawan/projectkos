@@ -1,4 +1,5 @@
 ﻿using LihatKos.Common;
+using LihatKos.DataAccess.Helper;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
 using System.Collections.Generic;
@@ -594,6 +595,10 @@ namespace LihatKos.DataAccess
                 db.AddInParameter(dbCommand, "AuditUserName", DbType.String, AuditUserName);
 
                 db.ExecuteNonQuery(dbCommand);
+                //if (StatusAktif == 1)
+                    new MailHelper().SendEmailFormKosAktif(Id, StatusAktif);
+                //else
+                //    new MailHelper().SendEmailFormKosDeaktif(Id, StatusAktif);
                 return true;
             }
             catch (Exception ex)

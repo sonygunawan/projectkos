@@ -238,10 +238,59 @@
                                 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w"></script>
                                 
                                 <script type="text/javascript">
+                                    function geocodeAddress(geocoder, resultsMap) {
+
+                                        var address = document.getElementById('txtLokasi').value;
+                                        geocoder.geocode({ 'address': address }, function (results, status) {
+                                            if (status === 'OK') {
+                                                resultsMap.setCenter(results[0].geometry.location);
+                                                resultsMap.setZoom(15);
+                                                var marker = new google.maps.Marker({
+                                                    map: resultsMap,
+                                                    position: results[0].geometry.location
+                                                });
+
+                                                for (i = 0 ; i < results[0].address_components.length ; ++i) {
+                                                    var super_var1 = results[0].address_components[i];
+                                                    //find kelurahan
+                                                    if (super_var1.types[0] == "administrative_area_level_4") {
+                                                        document.getElementById('<%= txtKelurahan.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidKelurahan.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                    //find kecamatan
+                                                    if (super_var1.types[0] == "administrative_area_level_3") {
+                                                        document.getElementById('<%= txtKecamatan.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidKecamatan.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                    //find kabupaten
+                                                    if (super_var1.types[0] == "administrative_area_level_2") {
+                                                        document.getElementById('<%= txtKabupaten.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidKabupaten.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                    //find propinsi
+                                                    if (super_var1.types[0] == "administrative_area_level_1") {
+                                                        document.getElementById('<%= txtCity.ClientID %>').value = super_var1.long_name;
+                                                        document.getElementById('<%= hidProvinsi.ClientID %>').value = super_var1.long_name;
+                                                    }
+                                                }
+
+                                            } else {
+                                                alert('Geocode was not successful for the following reason: ' + status);
+                                            }
+                                        });
+                                    }
                                     function init_map() {
                                         var latitude = document.getElementById('hidLatitude').value;
                                         var longitude = document.getElementById('hidLongitude').value;
                                         var myOptions = { zoom: 13, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP, scrollwheel: false }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(latitude, longitude), animation: google.maps.Animation.DROP }); marker.addListener('click', toggleBounce);
+                                        var input = document.getElementById('txtLokasi');
+                                        if (input.value != '') {
+                                            var geocoder = new google.maps.Geocoder();
+                                            geocodeAddress(geocoder, map);
+                                            //initAutocomplete();
+                                            //google.maps.event.trigger('places_changed');
+                                            //searchBox.getPlaces();
+                                        }
                                     }
 
                                     function toggleBounce() {
@@ -416,7 +465,7 @@
                                 <label class="col-md-3 control-label" for="textarea">Lokasi</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtLokasi" runat="server" CssClass="form-control" ClientIDMode="Static"
-                                         MaxLength="1000" ></asp:TextBox>
+                                         MaxLength="1000" Enabled="false" ></asp:TextBox>
                                     <div style='overflow: hidden; height: 400px; width: 100%;'>
                                     <div id='gmap_canvas' style='height: 400px;  width: 100%;'>
                                     </div>
@@ -483,17 +532,94 @@
 
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="price">Nama Pemilik</label>
+                                <label class="col-md-3 control-label" for="price">Contact Person</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtPemilik" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                     <%--<input id="price" name="price" type="text" placeholder="Product price" class="form-control input-md" required="">--%>
                                 </div>
                             </div>
+                            
                             <div class="form-group">
+                                <label class="col-md-3 control-label" for="file">Telepon/HP Pemilik<a class="fa fa-info-circle">
+                                  </a></label>
+                                <div class="col-md-8">
+                                    <asp:GridView ID="gvKosTelepon" runat="server" CssClass="table table-hover table-striped" AutoGenerateColumns="false" GridLines="None"
+                                        ShowFooter="false" ShowHeader="false" OnRowDataBound="gvKosTelepon_RowDataBound">
+                                        <Columns>
+                                            <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-Width="10%" />
+                                            <asp:TemplateField HeaderText="Telepon" ItemStyle-Width="70%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtValue" runat="server" Width="100%" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Tipe Nomor" ItemStyle-Width="15%">
+                                                <ItemTemplate>
+                                                    <asp:DropDownList ID="ddlPhoneID" runat="server" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="" ItemStyle-Width="5%">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgBtnMinus" runat="server" ImageUrl="~/images/minus.png" OnClientClick="return confirm('Apakah Anda yakin ingin menghapus nomor telepon ini?');" CommandName="Delete"
+                                                        Visible="false" />
+                                                </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="Center" />
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                    
+                                </div>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Kamar<a class="fa fa-info-circle">
+                                    </a></label>
+                                <div class="col-md-8">
+                                    <asp:GridView ID="gvKamarKos" runat="server" GridLines="None" ShowHeader="true" ShowFooter="false"
+                                        CssClass="table table-hover table-striped" AutoGenerateColumns="false" OnRowDataBound="gvKamarKos_RowDataBound" >
+                                        <Columns>
+                                            <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-Width="10%" />
+                                            <asp:TemplateField HeaderText="Luas" ItemStyle-Width="20%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtLuas" runat="server" Width="100%" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Fasilitas" ItemStyle-Width="25%">
+                                                <ItemTemplate>
+                                                    <asp:RadioButtonList ID="rblFasilitas" runat="server" Enabled="false">
+                                                        <asp:ListItem Value="2" Text="Kamar Mandi Luar" Selected="True" />
+                                                        <asp:ListItem Value="1" Text="Kamar Mandi Dalam" />
+                                                    </asp:RadioButtonList>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Jml Kmr" ItemStyle-Width="20%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtJmlKamar" runat="server" Width="100%" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Kmr Kosong" ItemStyle-Width="20%">
+                                                <ItemTemplate>
+                                                    <asp:TextBox ID="txtKamarKosong" runat="server" Width="100%" Enabled="false" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="" ItemStyle-Width="5%">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgBtnMinus" runat="server" ImageUrl="~/images/minus.png" OnClientClick="return confirm('Apakah Anda yakin ingin menghapus kamar ini?');" CommandName="Delete"
+                                                         Visible="false" />
+                                                </ItemTemplate>
+                                                <ItemStyle HorizontalAlign="Center" />
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </div>
+                                <div class="col-md-1" style="display: inline-block;vertical-align:middle;float:none;">
+                                    <asp:ImageButton ID="imgBtnKamarPlus" runat="server" ImageUrl="~/images/plus.png" Visible="false" />
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <%--<div class="form-group">
                                 <label class="col-md-3 control-label" for="image">Alamat Pemilik</label>
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtAlamatPemilik" runat="server" CssClass="form-control" MaxLength="1000" TextMode="MultiLine" Rows="2" Enabled="false"></asp:TextBox>
-                                    <%--<input id="image" name="image" type="text" placeholder="Image URL" class="form-control input-md">--%>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -533,7 +659,7 @@
                                 <div class="col-md-9">
                                     <asp:TextBox ID="txtLuasKamar" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:TextBox>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="title">Tipe Kos</label>
                                 <div class="col-md-9">

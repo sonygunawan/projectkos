@@ -121,11 +121,11 @@ namespace LihatKosV1
                         item.Selected = true;
                 }
                 //KosTelepon 
-                //gvKosTelepon.DataSource = Data.KosTelepon;
-                //gvKosTelepon.DataBind();
+                gvKosTelepon.DataSource = Data.KosTelepon;
+                gvKosTelepon.DataBind();
                 //KosKamar
-                //gvKamarKos.DataSource = Data.KosKamar;
-                //gvKamarKos.DataBind();
+                gvKamarKos.DataSource = Data.KosKamar;
+                gvKamarKos.DataBind();
 
                 if (Session["UserID"] != null)
                 {
@@ -280,5 +280,69 @@ namespace LihatKosV1
         {
 
         }
+        //private void LoadDropDownHarga(int SatuanHargaID, ref DropDownList ddlMinimumBayar)
+        //{
+        //    int countItems = 0;
+        //    switch (SatuanHargaID)
+        //    {
+        //        case 1:
+        //            {
+        //                countItems = 120;
+        //            }
+        //            break;
+        //        case 2:
+        //            {
+        //                countItems = 10;
+        //            }
+        //            break;
+        //        case 3:
+        //            {
+        //                countItems = 24;
+        //            }
+        //            break;
+        //        case 4:
+        //            {
+        //                countItems = 10;
+        //            }
+        //            break;
+        //        default:
+        //            break;
+        //    }
+
+        //    for (int i = 1; i <= countItems; i++)
+        //    {
+        //        ddlMinimumBayar.Items.Add(i.ToString());
+        //    }
+        //}
+        //protected void gvKosHarga_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        KosHargaData data = (KosHargaData)e.Row.DataItem;
+        //        CheckBox chkIsChecked = (CheckBox)e.Row.Cells[0].FindControl("chkIsChecked");
+        //        TextBox txtHarga = (TextBox)e.Row.Cells[1].FindControl("txtHarga");
+        //        DropDownList ddlMinimumBayar = (DropDownList)e.Row.Cells[4].FindControl("ddlMinimumBayar");
+        //        //isChecked.Enabled = tr
+        //        LoadDropDownHarga(data.SatuanHargaID, ref ddlMinimumBayar);
+        //        ddlMinimumBayar.SelectedValue = data.MinimumBayar.ToString();
+        //        if (data.Harga > 0)
+        //        {
+        //            chkIsChecked.Checked = data.isChecked;
+        //            txtHarga.Text = data.Harga.ToString("N0");
+        //            ddlMinimumBayar.SelectedValue = data.MinimumBayar.ToString();
+
+        //        }
+        //        if (chkIsChecked.Checked == false)
+        //        {
+        //            txtHarga.Text = "";
+        //            txtHarga.Enabled = false;
+        //            ddlMinimumBayar.SelectedValue = "1";
+        //            ddlMinimumBayar.Enabled = false;
+        //            ddlMinimumBayar.BackColor = System.Drawing.ColorTranslator.FromHtml("#EBEBE4");
+        //        }
+
+        //    }
+        //}
+
     }
 }

@@ -18,6 +18,9 @@ namespace LihatKos.DataAccess.Helper
 
         private String SMTPServer;
         private int Port = 25;
+
+        #region SendEmail
+
         public MailHelper()
         {
             try
@@ -96,6 +99,28 @@ namespace LihatKos.DataAccess.Helper
             }
 
         }
+
+        public void SendEmailFormKosAktif(long Id, int StatusAktif)
+        {
+            try
+            {
+                var formKos = new FormKosDA().GetAllFormKos(Id, "")[0];
+                var user = new UserDA().GetUsers(formKos.UserID)[0];
+                string body = "Hello " + user.UserName.Trim() + ",";
+                string url = "http://localhost:10981/EmailConfirmation?Code=" + activationCode;
+                body += "<br /><br />Please click the following link to activate your account";
+                body += "<br /><a href = '" + url + "'>Click here to activate your account.</a>";
+                body += "<br /><br />Thanks";
+                var subjectStatus = StatusAktif == 1 );
+                SendEmail(user.Email, "LihatKos.com: Data Kos has been", body);
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+#endregion 
+
         public string DeleteUserActivation(Guid ActivationCode)
         {
             try
@@ -122,5 +147,6 @@ namespace LihatKos.DataAccess.Helper
             }
 
         }
+
     }
 }
