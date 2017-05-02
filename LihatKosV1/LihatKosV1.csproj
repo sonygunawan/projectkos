@@ -90,6 +90,7 @@
     <Content Include="assets\wow\animate.css" />
     <Content Include="assets\wow\wow.min.js" />
     <Content Include="CariLokasi.aspx" />
+    <Content Include="ContactUs.aspx" />
     <Content Include="DaftarKos.aspx" />
     <Content Include="DetailKos.aspx" />
     <Content Include="EmailConfirmation.aspx" />
@@ -159,6 +160,13 @@
     </Compile>
     <Compile Include="CariLokasi.aspx.designer.cs">
       <DependentUpon>CariLokasi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContactUs.aspx.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContactUs.aspx.designer.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
     </Compile>
     <Compile Include="DaftarKos.aspx.cs">
       <DependentUpon>DaftarKos.aspx</DependentUpon>

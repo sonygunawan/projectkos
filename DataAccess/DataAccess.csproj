@@ -50,6 +50,9 @@
   <ItemGroup>
     <Compile Include="AreaDA.cs" />
     <Compile Include="BannerDA.cs" />
+    <Compile Include="ContentDA.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DataAccessConnection.cs" />
     <Compile Include="DataAccessException.cs" />
     <Compile Include="DefaultImageDA.cs">

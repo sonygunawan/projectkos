@@ -29,6 +29,9 @@ namespace LihatKosV1
                 "CariLokasi",
                 "~/CariLokasi.aspx");
             routes.MapPageRoute("",
+                "ContactUs",
+                "~/ContactUs.aspx");
+            routes.MapPageRoute("",
                 "Register",
                 "~/RegisterForm.aspx");
             routes.MapPageRoute("",

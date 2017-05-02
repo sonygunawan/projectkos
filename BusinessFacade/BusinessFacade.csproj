@@ -50,6 +50,9 @@
   <ItemGroup>
     <Compile Include="AreaSystem.cs" />
     <Compile Include="BannerSystem.cs" />
+    <Compile Include="ContentSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DefaultImageSystem.cs" />
     <Compile Include="FasilitasSystem.cs" />
     <Compile Include="FavoriteSystem.cs" />
