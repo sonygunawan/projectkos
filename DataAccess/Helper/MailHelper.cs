@@ -107,13 +107,14 @@ namespace LihatKos.DataAccess.Helper
                 var formKos = new FormKosDA().GetAllFormKos(Id, "")[0];
                 var user = new UserDA().GetUsers(formKos.UserID)[0];
                 string body = "Hello " + user.UserName.Trim() + ",";
-                var statusBackground = StatusAktif == 1 ? "<p style='background-color:green;'>Re-activate</p>" : "<p style='background-color:red;'>Deactivated</p>";
+                var statusBackground = StatusAktif == 1 ? "<span style='background-color:lightgreen;'>Re-activate</span>" : "<span style='background-color:red;'>Deactivated</span>";
                 var statusSubject = StatusAktif == 1 ? "Re-activated" : "Deactivated";
                 body += "<br /><br />Your Data Kos has been " + statusBackground;
-                body += "<br />Please follow this link: <a href='\\DetailKos?ID=" + formKos.ID + "' />" +  formKos.Nama + "(lokasi: " + formKos.Alamat + ")</a>";
+                body += "<br />Please follow this link: <a href=\"http://www.lihatkos.com/DetailKos?ID=" + formKos.ID + "\" >" +  formKos.Nama + "(lokasi: " + formKos.Alamat + ")</a>";
                 body += "<br /><br />Thanks";
                 
-                SendEmail(user.Email, "LihatKos.com: Data Kos has been " + statusSubject, body);
+                //SendEmail(user.Email, "LihatKos.com: Data Kos has been " + statusSubject, body);
+                SendEmail("sony.ss4@gmail.com", "LihatKos.com: Data Kos has been " + statusSubject, body);
             }
             catch (Exception ex)
             {
