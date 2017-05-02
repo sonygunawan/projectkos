@@ -1,4 +1,5 @@
 ﻿using LihatKos.BusinessFacade;
+using LihatKos.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,27 @@ namespace LihatKosV1
                 ddlSubject.DataTextField = "Nama";
                 ddlSubject.DataBind();
 
+            }
+        }
+
+        protected void btnContactUs_Click(object sender, EventArgs e)
+        {
+            if (Session["UserID"] != null)
+            {
+                var Data = new ContactData();
+                var UserID = Convert.ToInt64(Session["UserID"]);
+                Data.SubjectID = Convert.ToInt32(ddlSubject.SelectedValue);
+                Data.Message = txtMessage.Text;
+                Data.Status = 0;
+                Data.UserID = UserID;
+                var retVal = new ContentSystem().InsertContactUs(Data);
+                if (retVal == true)
+                {
+                    pnlSuccess.Visible = true;
+                    Response.AddHeader("REFRESH", "2;URL=/");
+
+                    Response.Redirect("/ContactUs");
+                }
             }
         }
     }

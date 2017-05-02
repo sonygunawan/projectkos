@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\FormBanner.aspx" />
+    <Content Include="Admin\FormContactUs.aspx" />
     <Content Include="Admin\FormUser.aspx" />
     <Content Include="assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -146,6 +147,13 @@
     </Compile>
     <Compile Include="Admin\FormBanner.aspx.designer.cs">
       <DependentUpon>FormBanner.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\FormContactUs.aspx.cs">
+      <DependentUpon>FormContactUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\FormContactUs.aspx.designer.cs">
+      <DependentUpon>FormContactUs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\FormUser.aspx.cs">
       <DependentUpon>FormUser.aspx</DependentUpon>

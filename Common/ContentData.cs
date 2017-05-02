@@ -14,4 +14,13 @@ namespace LihatKos.Common
         public string PageContent { get; set; }
     }
 
+    public class ContactData
+    {
+        public int ID { get; set; }
+        public int SubjectID { get; set; }
+        public string Message { get; set; }
+        public long UserID { get; set; }
+        public int Status { get; set; }
+    }
+
 }

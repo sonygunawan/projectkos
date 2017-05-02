@@ -73,13 +73,15 @@ namespace LihatKos.DataAccess
             }
         }
 
-        public bool InsertContactUs(Int64 Id, Int64 UserId)
+        public bool InsertContactUs(ContactData Data)
         {
             try
             {
-                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_InsertFormKosFavorit");
-                db.AddInParameter(dbCommand, "FormKosID", DbType.Int64, Id);
-                db.AddInParameter(dbCommand, "UserID", DbType.Int64, UserId);
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_InsertContactUs");
+                db.AddInParameter(dbCommand, "SubjectID", DbType.Int32, Data.SubjectID);
+                db.AddInParameter(dbCommand, "Message", DbType.String, Data.Message);
+                db.AddInParameter(dbCommand, "UserID", DbType.Int64, Data.UserID);
+                db.AddInParameter(dbCommand, "Status", DbType.Int32, Data.Status);
 
                 db.ExecuteNonQuery(dbCommand);
                 return true;

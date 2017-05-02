@@ -23,14 +23,13 @@
         .h1 small {
             font-size: 24px;
         }
-         .unwatermarked
-        {
+
+        .unwatermarked {
             height: 18px;
             width: 148px;
         }
-        
-        .watermarked
-        {
+
+        .watermarked {
             height: 20px;
             width: 150px;
             padding: 2px 0 0 2px;
@@ -43,8 +42,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-lg-12">
-                    <h1 class="h1">
-                        Contact us <small>Feel free to contact us</small></h1>
+                    <h1 class="h1">Contact us <small>Feel free to contact us</small></h1>
                 </div>
             </div>
         </div>
@@ -53,7 +51,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="well well-sm">
-                    
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -72,20 +70,20 @@
                                     <asp:TextBox ID="txtEmail" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
                                     <cc1:TextBoxWatermarkExtender ID="txtEmailWatermarkExtender" runat="server" TargetControlID="txtEmail" WatermarkText="Enter email" />
                                     <%--<input type="email" class="form-control" id="email" placeholder="Enter email" required="required" /></div>--%>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">
-                                    Subject</label>
-                                <asp:DropDownList ID="ddlSubject" runat="server" CssClass="form-control"></asp:DropDownList>
-                                <%--<select id="subject" name="subject" class="form-control" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">
+                                        Subject</label>
+                                    <asp:DropDownList ID="ddlSubject" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    <%--<select id="subject" name="subject" class="form-control" required="required">
                                     <option value="na" selected="">Choose One:</option>
                                     <option value="service">General Customer Service</option>
                                     <option value="suggestions">Suggestions</option>
                                     <option value="product">Product Support</option>
                                 </select>--%>
+                                </div>
                             </div>
                         </div>
-                </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">
@@ -97,17 +95,25 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <asp:Button ID="btnContactUs" runat="server" CssClass="btn btn-default pull-right" Text="Send Message" />
-<%--                            <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                            <asp:Button ID="btnContactUs" runat="server" CssClass="btn btn-default pull-right" Text="Send Message" OnClick="btnContactUs_Click" />
+                            <asp:Panel ID="pnlSuccess" runat="server" Visible="false">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"></label>
+                                    <div style="color: darkblue;">
+                                        <asp:Label ID="lblSuccess" runat="server" Text="Register Success.. Activation email has been sent. Loading!!"></asp:Label>
+                                    </div>
+                                </div>
+                            </asp:Panel>
+                            <%--                            <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
                                 Send Message</button>--%>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
+                <legend><span class="glyphicon glyphicon-globe"></span>Our office</legend>
                 <address>
-                   <asp:Literal ID="litAddress" runat="server"></asp:Literal>
+                    <asp:Literal ID="litAddress" runat="server"></asp:Literal>
                 </address>
                 <address>
                     <strong>LihatKos</strong><br>

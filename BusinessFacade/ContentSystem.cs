@@ -9,14 +9,21 @@ namespace LihatKos.BusinessFacade
 {
     public class ContentSystem
     {
+        public ContentData GetPageContent(Int32 Id)
+        {
+            return new ContentDA().getPageContent(Id);
+        }
+        #region Contact
 
         public List<ContentData> GetAllSubjectContact()
         {
             return new ContentDA().GetAllSubjectContact();
         }
-        public ContentData GetPageContent(Int32 Id)
+        public bool InsertContactUs(ContactData Data)
         {
-            return new ContentDA().getPageContent(Id);
+            return new ContentDA().InsertContactUs(Data);
         }
+
+        #endregion 
     }
 }
