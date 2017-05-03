@@ -51,63 +51,61 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="well well-sm">
+                    <asp:UpdatePanel ID="UpdatePanelContact" runat="server">
+                        <ContentTemplate>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">
-                                    Name</label>
-                                <asp:TextBox ID="txtName" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
-                                <cc1:TextBoxWatermarkExtender ID="txtNameWatermarkExtender" runat="server" TargetControlID="txtName" WatermarkText="Enter name" />
-                                <%--<input type="text" class="form-control" id="name" placeholder="Enter name" required="required" />--%>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">
-                                    Email Address</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
-                                    </span>
-                                    <asp:TextBox ID="txtEmail" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
-                                    <cc1:TextBoxWatermarkExtender ID="txtEmailWatermarkExtender" runat="server" TargetControlID="txtEmail" WatermarkText="Enter email" />
-                                    <%--<input type="email" class="form-control" id="email" placeholder="Enter email" required="required" /></div>--%>
-                                </div>
-                                <div class="form-group">
-                                    <label for="subject">
-                                        Subject</label>
-                                    <asp:DropDownList ID="ddlSubject" runat="server" CssClass="form-control"></asp:DropDownList>
-                                    <%--<select id="subject" name="subject" class="form-control" required="required">
-                                    <option value="na" selected="">Choose One:</option>
-                                    <option value="service">General Customer Service</option>
-                                    <option value="suggestions">Suggestions</option>
-                                    <option value="product">Product Support</option>
-                                </select>--%>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">
-                                    Message</label>
-                                <asp:TextBox ID="txtMessage" runat="server" CssClass="form-control" Rows="9" TextMode="MultiLine"></asp:TextBox>
-                                <cc1:TextBoxWatermarkExtender ID="txtMessageWatermarkExtender" runat="server" TargetControlID="txtMessage" WatermarkText="Message" />
-                                <%--<textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
-                                    placeholder="Message"></textarea>--%>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <asp:Button ID="btnContactUs" runat="server" CssClass="btn btn-default pull-right" Text="Send Message" OnClick="btnContactUs_Click" />
-                            <asp:Panel ID="pnlSuccess" runat="server" Visible="false">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label"></label>
-                                    <div style="color: darkblue;">
-                                        <asp:Label ID="lblSuccess" runat="server" Text="Register Success.. Activation email has been sent. Loading!!"></asp:Label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">
+                                            Name</label>
+                                        <asp:TextBox ID="txtName" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
+                                        <cc1:TextBoxWatermarkExtender ID="txtNameWatermarkExtender" runat="server" TargetControlID="txtName" WatermarkText="Enter name" />
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">
+                                            Email Address</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
+                                            </span>
+                                            <asp:TextBox ID="txtEmail" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
+                                            <cc1:TextBoxWatermarkExtender ID="txtEmailWatermarkExtender" runat="server" TargetControlID="txtEmail" WatermarkText="Enter email" />
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="subject">
+                                                Subject</label>
+                                            <asp:DropDownList ID="ddlSubject" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            
+                                        </div>
                                     </div>
                                 </div>
-                            </asp:Panel>
-                            <%--                            <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
-                                Send Message</button>--%>
-                        </div>
-                    </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">
+                                            Message</label>
+                                        <asp:TextBox ID="txtMessage" runat="server" CssClass="form-control" Rows="9" TextMode="MultiLine"></asp:TextBox>
+                                        <cc1:TextBoxWatermarkExtender ID="txtMessageWatermarkExtender" runat="server" TargetControlID="txtMessage" WatermarkText="Message" />
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <asp:Button ID="btnContactUs" runat="server" CssClass="btn btn-default pull-right" Text="Send Message" OnClick="btnContactUs_Click" />
+                                    <asp:Panel ID="pnlSuccess" runat="server" Visible="false">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label"></label>
+                                            <div style="color: darkblue;">
+                                                <asp:Label ID="lblSuccess" runat="server" Text="Sending Success.. Please wait for the reply.."></asp:Label>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                    
+                                </div>
+                            </div>
+
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
             <div class="col-md-4">

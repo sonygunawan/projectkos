@@ -75,7 +75,7 @@ namespace LihatKosV1
 
         private void LoadFormKosByID(long ID)
         {
-            var formKos = new FormKosSystem().GetAllFormKos(ID, "");
+            var formKos = new FormKosSystem().GetAllFormKos(ID);
             txtNama.Text = formKos[0].Nama;
             txtDeskripsi.Text = formKos[0].Deskripsi;
             txtLokasi.Text = formKos[0].Alamat;

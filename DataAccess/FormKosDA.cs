@@ -373,7 +373,6 @@ namespace LihatKos.DataAccess
                 List<FormKosData> formKos = new List<FormKosData>();
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetAllFormKos");
                 db.AddInParameter(dbCommand, "ID", DbType.Int64, Id);
-                db.AddInParameter(dbCommand, "Search", DbType.String, Search);
                 
                 using (IDataReader dataReader = db.ExecuteReader(dbCommand))
                 {

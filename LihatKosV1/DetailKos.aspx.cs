@@ -44,7 +44,7 @@ namespace LihatKosV1
                 {
                     ID = Convert.ToInt64(Request.QueryString["ID"]);
                 }
-                FormKosData Data = new FormKosSystem().GetAllFormKos(ID,"")[0];
+                FormKosData Data = new FormKosSystem().GetAllFormKos(ID)[0];
                 lblSisaKamar.Text = (Data.JmlKamar - Data.JmlKamarKosong).ToString();
                 lblNama.Text = Data.Nama;
                 txtDeskripsi.Text = Data.Deskripsi;

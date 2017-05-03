@@ -15,6 +15,18 @@ namespace LihatKos.BusinessFacade
         }
         #region Contact
 
+        public List<ContactData> GetContactData(long Id = 0)
+        {
+            return new ContentDA().GetContactData(Id);
+        }
+        public object GetContactDataSmp(string search)
+        {
+            var tempcontacts = new ContentDA().GetContactData();
+            var contacts = tempcontacts.Where(x => x.Message.Contains(search) 
+                || x.Email.Contains(search) 
+                || x.SubjectContact.Contains(search)).ToList();
+            return contacts;
+        }
         public List<ContentData> GetAllSubjectContact()
         {
             return new ContentDA().GetAllSubjectContact();
@@ -23,7 +35,15 @@ namespace LihatKos.BusinessFacade
         {
             return new ContentDA().InsertContactUs(Data);
         }
-
+        public bool UpdateContactAktif(long ID, int Status)
+        {
+            var data = new ContactData();
+            data.ID = ID;
+            data.Status = Status;
+            return new ContentDA().UpdateContactAktif(data);
+        }
         #endregion 
+    
+    
     }
 }

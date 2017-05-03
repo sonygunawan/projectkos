@@ -161,7 +161,7 @@ namespace LihatKosV1
 
                     if (String.IsNullOrEmpty(Request.QueryString["latLng"]) || Convert.ToString(Request.QueryString["latLng"]).Split(',')[0] == "")
                     {
-                        rptListByLoc.DataSource = new FormKosSystem().GetAllFormKos(0, "");
+                        rptListByLoc.DataSource = new FormKosSystem().GetAllFormKos(0);
                         rptListByLoc.DataBind();
                     }
                     else

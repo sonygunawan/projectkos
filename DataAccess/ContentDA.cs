@@ -73,6 +73,38 @@ namespace LihatKos.DataAccess
             }
         }
 
+        public List<ContactData> GetContactData(long Id = 0)
+        {
+            try
+            {
+                List<ContactData> retVal = new List<ContactData>();
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetContactData");
+                db.AddInParameter(dbCommand, "ID", DbType.Int32, Id);
+                
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        ContactData data = new ContactData();
+                        data.ID = Convert.ToInt64(dataReader["ID"]);
+                        data.SubjectID = Convert.ToInt32(dataReader["SubjectID"]);
+                        data.SubjectContact = dataReader["SubjectContact"].ToString();
+                        data.Message = dataReader["Message"].ToString();
+                        data.UserID = Convert.ToInt64(dataReader["UserID"]);
+                        data.UserName = dataReader["UserName"].ToString();
+                        data.Email = dataReader["Email"].ToString();
+                        data.Status = Convert.ToInt32(dataReader["Status"]);
+                        retVal.Add(data);
+                    }
+                    dataReader.Close();
+                }
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
         public bool InsertContactUs(ContactData Data)
         {
             try
@@ -92,7 +124,24 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+        public bool UpdateContactAktif(ContactData Data)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdateContactData");
+                db.AddInParameter(dbCommand, "ID", DbType.Int64, Data.ID);
+                db.AddInParameter(dbCommand, "Status", DbType.Int32, Data.Status);
 
+                db.ExecuteNonQuery(dbCommand);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
         #endregion 
+    
     }
 }

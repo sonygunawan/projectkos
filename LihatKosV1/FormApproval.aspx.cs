@@ -19,8 +19,28 @@ namespace LihatKosV1
 
         private void LoadApproval()
         {
-            gvApprovalKos.DataSource = new FormKosSystem().GetAllFormKos(0, txtSearch.Text);
+            gvApprovalKos.DataSource = new FormKosSystem().GetAllFormKos(0);
             gvApprovalKos.DataBind();
+        }
+        private void LoadApprovalSearch(string search)
+        {
+            gvApprovalKos.DataSource = new FormKosSystem().GetAllFormKosSmp(0,search);
+            gvApprovalKos.DataBind();
+        }
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (txtSearch.Text != "")
+                LoadApprovalSearch(txtSearch.Text);
+            else
+                LoadApproval();
+        }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearch.Text != "")
+                LoadApprovalSearch(txtSearch.Text);
+            else
+                LoadApproval();
         }
         protected void gvApprovalKos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -100,15 +120,6 @@ namespace LihatKosV1
             LoadApproval();
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadApproval();
-        }
-
-        protected void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         //protected void lbtnEdit_Command(object sender, CommandEventArgs e)
         //{

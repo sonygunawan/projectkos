@@ -56,6 +56,10 @@ namespace LihatKosV1
                 "FormBanner",
                 "~/Admin/FormBanner.aspx");
             routes.MapPageRoute("",
+                "Admin/ContactUs",
+                "~/Admin/FormContactUs.aspx");
+            
+            routes.MapPageRoute("",
                 "UploadFoto",
                 "~/UploadFoto.aspx");
             routes.MapPageRoute("",

@@ -39,9 +39,8 @@ namespace LihatKosV1
                 if (retVal == true)
                 {
                     pnlSuccess.Visible = true;
-                    Response.AddHeader("REFRESH", "2;URL=/");
+                    Response.AddHeader("REFRESH", "2;URL=/ContactUs");
 
-                    Response.Redirect("/ContactUs");
                 }
             }
         }

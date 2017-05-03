@@ -38,11 +38,23 @@ namespace LihatKos.BusinessFacade
             return new FormKosDA().InsertFormKosLengkap(Data);
         }
         
-        public List<FormKosData> GetAllFormKos(Int64 Id, string Search)
+        public List<FormKosData> GetAllFormKos(Int64 Id)
         {
-            return new FormKosDA().GetAllFormKos(Id, Search);
+            return new FormKosDA().GetAllFormKos(Id, "");
         }
-
+        public List<FormKosData> GetAllFormKosSmp(Int64 Id, string search)
+        {
+            var tempForm = new FormKosDA().GetAllFormKos(Id, "");
+            var forms = tempForm.Where(x => x.Nama.Contains(search)
+                || x.NamaTipeKos.Contains(search)
+                || x.NamaPemilik.Contains(search)
+                || x.UserName.Contains(search)
+                || x.NamaProvinsi.Contains(search)
+                || x.NamaKabupaten.Contains(search)
+                || x.NamaKecamatan.Contains(search)
+                || x.NamaKelurahan.Contains(search)).ToList();
+            return forms;
+        }
         public List<FormKosData> GetAllFormKosByLocation(string Latitude, string Longitude, int TipeKosID, int SatuanHargaID, string Fasilitas)
         {
             return new FormKosDA().GetAllFormKosByLocation(Latitude, Longitude, TipeKosID, SatuanHargaID, Fasilitas);
