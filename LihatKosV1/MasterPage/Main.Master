@@ -95,9 +95,8 @@
                         <li id="liAbout" runat="server" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                              <li><a href="/ContactUs">Contact Us</a></li>
-                              <%--<li><a href="/FormUser">Form User</a></li>
-                              <li><a href="/FormBanner">Form Banner</a></li>--%>
+                                <li><a href="/AboutUs">About Us</a></li>
+                                <li><a href="/ContactUs">Contact Us</a></li>
                             </ul>
                           </li>   
                         <li id="liAdmin" runat="server" class="dropdown">
@@ -107,11 +106,9 @@
                               <li><a href="/FormUser">Form User</a></li>
                               <li><a href="/FormBanner">Form Banner</a></li>
                               <li><a href="/Admin/ContactUs">Form ContactUs</a></li>
+                              <li><a href="/Admin/AboutUs">Form AboutUs</a></li>
                             </ul>
                           </li>       
-                        <%--<li id="liRegister" runat="server"><a href="/Register">Register</a></li>
-                        <li id="liLogin" runat="server"><asp:LinkButton ID="lbtnLogin" runat="server" OnClick="lbtnLogin_Click">Login</asp:LinkButton></li>
-                        --%>
                     </ul>
                     <p id="pWelcome" runat="server" class="navbar-text" style="margin-left:50px;"><span class="welcome">Welcome, <a href="#" class="navbar-link"><asp:Literal ID="litUsername" runat="server"></asp:Literal></a>
                         </span> <br /><a href="#" class="navbar-link">My Account</a> | <a href="#" class="navbar-link">My Favorites</a> | <a href="/Logout" class="navbar-link">Logout</a></p>        
@@ -124,21 +121,6 @@
         </nav>
         <!-- header -->
 
-        <!-- banner
-<div class="banner">
-    <img src="images/photos/banner.jpg"  class="img-responsive" alt="slide">
-    <div class="welcome-message">
-        <div class="wrap-info">
-            <div class="information">
-                <h1  class="animated fadeInDown">Best hotel in Dubai</h1>
-                <p class="animated fadeInUp">Most luxurious hotel of asia with the royal treatments and excellent customer service.</p>
-            </div>
-            <a href="#information" class="arrow-nav scroll wowload fadeInDownBig"><i class="fa fa-angle-down"></i></a>
-        </div>
-    </div>
-</div>
-banner-->
-
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
@@ -148,7 +130,6 @@ banner-->
                 <asp:Panel ID="pnlLogin" runat="server" Style="display:none;background-color: #ffffff;width:600px;border-radius: 6px;background-clip: padding-box;" DefaultButton="btnLoginShort">
                         <div class="modal-header">
                         <asp:Button ID="btnClose" CssClass="close" runat="server" Text="x" />
-                        <%--<button type="button" class="close" data-dismiss="modal">x</button>--%>
                         <h3>Login to LihatKos.com</h3>
                         </div>
                         <div class="modal-body">

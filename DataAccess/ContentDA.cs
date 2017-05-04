@@ -44,7 +44,23 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+        public bool UpdatePageContent(ContentData Data)
+        {
+            try
+            {
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdatePageContent");
+                db.AddInParameter(dbCommand, "ID", DbType.Int64, Data.ID);
+                db.AddInParameter(dbCommand, "Status", DbType.Int32, Data.PageContent);
 
+                db.ExecuteNonQuery(dbCommand);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
         #region Contact
 
         public List<ContentData> GetAllSubjectContact()

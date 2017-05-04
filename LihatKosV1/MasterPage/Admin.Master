@@ -109,7 +109,6 @@
         <li><a href="gallery.php">Gallery</a></li>
         <li><a href="contact.php">Contact</a></li>
       -->
-                        
                         <li id="liAdmin" runat="server" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -117,6 +116,7 @@
                               <li><a href="/FormUser">Form User</a></li>
                               <li><a href="/FormBanner">Form Banner</a></li>
                               <li><a href="/Admin/ContactUs">Form ContactUs</a></li>
+                              <li><a href="/Admin/AboutUs">Form AboutUs</a></li>
                             </ul>
                           </li>    
                     </ul>

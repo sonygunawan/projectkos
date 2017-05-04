@@ -13,6 +13,12 @@ namespace LihatKos.BusinessFacade
         {
             return new ContentDA().getPageContent(Id);
         }
+
+        public bool UpdatePageContent(ContentData Data)
+        {
+            return new ContentDA().UpdatePageContent(Data);
+        }
+
         #region Contact
 
         public List<ContactData> GetContactData(long Id = 0)

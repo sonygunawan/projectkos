@@ -64,6 +64,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AboutUs.aspx" />
+    <Content Include="Admin\FormAboutUs.aspx" />
     <Content Include="Admin\FormBanner.aspx" />
     <Content Include="Admin\FormContactUs.aspx" />
     <Content Include="Admin\FormUser.aspx" />
@@ -141,6 +143,20 @@
     <Content Include="Default.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutUs.aspx.cs">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AboutUs.aspx.designer.cs">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\FormAboutUs.aspx.cs">
+      <DependentUpon>FormAboutUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\FormAboutUs.aspx.designer.cs">
+      <DependentUpon>FormAboutUs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\FormBanner.aspx.cs">
       <DependentUpon>FormBanner.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

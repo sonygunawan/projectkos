@@ -32,6 +32,9 @@ namespace LihatKosV1
                 "ContactUs",
                 "~/ContactUs.aspx");
             routes.MapPageRoute("",
+                "AboutUs",
+                "~/AboutUs.aspx");
+            routes.MapPageRoute("",
                 "Register",
                 "~/RegisterForm.aspx");
             routes.MapPageRoute("",
@@ -58,7 +61,9 @@ namespace LihatKosV1
             routes.MapPageRoute("",
                 "Admin/ContactUs",
                 "~/Admin/FormContactUs.aspx");
-            
+            routes.MapPageRoute("",
+                "Admin/AboutUs",
+                "~/Admin/FormAboutUs.aspx");
             routes.MapPageRoute("",
                 "UploadFoto",
                 "~/UploadFoto.aspx");

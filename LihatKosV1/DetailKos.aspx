@@ -110,19 +110,12 @@
                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav">
-                        <!--
-        <li><a href="index.php">Home </a></li>
-        <li><a href="rooms-tariff.php">Rooms & Tariff</a></li>
-        <li><a href="introduction.php">Introduction</a></li>
-        <li><a href="gallery.php">Gallery</a></li>
-        <li><a href="contact.php">Contact</a></li>
-      -->
+                        
                         <li id="liAbout" runat="server" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
                             <ul class="dropdown-menu">
+                              <li><a href="/AboutUs">About Us</a></li>
                               <li><a href="/ContactUs">Contact Us</a></li>
-                              <%--<li><a href="/FormUser">Form User</a></li>
-                              <li><a href="/FormBanner">Form Banner</a></li>--%>
                             </ul>
                           </li>   
                         <li id="liAdmin" runat="server" class="dropdown">
@@ -132,6 +125,7 @@
                               <li><a href="/FormUser">Form User</a></li>
                               <li><a href="/FormBanner">Form Banner</a></li>
                               <li><a href="/Admin/ContactUs">Form ContactUs</a></li>
+                              <li><a href="/Admin/AboutUs">Form AboutUs</a></li>
                             </ul>
                           </li>    
                     </ul>
@@ -472,6 +466,7 @@
                                 </script>
                                 <label class="col-md-3 control-label" for="textarea">Lokasi</label>
                                 <div class="col-md-9">
+
                                     <asp:TextBox ID="txtLokasi" runat="server" CssClass="form-control" ClientIDMode="Static"
                                          MaxLength="1000" Enabled="false" ></asp:TextBox>
                                     <div style='overflow: hidden; height: 400px; width: 100%;'>
