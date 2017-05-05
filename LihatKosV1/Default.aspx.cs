@@ -36,17 +36,17 @@ namespace LihatKosV1
         }
         private void RunClientScript()
         {
-            ClientScript.RegisterStartupScript(GetType(), "multislider", "$('#slider-3').slider({ " +
-                            " range: true, min: 0, max: 5000000, step: 5000, values: [0, 2000000], " +
-                            " slide: function (event, ui) { " +
-                            " $('#price').val('Rp.' + ui.values[0] + ' - Rp.' + ui.values[1]); " +
-                            " $('#hidMinimumSetValue').val(ui.values[0]); " +
-                            " $('#hidMaximumSetValue').val(ui.values[1]); }  }); " +
-                            " $('#price').val('Rp.' + $('#slider-3').slider('values', 0) + " +
-                            " ' - Rp.' + $('#slider-3').slider('values', 1));"
+            //ClientScript.RegisterStartupScript(GetType(), "multislider", "$('#slider-3').slider({ " +
+            //                " range: true, min: 0, max: 5000000, step: 5000, values: [0, 2000000], " +
+            //                " slide: function (event, ui) { " +
+            //                " $('#price').val('Rp.' + ui.values[0] + ' - Rp.' + ui.values[1]); " +
+            //                " $('#hidMinimumSetValue').val(ui.values[0]); " +
+            //                " $('#hidMaximumSetValue').val(ui.values[1]); }  }); " +
+            //                " $('#price').val('Rp.' + $('#slider-3').slider('values', 0) + " +
+            //                " ' - Rp.' + $('#slider-3').slider('values', 1));"
                 // + "$('#hidMinimumSetValue').val($('#slider-3').slider('values', 0)); " + 
                 //"$('#hidMaximumSetValue').val($('#slider-3').slider('values', 1)); "
-                        , true);
+                        //, true);
 
         }
         protected void ddlPropinsi_SelectedIndexChanged(object sender, EventArgs e)

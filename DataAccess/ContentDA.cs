@@ -50,7 +50,7 @@ namespace LihatKos.DataAccess
             {
                 DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_UpdatePageContent");
                 db.AddInParameter(dbCommand, "ID", DbType.Int64, Data.ID);
-                db.AddInParameter(dbCommand, "Status", DbType.Int32, Data.PageContent);
+                db.AddInParameter(dbCommand, "Content", DbType.String, Data.PageContent);
 
                 db.ExecuteNonQuery(dbCommand);
                 return true;

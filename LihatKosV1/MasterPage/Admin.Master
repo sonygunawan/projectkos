@@ -116,7 +116,7 @@
                               <li><a href="/FormUser">Form User</a></li>
                               <li><a href="/FormBanner">Form Banner</a></li>
                               <li><a href="/Admin/ContactUs">Form ContactUs</a></li>
-                              <li><a href="/Admin/AboutUs">Form AboutUs</a></li>
+                              <li><a href="/Admin/FormContent">Form Content</a></li>
                             </ul>
                           </li>    
                     </ul>

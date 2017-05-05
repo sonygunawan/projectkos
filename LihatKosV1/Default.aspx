@@ -59,7 +59,7 @@
                         </div>
                     <div class="col-sm-4 topservices" style="position:relative;">
                         <%--<uc2:SearchControl ID="SearchControl" runat="server" /> --%>
-                        <div class="row favList">
+                        <div class="favList">
                             <div class="col-sm-6 col-xs-6 favPadding">
                                 <div class="image-container">
                                     <a href="#">
@@ -143,6 +143,7 @@
                         </div>--%>
                     </div>
                 </div>
+            </div>
                 <%--<div class="row">
                     <div class="col-sm-12 newsearch">
 
@@ -150,7 +151,6 @@
                 </div>--%>
                
             </div>
-        </div>
         <!-- End of Front -->
             
         </ContentTemplate>

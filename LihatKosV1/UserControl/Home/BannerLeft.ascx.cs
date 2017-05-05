@@ -12,8 +12,11 @@ namespace LihatKosV1.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            rptBanner.DataSource = new BannerSystem().GetAllBanner();
-            rptBanner.DataBind();
+            if (!Page.IsPostBack)
+            {
+                rptBanner.DataSource = new BannerSystem().GetAllBanner();
+                rptBanner.DataBind();
+            }
         }
 
         protected void rptBanner_ItemDataBound(object sender, RepeaterItemEventArgs e)

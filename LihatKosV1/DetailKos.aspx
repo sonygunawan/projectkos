@@ -125,7 +125,7 @@
                               <li><a href="/FormUser">Form User</a></li>
                               <li><a href="/FormBanner">Form Banner</a></li>
                               <li><a href="/Admin/ContactUs">Form ContactUs</a></li>
-                              <li><a href="/Admin/AboutUs">Form AboutUs</a></li>
+                              <li><a href="/Admin/FormContent">Form Content</a></li>
                             </ul>
                           </li>    
                     </ul>
@@ -284,7 +284,7 @@
                                     function init_map() {
                                         var latitude = document.getElementById('hidLatitude').value;
                                         var longitude = document.getElementById('hidLongitude').value;
-                                        var myOptions = { zoom: 13, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP, scrollwheel: false }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(latitude, longitude), animation: google.maps.Animation.DROP }); marker.addListener('click', toggleBounce);
+                                        var myOptions = { zoom: 13, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP, draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(latitude, longitude), animation: google.maps.Animation.DROP }); marker.addListener('click', toggleBounce);
                                         var input = document.getElementById('txtLokasi');
                                         if (input.value != '') {
                                             var geocoder = new google.maps.Geocoder();

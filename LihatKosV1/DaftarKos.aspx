@@ -82,7 +82,8 @@
                                                 resultsMap.setZoom(15);
                                                 var marker = new google.maps.Marker({
                                                     map: resultsMap,
-                                                    position: results[0].geometry.location
+                                                    position: results[0].geometry.location,
+                                                    draggable: true
                                                 });
                                                 
                                                 for (i = 0 ; i < results[0].address_components.length ; ++i) {
@@ -177,7 +178,8 @@
                                                     map: map,
                                                     icon: icon,
                                                     title: place.name,
-                                                    position: place.geometry.location
+                                                    position: place.geometry.location,
+                                                    draggable:true
                                                 }));
 
                                                 var latitude = place.geometry.location.lat();
