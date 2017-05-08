@@ -72,6 +72,28 @@ namespace LihatKosV1.MasterPage
                 MPELogin.Hide();
             }
         }
+
+        private Boolean CheckIPAddressClientIsAllow()
+        {
+            String[] FormatIPAddressAllowLogin = "192.168.x.x;127.0.0.1".Split(';');
+            String[] SplitIP = null;
+            String DetectedIPClient = Request.UserHostAddress.ToString();
+            String[] SplitIpDetected = DetectedIPClient.Split('.');
+            Boolean Allow = false;
+            for (int n = 0; n < FormatIPAddressAllowLogin.Length; n++)
+            {
+                Allow = false;
+                SplitIP = FormatIPAddressAllowLogin[n].Split('.');
+
+                if ((SplitIP[0] == SplitIpDetected[0] || SplitIP[0] == "x") && (SplitIP[1] == SplitIpDetected[1] || SplitIP[1] == "x") && (SplitIP[2] == SplitIpDetected[2] || SplitIP[2] == "x"))
+                {
+                    Allow = true;
+                    break;
+                }
+            }
+            return Allow;
+        }
+
         protected void btnLoginShort_Click(object sender, EventArgs e)
         {
             var retVal = new UserSystem().DoSignIn(txtEmail.Text.Trim(), txtPassword.Text.Trim());
@@ -87,6 +109,7 @@ namespace LihatKosV1.MasterPage
                     }
                     LoadPage();
                     MPELogin.Hide();
+                    CheckIPAddressClientIsAllow();
                 }
                 else
                     lblLoginErrorMsg.Text = "Email belum terverifikasi.";
