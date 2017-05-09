@@ -95,6 +95,7 @@
     <Content Include="CariLokasi.aspx" />
     <Content Include="ContactUs.aspx" />
     <Content Include="DaftarKos.aspx" />
+    <Content Include="Default3.aspx" />
     <Content Include="DetailKos.aspx" />
     <Content Include="EmailConfirmation.aspx" />
     <Content Include="FormApproval.aspx" />
@@ -205,6 +206,13 @@
     </Compile>
     <Compile Include="Default2.aspx.designer.cs">
       <DependentUpon>Default2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default3.aspx.cs">
+      <DependentUpon>Default3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default3.aspx.designer.cs">
+      <DependentUpon>Default3.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetailKos.aspx.cs">
       <DependentUpon>DetailKos.aspx</DependentUpon>
