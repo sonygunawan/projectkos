@@ -11,7 +11,19 @@
 <head runat="server">
     <title>LihatKos.com | Website Pencari Tempat Kos Terbaik dan Terkini</title>
     <meta name="description" content="Website listing Rumah Kos yang menyajikan berbagai macam data Tempat Kos yang Akurat dan Terverifikasi. Saat ini Lokasi jangkauan wilayah kami meliputi Jakarta, Bogor, Tangerang dan Bekasi." />
-    <style>
+    
+    <!-- bootstrap -->
+    <link type="text/css" rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+
+    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link type="text/css" rel="stylesheet" href="assets/wow/animate.css" />
+    
+    <link type="text/css" rel="stylesheet" href="assets/style.css" />
+    <!-- Owl Carousel 2 -->
+    <link type="text/css" rel="stylesheet" href="assets/owlcarousel/owl.carousel.min.css" />
+    <link type="text/css" rel="stylesheet" href="assets/owlcarousel/owl.theme.default.min.css" />
+
+    <style type="text/css">
         .favList {
             margin: 0px 25px;
         }
@@ -48,7 +60,45 @@
             position: absolute;
         }
     </style>
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <!-- Owl Carousel 2 -->
+    <script src="assets/owlcarousel/owl.carousel.min.js"></script>
+    
+    <!-- wow script -->
+    <script src="assets/wow/wow.min.js"></script>
+    
+    <!-- uniform -->
+    <script src="assets/uniform/js/jquery.uniform.js"></script>
+
+    <!-- boostrap -->
+    <script src="assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    
+    <!-- jquery mobile -->
+    <script src="assets/mobile/touchSwipe.min.js"></script>
+
+    <!-- custom script -->
+    <script src="assets/script.js"></script>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
     <script type="text/javascript">
+        function pageLoad() {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                items: 1,
+                height: 849,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true
+            });
+
+            $(".owl-carousel").owlCarousel();
+
+            $('.dropdown-toggle').dropdown();
+        }
+
         function showLatLng() {
             var geocoder = new google.maps.Geocoder();
             var ddlKecamatan = document.getElementById('ddlKecamatan');
@@ -91,9 +141,6 @@
     
     </div>--%>
         <asp:ScriptManager ID="sm2" runat="server" AsyncPostBackTimeout="3000">
-            <Scripts>
-                <asp:ScriptReference Path="~/Scripts/AjaxControlToolkit/Bundle" />
-            </Scripts>
         </asp:ScriptManager>
         
         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
@@ -158,7 +205,6 @@
                     
                         </div>
                     <div class="col-sm-4 topservices" style="position:relative;">
-                        <%--<uc2:SearchControl ID="SearchControl" runat="server" /> --%>
                         <div class="favList">
                             <div class="col-sm-6 col-xs-6 favPadding">
                                 <div class="image-container">
@@ -258,11 +304,6 @@
                                     <asp:HiddenField ID="hidMaximumPrice" runat="server" ClientIDMode="Static" />
                                     <asp:HiddenField ID="hidMinimumSetValue" runat="server" ClientIDMode="Static" />
                                     <asp:HiddenField ID="hidMaximumSetValue" runat="server" ClientIDMode="Static" />
-                                    <%--<asp:HiddenField ID="hidLowRate" runat="server" />
-                                    <asp:HiddenField ID="hidHighRate" runat="server" />
-                                    <input type="text" id="price" 
-                                        style="width:100%;border:0; background-color:#dedbd3; color:#756534; font-weight:bold;">
-                                   <div id="slider-3"></div>--%>
                                     <asp:TextBox ID="multiHandle2_1_BoundControl" runat="server"  Width="150" Text="0"></asp:TextBox>
                                     <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" />
                                     <asp:TextBox ID="sliderTwo" runat="server" Style="display: none;" />
@@ -286,61 +327,137 @@
                                             <cc1:MultiHandleSliderTarget ControlID="multiHandle2_2_BoundControl" />
                                         </MultiHandleSliderTargets>
                                     </cc1:MultiHandleSliderExtender>
-                                    <%--<asp:TextBox ID="multiHandle2_1_BoundControl" runat="server" Width="150" Text="0" ClientIDMode="Static" />&nbsp; - &nbsp;
-                                    <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" ClientIDMode="Static" />
-                                    <asp:TextBox ID="sliderTwo" runat="server" Style="display: none;" />
-                                        <cc1:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server"
-                                            BehaviorID="multiHandleSliderExtenderTwo"
-                                            TargetControlID="sliderTwo"
-                                            Minimum="0" 
-                                            Maximum="1000000"
-                                            Steps="25000"
-                                            Length="600"
-                                            TooltipText="{0}"
-                                            Orientation="Horizontal"
-                                            EnableHandleAnimation="true"
-                                            EnableKeyboard="false"
-                                            EnableMouseWheel="false"
-                                            ShowHandleDragStyle="true"
-                                            ShowHandleHoverStyle="true" 
-                                            ShowInnerRail="true">
-                                            <MultiHandleSliderTargets>
-                                                <cc1:MultiHandleSliderTarget ControlID="multiHandle2_1_BoundControl" />
-                                                <cc1:MultiHandleSliderTarget ControlID="multiHandle2_2_BoundControl" />
-                                            </MultiHandleSliderTargets>
-                                        </cc1:MultiHandleSliderExtender>--%>
                                 </div>
     
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label></label>
-                                    <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default btn-fullwidth text-uppercase" Text="Cari Kos" OnClick="btnSearch_Click" /><%--OnClientClick="showLatLng();return false;"--%>
+                                    <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-default btn-fullwidth text-uppercase" Text="Cari Kos" OnClick="btnSearch_Click" />
                                 </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
+                <%--room --%>
 
-                    <!-- Room -->
-                    <asp:Panel ID="room" runat="server"  ClientIDMode="Static">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <uc3:HighestControl ID="HighestControl" runat="server" />
-                                </div>
-                                <!-- #.col-sm-6 -->
-
-                                <div class="col-sm-6">
-                                    <uc4:MyFavoritesControl ID="MyFavoritesControl" runat="server" />
-                                </div>
-                                <!-- #.col-sm-6 -->
-                            </div>
-                            <!-- #row -->
+                <asp:Button ID="btn1" runat="server" Style="display:none;" />
+                <cc1:ModalPopupExtender ID="MPELogin" runat="server" TargetControlID="btn1" DropShadow="true" PopupControlID="pnlLogin" 
+                    CancelControlID="btnClose" BackgroundCssClass="modalBackground" />
+                <asp:Panel ID="pnlLogin" runat="server" Style="display:none;background-color: #ffffff;width:600px;border-radius: 6px;background-clip: padding-box;" DefaultButton="btnLoginShort">
+                        <div class="modal-header">
+                        <asp:Button ID="btnClose" CssClass="close" runat="server" Text="x" />
+                        <h3>Login to LihatKos.com</h3>
                         </div>
-                        <!-- #container-fluid -->
-                    </asp:Panel>
+                        <div class="modal-body">
+                            <div class="row">
+                              
+                              <div class="col-xs-6">
+                                  <p class="lead">Register</p>
+                                  <div class="form-group">
+                                      <label>Name</label>
+                                      <asp:TextBox ID="txtName" runat="server" CssClass="form-control"></asp:TextBox>
+                                  </div>
+                                  <div class="form-group">
+                                      <label>E-mail Address</label>
+                                      <asp:TextBox ID="txtEmailRegister" runat="server" CssClass="form-control"></asp:TextBox>
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Password</label>
+                                      <asp:TextBox ID="txtPasswordRegister" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                  </div>
+                                  <div class="form-group">
+                                      <label>Confirm Password</label>
+                                      <asp:TextBox ID="txtPasswordConfirm" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                  </div>
+                                  <div class="form-group">
+                                    <div style="color:red;">
+                                        <asp:Label ID="lblRegisterErrorMsg" runat="server" />
+                                    </div>
+                                    <div style="color:blue;">
+                                        <asp:Label ID="lblRegisterSuccessMsg" runat="server" />
+                                    </div>
+                                </div>
+                                  <asp:LinkButton ID="btnRegister" runat="server" CssClass="btn btn-info btn-block" OnClick="btnRegister_Click">Register</asp:LinkButton>
+                              </div>
+                            <div class="col-xs-6">
+                                <p class="lead">Login</p>
+                                <div class="well">
+                                    
+                                        <div class="form-group">
+                                            <label for="username" class="control-label">E-mail Address</label>
+                                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="control-label">Password</label>
+                                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" TextMode="Password" />
+                                        </div>
+                                    
+                                        <div class="form-group">
+                                                        <asp:CheckBox ID="chkRemember" runat="server" />
+                                                        Remember Me
+                                        </div>
+                                        <div class="form-group">
+                                            <div style="color:red;">&nbsp;
+                                                <asp:Label ID="lblLoginErrorMsg" runat="server" />
+                                            </div>
+                                        </div>
+                                        <asp:Button ID="btnLoginShort" runat="server" CssClass="btn btn-success btn-block" Text="Login" OnClick="btnLoginShort_Click" />
+                                        <asp:HyperLink ID="hlForgot" runat="server" NavigateUrl="/Forgot" CssClass="btn btn-default btn-block" Text="Forgot Password" />
+                                        
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </asp:Panel>
+             <%--footer--%>
+                
+        <footer class="spacer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h4>LihatKos</h4>
+                        <p>Dapatkan info kos murah, kos harian, kos bebas dan info kos lainnya di LihatKos.com </p>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <h4>Lokasi</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Jabodetabek</a></li>
+                            <li><a href="#">Bandung</a></li>
+                            <li><a href="#">Yogyakarta</a></li>
+                            <li><a href="#">Semarang</a></li>
+                            <li><a href="#">Malang</a></li>
+                            <li><a href="#">Surabaya</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 subscribe">
+                        <h4>Subscription</h4>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter email id here">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Get Notify</button>
+                            </span>
+                        </div>
+                        <div class="social">
+                            <a href="#"><i class="fa fa-facebook-square" data-toggle="tooltip" data-placement="top" data-original-title="facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram" data-toggle="tooltip" data-placement="top" data-original-title="instragram"></i></a>
+                            <a href="#"><i class="fa fa-twitter-square" data-toggle="tooltip" data-placement="top" data-original-title="twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest-square" data-toggle="tooltip" data-placement="top" data-original-title="pinterest"></i></a>
+                            <a href="#"><i class="fa fa-tumblr-square" data-toggle="tooltip" data-placement="top" data-original-title="tumblr"></i></a>
+                            <a href="#"><i class="fa fa-youtube-square" data-toggle="tooltip" data-placement="top" data-original-title="youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!--/.row-->
+            </div>
+            <!--/.container-->
+
+            <!--/.footer-bottom-->
+        </footer>
+        <a href="#home" class="toTop scroll"><i class="fa fa-angle-up"></i></a>
             </ContentTemplate>
         </asp:UpdatePanel>
     </form>

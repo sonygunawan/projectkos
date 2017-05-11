@@ -22,9 +22,9 @@ namespace LihatKosV1
             //routes.MapPageRoute("",
             //    "Category/{action}/{categoryName}",
             //    "~/categoriespage.aspx");
-            //routes.MapPageRoute("",
-            //    "",
-            //    "~/Default.aspx");
+            routes.MapPageRoute("",
+                "",
+                "~/Default3.aspx");
             routes.MapPageRoute("",
                 "CariLokasi",
                 "~/CariLokasi.aspx");
