@@ -1,4 +1,5 @@
 ﻿using LihatKos.BusinessFacade;
+using LihatKos.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,22 @@ namespace LihatKosV1
                 hidMinimumPrice.Value = hidMinimumSetValue.Value = "0";
                 hidMaximumPrice.Value = hidMaximumSetValue.Value = "5000000";
 
+                //Highest Control
+                ddlArea.DataSource = new AreaSystem().GetAllArea();
+                ddlArea.DataTextField = "Nama";
+                ddlArea.DataValueField = "ID";
+                ddlArea.DataBind();
+
                 LoadPriceRange();
+            }
+            
+            //Highest Control
+            rptFormKosByArea.DataSource = new FormKosSystem().GetHighestFormKosByArea(Convert.ToInt32(ddlArea.SelectedValue));
+            rptFormKosByArea.DataBind();
+            if (Session["UserID"] != null)
+            {
+                rptFavorites.DataSource = new FavoriteSystem().GetMyFavoriteForm(Convert.ToInt32(Session["UserID"]));
+                rptFavorites.DataBind();
             }
             LoadPage();
         }
@@ -162,6 +178,37 @@ namespace LihatKosV1
                 }
             }
             return Allow;
+        }
+
+        protected void rptFormKosByArea_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                FormKosData Data = (FormKosData)e.Item.DataItem;
+
+                Label lblKeterangan = (Label)e.Item.FindControl("lblKeterangan");
+                HyperLink hlDetailLink = (HyperLink)e.Item.FindControl("hlDetailLink");
+
+                //lblHargaBulanan.Text = Data.Harga.ToString("N2");
+                lblKeterangan.Text = Data.Keterangan;
+                hlDetailLink.NavigateUrl = "../../DetailKos?id=" + Data.ID.ToString();
+            }
+        }
+
+        protected void rptFavorites_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                FormKosData Data = (FormKosData)e.Item.DataItem;
+
+                Label lblHargaBulanan = (Label)e.Item.FindControl("lblHargaBulanan");
+                Label lblLocation = (Label)e.Item.FindControl("lblLocation");
+                HyperLink hlDetailLink = (HyperLink)e.Item.FindControl("hlDetailLink");
+
+                lblHargaBulanan.Text = Data.Harga.ToString("N2");
+                lblLocation.Text = Data.Nama;
+                hlDetailLink.NavigateUrl = "../../DetailKos?id=" + Data.ID.ToString();
+            }
         }
     }
 }

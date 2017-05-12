@@ -133,6 +133,7 @@
                 }
             });
         }
+       
     </script>
 </head>
 <body id="home">
@@ -337,11 +338,79 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <%--room --%>
+                <asp:Panel ID="room" runat="server"  ClientIDMode="Static">
+                <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="col-sm-4">
+                            <h2>Area</h2>
+                        </div>
+                        <div class="col-sm-8 select-area">
+                            <asp:DropDownList ID="ddlArea" runat="server" CssClass="form-control ddlArea" />
+                        </div>
+                        
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-room-highlight">
+                                    <tbody>
+                                        <asp:Repeater ID="rptFormKosByArea" runat="server" OnItemDataBound="rptFormKosByArea_ItemDataBound">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td class="clearfix">
+                                                        <asp:HyperLink ID="hlDetailLink" runat="server" NavigateUrl="~/DetailKos.aspx">
+                                                            <img src="images/300x150.png" class="pull-left img-responsive" alt="">
+                                                        </asp:HyperLink>
+                                                        <h4><asp:Label ID="lblKeterangan" runat="server"></asp:Label></h4>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- #.col-sm-6 -->
+                    <div class="col-sm-6">
+                        
+                        <div class="table-responsive">
+                            <table class="table table-favorite">
+                                <caption class="text-center">
+                                    <h2>My Favorites</h2>
+                                </caption>
+                                <thead class="text-center">
+                                    <th>#</th>
+                                    <th>Price</th>
+                                    <th>Location</th>
+                                </thead>
 
+                                <tbody class="text-center">
+                                    <asp:Repeater ID="rptFavorites" runat="server" OnItemDataBound="rptFavorites_ItemDataBound">
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td>
+                                                    <asp:HyperLink ID="hlDetailLink" runat="server" NavigateUrl="~/DetailKos.aspx">
+                                                        <img src="images/128x128.png" class="img-responsive center-block" alt="">
+                                                    </asp:HyperLink>
+                                                </td>
+                                                <td><asp:Label ID="lblHargaBulanan" runat="server"></asp:Label> /bln
+                                                </td>
+                                                <td><asp:Label ID="lblLocation" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- #.col-sm-6 -->
+                </div>
+                </div>
+                </asp:Panel>
                 <asp:Button ID="btn1" runat="server" Style="display:none;" />
                 <cc1:ModalPopupExtender ID="MPELogin" runat="server" TargetControlID="btn1" DropShadow="true" PopupControlID="pnlLogin" 
                     CancelControlID="btnClose" BackgroundCssClass="modalBackground" />
