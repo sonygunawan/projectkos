@@ -31,6 +31,15 @@ namespace LihatKosV1 {
         protected global::LihatKosV1.UserControl.BannerLeft BannerLeft;
         
         /// <summary>
+        /// rptFavList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptFavList;
+        
+        /// <summary>
         /// UpdatePanel11 control.
         /// </summary>
         /// <remarks>

@@ -33,6 +33,13 @@ namespace LihatKosV1.MasterPage
             //    }
             //}
             LoadPage();
+            txtCheckIP.Text = CheckIPAddress();
+        }
+
+        private string CheckIPAddress()
+        {
+            //DetectedIPClient
+            return Request.UserHostAddress.ToString();
         }
         private void LoadPage()
         {

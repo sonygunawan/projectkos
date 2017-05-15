@@ -31,8 +31,15 @@ namespace LihatKosV1
                 hidMaximumPrice.Value = hidMaximumSetValue.Value = "5000000";
 
                 LoadPriceRange();
+                LoadFavList();
             }
             //RunClientScript();
+        }
+
+        private void LoadFavList()
+        {
+            rptFavList.DataSource = new FormKosSystem().GetTopListFormKos();
+            rptFavList.DataBind();
         }
         private void RunClientScript()
         {
@@ -98,6 +105,20 @@ namespace LihatKosV1
 
             Response.Redirect("/CariLokasi?tipeKos=&lokasi=&latLng=" +
                 "&propinsi=" + provinsi + "&kabupaten=" + kabupaten + "&kecamatan=" + kecamatan+ "&minimum=" + multiHandle2_1_BoundControl.Text + "&maximum=" + multiHandle2_2_BoundControl.Text);
+        }
+
+        protected void rptFavList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                FormKosData Data = (FormKosData)e.Item.DataItem;
+
+                HyperLink hlDetailLink = (HyperLink)e.Item.FindControl("hlDetailLink");
+                Literal litAlamat = (Literal)e.Item.FindControl("litAlamat");
+
+                hlDetailLink.NavigateUrl = "~/DetailKos?ID=" + Data.ID.ToString();
+                litAlamat.Text = Data.Alamat;
+            }
         }
     }
 }

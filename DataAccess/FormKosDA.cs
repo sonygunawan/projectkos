@@ -642,6 +642,71 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+        //Created by sony, 15 Mei 2017
+        public List<FormKosData> GetTopListFormKos()
+        {
+            try
+            {
+                List<FormKosData> formKos = new List<FormKosData>();
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetTopListFormKos");
+                
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        FormKosData Data = new FormKosData();
+
+                        Data.ID = Convert.ToInt64(dataReader["ID"].ToString());
+                        Data.Nama = dataReader["Nama"].ToString();
+                        Data.Alamat = dataReader["Alamat"].ToString();
+                        Data.Harga = Convert.ToDecimal(dataReader["Harga"].ToString());
+                        Data.SatuanHarga = dataReader["SatuanHarga"].ToString();
+
+                        formKos.Add(Data);
+                    }
+                    dataReader.Close();
+                }
+                return formKos;
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
+        //public List<FormKosData> GetTopListFormKos()
+        //{
+        //    try
+        //    {
+        //        List<FormKosData> retVal = new List<FormKosData>();
+        //        DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.LIK_GetHighestFormKosByArea");
+                
+        //        DataSet ds = db.ExecuteDataSet(dbCommand);
+        //        DataTable dtLatest = ds.Tables[0];
+        //        DataTable dtFav = ds.Tables[1];
+        //        DataTable dtSeen = ds.Tables[2];
+        //        int countx = ds.Tables.Count;
+        //        for (int x = 0; x < countx; x++)
+        //        {
+        //            foreach (DataRow dr in ds.Tables[x].Rows)
+        //            {
+        //                var DataKos = new FormKosData();
+        //                DataKos.Keterangan = dr["ScoreH"].ToString();
+        //                DataKos.ID = Convert.ToInt64(dr["ID"].ToString());
+        //                DataKos.Nama = dr["Nama"].ToString();
+        //                DataKos.Alamat = dr["Alamat"].ToString();
+        //                DataKos.Harga = Convert.ToDecimal(dr["Harga"].ToString());
+        //                DataKos.SatuanHarga = dr["SatuanHarga"].ToString();
+        //                retVal.Add(DataKos);
+        //            }
+        //        }
+
+        //        return retVal;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+        //    }
+        //}
 
         public FormKosData  GetPriceRangeByKecamatan(string NamaProvinsi, string NamaKabupaten, string NamaKecamatan, int SatuanHargaID = 3 )
         {

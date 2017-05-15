@@ -89,7 +89,11 @@ namespace LihatKos.BusinessFacade
         {
             return new FormKosDA().GetAllFormKosByKecamatan(NamaProvinsi, NamaKabupaten, NamaKecamatan, minimum, maximum, fasilitas, tipeKosId, satuanHargaId);
         }
-
+        //Created by sony, 15 Mei 2017
+        public List<FormKosData> GetTopListFormKos()
+        {
+            return new FormKosDA().GetTopListFormKos();
+        }
         public bool UpdateFormKosApproval(Int64 Id, int StatusApproval)
         {
             return new FormKosDA().UpdateFormKosApproval(Id, StatusApproval);

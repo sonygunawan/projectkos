@@ -57,9 +57,22 @@
                     
                         </div>
                     <div class="col-sm-4 topservices" style="position:relative;">
-                        <%--<uc2:SearchControl ID="SearchControl" runat="server" /> --%>
                         <div class="favList">
-                            <div class="col-sm-6 col-xs-6 favPadding">
+                            <asp:Repeater ID="rptFavList" runat="server" OnItemDataBound="rptFavList_ItemDataBound">
+                                <ItemTemplate>
+                                    <div class="col-sm-6 col-xs-6 favPadding">
+                                        <div class="image-container">
+                                            <asp:HyperLink ID="hlDetailLink" runat="server" NavigateUrl="~/DetailKos">
+                                                <img id="image" src="images/150x110.png"/>
+                                                <div class="text">
+                                                   <span><asp:Literal ID="litAlamat" runat="server"></asp:Literal></span>
+                                                </div>
+                                            </asp:HyperLink>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                            <%--<div class="col-sm-6 col-xs-6 favPadding">
                                 <div class="image-container">
                                     <a href="#">
                                         <img id="image" src="images/150x110.png"/>
@@ -118,36 +131,12 @@
                                         </div>
                                     </a>
                                 </div>
+                            </div>--%>
                             </div>
-                            </div>
-                        <%--<div class="row favList ">
-                            <div class="col-sm-6 favPadding">
-                                <a href="#"><img src="images/150x110.png"</a>
-                            </div>
-                            <div class="col-sm-6 favPadding">
-                                <a href="#"><img src="images/150x110.png"</a>
-                            </div>
-                            <div class="col-sm-6 favPadding">
-                                <a href="#"><img src="images/150x110.png"</a>
-                            </div>
-                            <div class="col-sm-6 favPadding">
-                                <a href="#"><img src="images/150x110.png"</a>
-                            </div>
-                            <div class="col-sm-6 favPadding">
-                                <a href="#"><img src="images/150x110.png"</a>
-                            </div>
-                            <div class="col-sm-6 favPadding">
-                                <a href="#"><img src="images/150x110.png"</a>
-                            </div>
-                        </div>--%>
+                        
                     </div>
                 </div>
             </div>
-                <%--<div class="row">
-                    <div class="col-sm-12 newsearch">
-
-                    </div>
-                </div>--%>
                
             </div>
         <!-- End of Front -->
@@ -226,28 +215,6 @@
                         font-weight: bold;
                     }
                 </style>
-                <script type="text/javascript">
-                    //$(document).ready(function () {
-
-                    //});
-                    //function pageLoad() {
-                    //    $("#slider-3").slider({
-                    //        range: true,
-                    //        min: 0,
-                    //        max: 5000000,
-                    //        step: 5000,
-                    //        values: [25000, 2000000],
-                    //        slide: function (event, ui) {
-                    //            $("#price").val("Rp." + ui.values[0] + " - Rp." + ui.values[1]);
-                    //            $("#hidMinimumSetValue").val(ui.values[0]);
-                    //            $("#hidMaximumSetValue").val(ui.values[1]);
-                    //        }
-                    //    });
-                    //    $("#price").val("Rp." + $("#slider-3").slider("values", 0) +
-                    //       " - Rp." + $("#slider-3").slider("values", 1));
-
-                    //}
-                </script>
                 <div class="col-sm-8">
                     <div class="form-group">
                         <label>Range Harga</label>
@@ -283,29 +250,7 @@
                                 <cc1:MultiHandleSliderTarget ControlID="multiHandle2_2_BoundControl" />
                             </MultiHandleSliderTargets>
                         </cc1:MultiHandleSliderExtender>
-                        <%--<asp:TextBox ID="multiHandle2_1_BoundControl" runat="server" Width="150" Text="0" ClientIDMode="Static" />&nbsp; - &nbsp;
-                        <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" ClientIDMode="Static" />
-                        <asp:TextBox ID="sliderTwo" runat="server" Style="display: none;" />
-                            <cc1:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server"
-                                BehaviorID="multiHandleSliderExtenderTwo"
-                                TargetControlID="sliderTwo"
-                                Minimum="0" 
-                                Maximum="1000000"
-                                Steps="25000"
-                                Length="600"
-                                TooltipText="{0}"
-                                Orientation="Horizontal"
-                                EnableHandleAnimation="true"
-                                EnableKeyboard="false"
-                                EnableMouseWheel="false"
-                                ShowHandleDragStyle="true"
-                                ShowHandleHoverStyle="true" 
-                                ShowInnerRail="true">
-                                <MultiHandleSliderTargets>
-                                    <cc1:MultiHandleSliderTarget ControlID="multiHandle2_1_BoundControl" />
-                                    <cc1:MultiHandleSliderTarget ControlID="multiHandle2_2_BoundControl" />
-                                </MultiHandleSliderTargets>
-                            </cc1:MultiHandleSliderExtender>--%>
+                        
                     </div>
     
                 </div>
@@ -319,7 +264,14 @@
 
         </div>
     </div>
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12" align="center" style="padding:40px 0px;background-color:darkblue;color:whitesmoke;">
+                <h1>How It Works</h1>
+                Learn how to buy our mutual Kos here.
+            </div>
+        </div>
+    </div>
         <!-- Room -->
         <asp:Panel ID="room" runat="server"  ClientIDMode="Static">
             <div class="container-fluid">
