@@ -92,6 +92,50 @@ namespace LihatKos.DataAccess
                 throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
             }
         }
+
+        public UserData DoPassword(string Name)
+        {
+            try
+            {
+                var retVal = new UserData();
+                DbCommand dbCommand = dbConnection.GetStoredProcCommand(db, "dbo.PassN");
+                db.AddInParameter(dbCommand, "Name", DbType.String, Name);
+
+                using (IDataReader dataReader = db.ExecuteReader(dbCommand))
+                {
+
+                    while (dataReader.Read())
+                    {
+                        retVal.ID = Convert.ToInt64(dataReader["UserID"]);
+                        retVal.UserName = dataReader["UserName"].ToString();
+                        retVal.Email = dataReader["Email"].ToString();
+                        retVal.Password = dataReader["Password"].ToString();
+                        retVal.IsActive = Convert.ToInt32(dataReader["IsActive"]);
+                        retVal.IsApproved = Convert.ToBoolean(dataReader["IsApproved"]);
+                    }
+                    dataReader.Close();
+                }
+
+                string body = "Hello " + retVal.UserName.Trim() + ",";
+                if (retVal != null)
+                {
+                    //var statusBackground = StatusAktif == 1 ? "<span style='background-color:lightgreen;'>Re-activate</span>" : "<span style='background-color:red;'>Deactivated</span>";
+                    //var statusSubject = StatusAktif == 1 ? "Re-activated" : "Deactivated";
+                    body += "<br /><br />Your Password is " + retVal.Password;
+                    body += "<br /><br />Thank You";
+                    //SendEmail(user.Email, "LihatKos.com: Data Kos has been " + statusSubject, body);
+                    new MailHelper().SendEmail(retVal.Email, "LihatKos.com: Password Recovery " + retVal.UserName, body);
+                }
+                
+
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+
+                throw new DataAccessException(this.ToString() + "\n" + MethodBase.GetCurrentMethod() + "\n" + ex.Message, ex);
+            }
+        }
         public List<UserData> GetUsers(Int64 UserID)
         {
             try

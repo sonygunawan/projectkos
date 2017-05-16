@@ -98,6 +98,7 @@
     <Content Include="Default3.aspx" />
     <Content Include="DetailKos.aspx" />
     <Content Include="EmailConfirmation.aspx" />
+    <Content Include="ForgotPassword.aspx" />
     <Content Include="FormApproval.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\128x128.png" />
@@ -227,6 +228,13 @@
     </Compile>
     <Compile Include="EmailConfirmation.aspx.designer.cs">
       <DependentUpon>EmailConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormApproval.aspx.cs">
       <DependentUpon>FormApproval.aspx</DependentUpon>

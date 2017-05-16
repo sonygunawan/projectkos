@@ -18,6 +18,10 @@ namespace LihatKos.BusinessFacade
         {
             return new UserDA().DoSignIn(Email, Password);
         }
+        public UserData DoPassword(string Name)
+        {
+            return new UserDA().DoPassword(Name);
+        }
         public List<UserData> GetUsers(Int64 UserID)
         {
             return new UserDA().GetUsers(UserID);
