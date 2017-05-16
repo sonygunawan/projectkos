@@ -6,8 +6,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
   <link type="text/css" rel="stylesheet" href="assets/style.css" />
-<%--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBbgdCbXWZn1idf6nn4KEVi-1YdG_5yu6w&sensor=false&libraries=places"></script>
-    <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>--%>
         <style>
             .favList {
                 margin: 0px 25px;
@@ -146,7 +144,7 @@
     <asp:UpdatePanel ID="UpdatePanel11" runat="server">
         <ContentTemplate>
 
-            <script type="text/javascript">
+            <%--<script type="text/javascript">
                 function showLatLng() {
                     var geocoder = new google.maps.Geocoder();
                     var ddlKecamatan = document.getElementById('ddlKecamatan');
@@ -168,7 +166,6 @@
 
                     if (kabupatenText == "" && kecamatanText == "") {
                         address = propinsiText;
-                        //alert(address);
                     }
 
                     geocoder.geocode({ 'address': address }, function (results, status) {
@@ -176,12 +173,10 @@
                         if (status == google.maps.GeocoderStatus.OK) {
                             var latitude = results[0].geometry.location.lat();
                             var longitude = results[0].geometry.location.lng();
-                            //alert(latitude+ ',' + longitude);
-                            //alert(JSON.stringify(results));
                         }
                     });
                 }
-            </script>
+            </script>--%>
     <div class="spacersmall services">
         <div class="container">
             <div class="row">
@@ -222,11 +217,7 @@
                         <asp:HiddenField ID="hidMaximumPrice" runat="server" ClientIDMode="Static" />
                         <asp:HiddenField ID="hidMinimumSetValue" runat="server" ClientIDMode="Static" />
                         <asp:HiddenField ID="hidMaximumSetValue" runat="server" ClientIDMode="Static" />
-                        <%--<asp:HiddenField ID="hidLowRate" runat="server" />
-                        <asp:HiddenField ID="hidHighRate" runat="server" />
-                        <input type="text" id="price" 
-                            style="width:100%;border:0; background-color:#dedbd3; color:#756534; font-weight:bold;">
-                       <div id="slider-3"></div>--%>
+
                         <asp:TextBox ID="multiHandle2_1_BoundControl" runat="server"  Width="150" Text="0"></asp:TextBox>
                         <asp:TextBox ID="multiHandle2_2_BoundControl" runat="server" Width="150" Text="1000000" />
                         <asp:TextBox ID="sliderTwo" runat="server" Style="display: none;" />

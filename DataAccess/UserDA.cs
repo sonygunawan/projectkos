@@ -110,15 +110,15 @@ namespace LihatKos.DataAccess
                         retVal.UserName = dataReader["UserName"].ToString();
                         retVal.Email = dataReader["Email"].ToString();
                         retVal.Password = dataReader["Password"].ToString();
-                        retVal.IsActive = Convert.ToInt32(dataReader["IsActive"]);
+                        retVal.IsActive = Convert.ToInt32(dataReader["Aktif"]);
                         retVal.IsApproved = Convert.ToBoolean(dataReader["IsApproved"]);
                     }
                     dataReader.Close();
                 }
 
-                string body = "Hello " + retVal.UserName.Trim() + ",";
-                if (retVal != null)
+                if (retVal.UserName != null)
                 {
+                    string body = "Hello " + retVal.UserName.Trim() + ",";
                     //var statusBackground = StatusAktif == 1 ? "<span style='background-color:lightgreen;'>Re-activate</span>" : "<span style='background-color:red;'>Deactivated</span>";
                     //var statusSubject = StatusAktif == 1 ? "Re-activated" : "Deactivated";
                     body += "<br /><br />Your Password is " + retVal.Password;

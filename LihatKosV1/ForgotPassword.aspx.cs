@@ -23,10 +23,10 @@ namespace LihatKosV1
 
             var userData = new UserSystem().DoPassword(txtEmail.Text.Trim());
 
-            if (userData != null)
+            if (userData.UserName != null)
             {
                 lblMessage.ForeColor = Color.Green;
-                lblMessage.Text = "Password has been sent to your email address.";
+                lblMessage.Text = "Password has been sent to your email address. <br>Email ada kemungkinan berada di-SPAM Folder";
             }
             else
             {
