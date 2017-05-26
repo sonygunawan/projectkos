@@ -289,8 +289,8 @@
         </div>--%>
         <!-- services -->
         <asp:TextBox ID="txtCheckIP" runat="server" Enabled="false" BackColor="Gray" ForeColor="WhiteSmoke" Width="100"></asp:TextBox>
-        <footer class="spacer">
-            <div class="container">
+        <footer class="page-footer spacer">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-5">
                         <h4>LihatKos</h4>
