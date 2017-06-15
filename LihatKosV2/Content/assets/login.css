@@ -1,0 +1,16 @@
+﻿body{background-color: #fff;font-family: 'Raleway', sans-serif;font-size: 15px;line-height: 15px; color: #73726C;}
+
+.services {
+    background-color: #dedbd3;
+}
+
+.navbar-brand {
+    height: 83px;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    /*padding: 15px 15px;*/
+    font-size: 18px;
+    line-height: 20px;
+}

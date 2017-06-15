@@ -162,6 +162,7 @@
                                                                     <asp:TemplateField HeaderText="Image" ItemStyle-Width="30%">
                                                                         <ItemTemplate>
                                                                             <div style="padding:4px;">
+                                                                                
                                                                                 <asp:Image ID="imgFile" runat="server" Style="width:179px;height:80px;" />
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
